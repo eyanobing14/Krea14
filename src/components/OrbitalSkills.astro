@@ -1,6 +1,6 @@
 ---
 // OrbitalSkills — Solar system animation showing core capabilities
-// NOT tools — skills & competencies that orbit around Expertise
+// Smooth circular orbit using rotate + translateX (no overlap)
 import Container from "./Container.astro";
 ---
 
@@ -26,41 +26,42 @@ import Container from "./Container.astro";
           <span class="orbital-center-text">Stack</span>
         </div>
 
-        <!-- Orbit rings -->
-        <div class="orbital-ring orbital-ring--1">
-          <div class="orbital-item orbital-item--1" style="--orbit-speed: 20s;">
-            <span class="orbital-label">UI/UX</span>
-          </div>
-          <div class="orbital-item orbital-item--2" style="--orbit-speed: 20s; --orbit-delay: -10s;">
-            <span class="orbital-label">Design System</span>
-          </div>
+        <!-- Orbit rings (visual dashed circles) -->
+        <div class="orbital-ring orbital-ring--1"></div>
+        <div class="orbital-ring orbital-ring--2"></div>
+        <div class="orbital-ring orbital-ring--3"></div>
+
+        <!-- Ring 1 items — radius 90px, 2 items 180° apart -->
+        <div class="orbital-item" style="--r: 90px; --start: 0deg; --speed: 20s;">
+          <span class="orbital-label">UI/UX</span>
+        </div>
+        <div class="orbital-item" style="--r: 90px; --start: 180deg; --speed: 20s;">
+          <span class="orbital-label">Design System</span>
         </div>
 
-        <div class="orbital-ring orbital-ring--2">
-          <div class="orbital-item orbital-item--3" style="--orbit-speed: 28s;">
-            <span class="orbital-label">Performance</span>
-          </div>
-          <div class="orbital-item orbital-item--4" style="--orbit-speed: 28s; --orbit-delay: -9.3s;">
-            <span class="orbital-label">Accessibilité</span>
-          </div>
-          <div class="orbital-item orbital-item--5" style="--orbit-speed: 28s; --orbit-delay: -18.6s;">
-            <span class="orbital-label">Animation</span>
-          </div>
+        <!-- Ring 2 items — radius 140px, 3 items 120° apart -->
+        <div class="orbital-item" style="--r: 140px; --start: 30deg; --speed: 28s;">
+          <span class="orbital-label">Performance</span>
+        </div>
+        <div class="orbital-item" style="--r: 140px; --start: 150deg; --speed: 28s;">
+          <span class="orbital-label">Accessibilité</span>
+        </div>
+        <div class="orbital-item" style="--r: 140px; --start: 270deg; --speed: 28s;">
+          <span class="orbital-label">Animation</span>
         </div>
 
-        <div class="orbital-ring orbital-ring--3">
-          <div class="orbital-item orbital-item--6" style="--orbit-speed: 38s;">
-            <span class="orbital-label">Responsive</span>
-          </div>
-          <div class="orbital-item orbital-item--7" style="--orbit-speed: 38s; --orbit-delay: -9.5s;">
-            <span class="orbital-label">Architecture</span>
-          </div>
-          <div class="orbital-item orbital-item--8" style="--orbit-speed: 38s; --orbit-delay: -19s;">
-            <span class="orbital-label">DevOps</span>
-          </div>
-          <div class="orbital-item orbital-item--9" style="--orbit-speed: 38s; --orbit-delay: -28.5s;">
-            <span class="orbital-label">API Design</span>
-          </div>
+        <!-- Ring 3 items — radius 190px, 4 items 90° apart -->
+        <div class="orbital-item" style="--r: 190px; --start: 0deg; --speed: 38s;">
+          <span class="orbital-label">Responsive</span>
+        </div>
+        <div class="orbital-item" style="--r: 190px; --start: 90deg; --speed: 38s;">
+          <span class="orbital-label">Architecture</span>
+        </div>
+        <div class="orbital-item" style="--r: 190px; --start: 180deg; --speed: 38s;">
+          <span class="orbital-label">DevOps</span>
+        </div>
+        <div class="orbital-item" style="--r: 190px; --start: 270deg; --speed: 38s;">
+          <span class="orbital-label">API Design</span>
         </div>
 
         <!-- Ambient particles -->
@@ -111,7 +112,7 @@ import Container from "./Container.astro";
     color: var(--fg);
   }
 
-  /* Orbit rings */
+  /* Orbit rings (visual dashed circles) */
   .orbital-ring {
     position: absolute;
     top: 50%;
@@ -119,21 +120,30 @@ import Container from "./Container.astro";
     border: 1px dashed var(--border);
     border-radius: 50%;
     transform: translate(-50%, -50%);
+    pointer-events: none;
   }
   .orbital-ring--1 { width: 180px; height: 180px; }
   .orbital-ring--2 { width: 280px; height: 280px; }
   .orbital-ring--3 { width: 380px; height: 380px; }
 
-  /* Orbit items */
+  /* Orbit items — single smooth circular animation */
   .orbital-item {
     position: absolute;
     top: 50%;
     left: 50%;
     width: 0;
     height: 0;
-    animation: orbital-spin var(--orbit-speed, 20s) linear infinite;
-    animation-delay: var(--orbit-delay, 0s);
+    /* rotate to start angle, then translate out to radius, then counter-rotate label */
+    transform: rotate(var(--start, 0deg)) translateX(var(--r, 90px)) rotate(calc(-1 * var(--start, 0deg)));
+    animation: orbital-orbit var(--speed, 20s) linear infinite;
+    z-index: 2;
   }
+
+  @keyframes orbital-orbit {
+    from { transform: rotate(var(--start, 0deg)) translateX(var(--r, 90px)) rotate(calc(-1 * var(--start, 0deg) - 0deg)); }
+    to   { transform: rotate(calc(var(--start, 0deg) + 360deg)) translateX(var(--r, 90px)) rotate(calc(-1 * var(--start, 0deg) - 360deg)); }
+  }
+
   .orbital-label {
     position: absolute;
     transform: translate(-50%, -50%);
@@ -147,88 +157,11 @@ import Container from "./Container.astro";
     background: var(--bg-raised);
     white-space: nowrap;
     transition: color 0.3s, border-color 0.3s;
+    pointer-events: auto;
   }
   .orbital-label:hover {
     color: var(--fg);
     border-color: var(--border-hover);
-  }
-
-  /* Ring 1: radius 90px */
-  .orbital-item--1 { animation-name: orbital-pos-1a; }
-  .orbital-item--2 { animation-name: orbital-pos-1b; }
-
-  @keyframes orbital-pos-1a {
-    0%   { transform: translate(calc(-50% + 90px), -50%); }
-    25%  { transform: translate(-50%, calc(-50% - 90px)); }
-    50%  { transform: translate(calc(-50% - 90px), -50%); }
-    75%  { transform: translate(-50%, calc(-50% + 90px)); }
-    100% { transform: translate(calc(-50% + 90px), -50%); }
-  }
-  @keyframes orbital-pos-1b {
-    0%   { transform: translate(-50%, calc(-50% + 90px)); }
-    25%  { transform: translate(calc(-50% + 90px), -50%); }
-    50%  { transform: translate(-50%, calc(-50% - 90px)); }
-    75%  { transform: translate(calc(-50% - 90px), -50%); }
-    100% { transform: translate(-50%, calc(-50% + 90px)); }
-  }
-
-  /* Ring 2: radius 140px */
-  .orbital-item--3 { animation-name: orbital-pos-2a; }
-  .orbital-item--4 { animation-name: orbital-pos-2b; }
-  .orbital-item--5 { animation-name: orbital-pos-2c; }
-
-  @keyframes orbital-pos-2a {
-    0%   { transform: translate(calc(-50% + 140px), -50%); }
-    33%  { transform: translate(calc(-50% - 70px), calc(-50% - 121px)); }
-    66%  { transform: translate(calc(-50% - 70px), calc(-50% + 121px)); }
-    100% { transform: translate(calc(-50% + 140px), -50%); }
-  }
-  @keyframes orbital-pos-2b {
-    0%   { transform: translate(calc(-50% - 70px), calc(-50% - 121px)); }
-    33%  { transform: translate(calc(-50% - 70px), calc(-50% + 121px)); }
-    66%  { transform: translate(calc(-50% + 140px), -50%); }
-    100% { transform: translate(calc(-50% - 70px), calc(-50% - 121px)); }
-  }
-  @keyframes orbital-pos-2c {
-    0%   { transform: translate(calc(-50% - 70px), calc(-50% + 121px)); }
-    33%  { transform: translate(calc(-50% + 140px), -50%); }
-    66%  { transform: translate(calc(-50% - 70px), calc(-50% - 121px)); }
-    100% { transform: translate(calc(-50% - 70px), calc(-50% + 121px)); }
-  }
-
-  /* Ring 3: radius 190px */
-  .orbital-item--6 { animation-name: orbital-pos-3a; }
-  .orbital-item--7 { animation-name: orbital-pos-3b; }
-  .orbital-item--8 { animation-name: orbital-pos-3c; }
-  .orbital-item--9 { animation-name: orbital-pos-3d; }
-
-  @keyframes orbital-pos-3a {
-    0%   { transform: translate(calc(-50% + 190px), -50%); }
-    25%  { transform: translate(-50%, calc(-50% - 190px)); }
-    50%  { transform: translate(calc(-50% - 190px), -50%); }
-    75%  { transform: translate(-50%, calc(-50% + 190px)); }
-    100% { transform: translate(calc(-50% + 190px), -50%); }
-  }
-  @keyframes orbital-pos-3b {
-    0%   { transform: translate(-50%, calc(-50% - 190px)); }
-    25%  { transform: translate(calc(-50% - 190px), -50%); }
-    50%  { transform: translate(-50%, calc(-50% + 190px)); }
-    75%  { transform: translate(calc(-50% + 190px), -50%); }
-    100% { transform: translate(-50%, calc(-50% - 190px)); }
-  }
-  @keyframes orbital-pos-3c {
-    0%   { transform: translate(calc(-50% - 190px), -50%); }
-    25%  { transform: translate(-50%, calc(-50% + 190px)); }
-    50%  { transform: translate(calc(-50% + 190px), -50%); }
-    75%  { transform: translate(-50%, calc(-50% - 190px)); }
-    100% { transform: translate(calc(-50% - 190px), -50%); }
-  }
-  @keyframes orbital-pos-3d {
-    0%   { transform: translate(-50%, calc(-50% + 190px)); }
-    25%  { transform: translate(calc(-50% + 190px), -50%); }
-    50%  { transform: translate(-50%, calc(-50% - 190px)); }
-    75%  { transform: translate(calc(-50% - 190px), -50%); }
-    100% { transform: translate(-50%, calc(-50% + 190px)); }
   }
 
   /* Ambient floating particles */
@@ -261,14 +194,5 @@ import Container from "./Container.astro";
 
   @media (prefers-reduced-motion: reduce) {
     .orbital-item, .orbital-particle { animation: none !important; }
-    .orbital-item--1 { transform: translate(calc(-50% + 90px), -50%); }
-    .orbital-item--2 { transform: translate(calc(-50% - 90px), -50%); }
-    .orbital-item--3 { transform: translate(calc(-50% + 140px), -50%); }
-    .orbital-item--4 { transform: translate(-50%, calc(-50% - 140px)); }
-    .orbital-item--5 { transform: translate(calc(-50% - 140px), -50%); }
-    .orbital-item--6 { transform: translate(calc(-50% + 190px), -50%); }
-    .orbital-item--7 { transform: translate(-50%, calc(-50% - 190px)); }
-    .orbital-item--8 { transform: translate(calc(-50% - 190px), -50%); }
-    .orbital-item--9 { transform: translate(-50%, calc(-50% + 190px)); }
   }
 </style>
