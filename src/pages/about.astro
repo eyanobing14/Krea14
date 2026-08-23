@@ -7,11 +7,9 @@ import ScrollReveal from "../components/ScrollReveal.astro";
 import Container from "../components/Container.astro";
 import ThinkingStyles from "../components/ThinkingStyles.astro";
 import ImpactSection from "../components/ImpactSection.astro";
-import DevArchitecture from "../components/DevArchitecture.astro";
 import OrbitalSkills from "../components/OrbitalSkills.astro";
 
 const profile = data.profile as typeof data.profile & { photo?: string };
-const services = data.services || [];
 const socials = (profile.socials || {}) as Record<string, string>;
 ---
 
@@ -103,6 +101,53 @@ const socials = (profile.socials || {}) as Record<string, string>;
       </Container>
     </section>
 
+    <!-- Bande déroulante — Ce que nous savons faire -->
+    <div class="about-marquee">
+      <div class="about-marquee-track">
+        <span>Brandings</span>
+        <span class="about-marquee-sep" aria-hidden="true">✦</span>
+        <span>UI/UX Design</span>
+        <span class="about-marquee-sep" aria-hidden="true">✦</span>
+        <span>Développement Web</span>
+        <span class="about-marquee-sep" aria-hidden="true">✦</span>
+        <span>Applications Mobiles</span>
+        <span class="about-marquee-sep" aria-hidden="true">✦</span>
+        <span>Systèmes de Design</span>
+        <span class="about-marquee-sep" aria-hidden="true">✦</span>
+        <span>Design Graphique</span>
+        <span class="about-marquee-sep" aria-hidden="true">✦</span>
+        <span>Identité Visuelle</span>
+        <span class="about-marquee-sep" aria-hidden="true">✦</span>
+        <span>APIs & Backend</span>
+        <span class="about-marquee-sep" aria-hidden="true">✦</span>
+        <span>Prototypage</span>
+        <span class="about-marquee-sep" aria-hidden="true">✦</span>
+        <span>Motion Design</span>
+        <span class="about-marquee-sep" aria-hidden="true">✦</span>
+        <!-- Duplicate -->
+        <span>Brandings</span>
+        <span class="about-marquee-sep" aria-hidden="true">✦</span>
+        <span>UI/UX Design</span>
+        <span class="about-marquee-sep" aria-hidden="true">✦</span>
+        <span>Développement Web</span>
+        <span class="about-marquee-sep" aria-hidden="true">✦</span>
+        <span>Applications Mobiles</span>
+        <span class="about-marquee-sep" aria-hidden="true">✦</span>
+        <span>Systèmes de Design</span>
+        <span class="about-marquee-sep" aria-hidden="true">✦</span>
+        <span>Design Graphique</span>
+        <span class="about-marquee-sep" aria-hidden="true">✦</span>
+        <span>Identité Visuelle</span>
+        <span class="about-marquee-sep" aria-hidden="true">✦</span>
+        <span>APIs & Backend</span>
+        <span class="about-marquee-sep" aria-hidden="true">✦</span>
+        <span>Prototypage</span>
+        <span class="about-marquee-sep" aria-hidden="true">✦</span>
+        <span>Motion Design</span>
+        <span class="about-marquee-sep" aria-hidden="true">✦</span>
+      </div>
+    </div>
+
     <div class="section-divider" aria-hidden="true"></div>
 
     <!-- L'impact que nous créons -->
@@ -117,50 +162,6 @@ const socials = (profile.socials || {}) as Record<string, string>;
 
     <!-- Expertise — Système orbital -->
     <OrbitalSkills />
-
-    <div class="section-divider" aria-hidden="true"></div>
-
-    <!-- Architecture Full-Stack -->
-    <DevArchitecture />
-
-    <div class="section-divider" aria-hidden="true"></div>
-
-    <!-- Services -->
-    <section class="section" style="background: var(--bg-raised);">
-      <Container>
-        <h2
-          class="text-2xl sm:text-3xl md:text-4xl font-bold"
-          style="color: var(--fg);"
-        >
-          Ce que nous maîtrisons.
-        </h2>
-
-        <div
-          class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4 gsap-stagger-grid"
-        >
-          {
-            services.map((service: any) => (
-              <div
-                class="p-6 transition-colors duration-300"
-                style="border: 1px solid var(--border);"
-                onmouseover="this.style.borderColor='var(--border-hover)'"
-                onmouseout="this.style.borderColor='var(--border)'"
-              >
-                <h3 class="text-sm font-semibold" style="color: var(--fg);">
-                  {service.title}
-                </h3>
-                <p
-                  class="mt-3 text-sm leading-relaxed"
-                  style="color: var(--fg-secondary);"
-                >
-                  {service.description}
-                </p>
-              </div>
-            ))
-          }
-        </div>
-      </Container>
-    </section>
 
     <!-- CTA -->
     <section class="section" style="border-top: 1px solid var(--border);">
@@ -227,5 +228,40 @@ const socials = (profile.socials || {}) as Record<string, string>;
       width: 300px;
       height: 300px;
     }
+  }
+
+  /* Marquee déroulante */
+  .about-marquee {
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 0.875rem 0;
+  }
+  .about-marquee-track {
+    display: flex;
+    gap: 0;
+    white-space: nowrap;
+    animation: about-marquee 30s linear infinite;
+    width: max-content;
+  }
+  .about-marquee-track span {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    padding: 0 0.75rem;
+    flex-shrink: 0;
+  }
+  .about-marquee-sep {
+    color: var(--border-hover) !important;
+    font-size: 0.5rem !important;
+  }
+  @keyframes about-marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .about-marquee-track { animation: none; }
   }
 </style>
