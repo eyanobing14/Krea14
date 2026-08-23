@@ -2,8 +2,8 @@
   "profile": {
     "name": "Votre Nom",
     "title": "Graphic Designer · UI/UX · Frontend Dev",
-    "tagline": "Je conçois des expériences numériques qui marquent.",
-    "bio": "Designer passionné avec 5+ ans d'expérience en design graphique, UI/UX et développement frontend. Je transforme des idées complexes en interfaces élégantes et intuitives.",
+    "tagline": "Nous concevons des expériences numériques qui marquent.",
+    "bio": "Designer passionné avec 5+ ans d'expérience en design graphique, UI/UX et développement frontend. Nous transformons des idées complexes en interfaces élégantes et intuitives.",
     "email": "hello@votreportfolio.com",
     "location": "Paris, France",
     "availability": "Disponible pour freelance",
@@ -18,7 +18,7 @@
     {
       "id": "graphic-design",
       "title": "Design Graphique",
-      "description": "Identité visuelle, branding, print design. Je crée des systèmes visuels cohérents qui racontent votre histoire.",
+      "description": "Identité visuelle, branding, print design. Nous créons des systèmes visuels cohérents qui racontent votre histoire.",
       "icon": "palette"
     },
     {
@@ -50,7 +50,7 @@
       "heroColor": "#1a1a1a",
       "description": "Refonte complète de l'identité visuelle d'un café de spécialité parisien. Du logo aux supports print, en passant par l'identité digitale.",
       "challenge": "Lumière Café voulait se différencier dans un marché saturé. L'ancienne identité était datée et ne reflétait plus l'ambiance chaleureuse et moderne du lieu.",
-      "solution": "J'ai développé un système visuel autour du jeu de lumière et d'ombre. Un logo minimaliste inspiré du verre à espresso, une palette noir & blanc contrastée, et une typographie contemporaine.",
+      "solution": "Nous avons développé un système visuel autour du jeu de lumière et d'ombre. Un logo minimaliste inspiré du verre à espresso, une palette noir & blanc contrastée, et une typographie contemporaine.",
       "results": [
         "+40% de visibilité sur les réseaux sociaux",
         "Couverture dans 3 magazines spécialisés",
