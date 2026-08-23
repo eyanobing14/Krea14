@@ -1,0 +1,76 @@
+---
+// Problem / Solution — theme-aware
+---
+
+<section id="product" class="section">
+  <div class="container-page">
+    <span class="label">Le problème</span>
+
+    <div class="mt-12 md:mt-16 grid grid-cols-12 gap-8 md:gap-12 items-start">
+      <div class="col-span-12 lg:col-span-5">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.05] tracking-[-0.02em]" style="color: var(--fg);">
+          Créer des stratégies de trading est cassé.
+        </h2>
+        <p class="mt-6 leading-relaxed" style="color: var(--fg-secondary);">
+          La plupart des quantitatifs perdent des mois à assembler des outils déconnectés —
+          écrire du code dans un système, backtester dans un autre, et déployer via des scripts manuels.
+          Résultat : des pipelines fragiles, des résultats non reproductibles.
+        </p>
+      </div>
+
+      <div class="col-span-12 lg:col-span-6 lg:col-start-7 space-y-4 gsap-stagger-group">
+        {[
+          { num: '01', title: 'Outils fragmentés', desc: 'Notebooks Jupyter pour la recherche, moteurs de backtest séparés, intégrations de courtiers manuelles. Rien ne fonctionne ensemble.' },
+          { num: '02', title: 'Backtests peu fiables', desc: 'Biais de survie, biais de lookahead et mauvaise qualité des données mènent à des stratégies qui semblent rentables mais échouent en direct.' },
+          { num: '03', title: 'Complexité de déploiement', desc: 'Passer du backtest au trading en direct nécessite de réécrire l\'infrastructure. Des mois de DevOps avant de placer un seul ordre.' },
+        ].map((item) => (
+          <div class="p-5 transition-colors duration-300" style="border: 1px solid var(--border);" onmouseover="this.style.borderColor='var(--border-hover)'" onmouseout="this.style.borderColor='var(--border)'">
+            <div class="flex items-start gap-4">
+              <div class="shrink-0 w-8 h-8 flex items-center justify-center font-mono text-xs font-semibold" style="color: var(--fg-muted); border: 1px solid var(--border);">
+                {item.num}
+              </div>
+              <div>
+                <h3 class="text-sm font-semibold" style="color: var(--fg);">{item.title}</h3>
+                <p class="mt-2 text-sm leading-relaxed" style="color: var(--fg-secondary);">{item.desc}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background: var(--bg-raised);">
+  <div class="container-page">
+    <span class="label">La solution</span>
+
+    <div class="mt-12 md:mt-16 grid grid-cols-12 gap-8 md:gap-12 items-start">
+      <div class="col-span-12 lg:col-span-5 gsap-slide-left">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.05] tracking-[-0.02em]" style="color: var(--fg);">
+          Une plateforme. Du code au capital.
+        </h2>
+        <p class="mt-6 leading-relaxed" style="color: var(--fg-secondary);">
+          Algokreation unifie tout le cycle — de l'écriture de la logique stratégique
+          au backtest avec des données de qualité institutionnelle, jusqu'au déploiement en direct.
+        </p>
+      </div>
+
+      <div class="col-span-12 lg:col-span-6 lg:col-start-7 space-y-6 gsap-stagger-group">
+        {[
+          { title: 'Espace de travail unifié', desc: 'Écrivez, testez et surveillez les stratégies dans un seul environnement. Votre code, vos données, vos résultats.' },
+          { title: 'Backtest de qualité production', desc: 'Données tick-level, modélisation réaliste de l\'exécution et simulation du slippage. Vos backtests reflètent la réalité.' },
+          { title: 'Déploiement en un clic', desc: 'Déployez en paper trading ou en exécution directe avec une seule commande. Gestion des risques intégrée dès le jour un.' },
+        ].map((item) => (
+          <div class="flex gap-4">
+            <div class="shrink-0 w-px self-stretch" style="background: var(--fg);"></div>
+            <div>
+              <h3 class="text-sm font-semibold" style="color: var(--fg);">{item.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed" style="color: var(--fg-secondary);">{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

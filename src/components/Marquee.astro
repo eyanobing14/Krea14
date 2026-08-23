@@ -1,0 +1,73 @@
+---
+// Marquee — GSAP-powered infinite scroll
+const items = [
+  '12 000+ stratégies backtestées',
+  '99.97% de disponibilité SLA',
+  '2.4ms latence moyenne',
+  '$18B+ stratégies déployées',
+  '40+ intégrations de bourses',
+  'Conforme SOC 2',
+  '500K+ événements/sec',
+  '10 ans de données tick-level',
+];
+---
+
+<section class="py-5 overflow-hidden gsap-reveal" style="border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="marquee-container">
+    <div class="marquee-track" data-speed="1">
+      {[...items, ...items, ...items].map((item) => (
+        <span class="inline-flex items-center gap-3 px-6 shrink-0">
+          <span class="w-1 h-1" style="background: var(--fg-muted);"></span>
+          <span class="text-xs font-mono whitespace-nowrap" style="color: var(--fg-muted);">{item}</span>
+        </span>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import gsap from 'gsap';
+
+  function initMarquee() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const track = document.querySelector('.marquee-track') as HTMLElement;
+    if (!track) return;
+
+    const container = document.querySelector('.marquee-container');
+    if (!container) return;
+
+    // Calculate the width of one set of items (total / 3 since we duplicated 3x)
+    const totalWidth = track.scrollWidth / 3;
+
+    const tl = gsap.to(track, {
+      x: -totalWidth,
+      duration: 40,
+      ease: 'none',
+      repeat: -1,
+    });
+
+    // Pause when not visible
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            tl.play();
+          } else {
+            tl.pause();
+          }
+        });
+      },
+      { threshold: 0 }
+    );
+    observer.observe(container);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMarquee);
+  } else {
+    initMarquee();
+  }
+
+  document.addEventListener('astro:page-load', initMarquee);
+</script>

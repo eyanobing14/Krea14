@@ -1,0 +1,164 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+
+const navLinks = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Work', href: '/work' },
+  { label: 'À propos', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+  { label: 'Admin', href: '/admin' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500" style="background: transparent; border-bottom: 1px solid transparent;">
+  <div class="container-page flex items-center justify-between h-16">
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-3 no-underline group">
+      <div class="w-7 h-7 flex items-center justify-center transition-colors duration-300" style="background: var(--fg);">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 12L6.5 4L10 8L13 2" stroke="var(--bg)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="text-sm font-semibold tracking-tight hidden sm:block" style="color: var(--fg);">Portfolio</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden md:flex items-center gap-1" aria-label="Navigation principale">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class:list={[
+            'px-3 py-1.5 text-sm no-underline transition-colors duration-200',
+            currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href)) ? 'font-medium' : ''
+          ]}
+          style={currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
+            ? 'color: var(--fg);'
+            : 'color: var(--fg-secondary);'}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Desktop CTA -->
+    <div class="hidden md:flex items-center gap-4">
+      <ThemeToggle />
+      <a href="mailto:hello@votreportfolio.com" class="text-sm font-medium px-5 py-2 no-underline transition-all duration-200" style="background: var(--fg); color: var(--bg);" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+        Contact
+      </a>
+    </div>
+
+    <!-- Mobile toggle -->
+    <div class="md:hidden flex items-center gap-1">
+      <ThemeToggle />
+      <button
+        id="mobile-menu-toggle"
+        class="mobile-burger"
+        aria-label="Menu"
+        aria-expanded="false"
+      >
+        <span id="line-1"></span>
+        <span id="line-2"></span>
+        <span id="line-3"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="md:hidden hidden" style="background: var(--bg); border-top: 1px solid var(--border);">
+    <nav class="container-page py-6 flex flex-col gap-1">
+      {navLinks.map((link) => (
+        <a href={link.href} class="text-base no-underline transition-colors duration-200 py-2.5" style="color: var(--fg-secondary);" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--fg-secondary)'">
+          {link.label}
+        </a>
+      ))}
+      <div class="flex flex-col gap-3 pt-4 mt-3" style="border-top: 1px solid var(--border);">
+        <a href="mailto:hello@votreportfolio.com" class="text-sm font-medium px-5 py-3 text-center no-underline transition-all" style="background: var(--fg); color: var(--bg);">Me contacter</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .mobile-burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+  .mobile-burger span {
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    background: var(--fg);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s;
+    transform-origin: center;
+  }
+  .mobile-burger.is-open #line-1 {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+  .mobile-burger.is-open #line-2 {
+    opacity: 0;
+  }
+  .mobile-burger.is-open #line-3 {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+</style>
+
+<script>
+  function init() {
+    const header = document.getElementById('site-header');
+    if (!header) return;
+
+    let ticking = false;
+    function update() {
+      const isDark = !document.documentElement.hasAttribute('data-theme');
+      if (window.scrollY > 50) {
+        header.style.background = isDark ? 'rgba(0,0,0,0.92)' : 'rgba(255,255,255,0.92)';
+        header.style.backdropFilter = 'blur(12px)';
+        header.style.borderBottomColor = isDark ? '#262626' : '#e0e0e0';
+      } else {
+        header.style.background = 'transparent';
+        header.style.backdropFilter = 'none';
+        header.style.borderBottomColor = 'transparent';
+      }
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) { requestAnimationFrame(update); ticking = true; }
+    });
+
+    window.addEventListener('themechange', () => {
+      requestAnimationFrame(update);
+    });
+
+    const toggle = document.getElementById('mobile-menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+    let open = false;
+
+    toggle?.addEventListener('click', () => {
+      open = !open;
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.classList.toggle('is-open', open);
+      menu?.classList.toggle('hidden', !open);
+    });
+
+    menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      open = false;
+      toggle?.setAttribute('aria-expanded', 'false');
+      toggle?.classList.remove('is-open');
+      menu?.classList.add('hidden');
+    }));
+  }
+  document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', init) : init();
+</script>

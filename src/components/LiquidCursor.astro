@@ -1,0 +1,176 @@
+---
+// Cursor — Awwwards-style: dot + ring + glow blob
+// Visible in both dark and light modes with proper illumination
+---
+
+<div id="cursor-dot" class="cursor-dot" aria-hidden="true"></div>
+<div id="cursor-ring" class="cursor-ring" aria-hidden="true"></div>
+<div id="cursor-glow" class="cursor-glow" aria-hidden="true"></div>
+
+<style>
+  .cursor-dot,
+  .cursor-ring,
+  .cursor-glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 2147483647;
+    will-change: transform;
+    transform: translate(-50%, -50%);
+  }
+
+  .cursor-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--cursor-fg);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .cursor-dot.is-hovering {
+    transform: translate(-50%, -50%) scale(0.4);
+  }
+  .cursor-dot.is-text-hover {
+    transform: translate(-50%, -50%) scale(0);
+  }
+
+  .cursor-ring {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1.5px solid var(--cursor-fg);
+    transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.3s ease,
+                background 0.3s ease;
+  }
+  .cursor-ring.is-hovering {
+    width: 64px;
+    height: 64px;
+    background: var(--cursor-hover-bg);
+  }
+  .cursor-ring.is-clicking {
+    width: 32px;
+    height: 32px;
+  }
+  .cursor-ring.is-text-hover {
+    width: 80px;
+    height: 80px;
+    border-color: transparent;
+    background: var(--cursor-hover-bg);
+  }
+
+  .cursor-glow {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                width 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    background: radial-gradient(circle, var(--glow-inner) 0%, var(--glow-mid) 35%, transparent 70%);
+    filter: blur(1px);
+  }
+  .cursor-glow.is-active { opacity: 1; }
+  .cursor-glow.is-hovering {
+    width: 420px;
+    height: 420px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cursor-dot, .cursor-ring, .cursor-glow { display: none; }
+  }
+  @media (pointer: coarse) {
+    .cursor-dot, .cursor-ring, .cursor-glow { display: none; }
+  }
+</style>
+
+<script>
+  function initCursor() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+
+    const dot = document.getElementById('cursor-dot');
+    const ring = document.getElementById('cursor-ring');
+    const glow = document.getElementById('cursor-glow');
+    if (!dot || !ring || !glow) return;
+
+    const cx = window.innerWidth / 2;
+    const cy = window.innerHeight / 2;
+    let mouseX = cx, mouseY = cy;
+    let dotX = cx, dotY = cy;
+    let ringX = cx, ringY = cy;
+    let glowX = cx, glowY = cy;
+
+    glow.classList.add('is-active');
+
+    const interactiveSelectors = 'a, button, [role="button"], input, textarea, select, label, [data-cursor-hover]';
+    const textSelectors = 'h1, h2, h3, h4, p, span, li, blockquote, .code-block';
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    document.addEventListener('mousedown', () => ring.classList.add('is-clicking'));
+    document.addEventListener('mouseup', () => ring.classList.remove('is-clicking'));
+
+    document.addEventListener('mouseover', (e) => {
+      const target = (e.target as HTMLElement).closest(interactiveSelectors);
+      if (target) {
+        ring.classList.add('is-hovering');
+        dot.classList.add('is-hovering');
+        glow.classList.add('is-hovering');
+        ring.classList.remove('is-text-hover');
+        dot.classList.remove('is-text-hover');
+        return;
+      }
+      const textTarget = (e.target as HTMLElement).closest(textSelectors);
+      if (textTarget) {
+        ring.classList.add('is-text-hover');
+        dot.classList.add('is-text-hover');
+        ring.classList.remove('is-hovering');
+        dot.classList.remove('is-hovering');
+        glow.classList.remove('is-hovering');
+      }
+    });
+
+    document.addEventListener('mouseout', (e) => {
+      if ((e.target as HTMLElement).closest(interactiveSelectors) ||
+          (e.target as HTMLElement).closest(textSelectors)) {
+        ring.classList.remove('is-hovering');
+        dot.classList.remove('is-hovering');
+        glow.classList.remove('is-hovering');
+      }
+    });
+
+    document.addEventListener('mouseleave', () => glow.classList.remove('is-active'));
+    document.addEventListener('mouseenter', () => glow.classList.add('is-active'));
+
+    function animate() {
+      dotX += (mouseX - dotX) * 0.35;
+      dotY += (mouseY - dotY) * 0.35;
+      dot.style.left = `${dotX}px`;
+      dot.style.top = `${dotY}px`;
+
+      ringX += (mouseX - ringX) * 0.12;
+      ringY += (mouseY - ringY) * 0.12;
+      ring.style.left = `${ringX}px`;
+      ring.style.top = `${ringY}px`;
+
+      glowX += (mouseX - glowX) * 0.06;
+      glowY += (mouseY - glowY) * 0.06;
+      glow.style.left = `${glowX}px`;
+      glow.style.top = `${glowY}px`;
+
+      requestAnimationFrame(animate);
+    }
+    animate();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCursor);
+  } else {
+    initCursor();
+  }
+</script>

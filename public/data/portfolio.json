@@ -1,0 +1,172 @@
+{
+  "profile": {
+    "name": "Votre Nom",
+    "title": "Graphic Designer · UI/UX · Frontend Dev",
+    "tagline": "Je conçois des expériences numériques qui marquent.",
+    "bio": "Designer passionné avec 5+ ans d'expérience en design graphique, UI/UX et développement frontend. Je transforme des idées complexes en interfaces élégantes et intuitives.",
+    "email": "hello@votreportfolio.com",
+    "location": "Paris, France",
+    "availability": "Disponible pour freelance",
+    "socials": {
+      "dribbble": "https://dribbble.com/votreprofil",
+      "behance": "https://behance.net/votreprofil",
+      "github": "https://github.com/votreprofil",
+      "linkedin": "https://linkedin.com/in/votreprofil"
+    }
+  },
+  "services": [
+    {
+      "id": "graphic-design",
+      "title": "Design Graphique",
+      "description": "Identité visuelle, branding, print design. Je crée des systèmes visuels cohérents qui racontent votre histoire.",
+      "icon": "palette"
+    },
+    {
+      "id": "uiux",
+      "title": "UI/UX Design",
+      "description": "Interfaces utilisateur intuitives, wireframing, prototypage. L'expérience utilisateur est au centre de chaque décision.",
+      "icon": "layout"
+    },
+    {
+      "id": "frontend",
+      "title": "Développement Frontend",
+      "description": "Sites web performants avec React, Astro, Tailwind. Du pixel-perfect au code propre.",
+      "icon": "code"
+    },
+    {
+      "id": "logo",
+      "title": "Logo Design",
+      "description": "Logos mémorables et intemporels. Chaque logo raconte une histoire en un coup d'œil.",
+      "icon": "star"
+    }
+  ],
+  "caseStudies": [
+    {
+      "slug": "branding-lumiere",
+      "title": "Branding — Lumière Café",
+      "category": "Branding · Design Graphique",
+      "year": "2025",
+      "thumbnail": "",
+      "heroColor": "#1a1a1a",
+      "description": "Refonte complète de l'identité visuelle d'un café de spécialité parisien. Du logo aux supports print, en passant par l'identité digitale.",
+      "challenge": "Lumière Café voulait se différencier dans un marché saturé. L'ancienne identité était datée et ne reflétait plus l'ambiance chaleureuse et moderne du lieu.",
+      "solution": "J'ai développé un système visuel autour du jeu de lumière et d'ombre. Un logo minimaliste inspiré du verre à espresso, une palette noir & blanc contrastée, et une typographie contemporaine.",
+      "results": [
+        "+40% de visibilité sur les réseaux sociaux",
+        "Couverture dans 3 magazines spécialisés",
+        "Identité déclinée sur 20+ supports"
+      ],
+      "flow": [
+        "Audit de l'existant et analyse concurrentielle",
+        "Recherche de direction créative (moodboards, références)",
+        "Design du logo et déclinaisons",
+        "Création de la charte graphique complète",
+        "Production des supports print et digitaux",
+        "Déploiement et formation de l'équipe"
+      ],
+      "tags": ["Branding", "Print", "Identité visuelle"],
+      "images": []
+    },
+    {
+      "slug": "app-mindflow",
+      "title": "App — MindFlow",
+      "category": "UI/UX Design · Mobile",
+      "year": "2025",
+      "thumbnail": "",
+      "heroColor": "#0a0a0a",
+      "description": "Conception d'une application mobile de méditation et productivité. Design system complet et prototypage interactif.",
+      "challenge": "Les apps de méditation existantes manquent de personnalisation. Les utilisateurs veulent une expérience qui s'adapte à leur routine, pas l'inverse.",
+      "solution": "Interface modulaire avec des « rituels » personnalisables. Un design system en dark mode avec des micro-animations douces. Prototype Figma interactif avec 40+ écrans.",
+      "results": [
+        "40+ écrans designés",
+        "Design system avec 120+ composants",
+        "Note de satisfaction utilisateurs : 4.8/5"
+      ],
+      "flow": [
+        "Recherche utilisateurs et interviews",
+        "Definition des personas et parcours",
+        "Wireframing des écrans principaux",
+        "Design system et composants UI",
+        "Prototypage interactif haute fidélité",
+        "Tests utilisateurs et itérations"
+      ],
+      "tags": ["UI/UX", "Mobile", "Design System"],
+      "images": []
+    },
+    {
+      "slug": "site-cipher-studio",
+      "title": "Site Web — Cipher Studio",
+      "category": "Frontend Dev · UI/UX",
+      "year": "2024",
+      "thumbnail": "",
+      "heroColor": "#111111",
+      "description": "Développement frontend d'un site vitrine pour un studio créatif. Animations GSAP, responsive, performance optimale.",
+      "challenge": "Créer un site qui impressionne visuellement tout en restant rapide et accessible. Le client voulait des animations immersives sans sacrifier les Core Web Vitals.",
+      "solution": "Astro + GSAP pour des animations fluides. Scroll-driven animations, curseur custom, transitions de page. Score Lighthouse 98/100.",
+      "results": [
+        "Lighthouse score 98/100",
+        "Temps de chargement < 1s",
+        "+200% de temps passé sur le site"
+      ],
+      "flow": [
+        "Brief créatif et définition des animations",
+        "Maquettes et prototypes de transitions",
+        "Setup du projet Astro + Tailwind + GSAP",
+        "Développement des composants et animations",
+        "Optimisation performance (lazy load, code split)",
+        "Déploiement et tests cross-browser"
+      ],
+      "tags": ["Frontend", "GSAP", "Astro", "Responsive"],
+      "images": []
+    },
+    {
+      "slug": "logo-noctis-ai",
+      "title": "Logo — Noctis AI",
+      "category": "Logo Design · Branding",
+      "year": "2024",
+      "thumbnail": "",
+      "heroColor": "#0d0d0d",
+      "description": "Création du logo et de la charte graphique pour une startup d'IA. Un logo qui évoque l'intelligence et la modernité.",
+      "challenge": "Noctis AI avait besoin d'un logo qui transmette confiance et innovation, sans tomber dans les clichés du secteur IA (cerveaux, robots, réseaux de neurones).",
+      "solution": "Un symbole abstrait combinant une étoile (« noctis » = nuit en latin) et un motif géométrique suggérant la structure des données. Variante animée pour le digital.",
+      "results": [
+        "Logo utilisé par 3 filiales",
+        "Décliné en 12 variantes",
+        "Présent sur 500+ cartes de visite"
+      ],
+      "flow": [
+        "Recherche de positionnement de marque",
+        "Exploration de 3 directions graphiques",
+        "Sélection et raffinement du concept",
+        "Création des variantes (clair, sombre, icon)",
+        "Définition de la charte d'usage",
+        "Livraison des fichiers sources et exports"
+      ],
+      "tags": ["Logo", "Branding", "Startup"],
+      "images": []
+    }
+  ],
+  "resources": [
+    {
+      "id": "figma-toolkit",
+      "title": "UI/UX Design Toolkit",
+      "description": "Ma collection de composants Figma réutilisables pour démarrer rapidement tout projet UI/UX.",
+      "type": "tool",
+      "link": "#"
+    },
+    {
+      "id": "color-palette",
+      "title": "Palette Monochrome",
+      "description": "Système de couleurs en niveaux de gris pour des designs épurés et intemporels.",
+      "type": "template",
+      "link": "#"
+    },
+    {
+      "id": "gsap-snippets",
+      "title": "GSAP Animation Snippets",
+      "description": "Collection de snippets GSAP pour scroll reveals, text animations et cursor effects.",
+      "type": "code",
+      "link": "#"
+    }
+  ]
+}

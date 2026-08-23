@@ -1,0 +1,81 @@
+---
+// Workflow — theme-aware
+---
+
+<section id="workflow" class="section">
+  <div class="container-page">
+    <div class="max-w-2xl">
+      <span class="label">Fonctionnement</span>
+      <h2 class="mt-6 text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.05] tracking-[-0.02em]" style="color: var(--fg);">
+        De l'idée à l'exécution<br class="hidden sm:inline" /> en trois étapes.
+      </h2>
+    </div>
+
+    <div class="mt-16 md:mt-20 relative">
+      <div class="hidden md:block absolute top-8 left-0 right-0 h-px" style="background: var(--border);" aria-hidden="true"></div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 relative gsap-stagger-grid">
+        <!-- Step 1 -->
+        <div class="relative">
+          <div class="relative z-10 w-16 h-16 flex items-center justify-center font-mono text-xl font-semibold" style="background: var(--bg); border: 1px solid var(--border-strong);">
+            <span style="color: var(--fg);">01</span>
+          </div>
+          <h3 class="mt-6 text-lg font-semibold" style="color: var(--fg);">Écrivez votre stratégie</h3>
+          <p class="mt-3 text-sm leading-relaxed" style="color: var(--fg-secondary);">
+            Utilisez notre SDK Python ou l'éditeur intégré. Accédez aux données de marché,
+            indicateurs techniques et gestion des ordres via une API claire.
+          </p>
+          <div class="mt-5 code-block">
+            <div class="code-block-body">
+              <span class="syn-comment">$ pip install algokreation</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="relative">
+          <div class="relative z-10 w-16 h-16 flex items-center justify-center font-mono text-xl font-semibold" style="background: var(--bg); border: 1px solid var(--border-strong);">
+            <span style="color: var(--fg);">02</span>
+          </div>
+          <h3 class="mt-6 text-lg font-semibold" style="color: var(--fg);">Backtest avec données réelles</h3>
+          <p class="mt-3 text-sm leading-relaxed" style="color: var(--fg-secondary);">
+            Exécutez sur des années de données tick-level. Notre moteur simule des exécutions réalistes,
+            slippage, commissions et impact marché.
+          </p>
+          <div class="mt-5 p-4" style="border: 1px solid var(--border);">
+            <svg viewBox="0 0 300 60" class="w-full" aria-hidden="true">
+              <polyline points="0,45 30,42 60,38 90,40 120,30 150,32 180,22 210,25 240,15 270,18 300,8" fill="none" stroke="var(--fg)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <polyline points="0,50 30,48 60,47 90,49 120,44 150,46 180,42 210,43 240,40 270,41 300,35" fill="none" stroke="var(--border-strong)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 3"/>
+            </svg>
+            <div class="mt-2 flex items-center justify-between text-xs font-mono" style="color: var(--fg-muted);">
+              <span>Backtest 12 mois</span>
+              <span style="color: var(--fg);">+34.2% rendement</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="relative">
+          <div class="relative z-10 w-16 h-16 flex items-center justify-center font-mono text-xl font-semibold" style="background: var(--bg); border: 1px solid var(--border-strong);">
+            <span style="color: var(--fg);">03</span>
+          </div>
+          <h3 class="mt-6 text-lg font-semibold" style="color: var(--fg);">Déployez sur les marchés</h3>
+          <p class="mt-3 text-sm leading-relaxed" style="color: var(--fg-secondary);">
+            Passez en direct avec une commande. Connectez votre courtier, définissez les paramètres
+            de risque et surveillez les performances en temps réel.
+          </p>
+          <div class="mt-5 p-4" style="border: 1px solid var(--border);">
+            <div class="flex items-center gap-3">
+              <div class="w-2 h-2 rounded-full" style="background: var(--fg);"></div>
+              <span class="font-mono text-xs" style="color: var(--fg);">EN DIRECT — NASDAQ: AAPL</span>
+            </div>
+            <div class="mt-2 flex items-center gap-3">
+              <div class="w-2 h-2 rounded-full" style="background: var(--fg-muted);"></div>
+              <span class="font-mono text-xs" style="color: var(--fg-secondary);">PAPER — CME: ES</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,62 @@
+---
+// StrategyViz — theme-aware
+---
+
+<section class="section">
+  <div class="container-page">
+    <div class="grid grid-cols-12 gap-12 lg:gap-20 items-center">
+      <div class="col-span-12 lg:col-span-5 gsap-slide-left">
+        <span class="label">Moteur stratégique</span>
+        <h2 class="mt-6 text-2xl md:text-3xl font-bold leading-tight tracking-[-0.02em]" style="color: var(--fg);">
+          Votre logique. Notre infrastructure.
+        </h2>
+        <p class="mt-4 text-sm leading-relaxed" style="color: var(--fg-secondary);">
+          Écrivez des stratégies en Python avec notre SDK intuitif. Le moteur gère tout le reste —
+          ingestion de données, routage des ordres, gestion des positions et contrôles de risque.
+        </p>
+
+        <div class="mt-8 space-y-3">
+          {[
+            'Flux de données marché avec latence sous-milliseconde',
+            '300+ indicateurs techniques intégrés',
+            'Architecture événementielle avec précision microseconde',
+            'Analyse au niveau portefeuille pour toutes les stratégies',
+          ].map((item) => (
+            <div class="flex items-start gap-3">
+              <svg class="shrink-0 mt-0.5" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8L7 12L13 4" stroke="var(--fg)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span class="text-sm" style="color: var(--fg-secondary);">{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="col-span-12 lg:col-span-6 lg:col-start-7 gsap-slide-right">
+        <div class="code-block gsap-code-reveal">
+          <div class="code-block-header">
+            <div class="code-block-dot"></div>
+            <div class="code-block-dot"></div>
+            <div class="code-block-dot"></div>
+            <span class="code-block-title">backtest.py</span>
+          </div>
+          <div class="code-block-body">
+            <div class="syn-comment"># Configurer et exécuter un backtest</div>
+            <div class="mt-1"><span class="syn-keyword">from</span> algokreation <span class="syn-keyword">import</span> Engine, Strategy</div>
+            <div class="mt-3">engine <span class="syn-operator">=</span> Engine(</div>
+            <div class="pl-4">data<span class="syn-operator">=</span><span class="syn-string">"NASDAQ:5Y:1m"</span>,</div>
+            <div class="pl-4">capital<span class="syn-operator">=</span><span class="syn-number">100_000</span>,</div>
+            <div class="pl-4">commission<span class="syn-operator">=</span><span class="syn-number">0.001</span></div>
+            <div>)</div>
+            <div class="mt-3">result <span class="syn-operator">=</span> engine.run(</div>
+            <div class="pl-4">MomentumBreakout(),</div>
+            <div class="pl-4">start<span class="syn-operator">=</span><span class="syn-string">"2024-01-01"</span>,</div>
+            <div class="pl-4">end<span class="syn-operator">=</span><span class="syn-string">"2025-01-01"</span></div>
+            <div>)</div>
+            <div class="mt-3 syn-comment"># result.sharpe → 2.34</div>
+            <div class="syn-comment"># result.max_drawdown → -8.2%</div>
+            <div class="syn-comment"># result.total_return → +47.1%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

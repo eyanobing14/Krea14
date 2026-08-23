@@ -1,0 +1,62 @@
+---
+import '../styles/global.css';
+import LiquidCursor from '../components/LiquidCursor.astro';
+import GSAPSetup from '../components/GSAPSetup.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Algokreation — Algorithmic Trading Strategies',
+  description = 'Design, backtest, and deploy algorithmic trading strategies with institutional-grade precision.'
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#000000" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
+    <!-- Prevent FOUC: apply theme before paint -->
+    <script is:inline>
+      (function() {
+        var saved = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        // Default to dark. Only switch to light if explicitly saved or prefers-light.
+        if (saved === 'light' || (!saved && !prefersDark)) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+        }
+      })();
+    </script>
+    <style>
+      /* Hide default cursor globally — custom cursor handles interaction */
+      @media (pointer: fine) {
+        *, *::before, *::after {
+          cursor: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <LiquidCursor />
+    <slot />
+    <GSAPSetup />
+  </body>
+</html>

@@ -1,0 +1,90 @@
+---
+// Hero — GSAP-animated hero section
+---
+
+<section class="relative min-h-screen flex items-end pb-16 md:pb-24 pt-32 overflow-hidden hero-animate">
+  <!-- Grid lines — theme-aware -->
+  <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.04] gsap-parallax" data-speed="0.2" aria-hidden="true"
+    style="background-image: linear-gradient(to right, var(--fg) 1px, transparent 1px), linear-gradient(to bottom, var(--fg) 1px, transparent 1px); background-size: 80px 80px;">
+  </div>
+
+  <div class="container-page relative w-full">
+    <div class="grid grid-cols-12 gap-6 md:gap-8">
+      <!-- Left: Content -->
+      <div class="col-span-12 lg:col-span-7">
+        <div>
+          <span class="label">Infrastructure quantitative</span>
+        </div>
+
+        <h1 class="mt-8 text-[2.5rem] md:text-[4rem] lg:text-[5rem] font-bold leading-[0.95] tracking-[-0.03em]" style="color: var(--fg); perspective: 600px;">
+          <span class="hero-line block">Construisez des</span>
+          <span class="hero-line block">stratégies qui</span>
+          <span class="hero-line block" style="color: var(--fg-tertiary);">font bouger</span>
+          <span class="hero-line block">les marchés.</span>
+        </h1>
+
+        <p class="hero-desc mt-8 text-lg md:text-xl leading-relaxed max-w-xl" style="color: var(--fg-secondary);">
+          Conception, backtest et déploiement de stratégies de trading algorithmique
+          avec une précision institutionnelle. Du concept à l'exécution en direct en quelques heures.
+        </p>
+
+        <div class="hero-actions mt-10 flex flex-wrap items-center gap-4">
+          <a href="#cta" class="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium no-underline transition-all duration-200" style="background: var(--fg); color: var(--bg);" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+            Commencer
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6H10M7 3L10 6L7 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#product" class="inline-flex items-center gap-2 px-6 py-3 text-sm no-underline transition-all duration-200" style="color: var(--fg-secondary); border: 1px solid var(--border-strong);" onmouseover="this.style.color='var(--fg)'; this.style.borderColor='var(--fg-muted)'" onmouseout="this.style.color='var(--fg-secondary)'; this.style.borderColor='var(--border-strong)'">
+            Voir le fonctionnement
+          </a>
+        </div>
+
+        <!-- Metrics -->
+        <div class="hero-metrics mt-16 md:mt-20 flex flex-wrap gap-10 md:gap-14">
+          <div>
+            <div class="font-mono text-2xl md:text-3xl font-semibold tabular-nums" style="color: var(--fg);">2.4ms</div>
+            <div class="mt-1 text-xs uppercase tracking-widest font-mono" style="color: var(--fg-muted);">latence moyenne</div>
+          </div>
+          <div>
+            <div class="font-mono text-2xl md:text-3xl font-semibold tabular-nums" style="color: var(--fg);">$18B+</div>
+            <div class="mt-1 text-xs uppercase tracking-widest font-mono" style="color: var(--fg-muted);">stratégies déployées</div>
+          </div>
+          <div>
+            <div class="font-mono text-2xl md:text-3xl font-semibold tabular-nums" style="color: var(--fg);">99.97%</div>
+            <div class="mt-1 text-xs uppercase tracking-widest font-mono" style="color: var(--fg-muted);">disponibilité SLA</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Code visualization -->
+      <div class="hidden lg:flex col-span-5 items-center justify-end">
+        <div class="w-full max-w-[380px] gsap-code-reveal">
+          <div class="code-block">
+            <div class="code-block-header">
+              <div class="code-block-dot"></div>
+              <div class="code-block-dot"></div>
+              <div class="code-block-dot"></div>
+              <span class="code-block-title">strategy.py</span>
+            </div>
+            <div class="code-block-body">
+              <div><span class="syn-keyword">class</span> <span class="syn-class">MomentumBreakout</span><span class="syn-operator">(</span><span class="syn-class">Strategy</span><span class="syn-operator">):</span></div>
+              <div class="pl-4"><span class="syn-keyword">def</span> <span class="syn-function">__init__</span><span class="syn-param">(self):</span></div>
+              <div class="pl-8">self.lookback <span class="syn-operator">=</span> <span class="syn-number">20</span></div>
+              <div class="pl-8">self.threshold <span class="syn-operator">=</span> <span class="syn-number">0.02</span></div>
+              <div class="pl-8">self.risk <span class="syn-operator">=</span> <span class="syn-number">0.01</span></div>
+              <div class="mt-2 pl-4"><span class="syn-keyword">def</span> <span class="syn-function">on_bar</span><span class="syn-param">(self, bar):</span></div>
+              <div class="pl-8">ret <span class="syn-operator">=</span> bar.close.pct(self.lookback)</div>
+              <div class="pl-8"><span class="syn-keyword">if</span> ret <span class="syn-operator">></span> self.threshold:</div>
+              <div class="pl-12">self.<span class="syn-function">buy</span><span class="syn-param">(</span>size<span class="syn-operator">=</span>self.risk<span class="syn-param">)</span></div>
+              <div class="pl-8"><span class="syn-keyword">elif</span> ret <span class="syn-operator">&lt;</span> <span class="syn-number">-0.01</span>:</div>
+              <div class="pl-12">self.<span class="syn-function">sell</span><span class="syn-param">(</span>size<span class="syn-operator">=</span>self.risk<span class="syn-param">)</span></div>
+            </div>
+            <div class="code-block-status">
+              <div class="code-block-status-dot" style="animation: pulse-dot 2s ease-in-out infinite;"></div>
+              <span class="code-block-status-text">Backtest en cours — 847 transactions simulées</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

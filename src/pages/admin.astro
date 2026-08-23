@@ -1,0 +1,674 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Admin — Portfolio">
+  <Header />
+  <main class="pt-24 pb-16">
+    <div class="container-page">
+      <!-- Top bar -->
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-10">
+        <div>
+          <span class="label">Admin</span>
+          <h1 class="mt-4 text-3xl md:text-4xl font-bold" style="color: var(--fg);">Gérer le portfolio</h1>
+          <p class="mt-2 text-sm" style="color: var(--fg-secondary);">Modifiez les données. Elles sont sauvegardées dans votre navigateur.</p>
+        </div>
+        <div class="flex flex-wrap gap-3 items-center">
+          <span id="git-status" class="text-[10px] font-mono" style="color: var(--fg-muted);"></span>
+          <button id="btn-git-commit" class="admin-btn-primary">Commit git</button>
+          <button id="btn-git-push" class="admin-btn-primary" style="background: #16a34a;">Push GitHub</button>
+          <button id="btn-export" class="admin-btn-ghost">Exporter JSON ↓</button>
+          <button id="btn-reset" class="admin-btn-ghost">Réinitialiser</button>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="flex gap-1 mb-8 border-b" style="border-color: var(--border);">
+        <button class="admin-tab active px-4 py-2.5 text-xs font-medium transition-colors" data-tab="profile" style="color: var(--fg); border-bottom: 2px solid var(--fg);">Profil</button>
+        <button class="admin-tab px-4 py-2.5 text-xs font-medium transition-colors" data-tab="studies" style="color: var(--fg-muted);">Case Studies</button>
+        <button class="admin-tab px-4 py-2.5 text-xs font-medium transition-colors" data-tab="services" style="color: var(--fg-muted);">Services</button>
+      </div>
+
+      <!-- Profile Tab -->
+      <div id="tab-profile" class="admin-panel">
+        <div class="admin-section-header">
+          <span class="admin-section-num">01</span>
+          <div>
+            <h2 class="text-sm font-semibold" style="color: var(--fg);">Informations personnelles</h2>
+            <p class="text-xs" style="color: var(--fg-muted);">Nom, titre, bio et contacts</p>
+          </div>
+        </div>
+        <div class="admin-section-body">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div>
+              <label class="admin-label">Nom</label>
+              <input id="p-name" type="text" class="admin-input" />
+            </div>
+            <div>
+              <label class="admin-label">Titre</label>
+              <input id="p-title" type="text" class="admin-input" />
+            </div>
+            <div class="md:col-span-2">
+              <label class="admin-label">Tagline</label>
+              <input id="p-tagline" type="text" class="admin-input" />
+            </div>
+            <div class="md:col-span-2">
+              <label class="admin-label">Bio</label>
+              <textarea id="p-bio" rows="4" class="admin-input"></textarea>
+            </div>
+            <div class="md:col-span-2">
+              <label class="admin-label">Photo de profil</label>
+              <div class="flex items-center gap-4 mt-1">
+                <div id="photo-preview" class="w-16 h-16 flex items-center justify-center overflow-hidden" style="border: 1px solid var(--border-strong); background: var(--bg-raised);">
+                  <img id="photo-img" class="w-full h-full object-cover hidden" alt="Photo" />
+                  <span id="photo-placeholder" class="text-[10px] font-mono" style="color: var(--fg-muted);">Photo</span>
+                </div>
+                <div class="flex flex-col gap-2">
+                  <label class="admin-btn-outline" style="display:inline-block;cursor:pointer;">
+                    Choisir une photo
+                    <input type="file" accept="image/*" id="p-photo-input" style="display:none;" />
+                  </label>
+                  <button id="p-photo-remove" class="admin-btn-ghost hidden">Supprimer la photo</button>
+                </div>
+              </div>
+            </div>
+            <div>
+              <label class="admin-label">Email</label>
+              <input id="p-email" type="email" class="admin-input" />
+            </div>
+            <div>
+              <label class="admin-label">Localisation</label>
+              <input id="p-location" type="text" class="admin-input" />
+            </div>
+            <div>
+              <label class="admin-label">Disponibilité</label>
+              <input id="p-availability" type="text" class="admin-input" />
+            </div>
+          </div>
+          <div class="mt-6 flex justify-end">
+            <button id="btn-save-profile" class="admin-btn-primary">Sauvegarder le profil</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case Studies Tab -->
+      <div id="tab-studies" class="admin-panel hidden">
+        <div id="studies-list"></div>
+        <div class="mt-6 flex justify-center">
+          <button id="btn-add-study" class="admin-btn-outline">+ Ajouter un case study</button>
+        </div>
+      </div>
+
+      <!-- Services Tab -->
+      <div id="tab-services" class="admin-panel hidden">
+        <div id="services-list"></div>
+        <div class="mt-6 flex justify-center">
+          <button id="btn-add-service" class="admin-btn-outline">+ Ajouter un service</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Modal -->
+    <div id="delete-modal" class="delete-modal hidden">
+      <div class="delete-modal-backdrop"></div>
+      <div class="delete-modal-content">
+        <div class="delete-modal-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+        </div>
+        <h3 class="delete-modal-title">Confirmer la suppression</h3>
+        <p id="delete-modal-desc" class="delete-modal-desc"></p>
+        <div class="delete-modal-actions">
+          <button id="delete-modal-cancel" class="admin-btn-ghost">Annuler</button>
+          <button id="delete-modal-confirm" class="delete-modal-confirm-btn">Supprimer</button>
+        </div>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .delete-modal { position: fixed; inset: 0; z-index: 2147483646; display: flex; align-items: center; justify-content: center; }
+  .delete-modal.hidden { display: none; }
+  .delete-modal-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .delete-modal-content { position: relative; background: var(--bg); border: 1px solid var(--border-strong); padding: 2rem; max-width: 400px; width: 90%; text-align: center; }
+  .delete-modal-icon { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border-strong); color: var(--fg); margin-bottom: 1rem; }
+  .delete-modal-title { font-size: 0.875rem; font-weight: 600; color: var(--fg); margin-bottom: 0.5rem; }
+  .delete-modal-desc { font-size: 0.75rem; color: var(--fg-secondary); margin-bottom: 1.5rem; line-height: 1.5; }
+  .delete-modal-actions { display: flex; gap: 0.5rem; justify-content: center; }
+  .delete-modal-confirm-btn { padding: 0.5rem 1.25rem; font-size: 0.75rem; font-weight: 500; background: #dc2626; color: #fff; border: none; transition: opacity 0.2s; }
+  .delete-modal-confirm-btn:hover { opacity: 0.85; }
+</style>
+
+<script>
+  function initAdmin() {
+    const API = "http://localhost:4200";
+    const JSON_URL = '/data/portfolio.json';
+    let data: any = null;
+
+    async function loadData() {
+      try { const sr = await fetch(API + '/api/read-data'); if (sr.ok) { const d = await sr.json(); if (d.ok) { data = d.data; return; } } } catch(e) {}
+      try { const resp = await fetch(JSON_URL); data = await resp.json(); } catch(e) {}
+    }
+    async function save() {
+      try { await fetch(API + '/api/save-data', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); } catch(e) {}
+    }
+
+
+    // ── Git: status ──
+    async function refreshGitStatus() {
+      try {
+        const resp = await fetch(API + '/api/status');
+        const status = await resp.json();
+        const el = document.getElementById('git-status');
+        if (el && status.ok) {
+          el.textContent = status.modified > 0 ? status.modified + ' fichier(s) modifié(s) — ' + status.branch : 'Aucune modification — ' + status.branch;
+        }
+      } catch(e) {}
+    }
+
+    // ── Git: commit ──
+    document.getElementById('btn-git-commit')?.addEventListener('click', async () => {
+      const msg = prompt('Message du commit:', 'Update portfolio data');
+      if (msg === null) return;
+      try {
+        const resp = await fetch(API + '/api/git-commit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: msg })
+        });
+        const result = await resp.json();
+        showToast(result.message || 'Commit effectué!');
+        refreshGitStatus();
+      } catch(e) { showToast('Erreur commit: ' + e.message); }
+    });
+
+    // ── Git: push ──
+    document.getElementById('btn-git-push')?.addEventListener('click', async () => {
+      try {
+        const resp = await fetch(API + '/api/git-push', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ branch: 'main' })
+        });
+        const result = await resp.json();
+        showToast(result.message || 'Push effectué!');
+        refreshGitStatus();
+      } catch(e) { showToast('Erreur push: ' + e.message); }
+    });
+
+    // ── Tabs ──
+    document.querySelectorAll('.admin-tab').forEach((tab) => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.admin-tab').forEach((t) => {
+          (t as HTMLElement).style.color = 'var(--fg-muted)';
+          (t as HTMLElement).style.borderBottom = 'none';
+        });
+        document.querySelectorAll('.admin-panel').forEach((p) => p.classList.add('hidden'));
+        const tabName = (tab as HTMLElement).dataset.tab;
+        (tab as HTMLElement).style.color = 'var(--fg)';
+        (tab as HTMLElement).style.borderBottom = '2px solid var(--fg)';
+        document.getElementById(`tab-${tabName}`)?.classList.remove('hidden');
+      });
+    });
+
+    // ── Profile ──
+    function loadProfile() {
+      const p = data.profile;
+      (document.getElementById('p-name') as HTMLInputElement).value = p.name || '';
+      (document.getElementById('p-title') as HTMLInputElement).value = p.title || '';
+      (document.getElementById('p-tagline') as HTMLInputElement).value = p.tagline || '';
+      (document.getElementById('p-bio') as HTMLTextAreaElement).value = p.bio || '';
+      (document.getElementById('p-email') as HTMLInputElement).value = p.email || '';
+      (document.getElementById('p-location') as HTMLInputElement).value = p.location || '';
+      (document.getElementById('p-availability') as HTMLInputElement).value = p.availability || '';
+      // Photo
+      const photoImg = document.getElementById('photo-img') as HTMLImageElement;
+      const photoPlaceholder = document.getElementById('photo-placeholder');
+      const photoRemove = document.getElementById('p-photo-remove');
+      if (p.photo) {
+        photoImg.src = p.photo;
+        photoImg.classList.remove('hidden');
+        photoPlaceholder?.classList.add('hidden');
+        photoRemove?.classList.remove('hidden');
+      } else {
+        photoImg.classList.add('hidden');
+        photoPlaceholder?.classList.remove('hidden');
+        photoRemove?.classList.add('hidden');
+      }
+    }
+
+    // Photo upload
+    document.getElementById('p-photo-input')?.addEventListener('change', (e) => {
+      const file = (e.target as HTMLInputElement).files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = async () => {
+        try {
+          const resp = await fetch(API + '/api/upload-image', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ filename: 'profile-photo.' + file.name.split('.').pop(), data: reader.result })
+          });
+          const result = await resp.json();
+          if (result.ok) {
+            data.profile.photo = result.path;
+            await save();
+            loadProfile();
+            showToast('Photo uploadée dans public/assets/!');
+          }
+        } catch(e) { showToast('Erreur: ' + e.message); }
+      };
+      reader.readAsDataURL(file);
+    });
+
+    // Photo remove
+    document.getElementById('p-photo-remove')?.addEventListener('click', () => {
+      delete data.profile.photo;
+      save();
+      loadProfile();
+      showToast('Photo supprimée.');
+    });
+
+    document.getElementById('btn-save-profile')?.addEventListener('click', () => {
+      data.profile.name = (document.getElementById('p-name') as HTMLInputElement).value;
+      data.profile.title = (document.getElementById('p-title') as HTMLInputElement).value;
+      data.profile.tagline = (document.getElementById('p-tagline') as HTMLInputElement).value;
+      data.profile.bio = (document.getElementById('p-bio') as HTMLTextAreaElement).value;
+      data.profile.email = (document.getElementById('p-email') as HTMLInputElement).value;
+      data.profile.location = (document.getElementById('p-location') as HTMLInputElement).value;
+      data.profile.availability = (document.getElementById('p-availability') as HTMLInputElement).value;
+      save();
+      showToast('Profil sauvegardé!');
+    });
+
+    // ── Case Studies ──
+    function renderFlows(flows: string[], studyIndex: number): string {
+      const items = (flows || []).map((step, fi) => `
+        <div class="admin-flow-item">
+          <span class="admin-flow-num">${String(fi + 1).padStart(2, '0')}</span>
+          <input class="admin-input study-flow-input" data-si="${studyIndex}" data-fi="${fi}" value="${step.replace(/"/g, '&quot;')}" />
+          <button class="admin-flow-delete study-flow-delete" data-si="${studyIndex}" data-fi="${fi}">×</button>
+        </div>
+      `).join('');
+      return `
+        <div class="admin-flow-list" data-si="${studyIndex}">
+          ${items}
+          <button class="admin-flow-add study-flow-add" data-si="${studyIndex}">+ Ajouter une étape</button>
+        </div>
+      `;
+    }
+
+    function renderStudies() {
+      const list = document.getElementById('studies-list')!;
+      list.innerHTML = '';
+      (data.caseStudies || []).forEach((study: any, i: number) => {
+        const item = document.createElement('div');
+        item.className = 'admin-item';
+        item.innerHTML = `
+          <div class="admin-item-header" data-action="toggle">
+            <div class="admin-item-left">
+              <span class="admin-item-num">${String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <div class="admin-item-title">${study.title || 'Sans titre'}</div>
+                <div class="admin-item-subtitle">${study.category || ''} · ${study.year || ''}</div>
+              </div>
+            </div>
+            <div class="admin-item-actions">
+              <button class="admin-btn-sm study-save" data-i="${i}" style="background:var(--fg); color:var(--bg);">Sauver</button>
+              <button class="admin-btn-ghost study-delete" data-i="${i}">Supprimer</button>
+              <svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+          <div class="admin-item-body collapsed">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div><label class="admin-label">Titre</label><input class="admin-input study-title" data-i="${i}" value="${(study.title || '').replace(/"/g, '&quot;')}" /></div>
+              <div><label class="admin-label">Slug</label><input class="admin-input study-slug" data-i="${i}" value="${(study.slug || '').replace(/"/g, '&quot;')}" /></div>
+              <div><label class="admin-label">Catégorie</label><input class="admin-input study-category" data-i="${i}" value="${(study.category || '').replace(/"/g, '&quot;')}" /></div>
+              <div><label class="admin-label">Année</label><input class="admin-input study-year" data-i="${i}" value="${(study.year || '').replace(/"/g, '&quot;')}" /></div>
+              <div class="md:col-span-2"><label class="admin-label">Description</label><textarea class="admin-input study-desc" data-i="${i}" rows="2">${study.description || ''}</textarea></div>
+              <div class="md:col-span-2"><label class="admin-label">Défi</label><textarea class="admin-input study-challenge" data-i="${i}" rows="2">${study.challenge || ''}</textarea></div>
+              <div class="md:col-span-2"><label class="admin-label">Solution</label><textarea class="admin-input study-solution" data-i="${i}" rows="2">${study.solution || ''}</textarea></div>
+              <div class="md:col-span-2"><label class="admin-label">Résultats (un par ligne)</label><textarea class="admin-input study-results" data-i="${i}" rows="2">${(study.results || []).join('\n')}</textarea></div>
+              <div class="md:col-span-2"><label class="admin-label">Tags (virgule)</label><input class="admin-input study-tags" data-i="${i}" value="${(study.tags || []).join(', ')}" /></div>
+              <div><label class="admin-label">Couleur hero</label><input class="admin-input study-color" data-i="${i}" value="${study.heroColor || '#1a1a1a'}" type="color" style="height:34px; padding:4px;" /></div>
+            </div>
+            <!-- Images -->
+            <div class="mt-5 pt-5" style="border-top: 1px solid var(--border-strong);">
+              <label class="admin-label">Images du projet</label>
+              <div class="study-images-grid" data-si="${i}" style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.5rem;">
+                ${(study.images || []).map((img: string, ii: number) => `
+                  <div class="study-image-thumb" style="position:relative;width:80px;height:60px;border:1px solid var(--border-strong);overflow:hidden;">
+                    <img src="${img}" style="width:100%;height:100%;object-fit:cover;" />
+                    <button class="study-image-remove" data-si="${i}" data-ii="${ii}" style="position:absolute;top:2px;right:2px;width:16px;height:16px;font-size:10px;background:var(--fg);color:var(--bg);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;line-height:1;">×</button>
+                  </div>
+                `).join('')}
+              </div>
+              <label class="admin-btn-outline mt-2" style="display:inline-block;cursor:pointer;">
+                + Ajouter des images
+                <input type="file" accept="image/*" multiple class="study-image-input" data-i="${i}" style="display:none;" />
+              </label>
+            </div>
+            <!-- Flow / Steps -->
+            <div class="mt-5 pt-5" style="border-top: 1px solid var(--border);">
+              <label class="admin-label">Étapes du flow (processus)</label>
+              ${renderFlows(study.flow || [], i)}
+            </div>
+          </div>
+        `;
+        list.appendChild(item);
+      });
+
+      // Toggle
+      list.querySelectorAll('[data-action="toggle"]').forEach((header) => {
+        header.addEventListener('click', (e) => {
+          if ((e.target as HTMLElement).closest('.admin-btn-sm, .admin-btn-ghost')) return;
+          const body = header.nextElementSibling as HTMLElement;
+          const chevron = header.querySelector('.chevron') as HTMLElement;
+          body?.classList.toggle('collapsed');
+          chevron?.classList.toggle('is-open');
+        });
+      });
+
+      // Save
+      list.querySelectorAll('.study-save').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const i = parseInt((btn as HTMLElement).dataset.i!);
+          const item = (btn as HTMLElement).closest('.admin-item')!;
+          data.caseStudies[i].title = (item.querySelector('.study-title') as HTMLInputElement).value;
+          data.caseStudies[i].slug = (item.querySelector('.study-slug') as HTMLInputElement).value;
+          data.caseStudies[i].category = (item.querySelector('.study-category') as HTMLInputElement).value;
+          data.caseStudies[i].year = (item.querySelector('.study-year') as HTMLInputElement).value;
+          data.caseStudies[i].description = (item.querySelector('.study-desc') as HTMLTextAreaElement).value;
+          data.caseStudies[i].challenge = (item.querySelector('.study-challenge') as HTMLTextAreaElement).value;
+          data.caseStudies[i].solution = (item.querySelector('.study-solution') as HTMLTextAreaElement).value;
+          data.caseStudies[i].results = (item.querySelector('.study-results') as HTMLTextAreaElement).value.split('\n').filter((l: string) => l.trim());
+          data.caseStudies[i].tags = (item.querySelector('.study-tags') as HTMLInputElement).value.split(',').map((t: string) => t.trim()).filter(Boolean);
+          data.caseStudies[i].heroColor = (item.querySelector('.study-color') as HTMLInputElement).value;
+          // Save flows
+          const flowInputs = item.querySelectorAll('.study-flow-input') as NodeListOf<HTMLInputElement>;
+          data.caseStudies[i].flow = Array.from(flowInputs).map((inp) => inp.value).filter(Boolean);
+          save();
+          const titleEl = item.querySelector('.admin-item-title');
+          if (titleEl) titleEl.textContent = data.caseStudies[i].title;
+          const subEl = item.querySelector('.admin-item-subtitle');
+          if (subEl) subEl.textContent = `${data.caseStudies[i].category || ''} · ${data.caseStudies[i].year || ''}`;
+          showToast('Case study sauvegardé!');
+        });
+      });
+
+      // Delete
+      list.querySelectorAll('.study-delete').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const i = parseInt((btn as HTMLElement).dataset.i!);
+          const title = data.caseStudies[i]?.title || 'ce case study';
+          showDeleteModal(`Supprimer "${title}" ? Cette action est irréversible.`, () => {
+            data.caseStudies.splice(i, 1);
+            save();
+            renderStudies();
+            showToast('Case study supprimé.');
+          });
+        });
+      });
+
+      // Flow: add step
+      list.querySelectorAll('.study-flow-add').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const si = parseInt((btn as HTMLElement).dataset.si!);
+          if (!data.caseStudies[si].flow) data.caseStudies[si].flow = [];
+          data.caseStudies[si].flow.push('');
+          save();
+          renderStudies();
+          // Re-open the card
+          const items = list.querySelectorAll('.admin-item');
+          const body = items[si]?.querySelector('.admin-item-body');
+          const chevron = items[si]?.querySelector('.chevron');
+          body?.classList.remove('collapsed');
+          chevron?.classList.add('is-open');
+        });
+      });
+
+      // Flow: delete step
+      list.querySelectorAll('.study-flow-delete').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const si = parseInt((btn as HTMLElement).dataset.si!);
+          const fi = parseInt((btn as HTMLElement).dataset.fi!);
+          data.caseStudies[si].flow.splice(fi, 1);
+          save();
+          renderStudies();
+          const items = list.querySelectorAll('.admin-item');
+          const body = items[si]?.querySelector('.admin-item-body');
+          const chevron = items[si]?.querySelector('.chevron');
+          body?.classList.remove('collapsed');
+          chevron?.classList.add('is-open');
+        });
+      });
+
+      // Image: upload
+      list.querySelectorAll('.study-image-input').forEach((input) => {
+        input.addEventListener('change', (e) => {
+          const si = parseInt((input as HTMLElement).dataset.i!);
+          const files = (e.target as HTMLInputElement).files;
+          if (!files || files.length === 0) return;
+          if (!data.caseStudies[si].images) data.caseStudies[si].images = [];
+
+          Array.from(files).forEach(async (file) => {
+            const reader = new FileReader();
+            reader.onload = async () => {
+              try {
+                const resp = await fetch(API + '/api/upload-image', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ filename: file.name, data: reader.result })
+                });
+                const result = await resp.json();
+                if (result.ok) {
+                  data.caseStudies[si].images = data.caseStudies[si].images || [];
+                  data.caseStudies[si].images.push(result.path);
+                  await save();
+                  renderStudies();
+                  reopenCard(si);
+                  showToast('Image uploadée dans public/assets/!');
+                }
+              } catch(e) { showToast('Erreur upload: ' + e.message); }
+            };
+            reader.readAsDataURL(file);
+          });
+        });
+      });
+
+      // Image: remove
+      list.querySelectorAll('.study-image-remove').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const si = parseInt((btn as HTMLElement).dataset.si!);
+          const ii = parseInt((btn as HTMLElement).dataset.ii!);
+          data.caseStudies[si].images.splice(ii, 1);
+          save();
+          renderStudies();
+          reopenCard(si);
+        });
+      });
+    }
+
+    function reopenCard(index: number) {
+      const list = document.getElementById('studies-list')!;
+      const items = list.querySelectorAll('.admin-item');
+      const body = items[index]?.querySelector('.admin-item-body');
+      const chevron = items[index]?.querySelector('.chevron');
+      body?.classList.remove('collapsed');
+      chevron?.classList.add('is-open');
+    }
+
+    document.getElementById('btn-add-study')?.addEventListener('click', () => {
+      if (!data.caseStudies) data.caseStudies = [];
+      data.caseStudies.push({
+        slug: 'nouveau-projet-' + Date.now(),
+        title: 'Nouveau projet',
+        category: 'Catégorie',
+        year: new Date().getFullYear().toString(),
+        thumbnail: '',
+        heroColor: '#1a1a1a',
+        description: '',
+        challenge: '',
+        solution: '',
+        results: [],
+        tags: [],
+        flow: [],
+        images: [],
+      });
+      save();
+      renderStudies();
+      showToast('Case study ajouté!');
+    });
+
+    // ── Services ──
+    function renderServices() {
+      const list = document.getElementById('services-list')!;
+      list.innerHTML = '';
+      (data.services || []).forEach((service: any, i: number) => {
+        const item = document.createElement('div');
+        item.className = 'admin-item';
+        item.innerHTML = `
+          <div class="admin-item-header" data-action="toggle">
+            <div class="admin-item-left">
+              <span class="admin-item-num">${String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <div class="admin-item-title">${service.title || 'Sans titre'}</div>
+                <div class="admin-item-subtitle">${service.id || ''}</div>
+              </div>
+            </div>
+            <div class="admin-item-actions">
+              <button class="admin-btn-sm svc-save" data-i="${i}" style="background:var(--fg); color:var(--bg);">Sauver</button>
+              <button class="admin-btn-ghost svc-delete" data-i="${i}">Supprimer</button>
+              <svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+          <div class="admin-item-body collapsed">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div><label class="admin-label">Titre</label><input class="admin-input svc-title" data-i="${i}" value="${(service.title || '').replace(/"/g, '&quot;')}" /></div>
+              <div><label class="admin-label">ID</label><input class="admin-input svc-id" data-i="${i}" value="${(service.id || '').replace(/"/g, '&quot;')}" /></div>
+              <div class="md:col-span-2"><label class="admin-label">Description</label><textarea class="admin-input svc-desc" data-i="${i}" rows="2">${service.description || ''}</textarea></div>
+            </div>
+          </div>
+        `;
+        list.appendChild(item);
+      });
+
+      list.querySelectorAll('[data-action="toggle"]').forEach((header) => {
+        header.addEventListener('click', (e) => {
+          if ((e.target as HTMLElement).closest('.admin-btn-sm, .admin-btn-ghost')) return;
+          const body = header.nextElementSibling as HTMLElement;
+          const chevron = header.querySelector('.chevron') as HTMLElement;
+          body?.classList.toggle('collapsed');
+          chevron?.classList.toggle('is-open');
+        });
+      });
+
+      list.querySelectorAll('.svc-save').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const i = parseInt((btn as HTMLElement).dataset.i!);
+          const item = (btn as HTMLElement).closest('.admin-item')!;
+          data.services[i].title = (item.querySelector('.svc-title') as HTMLInputElement).value;
+          data.services[i].id = (item.querySelector('.svc-id') as HTMLInputElement).value;
+          data.services[i].description = (item.querySelector('.svc-desc') as HTMLTextAreaElement).value;
+          save();
+          const titleEl = item.querySelector('.admin-item-title');
+          if (titleEl) titleEl.textContent = data.services[i].title;
+          const subEl = item.querySelector('.admin-item-subtitle');
+          if (subEl) subEl.textContent = data.services[i].id;
+          showToast('Service sauvegardé!');
+        });
+      });
+
+      list.querySelectorAll('.svc-delete').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const i = parseInt((btn as HTMLElement).dataset.i!);
+          const title = data.services[i]?.title || 'ce service';
+          showDeleteModal(`Supprimer "${title}" ? Cette action est irréversible.`, () => {
+            data.services.splice(i, 1);
+            save();
+            renderServices();
+            showToast('Service supprimé.');
+          });
+        });
+      });
+    }
+
+    document.getElementById('btn-add-service')?.addEventListener('click', () => {
+      if (!data.services) data.services = [];
+      data.services.push({ id: 'nouveau-service-' + Date.now(), title: 'Nouveau service', description: '', icon: 'star' });
+      save();
+      renderServices();
+      showToast('Service ajouté!');
+    });
+
+    // ── Export ──
+    document.getElementById('btn-export')?.addEventListener('click', () => {
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'portfolio.json';
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('JSON exporté!');
+    });
+
+    // ── Reset ──
+    document.getElementById('btn-reset')?.addEventListener('click', () => {
+      showDeleteModal('Réinitialiser toutes les données?', async () => {
+        const resp = await fetch(JSON_URL);
+        data = await resp.json();
+        await save();
+        loadProfile();
+        renderStudies();
+        renderServices();
+        showToast('Données réinitialisées.');
+      });
+    });
+
+    // ── Delete Modal ──
+    function showDeleteModal(desc: string, onConfirm: () => void) {
+      const modal = document.getElementById('delete-modal')!;
+      const descEl = document.getElementById('delete-modal-desc')!;
+      const cancelBtn = document.getElementById('delete-modal-cancel')!;
+      const confirmBtn = document.getElementById('delete-modal-confirm')!;
+
+      descEl.textContent = desc;
+      modal.classList.remove('hidden');
+
+      const cleanup = () => {
+        modal.classList.add('hidden');
+        cancelBtn.removeEventListener('click', cleanup);
+        confirmBtn.removeEventListener('click', doConfirm);
+        modal.querySelector('.delete-modal-backdrop')?.removeEventListener('click', cleanup);
+      };
+      const doConfirm = () => { cleanup(); onConfirm(); };
+
+      cancelBtn.addEventListener('click', cleanup);
+      confirmBtn.addEventListener('click', doConfirm);
+      modal.querySelector('.delete-modal-backdrop')?.addEventListener('click', cleanup);
+    }
+
+    // ── Toast ──
+    function showToast(msg: string) {
+      const toast = document.createElement('div');
+      toast.textContent = msg;
+      toast.style.cssText = 'position:fixed;bottom:24px;right:24px;padding:10px 18px;font-size:12px;font-family:var(--font-mono);background:var(--fg);color:var(--bg);z-index:99999;transition:opacity 0.3s;';
+      document.body.appendChild(toast);
+      setTimeout(() => { toast.style.opacity = '0'; }, 2000);
+      setTimeout(() => toast.remove(), 2500);
+    }
+
+    refreshGitStatus();
+    loadData().then(() => { loadProfile(); renderStudies(); renderServices(); });
+  }
+
+  document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', initAdmin) : initAdmin();
+</script>

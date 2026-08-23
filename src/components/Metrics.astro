@@ -1,0 +1,50 @@
+---
+// Metrics — theme-aware
+---
+
+<section id="metrics" class="section" style="background: var(--bg-raised);">
+  <div class="container-page">
+    <div class="text-center max-w-2xl mx-auto">
+      <span class="label">En chiffres</span>
+      <h2 class="mt-6 text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.05] tracking-[-0.02em]" style="color: var(--fg);">
+        Prouvé à grande échelle.
+      </h2>
+    </div>
+
+    <div class="mt-16 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 gsap-stagger-grid">
+      {[
+        { value: '12 000+', label: 'Stratégies actives' },
+        { value: '99.97%', label: 'Disponibilité' },
+        { value: '2.4ms', label: 'Latence moyenne' },
+        { value: '$18B+', label: 'AUM déployé' },
+      ].map((item) => (
+        <div class="text-center p-6 md:p-8 transition-colors duration-300" style="border: 1px solid var(--border);" onmouseover="this.style.borderColor='var(--border-hover)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div class="font-mono text-xl md:text-2xl lg:text-3xl font-bold tabular-nums gsap-counter" style="color: var(--fg);" data-value="{item.value}">{item.value}</div>
+          <div class="mt-2 text-xs" style="color: var(--fg-muted);">{item.label}</div>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-16 md:mt-20 max-w-3xl mx-auto gsap-reveal">
+      <div class="p-8 md:p-12" style="border: 1px solid var(--border);">
+        <div class="text-6xl font-serif leading-none mb-4" style="color: var(--border-strong);" aria-hidden="true">"</div>
+        <blockquote>
+          <p class="text-lg md:text-xl leading-relaxed italic" style="color: var(--fg-secondary);">
+            « Algokreation a remplacé trois outils séparés dans notre stack. Nous sommes passés
+            de l'idée au trading en direct en un seul après-midi. La précision des backtests
+            est la meilleure que nous ayons vue. »
+          </p>
+        </blockquote>
+        <div class="mt-8 flex items-center gap-3">
+          <div class="w-10 h-10 flex items-center justify-center font-mono text-xs font-semibold" style="color: var(--fg-muted); border: 1px solid var(--border-strong);">
+            MK
+          </div>
+          <div>
+            <div class="text-sm font-medium" style="color: var(--fg);">Marcus Klein</div>
+            <div class="text-xs" style="color: var(--fg-muted);">Directeur de la Recherche Quantitative, Apex Capital</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

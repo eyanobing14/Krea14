@@ -1,0 +1,163 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ScrollReveal from '../components/ScrollReveal.astro';
+
+const dataPath = path.resolve(process.cwd(), 'public/data/portfolio.json');
+const data = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
+const profile = data.profile;
+---
+
+<Layout title={`Contact — ${profile.name}`}>
+  <Header />
+  <main>
+    <section class="pt-32 pb-16 md:pt-40 md:pb-24">
+      <div class="container-page">
+        <span class="label">Contact</span>
+        <h1 class="mt-8 text-4xl md:text-5xl lg:text-6xl font-bold leading-[1] tracking-[-0.03em]" style="color: var(--fg);">
+          Parlons de votre<br/>
+          <span style="color: var(--fg-tertiary);">projet.</span>
+        </h1>
+      </div>
+    </section>
+
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <section class="section">
+      <div class="container-page">
+        <div class="grid grid-cols-12 gap-8 md:gap-16">
+          <!-- Left: Form -->
+          <div class="col-span-12 lg:col-span-7 gsap-slide-left">
+            <form id="contact-form" class="space-y-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-xs font-mono uppercase tracking-wider mb-2" style="color: var(--fg-muted);">Nom</label>
+                  <input type="text" name="name" required class="contact-input" placeholder="Votre nom" />
+                </div>
+                <div>
+                  <label class="block text-xs font-mono uppercase tracking-wider mb-2" style="color: var(--fg-muted);">Email</label>
+                  <input type="email" name="email" required class="contact-input" placeholder="votre@email.com" />
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-mono uppercase tracking-wider mb-2" style="color: var(--fg-muted);">Type de projet</label>
+                <select name="project-type" class="contact-input">
+                  <option value="">Sélectionnez...</option>
+                  <option value="branding">Branding / Identité visuelle</option>
+                  <option value="uiux">UI/UX Design</option>
+                  <option value="frontend">Développement Frontend</option>
+                  <option value="logo">Logo Design</option>
+                  <option value="other">Autre</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-mono uppercase tracking-wider mb-2" style="color: var(--fg-muted);">Budget estimé</label>
+                <select name="budget" class="contact-input">
+                  <option value="">Sélectionnez...</option>
+                  <option value="1k-3k">1 000 € — 3 000 €</option>
+                  <option value="3k-5k">3 000 € — 5 000 €</option>
+                  <option value="5k-10k">5 000 € — 10 000 €</option>
+                  <option value="10k+">10 000 € +</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-mono uppercase tracking-wider mb-2" style="color: var(--fg-muted);">Message</label>
+                <textarea name="message" rows="5" required class="contact-input" placeholder="Décrivez votre projet, vos objectifs, votre timeline..."></textarea>
+              </div>
+              <div>
+                <button type="submit" class="px-8 py-3 text-sm font-medium transition-all" style="background: var(--fg); color: var(--bg);" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+                  Envoyer le message →
+                </button>
+              </div>
+            </form>
+            <div id="contact-success" class="hidden mt-6 p-6" style="border: 1px solid var(--border);">
+              <p class="text-sm font-medium" style="color: var(--fg);">Message envoyé!</p>
+              <p class="mt-2 text-xs" style="color: var(--fg-secondary);">Je vous répondrai dans les plus brefs délais.</p>
+            </div>
+          </div>
+
+          <!-- Right: Info -->
+          <div class="col-span-12 lg:col-span-5 gsap-slide-right">
+            <div class="space-y-8">
+              <div>
+                <span class="label">Email direct</span>
+                <a href={`mailto:${profile.email}`} class="mt-3 block text-lg font-medium no-underline transition-colors duration-200" style="color: var(--fg);" onmouseover="this.style.color='var(--fg-secondary)'" onmouseout="this.style.color='var(--fg)'">
+                  {profile.email}
+                </a>
+              </div>
+              <div>
+                <span class="label">Localisation</span>
+                <p class="mt-3 text-sm" style="color: var(--fg-secondary);">{profile.location}</p>
+              </div>
+              <div>
+                <span class="label">Disponibilité</span>
+                <p class="mt-3 text-sm" style="color: var(--fg-secondary);">{profile.availability}</p>
+              </div>
+              <div>
+                <span class="label">Réseaux</span>
+                <div class="mt-3 flex gap-3">
+                  {profile.socials && Object.entries(profile.socials).map(([name, url]) => (
+                    <a href={url} target="_blank" rel="noopener noreferrer" class="w-10 h-10 flex items-center justify-center transition-colors duration-200 no-underline text-xs font-mono uppercase" style="color: var(--fg-muted); border: 1px solid var(--border);" onmouseover="this.style.color='var(--fg)'; this.style.borderColor='var(--border-hover)'" onmouseout="this.style.color='var(--fg-muted)'; this.style.borderColor='var(--border)'">
+                      {name[0].toUpperCase()}
+                    </a>
+                  ))}
+                </div>
+              </div>
+              <div class="p-6" style="border: 1px solid var(--border); background: var(--bg-raised);">
+                <p class="text-xs leading-relaxed" style="color: var(--fg-secondary);">
+                  Réponse sous 24h ouvrées. Pour les projets urgents, mentionnez-le dans votre message.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <ScrollReveal />
+</Layout>
+
+<style>
+  .contact-input {
+    width: 100%;
+    padding: 0.625rem 0.75rem;
+    font-size: 0.875rem;
+    font-family: var(--font-body);
+    background: var(--bg-raised);
+    color: var(--fg);
+    border: 1px solid var(--border-strong);
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+    border-radius: 0;
+  }
+  .contact-input:focus {
+    border-color: var(--fg);
+  }
+  .contact-input::placeholder {
+    color: var(--fg-muted);
+  }
+  select.contact-input {
+    cursor: pointer;
+  }
+</style>
+
+<script>
+  function initContact() {
+    const form = document.getElementById('contact-form') as HTMLFormElement;
+    const success = document.getElementById('contact-success');
+    if (!form) return;
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // In a real app this would POST to an API
+      form.classList.add('hidden');
+      success?.classList.remove('hidden');
+    });
+  }
+  document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', initContact) : initContact();
+</script>

@@ -1,0 +1,176 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ScrollReveal from '../../components/ScrollReveal.astro';
+
+const dataPath = path.resolve(process.cwd(), 'public/data/portfolio.json');
+const data = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
+const caseStudies = data.caseStudies || [];
+
+// Extract unique categories (first part before "·")
+const categories = [...new Set(
+  caseStudies.map((s) => s.category.split('·')[0].trim())
+)];
+---
+
+<Layout title="Work — Portfolio">
+  <Header />
+  <main>
+    <section class="pt-32 pb-16 md:pt-40 md:pb-24">
+      <div class="container-page">
+        <span class="label">Work</span>
+        <h1 class="mt-8 text-4xl md:text-5xl lg:text-6xl font-bold leading-[1] tracking-[-0.03em]" style="color: var(--fg);">
+          Tous mes<br/>
+          <span style="color: var(--fg-tertiary);">projets.</span>
+        </h1>
+        <p class="mt-6 text-lg leading-relaxed max-w-2xl" style="color: var(--fg-secondary);">
+          Une sélection de projets en branding, UI/UX, développement frontend et logo design.
+        </p>
+
+        <!-- Category Filters -->
+        <div class="mt-10 flex flex-wrap gap-2" id="work-filters">
+          <button
+            class="filter-btn active px-4 py-2 text-xs font-mono uppercase tracking-wider transition-all duration-300"
+            data-category="all"
+          >
+            Tous
+          </button>
+          {categories.map((cat) => (
+            <button
+              class="filter-btn px-4 py-2 text-xs font-mono uppercase tracking-wider transition-all duration-300"
+              data-category={cat}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <section class="section">
+      <div class="container-page">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 gsap-stagger-grid" id="work-grid">
+          {caseStudies.map((study) => {
+            const mainCategory = study.category.split('·')[0].trim();
+            return (
+              <a
+                href={`/work/${study.slug}`}
+                class="group block no-underline work-card"
+                style="border: 1px solid var(--border);"
+                data-category={mainCategory}
+              >
+                <div class="aspect-[16/9] flex items-center justify-center transition-all duration-500 relative overflow-hidden" style={`background: ${study.heroColor || 'var(--bg-raised)'};`}>
+                  <span class="font-mono text-xs uppercase tracking-widest opacity-30" style="color: var(--fg);">{study.category}</span>
+                  <!-- Hover overlay -->
+                  <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background: rgba(0,0,0,0.4);">
+                    <span class="text-sm font-medium" style="color: #fff;">Voir le projet →</span>
+                  </div>
+                </div>
+                <div class="p-6" style="border-top: 1px solid var(--border);">
+                  <div class="flex items-center justify-between">
+                    <h2 class="text-base font-semibold" style="color: var(--fg);">{study.title}</h2>
+                    <span class="text-xs font-mono" style="color: var(--fg-muted);">{study.year}</span>
+                  </div>
+                  <p class="mt-3 text-sm leading-relaxed" style="color: var(--fg-secondary);">{study.description}</p>
+                  <div class="mt-4 flex flex-wrap gap-1.5">
+                    {study.tags?.map((tag) => (
+                      <span class="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider" style="color: var(--fg-muted); border: 1px solid var(--border);">{tag}</span>
+                    ))}
+                  </div>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+
+        <!-- Empty state -->
+        <div id="work-empty" class="hidden text-center py-20">
+          <p class="text-sm" style="color: var(--fg-muted);">Aucun projet dans cette catégorie.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section" style="border-top: 1px solid var(--border);">
+      <div class="container-page text-center">
+        <h2 class="text-3xl md:text-4xl font-bold" style="color: var(--fg);">Envie de collaborer?</h2>
+        <p class="mt-4 max-w-lg mx-auto" style="color: var(--fg-secondary);">
+          Chaque projet est une nouvelle aventure. Parlons du vôtre.
+        </p>
+        <div class="mt-8">
+          <a href="mailto:hello@votreportfolio.com" class="px-6 py-3 text-sm font-medium no-underline transition-all" style="background: var(--fg); color: var(--bg);" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+            Me contacter
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <ScrollReveal />
+</Layout>
+
+<style>
+  .filter-btn {
+    color: var(--fg-muted);
+    border: 1px solid var(--border);
+    background: transparent;
+  }
+  .filter-btn:hover {
+    color: var(--fg);
+    border-color: var(--border-hover);
+  }
+  .filter-btn.active {
+    color: var(--bg);
+    background: var(--fg);
+    border-color: var(--fg);
+  }
+  .work-card {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .work-card.is-hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  function initFilters() {
+    const buttons = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.work-card');
+    const empty = document.getElementById('work-empty');
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        // Update active state
+        buttons.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const category = (btn as HTMLElement).dataset.category;
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const cardCategory = (card as HTMLElement).dataset.category;
+          if (category === 'all' || cardCategory === category) {
+            (card as HTMLElement).classList.remove('is-hidden');
+            visibleCount++;
+          } else {
+            (card as HTMLElement).classList.add('is-hidden');
+          }
+        });
+
+        // Show/hide empty state
+        if (empty) {
+          empty.classList.toggle('hidden', visibleCount > 0);
+        }
+      });
+    });
+  }
+
+  document.readyState === 'loading'
+    ? document.addEventListener('DOMContentLoaded', initFilters)
+    : initFilters();
+</script>

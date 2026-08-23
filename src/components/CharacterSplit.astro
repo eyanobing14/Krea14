@@ -1,0 +1,84 @@
+---
+// CharacterSplit — text reveal animation, character by character
+interface Props {
+  text: string;
+  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'span';
+  class?: string;
+  delay?: number;
+  stagger?: number;
+}
+
+const { text, tag: Tag = 'span', class: className = '', delay = 0, stagger = 30 } = Astro.props;
+const words = text.split(' ');
+---
+
+<Tag class:list={['char-split', className]} data-delay={delay} data-stagger={stagger}>
+  {words.map((word, wi) => (
+    <span class="char-split-word" style={`--word-index: ${wi};`}>
+      {word.split('').map((char, ci) => (
+        <span class="char-split-char" style={`--char-index: ${wi * 20 + ci};`}>
+          {char}
+        </span>
+      ))}
+      {wi < words.length - 1 && <span class="char-split-char">&nbsp;</span>}
+    </span>
+  ))}
+</Tag>
+
+<style>
+  .char-split {
+    display: inline-block;
+    overflow: hidden;
+  }
+
+  .char-split-word {
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  .char-split-char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: calc(var(--char-index) * 30ms);
+  }
+
+  .char-split.is-visible .char-split-char {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .char-split-char {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  function initCharSplit() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    document.querySelectorAll('.char-split').forEach((el) => observer.observe(el));
+  }
+
+  document.readyState === 'loading'
+    ? document.addEventListener('DOMContentLoaded', initCharSplit)
+    : initCharSplit();
+</script>

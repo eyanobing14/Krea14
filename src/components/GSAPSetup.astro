@@ -1,0 +1,258 @@
+---
+// GSAPSetup — central GSAP animation orchestration
+---
+
+<script>
+  import gsap from 'gsap';
+
+  function initGSAP() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    // Wait for fonts to load
+    document.fonts.ready.then(() => {
+      initHeroAnimation();
+      initScrollAnimations();
+      initCounterAnimations();
+      initParallax();
+      initStaggerAnimations();
+    });
+  }
+
+  // ── Hero entrance animation ──
+  function initHeroAnimation() {
+    const hero = document.querySelector('.hero-animate');
+    if (!hero) return;
+
+    const tl = gsap.timeline({ delay: 0.2 });
+
+    tl.from('.hero-animate .label', {
+      opacity: 0,
+      y: 20,
+      duration: 0.8,
+      ease: 'power3.out',
+    })
+    .from('.hero-animate h1 .hero-line', {
+      opacity: 0,
+      y: 60,
+      rotateX: -15,
+      duration: 1,
+      ease: 'power3.out',
+      stagger: 0.12,
+    }, '-=0.4')
+    .from('.hero-animate .hero-desc', {
+      opacity: 0,
+      y: 30,
+      duration: 0.8,
+      ease: 'power3.out',
+    }, '-=0.5')
+    .from('.hero-animate .hero-actions > *', {
+      opacity: 0,
+      y: 20,
+      duration: 0.6,
+      ease: 'power3.out',
+      stagger: 0.1,
+    }, '-=0.4')
+    .from('.hero-animate .hero-metrics > *', {
+      opacity: 0,
+      y: 20,
+      duration: 0.6,
+      ease: 'power3.out',
+      stagger: 0.08,
+    }, '-=0.3');
+  }
+
+  // ── Scroll-triggered animations ──
+  function initScrollAnimations() {
+    // Animate elements with .gsap-reveal
+    gsap.utils.toArray<HTMLElement>('.gsap-reveal').forEach((el) => {
+      gsap.from(el, {
+        opacity: 0,
+        y: 40,
+        duration: 0.9,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 88%',
+          once: true,
+        },
+      });
+    });
+
+    // Slide from left
+    gsap.utils.toArray<HTMLElement>('.gsap-slide-left').forEach((el) => {
+      gsap.from(el, {
+        opacity: 0,
+        x: -50,
+        duration: 0.9,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+          once: true,
+        },
+      });
+    });
+
+    // Slide from right
+    gsap.utils.toArray<HTMLElement>('.gsap-slide-right').forEach((el) => {
+      gsap.from(el, {
+        opacity: 0,
+        x: 50,
+        duration: 0.9,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+          once: true,
+        },
+      });
+    });
+
+    // Scale in
+    gsap.utils.toArray<HTMLElement>('.gsap-scale').forEach((el) => {
+      gsap.from(el, {
+        opacity: 0,
+        scale: 0.92,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+          once: true,
+        },
+      });
+    });
+
+    // Line reveal (scaleX from left)
+    gsap.utils.toArray<HTMLElement>('.gsap-line').forEach((el) => {
+      gsap.from(el, {
+        scaleX: 0,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 90%',
+          once: true,
+        },
+      });
+    });
+
+    // Stagger groups
+    gsap.utils.toArray<HTMLElement>('.gsap-stagger-group').forEach((group) => {
+      const children = group.children;
+      gsap.from(children, {
+        opacity: 0,
+        y: 30,
+        duration: 0.7,
+        ease: 'power3.out',
+        stagger: 0.08,
+        scrollTrigger: {
+          trigger: group,
+          start: 'top 85%',
+          once: true,
+        },
+      });
+    });
+
+    // Code blocks slide up with clip
+    gsap.utils.toArray<HTMLElement>('.gsap-code-reveal').forEach((el) => {
+      gsap.from(el, {
+        opacity: 0,
+        y: 30,
+        clipPath: 'inset(0 0 100% 0)',
+        duration: 0.9,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+          once: true,
+        },
+      });
+    });
+  }
+
+  // ── Counter animations ──
+  function initCounterAnimations() {
+    gsap.utils.toArray<HTMLElement>('.gsap-counter').forEach((el) => {
+      const target = el.dataset.value;
+      if (!target) return;
+
+      // Parse the numeric value
+      const numMatch = target.match(/([\d,.]+)/);
+      if (!numMatch) return;
+
+      const numStr = numMatch[1].replace(/,/g, '');
+      const num = parseFloat(numStr);
+      if (isNaN(num)) return;
+
+      const prefix = target.substring(0, target.indexOf(numMatch[1]));
+      const suffix = target.substring(target.indexOf(numMatch[1]) + numMatch[1].length);
+
+      const obj = { val: 0 };
+      gsap.to(obj, {
+        val: num,
+        duration: 2,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+          once: true,
+        },
+        onUpdate() {
+          const formatted = num % 1 !== 0
+            ? obj.val.toFixed(1)
+            : Math.round(obj.val).toLocaleString('fr-FR');
+          el.textContent = prefix + formatted + suffix;
+        },
+      });
+    });
+  }
+
+  // ── Parallax ──
+  function initParallax() {
+    gsap.utils.toArray<HTMLElement>('.gsap-parallax').forEach((el) => {
+      const speed = parseFloat(el.dataset.speed || '0.3');
+      gsap.to(el, {
+        yPercent: -speed * 15,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 0.5,
+        },
+      });
+    });
+  }
+
+  // ── Staggered grid items ──
+  function initStaggerAnimations() {
+    gsap.utils.toArray<HTMLElement>('.gsap-stagger-grid').forEach((grid) => {
+      const items = grid.children;
+      gsap.from(items, {
+        opacity: 0,
+        y: 40,
+        duration: 0.8,
+        ease: 'power3.out',
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: grid,
+          start: 'top 85%',
+          once: true,
+        },
+      });
+    });
+  }
+
+  // Initialize
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGSAP);
+  } else {
+    initGSAP();
+  }
+
+  // Re-init on View Transitions navigation (Astro)
+  document.addEventListener('astro:page-load', () => {
+    initGSAP();
+  });
+</script>

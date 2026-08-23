@@ -1,0 +1,98 @@
+---
+const profileName = 'Portfolio';
+const year = new Date().getFullYear();
+---
+
+<footer>
+  <!-- Links Grid -->
+  <div class="container-page py-12 md:py-16" style="border-top: 1px solid var(--border);">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-8">
+      <!-- Nav -->
+      <div>
+        <h3 class="text-[10px] font-mono uppercase tracking-[0.15em] mb-5" style="color: var(--fg-muted);">Navigation</h3>
+        <ul class="space-y-3">
+          {[
+            { label: 'Accueil', href: '/' },
+            { label: 'Work', href: '/work' },
+            { label: 'À propos', href: '/about' },
+            { label: 'Admin', href: '/admin' },
+          ].map((link) => (
+            <li>
+              <a href={link.href} class="text-sm no-underline transition-colors duration-200 hover-link" style="color: var(--fg-secondary);">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Services -->
+      <div>
+        <h3 class="text-[10px] font-mono uppercase tracking-[0.15em] mb-5" style="color: var(--fg-muted);">Services</h3>
+        <ul class="space-y-3">
+          {['Design Graphique', 'UI/UX Design', 'Frontend Dev', 'Logo Design'].map((s) => (
+            <li>
+              <a href="/about" class="text-sm no-underline transition-colors duration-200 hover-link" style="color: var(--fg-secondary);">
+                {s}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Socials -->
+      <div>
+        <h3 class="text-[10px] font-mono uppercase tracking-[0.15em] mb-5" style="color: var(--fg-muted);">Réseaux</h3>
+        <ul class="space-y-3">
+          {[
+            { label: 'Dribbble', href: '#' },
+            { label: 'Behance', href: '#' },
+            { label: 'GitHub', href: '#' },
+            { label: 'LinkedIn', href: '#' },
+          ].map((link) => (
+            <li>
+              <a href={link.href} target="_blank" rel="noopener noreferrer" class="text-sm no-underline transition-colors duration-200 hover-link" style="color: var(--fg-secondary);">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      <div>
+        <h3 class="text-[10px] font-mono uppercase tracking-[0.15em] mb-5" style="color: var(--fg-muted);">Légal</h3>
+        <ul class="space-y-3">
+          {[
+            { label: 'Confidentialité', href: '#' },
+            { label: 'Mentions légales', href: '#' },
+            { label: 'CGV', href: '#' },
+          ].map((link) => (
+            <li>
+              <a href={link.href} class="text-sm no-underline transition-colors duration-200 hover-link" style="color: var(--fg-secondary);">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="container-page py-6 flex flex-col sm:flex-row items-center justify-between gap-4" style="border-top: 1px solid var(--border);">
+    <div class="flex items-center gap-3">
+      <div class="w-5 h-5 flex items-center justify-center" style="background: var(--fg);">
+        <svg width="8" height="8" viewBox="0 0 16 16" fill="none"><path d="M3 12L6.5 4L10 8L13 2" stroke="var(--bg)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <span class="text-xs" style="color: var(--fg-muted);">© {year} {profileName}. Tous droits réservés.</span>
+    </div>
+    <span class="text-[10px] font-mono uppercase tracking-widest" style="color: var(--fg-muted);">Fait avec soin à Paris</span>
+  </div>
+</footer>
+
+<style>
+  .hover-link:hover {
+    color: var(--fg) !important;
+  }
+</style>

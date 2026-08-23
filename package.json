@@ -1,0 +1,25 @@
+{
+  "name": "monportfolio",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "dev:admin": "concurrently \"astro dev\" \"node server.js\"",
+    "server": "node server.js",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.2.4",
+    "concurrently": "^10.0.5",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "gsap": "^3.15.0",
+    "tailwindcss": "^4.3.3"
+  }
+}

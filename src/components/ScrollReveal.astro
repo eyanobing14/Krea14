@@ -1,0 +1,48 @@
+---
+// ScrollReveal — handles all animation types
+---
+
+<script>
+  function init() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      // Make everything visible immediately
+      document.querySelectorAll('.animate-in, .animate-slide-left, .animate-scale, .animate-line, .animate-clip').forEach(el => {
+        el.classList.add('is-visible');
+      });
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    document.querySelectorAll('.animate-in, .animate-slide-left, .animate-scale, .animate-line, .animate-clip').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Character split animation
+    const charObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            charObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    document.querySelectorAll('.char-split').forEach(el => charObserver.observe(el));
+  }
+
+  document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', init) : init();
+</script>
