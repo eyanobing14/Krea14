@@ -1,0 +1,201 @@
+---
+import data from "../../../public/data/portfolio.json";
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import Container from "../../components/Container.astro";
+
+const legal = data.legal as any;
+const profile = data.profile;
+const name = legal?.companyName || profile.name;
+const email = legal?.companyEmail || profile.email;
+const jurisdiction = legal?.jurisdiction || "Paris, France";
+const lastUpdated = "August 2026";
+---
+
+<Layout title={`Politique de confidentialité — ${name}`}>
+  <Header />
+  <main>
+    <section class="pt-24 sm:pt-28 pb-16 md:pt-36 md:pb-24">
+      <Container>
+        <h1
+          class="text-3xl sm:text-4xl md:text-5xl font-bold leading-none tracking-[-0.03em] animate-in"
+          style="color: var(--fg);"
+        >
+          <span data-fr="Politique de" data-en="Privacy">Politique de</span> <span style="color: var(--fg-tertiary);"><span data-fr="confidentialité." data-en="Policy.">confidentialité.</span></span>
+        </h1>
+        <p
+          class="mt-4 text-xs font-mono uppercase tracking-wider animate-in"
+          style="color: var(--fg-muted); --delay: 0.1s;"
+        >
+          <span data-fr="Dernière mise à jour :" data-en="Last updated:">Dernière mise à jour :</span> {lastUpdated}
+        </p>
+      </Container>
+    </section>
+
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <section class="section">
+      <Container>
+        <div class="legal-content">
+          <h2>1. Collecte des informations</h2>
+          <p>
+            Nous collectons les informations que vous nous fournissez directement lorsque vous
+            utilisez notre site ou nos services, notamment :
+          </p>
+          <ul>
+            <li><strong>Informations de contact :</strong> nom, adresse email, numéro de téléphone si vous nous contactez via le formulaire.</li>
+            <li><strong>Informations de projet :</strong> description de votre projet, budget estimé, type de projet que vous sélectionnez dans le formulaire de contact.</li>
+            <li><strong>Données de navigation :</strong> adresse IP, type de navigateur, pages visitées, durée de la visite, et autres statistiques d'utilisation.</li>
+          </ul>
+
+          <h2>2. Utilisation des informations</h2>
+          <p>Les informations collectées sont utilisées pour :</p>
+          <ul>
+            <li>Répondre à vos demandes de contact et vous fournir un devis personnalisé.</li>
+            <li>Exécuter les services de design et de développement que vous avez commandés.</li>
+            <li>Améliorer notre site web et l'expérience utilisateur.</li>
+            <li>Communiquer avec vous concernant votre projet ou nos services.</li>
+            <li>Respecter nos obligations légales.</li>
+          </ul>
+
+          <h2>3. Partage des informations</h2>
+          <p>
+            Nous ne vendons, n'échangeons et ne transférons pas vos informations personnelles à des tiers.
+            Vos données peuvent toutefois être partagées avec :
+          </p>
+          <ul>
+            <li>Des prestataires techniques qui nous aident à exploiter notre site (hébergement, outils d'analytics).</li>
+            <li>Des sous-traitants directement impliqués dans votre projet, avec votre consentement préalable.</li>
+            <li>Les autorités compétentes lorsque la loi l'exige.</li>
+          </ul>
+
+          <h2>4. Cookies et technologies de suivi</h2>
+          <p>
+            Notre site utilise des cookies essentiels au fonctionnement du site. Nous pouvons également
+            utiliser des outils d'analyse (comme Google Analytics) pour comprendre comment les visiteurs
+            interagissent avec notre site. Vous pouvez configurer votre navigateur pour refuser les cookies,
+            bien que cela puisse affecter certaines fonctionnalités du site.
+          </p>
+
+          <h2>5. Sécurité des données</h2>
+          <p>
+            Nous mettons en œuvre des mesures de sécurité appropriées pour protéger vos informations
+            personnelles contre l'accès non autorisé, l'altération, la divulgation ou la destruction.
+            Cependant, aucune méthode de transmission sur Internet ou de stockage électronique n'est
+            totalement sécurisée.
+          </p>
+
+          <h2>6. Conservation des données</h2>
+          <p>
+            Nous conservons vos informations personnelles uniquement pendant la durée nécessaire aux fins
+            pour lesquelles elles ont été collectées, ou aussi longtemps que nécessaire pour se conformer
+            aux obligations légales. Les données de contact sont conservées pendant une durée maximale de
+            <strong>3 ans</strong> après le dernier contact.
+          </p>
+
+          <h2>7. Vos droits</h2>
+          <p>
+            Conformément au Règlement Général sur la Protection des Données (RGPD) et à la législation
+            applicable, vous disposez des droits suivants :
+          </p>
+          <ul>
+            <li><strong>Droit d'accès :</strong> obtenir une copie de vos données personnelles.</li>
+            <li><strong>Droit de rectification :</strong> corriger des données inexactes ou incomplètes.</li>
+            <li><strong>Droit à l'effacement :</strong> demander la suppression de vos données personnelles.</li>
+            <li><strong>Droit d'opposition :</strong> vous opposer au traitement de vos données.</li>
+            <li><strong>Droit à la portabilité :</strong> recevoir vos données dans un format structuré.</li>
+          </ul>
+          <p>
+            Pour exercer ces droits, contactez-nous à l'adresse : <a href={`mailto:${email}`}>{email}</a>
+          </p>
+
+          <h2>8. Transferts internationaux</h2>
+          <p>
+            Vos données peuvent être transférées et traitées dans des pays en dehors de l'Union européenne,
+            notamment si nos outils d'hébergement ou d'analytics sont situés aux États-Unis. Dans ce cas,
+            nous nous assurons que des garanties appropriées sont en place pour protéger vos données.
+          </p>
+
+          <h2>9. Mineurs</h2>
+          <p>
+            Notre site ne s'adresse pas aux personnes de moins de 16 ans. Nous ne collectons pas
+            sciemment d'informations personnelles auprès de mineurs.
+          </p>
+
+          <h2>10. Modifications</h2>
+          <p>
+            Nous nous réservons le droit de modifier cette politique de confidentialité à tout moment.
+            Toute modification sera publiée sur cette page avec une date de mise à jour révisée.
+          </p>
+
+          <h2>11. Contact</h2>
+          <p>
+            Pour toute question concernant cette politique de confidentialité, veuillez nous contacter :
+          </p>
+          <ul>
+            <li>Email : <a href={`mailto:${email}`}>{email}</a></li>
+            <li>Localisation : {jurisdiction}</li>
+          </ul>
+        </div>
+      </Container>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .legal-content {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .legal-content h2 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--fg);
+    letter-spacing: -0.01em;
+  }
+  .legal-content h2:first-child {
+    margin-top: 0;
+  }
+  .legal-content p {
+    font-size: 0.875rem;
+    line-height: 1.8;
+    color: var(--fg-secondary);
+    margin-bottom: 0.75rem;
+  }
+  .legal-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 1rem;
+  }
+  .legal-content li {
+    font-size: 0.875rem;
+    line-height: 1.8;
+    color: var(--fg-secondary);
+    padding-left: 1.25rem;
+    position: relative;
+    margin-bottom: 0.25rem;
+  }
+  .legal-content li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--fg-muted);
+  }
+  .legal-content a {
+    color: var(--fg);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+  }
+  .legal-content a:hover {
+    color: var(--fg-secondary);
+  }
+  .legal-content strong {
+    color: var(--fg);
+    font-weight: 600;
+  }
+</style>

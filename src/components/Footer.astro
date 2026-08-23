@@ -64,9 +64,8 @@ const year = new Date().getFullYear();
         <h3 class="text-[10px] font-mono uppercase tracking-[0.15em] mb-5" style="color: var(--fg-muted);">Légal</h3>
         <ul class="space-y-3">
           {[
-            { label: 'Confidentialité', href: '#' },
-            { label: 'Mentions légales', href: '#' },
-            { label: 'CGV', href: '#' },
+            { label: 'Confidentialité', href: '/legal/privacy' },
+            { label: 'Conditions générales', href: '/legal/terms' },
           ].map((link) => (
             <li>
               <a href={link.href} class="text-sm no-underline transition-colors duration-200 hover-link" style="color: var(--fg-secondary);">

@@ -163,4 +163,12 @@ export const T: Record<string, string> = {
 
   // ── Common ──
   "Photo": "Photo",
+
+  // ── Legal pages ──
+  "Politique de confidentialité.": "Privacy Policy.",
+  "Dernière mise à jour :": "Last updated:",
+  "Conditions générales.": "Terms of Service.",
+  "Confidentialité": "Privacy",
+  "Conditions générales": "Terms",
+  "Légal": "Legal",
 };

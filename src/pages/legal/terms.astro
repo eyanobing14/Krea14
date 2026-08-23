@@ -1,0 +1,269 @@
+---
+import data from "../../../public/data/portfolio.json";
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import Container from "../../components/Container.astro";
+
+const legal = data.legal as any;
+const profile = data.profile;
+const name = legal?.companyName || profile.name;
+const email = legal?.companyEmail || profile.email;
+const jurisdiction = legal?.jurisdiction || "Paris, France";
+const currency = legal?.currency || "USD";
+const pricing = legal?.pricing || {};
+const paymentTerms = legal?.paymentTerms || "50% upfront, 50% on delivery";
+const refundPolicy = legal?.refundPolicy || "Refund available within 14 days of initial payment if work has not commenced";
+const lastUpdated = "August 2026";
+
+function fmtPrice(amount: number) {
+  return `${currency === "USD" ? "$" : currency + " "}${amount.toLocaleString("en-US")}`;
+}
+---
+
+<Layout title={`Conditions générales — ${name}`}>
+  <Header />
+  <main>
+    <section class="pt-24 sm:pt-28 pb-16 md:pt-36 md:pb-24">
+      <Container>
+        <h1
+          class="text-3xl sm:text-4xl md:text-5xl font-bold leading-none tracking-[-0.03em] animate-in"
+          style="color: var(--fg);"
+        >
+          <span data-fr="Conditions" data-en="Terms of">Conditions</span> <span style="color: var(--fg-tertiary);"><span data-fr="générales." data-en="Service.">générales.</span></span>
+        </h1>
+        <p
+          class="mt-4 text-xs font-mono uppercase tracking-wider animate-in"
+          style="color: var(--fg-muted); --delay: 0.1s;"
+        >
+          <span data-fr="Dernière mise à jour :" data-en="Last updated:">Dernière mise à jour :</span> {lastUpdated}
+        </p>
+      </Container>
+    </section>
+
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <section class="section">
+      <Container>
+        <div class="legal-content">
+          <h2>1. Objet</h2>
+          <p>
+            Les présentes conditions générales régissent l'ensemble des services de design,
+            de développement et de conseil créatif fournis par {name} (ci-après « le Prestataire »)
+            à ses clients (ci-après « le Client »). Toute commande de services implique l'acceptation
+            sans réserve des présentes conditions.
+          </p>
+
+          <h2>2. Devis et tarification</h2>
+          <p>
+            Chaque projet fait l'objet d'un devis personnalisé établi après analyse des besoins du Client.
+            Les tarifs indicatifs sont les suivants :
+          </p>
+          {pricing.branding && (
+            <div class="price-row">
+              <span class="price-label">{pricing.branding.label}</span>
+              <span class="price-value">{fmtPrice(pricing.branding.min)} — {fmtPrice(pricing.branding.max)}</span>
+            </div>
+          )}
+          {pricing.uiux && (
+            <div class="price-row">
+              <span class="price-label">{pricing.uiux.label}</span>
+              <span class="price-value">{fmtPrice(pricing.uiux.min)} — {fmtPrice(pricing.uiux.max)}</span>
+            </div>
+          )}
+          {pricing.frontend && (
+            <div class="price-row">
+              <span class="price-label">{pricing.frontend.label}</span>
+              <span class="price-value">{fmtPrice(pricing.frontend.min)} — {fmtPrice(pricing.frontend.max)}</span>
+            </div>
+          )}
+          {pricing.logo && (
+            <div class="price-row">
+              <span class="price-label">{pricing.logo.label}</span>
+              <span class="price-value">{fmtPrice(pricing.logo.min)} — {fmtPrice(pricing.logo.max)}</span>
+            </div>
+          )}
+          {pricing.other && (
+            <div class="price-row">
+              <span class="price-label">{pricing.other.label}</span>
+              <span class="price-value">{fmtPrice(pricing.other.min)} — {fmtPrice(pricing.other.max)}</span>
+            </div>
+          )}
+          {pricing.hourlyRate && (
+            <div class="price-row">
+              <span class="price-label">Hourly Rate</span>
+              <span class="price-value">{fmtPrice(pricing.hourlyRate)}/hour</span>
+            </div>
+          )}
+          <p>
+            Les tarifs affichés sont indicatifs et peuvent varier selon la complexité du projet,
+            les délais demandés et les spécificités techniques. Un devis ferme et définitif sera
+            communiqué avant tout commencement de travail.
+          </p>
+
+          <h2>3. Modalités de paiement</h2>
+          <p>Les conditions de paiement sont les suivantes : <strong>{paymentTerms}</strong>.</p>
+          <ul>
+            <li>Le premier versement est dû à la signature du devis pour valider la commande.</li>
+            <li>Le solde est payable à la livraison finale des livrables, avant la remise des fichiers sources.</li>
+            <li>Les paiements s'effectuent par virement bancaire ou tout autre moyen convenu.</li>
+            <li>En cas de retard de paiement, des pénalités de retard de <strong>3 fois le taux d'intérêt légal</strong> seront appliquées, ainsi qu'une indemnité forfaitaire de <strong>{fmtPrice(40)}</strong> pour frais de recouvrement.</li>
+          </ul>
+
+          <h2>4. Délais d'exécution</h2>
+          <p>
+            Les délais de livraison sont donnés à titre indicatif et validés dans le devis.
+            Ils courent à compter de la réception du premier versement et de la validation du brief créatif.
+            Tout retard imputable au Client (retard de validation, fourniture tardive de contenus)
+            entraîne un report automatique du délai de livraison.
+          </p>
+
+          <h2>5. Révisions et modifications</h2>
+          <p>
+            Sauf mention contraire dans le devis, chaque projet inclut <strong>2 cycles de révisions</strong>.
+            Les révisions supplémentaires seront facturées au taux horaire indiqué ci-dessus.
+            Une révision est définie comme une modification mineure de l'existant (couleurs, espacement,
+            texte). Une refonte significative du concept validé est considérée comme un nouveau projet.
+          </p>
+
+          <h2>6. Propriété intellectuelle</h2>
+          <p>
+            Le transfert de propriété intellectuelle au Client s'effectue <strong>uniquement après
+            paiement intégral</strong> de la facture. Jusqu'à ce moment, tous les droits d'auteur
+            et de propriété restent la propriété du Prestataire.
+          </p>
+          <p>
+            Après paiement complet, le Client obtient une licence non exclusive d'utilisation des
+            livrables pour ses besoins professionnels. Le Prestataire se réserve le droit de
+            présenter les réalisations dans son portfolio et ses supports de communication, sauf
+            opposition écrite du Client.
+          </p>
+
+          <h2>7. Annulation et remboursement</h2>
+          <p>
+            {refundPolicy}.
+          </p>
+          <ul>
+            <li>Annulation avant le début des travaux : remboursement intégral du premier versement.</li>
+            <li>Annulation en cours de projet : le montant versé reste acquis au Prestataire, proportionnellement au travail déjà réalisé.</li>
+            <li>Annulation après livraison : aucun remboursement n'est possible.</li>
+          </ul>
+
+          <h2>8. Obligations du Client</h2>
+          <p>Le Client s'engage à :</p>
+          <ul>
+            <li>Fournir un brief créatif clair et complet au démarrage du projet.</li>
+            <li>Transmettre tous les éléments nécessaires (textes, images, logos, accès) dans les délais convenus.</li>
+            <li>Valider les étapes intermédiaires dans un délai raisonnable (max 5 jours ouvrés).</li>
+            <li>Effectuer les paiements aux dates convenues.</li>
+          </ul>
+
+          <h2>9. Limitation de responsabilité</h2>
+          <p>
+            Le Prestataire ne peut être tenu responsable des dommages indirects, pertes de données,
+            pertes de chiffre d'affaires ou toute autre perte économique résultant de l'utilisation
+            ou de l'impossibilité d'utiliser les livrables. La responsabilité totale du Prestataire
+            est limitée au montant total de la prestation.
+          </p>
+
+          <h2>10. Confidentialité</h2>
+          <p>
+            Les deux parties s'engagent à respecter la confidentialité des informations échangées
+            dans le cadre du projet. Le Prestataire ne divulguera pas les informations stratégiques
+            du Client à des tiers sans accord préalable écrit.
+          </p>
+
+          <h2>11. Litiges</h2>
+          <p>
+            En cas de litige, les parties s'engagent à rechercher une solution amiable avant toute
+            action judiciaire. À défaut, le litige sera soumis aux tribunaux compétents de {jurisdiction}.
+          </p>
+
+          <h2>12. Contact</h2>
+          <p>
+            Pour toute question relative aux présentes conditions, contactez-nous :
+          </p>
+          <ul>
+            <li>Email : <a href={`mailto:${email}`}>{email}</a></li>
+            <li>Localisation : {jurisdiction}</li>
+          </ul>
+        </div>
+      </Container>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .legal-content {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .legal-content h2 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--fg);
+    letter-spacing: -0.01em;
+  }
+  .legal-content h2:first-child {
+    margin-top: 0;
+  }
+  .legal-content p {
+    font-size: 0.875rem;
+    line-height: 1.8;
+    color: var(--fg-secondary);
+    margin-bottom: 0.75rem;
+  }
+  .legal-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 1rem;
+  }
+  .legal-content li {
+    font-size: 0.875rem;
+    line-height: 1.8;
+    color: var(--fg-secondary);
+    padding-left: 1.25rem;
+    position: relative;
+    margin-bottom: 0.25rem;
+  }
+  .legal-content li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--fg-muted);
+  }
+  .legal-content a {
+    color: var(--fg);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+  }
+  .legal-content a:hover {
+    color: var(--fg-secondary);
+  }
+  .legal-content strong {
+    color: var(--fg);
+    font-weight: 600;
+  }
+
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.625rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .price-label {
+    font-size: 0.8125rem;
+    color: var(--fg-secondary);
+  }
+  .price-value {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--fg);
+  }
+</style>

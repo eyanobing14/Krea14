@@ -159,6 +159,22 @@
     { "id": "credential", "label": "Credential" },
     { "id": "autre-design", "label": "Autre" }
   ],
+  "legal": {
+    "companyName": "Votre Nom",
+    "companyEmail": "hello@votreportfolio.com",
+    "jurisdiction": "Paris, France",
+    "currency": "USD",
+    "pricing": {
+      "branding": { "min": 1500, "max": 5000, "label": "Branding / Visual Identity" },
+      "uiux": { "min": 2000, "max": 8000, "label": "UI/UX Design" },
+      "frontend": { "min": 2500, "max": 10000, "label": "Frontend Development" },
+      "logo": { "min": 800, "max": 3000, "label": "Logo Design" },
+      "other": { "min": 1000, "max": 15000, "label": "Other Projects" },
+      "hourlyRate": 75
+    },
+    "paymentTerms": "50% upfront, 50% on delivery",
+    "refundPolicy": "Refund available within 14 days of initial payment if work has not commenced"
+  },
   "resources": [
     {
       "id": "figma-toolkit",
