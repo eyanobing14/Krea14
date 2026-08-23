@@ -15,12 +15,31 @@ import Footer from '../components/Footer.astro';
           <h1 class="mt-4 text-3xl md:text-4xl font-bold" style="color: var(--fg);">Gérer le portfolio</h1>
           <p class="mt-2 text-sm" style="color: var(--fg-secondary);">Modifiez les données. Elles sont sauvegardées dans votre navigateur.</p>
         </div>
-        <div class="flex flex-wrap gap-3 items-center">
-          <span id="git-status" class="text-[10px] font-mono" style="color: var(--fg-muted);"></span>
-          <button id="btn-git-commit" class="admin-btn-primary">Commit git</button>
-          <button id="btn-git-push" class="admin-btn-primary" style="background: #16a34a;">Push GitHub</button>
-          <button id="btn-export" class="admin-btn-ghost">Exporter JSON ↓</button>
-          <button id="btn-reset" class="admin-btn-ghost">Réinitialiser</button>
+        <div class="flex flex-col items-start md:items-end gap-2">
+          <div class="flex items-center gap-2">
+            <span id="git-account" class="text-[10px] font-mono" style="color: var(--fg-muted);"></span>
+            <span style="color: var(--border-strong);">·</span>
+            <span id="git-status" class="text-[10px] font-mono" style="color: var(--fg-muted);"></span>
+          </div>
+          <div class="flex flex-wrap gap-2 items-center">
+            <button id="btn-git-commit" class="admin-btn-primary">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:-2px;margin-right:4px;"><circle cx="12" cy="12" r="4"/><line x1="1.05" y1="12" x2="7" y2="12"/><line x1="17.01" y1="12" x2="22.96" y2="12"/></svg>
+              Commit
+            </button>
+            <button id="btn-git-push" class="admin-btn-primary" style="background: #16a34a;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:-2px;margin-right:4px;"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Push
+            </button>
+            <div style="width:1px;height:16px;background:var(--border-strong);margin:0 2px;"></div>
+            <button id="btn-export" class="admin-btn-ghost">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:-2px;margin-right:3px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Exporter
+            </button>
+            <button id="btn-reset" class="admin-btn-ghost">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:-2px;margin-right:3px;"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+              Réinitialiser
+            </button>
+          </div>
         </div>
       </div>
 
@@ -133,12 +152,17 @@ import Footer from '../components/Footer.astro';
     <!-- Commit Modal -->
     <div id="commit-modal" class="delete-modal hidden">
       <div class="delete-modal-backdrop"></div>
-      <div class="delete-modal-content" style="text-align:left;">
+      <div class="delete-modal-content" style="text-align:left;max-width:520px;">
         <h3 class="delete-modal-title" style="text-align:left;">Commit Git</h3>
         <div class="mb-4">
           <label class="admin-label">Message du commit</label>
           <input id="commit-modal-msg" type="text" class="admin-input" value="Update portfolio data" />
         </div>
+        <div id="commit-modal-logs-wrapper" class="hidden" style="margin-bottom:1rem;">
+          <label class="admin-label">Logs</label>
+          <div id="commit-modal-logs" class="git-log-output"></div>
+        </div>
+        <div id="commit-modal-status" class="hidden" style="margin-bottom:1rem;font-size:0.75rem;font-weight:500;"></div>
         <div class="delete-modal-actions" style="justify-content:flex-end;">
           <button id="commit-modal-cancel" class="admin-btn-ghost">Annuler</button>
           <button id="commit-modal-confirm" style="padding:0.5rem 1.25rem;font-size:0.75rem;font-weight:500;background:var(--fg);color:var(--bg);border:none;">Commit</button>
@@ -149,13 +173,18 @@ import Footer from '../components/Footer.astro';
     <!-- Push Modal -->
     <div id="push-modal" class="delete-modal hidden">
       <div class="delete-modal-backdrop"></div>
-      <div class="delete-modal-content" style="text-align:left;">
+      <div class="delete-modal-content" style="text-align:left;max-width:520px;">
         <h3 class="delete-modal-title" style="text-align:left;">Push vers GitHub</h3>
         <div id="push-modal-info" class="mb-4" style="font-size:0.75rem;color:var(--fg-secondary);line-height:1.6;"></div>
         <div class="mb-4">
           <label class="admin-label">Message du commit</label>
           <input id="push-modal-msg" type="text" class="admin-input" value="Update portfolio data" />
         </div>
+        <div id="push-modal-logs-wrapper" class="hidden" style="margin-bottom:1rem;">
+          <label class="admin-label">Logs</label>
+          <div id="push-modal-logs" class="git-log-output"></div>
+        </div>
+        <div id="push-modal-status" class="hidden" style="margin-bottom:1rem;font-size:0.75rem;font-weight:500;"></div>
         <div class="delete-modal-actions" style="justify-content:flex-end;">
           <button id="push-modal-cancel" class="admin-btn-ghost">Annuler</button>
           <button id="push-modal-confirm" style="padding:0.5rem 1.25rem;font-size:0.75rem;font-weight:500;background:#16a34a;color:#fff;border:none;">Commit & Push</button>
@@ -177,7 +206,40 @@ import Footer from '../components/Footer.astro';
   .delete-modal-actions { display: flex; gap: 0.5rem; justify-content: center; }
   .delete-modal-confirm-btn { padding: 0.5rem 1.25rem; font-size: 0.75rem; font-weight: 500; background: #dc2626; color: #fff; border: none; transition: opacity 0.2s; }
   .delete-modal-confirm-btn:hover { opacity: 0.85; }
-  .admin-btn-primary:disabled, .admin-btn-primary[disabled] { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
+
+  .git-log-output {
+    background: #0d1117;
+    color: #c9d1d9;
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    line-height: 1.5;
+    padding: 0.75rem 1rem;
+    max-height: 180px;
+    overflow-y: auto;
+    border: 1px solid #30363d;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  .git-log-output .log-cmd { color: #79c0ff; font-weight: 600; }
+  .git-log-output .log-stdout { color: #c9d1d9; }
+  .git-log-output .log-stderr { color: #f0883e; }
+  .git-log-output .log-error { color: #f85149; }
+  .git-log-output .log-ok { color: #3fb950; }
+  .git-log-output .log-sep { color: #484f58; margin: 0.25rem 0; }
+
+  .git-log-loading {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .git-log-loading .spinner {
+    width: 10px; height: 10px;
+    border: 2px solid #30363d;
+    border-top-color: #79c0ff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
 </style>
 
 <script>
@@ -202,15 +264,72 @@ import Footer from '../components/Footer.astro';
         const resp = await fetch(API + '/api/git-info', { method: 'POST' });
         const status = await resp.json();
         const el = document.getElementById('git-status');
-        const commitBtn = document.getElementById('btn-git-commit') as HTMLButtonElement | null;
-        const pushBtn = document.getElementById('btn-git-push') as HTMLButtonElement | null;
+        const accountEl = document.getElementById('git-account');
         if (el && status.ok) {
           gitModifiedCount = status.modified;
           el.textContent = status.modified > 0 ? status.modified + ' fichier(s) modifié(s) — ' + status.branch : 'Aucune modification — ' + status.branch;
         }
-        if (commitBtn) commitBtn.disabled = gitModifiedCount === 0;
-        if (pushBtn) pushBtn.disabled = gitModifiedCount === 0;
+        if (accountEl && status.ok && status.gitUser) {
+          const repo = status.remoteUrl ? status.remoteUrl.replace(/.*github\.com[/:]/, '').replace(/\.git$/, '') : '';
+          accountEl.textContent = (status.gitUser || '') + (status.gitEmail ? ' <' + status.gitEmail + '>' : '') + (repo ? ' · ' + repo : '');
+        }
       } catch(e: unknown) {}
+    }
+
+    // ── Git log renderer ──
+    function renderGitLogs(logsEl: HTMLElement, statusEl: HTMLElement, logs: any[], ok: boolean, msg: string) {
+      logsEl.innerHTML = '';
+      for (const log of logs || []) {
+        const cmdLine = document.createElement('div');
+        cmdLine.className = 'log-cmd';
+        cmdLine.textContent = '$ ' + log.cmd;
+        logsEl.appendChild(cmdLine);
+        if (log.stdout) {
+          const out = document.createElement('div');
+          out.className = 'log-stdout';
+          out.textContent = log.stdout;
+          logsEl.appendChild(out);
+        }
+        if (log.stderr) {
+          const err = document.createElement('div');
+          err.className = 'log-stderr';
+          err.textContent = log.stderr;
+          logsEl.appendChild(err);
+        }
+        if (!log.ok && log.message) {
+          const errLine = document.createElement('div');
+          errLine.className = 'log-error';
+          errLine.textContent = log.message;
+          logsEl.appendChild(errLine);
+        }
+        const sep = document.createElement('div');
+        sep.className = 'log-sep';
+        sep.textContent = '---';
+        logsEl.appendChild(sep);
+      }
+      statusEl.className = '';
+      statusEl.style.color = ok ? '#3fb950' : '#f85149';
+      statusEl.textContent = (ok ? '✓ ' : '✗ ') + msg;
+    }
+
+    function resetCommitModal() {
+      const logsWrapper = document.getElementById('commit-modal-logs-wrapper')!;
+      const statusEl = document.getElementById('commit-modal-status')!;
+      logsWrapper.classList.add('hidden');
+      statusEl.classList.add('hidden');
+      const confirmBtn = document.getElementById('commit-modal-confirm') as HTMLButtonElement;
+      confirmBtn.disabled = false;
+      confirmBtn.textContent = 'Commit';
+    }
+
+    function resetPushModal() {
+      const logsWrapper = document.getElementById('push-modal-logs-wrapper')!;
+      const statusEl = document.getElementById('push-modal-status')!;
+      logsWrapper.classList.add('hidden');
+      statusEl.classList.add('hidden');
+      const confirmBtn = document.getElementById('push-modal-confirm') as HTMLButtonElement;
+      confirmBtn.disabled = false;
+      confirmBtn.textContent = 'Commit & Push';
     }
 
     // ── Git: commit (with modal) ──
@@ -219,11 +338,16 @@ import Footer from '../components/Footer.astro';
       const msgInput = document.getElementById('commit-modal-msg') as HTMLInputElement;
       const confirmBtn = document.getElementById('commit-modal-confirm')!;
       const cancelBtn = document.getElementById('commit-modal-cancel')!;
+      const logsWrapper = document.getElementById('commit-modal-logs-wrapper')!;
+      const logsEl = document.getElementById('commit-modal-logs')!;
+      const statusEl = document.getElementById('commit-modal-status')!;
 
+      resetCommitModal();
       modal.classList.remove('hidden');
 
       const cleanup = () => {
         modal.classList.add('hidden');
+        resetCommitModal();
         cancelBtn.removeEventListener('click', cleanup);
         confirmBtn.removeEventListener('click', doCommit);
         modal.querySelector('.delete-modal-backdrop')?.removeEventListener('click', cleanup);
@@ -231,7 +355,11 @@ import Footer from '../components/Footer.astro';
 
       const doCommit = async () => {
         const msg = msgInput.value || 'Update portfolio data';
-        cleanup();
+        confirmBtn.disabled = true;
+        confirmBtn.textContent = 'Commit en cours…';
+        logsWrapper.classList.remove('hidden');
+        logsEl.innerHTML = '<div class="git-log-loading"><div class="spinner"></div><span style="color:#79c0ff;">Exécution de git add & commit…</span></div>';
+        statusEl.classList.add('hidden');
         try {
           const resp = await fetch(API + '/api/git-commit', {
             method: 'POST',
@@ -239,9 +367,13 @@ import Footer from '../components/Footer.astro';
             body: JSON.stringify({ message: msg })
           });
           const result = await resp.json();
-          showToast(result.message || 'Commit effectué!');
+          renderGitLogs(logsEl, statusEl, result.logs || [], result.ok, result.message || 'Done');
           refreshGitStatus();
-        } catch(e: unknown) { showToast('Erreur commit: ' + (e instanceof Error ? e.message : String(e))); }
+        } catch(e: unknown) {
+          renderGitLogs(logsEl, statusEl, [], false, 'Erreur: ' + (e instanceof Error ? e.message : String(e)));
+        }
+        confirmBtn.disabled = false;
+        confirmBtn.textContent = 'Commit';
       };
 
       cancelBtn.addEventListener('click', cleanup);
@@ -264,8 +396,10 @@ import Footer from '../components/Footer.astro';
       const msgInput = document.getElementById('push-modal-msg') as HTMLInputElement;
       const confirmBtn = document.getElementById('push-modal-confirm')!;
       const cancelBtn = document.getElementById('push-modal-cancel')!;
+      const logsWrapper = document.getElementById('push-modal-logs-wrapper')!;
+      const logsEl = document.getElementById('push-modal-logs')!;
+      const statusEl = document.getElementById('push-modal-status')!;
 
-      // Fetch remote info
       const gitInfo = await getGitInfo();
       const status = gitInfo || { branch: 'main', modified: 0 };
       const branch = status.ok ? status.branch : 'main';
@@ -279,27 +413,52 @@ import Footer from '../components/Footer.astro';
         infoEl.innerHTML = "<span style=\"color:var(--fg-muted);\">Remote non configuré. Ajoutez un remote GitHub d'abord :</span><br/><code style=\"font-size:0.625rem;color:var(--fg);\">git remote add origin https://github.com/VOTRE_USER/VOTRE_REPO.git</code>";
       }
 
+      resetPushModal();
       modal.classList.remove('hidden');
 
       const cleanup = () => {
         modal.classList.add('hidden');
+        resetPushModal();
         cancelBtn.removeEventListener('click', cleanup);
         confirmBtn.removeEventListener('click', doPush);
         modal.querySelector('.delete-modal-backdrop')?.removeEventListener('click', cleanup);
       };
 
       const doPush = async () => {
-        cleanup();
         const msg = msgInput.value || 'Update portfolio data';
+        confirmBtn.disabled = true;
+        confirmBtn.textContent = 'En cours…';
+        logsWrapper.classList.remove('hidden');
+        logsEl.innerHTML = '<div class="git-log-loading"><div class="spinner"></div><span style="color:#79c0ff;">Exécution de git add & commit…</span></div>';
+        statusEl.classList.add('hidden');
+        const allLogs: any[] = [];
         try {
-          showToast('Commit en cours...');
-          await fetch(API + '/api/git-commit', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: msg }) });
-          showToast('Push en cours...');
-          const resp = await fetch(API + '/api/git-push', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ branch }) });
-          const result = await resp.json();
-          showToast(result.message || 'Push effectué!');
+          // Commit
+          const commitResp = await fetch(API + '/api/git-commit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: msg })
+          });
+          const commitResult = await commitResp.json();
+          if (commitResult.logs) allLogs.push(...commitResult.logs);
+          renderGitLogs(logsEl, statusEl, [...allLogs], commitResult.ok, commitResult.message || 'Commit done');
+          if (!commitResult.ok) { confirmBtn.disabled = false; confirmBtn.textContent = 'Commit & Push'; return; }
+          // Push
+          logsEl.innerHTML += '<div class="git-log-loading"><div class="spinner"></div><span style="color:#79c0ff;">Exécution de git push…</span></div>';
+          const pushResp = await fetch(API + '/api/git-push', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ branch })
+          });
+          const pushResult = await pushResp.json();
+          if (pushResult.logs) allLogs.push(...pushResult.logs);
+          renderGitLogs(logsEl, statusEl, [...allLogs], pushResult.ok, pushResult.message || 'Push done');
           refreshGitStatus();
-        } catch(e: unknown) { showToast('Erreur: ' + (e instanceof Error ? e.message : String(e))); }
+        } catch(e: unknown) {
+          renderGitLogs(logsEl, statusEl, [...allLogs], false, 'Erreur: ' + (e instanceof Error ? e.message : String(e)));
+        }
+        confirmBtn.disabled = false;
+        confirmBtn.textContent = 'Commit & Push';
       };
 
       cancelBtn.addEventListener('click', cleanup);

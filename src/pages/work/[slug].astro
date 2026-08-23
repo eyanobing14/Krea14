@@ -1,27 +1,21 @@
 ---
-import fs from 'node:fs';
-import path from 'node:path';
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import ScrollReveal from '../../components/ScrollReveal.astro';
-
-const dataPath = path.resolve(process.cwd(), 'public/data/portfolio.json');
-const data = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
+import data from "../../../public/data/portfolio.json";
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import ScrollReveal from "../../components/ScrollReveal.astro";
 
 export function getStaticPaths() {
-  const dp = path.resolve(process.cwd(), 'public/data/portfolio.json');
-  const d = JSON.parse(fs.readFileSync(dp, 'utf-8'));
-  return (d.caseStudies || []).map((study) => ({
+  return (data.caseStudies || []).map((study: any) => ({
     params: { slug: study.slug },
   }));
 }
 
 const { slug } = Astro.params;
-const study = (data.caseStudies || []).find((s) => s.slug === slug);
+const study = (data.caseStudies || []).find((s: any) => s.slug === slug);
 
 if (!study) {
-  return Astro.redirect('/work');
+  return Astro.redirect("/work");
 }
 ---
 
@@ -32,29 +26,56 @@ if (!study) {
     <section class="pt-32 pb-16 md:pt-40 md:pb-24">
       <div class="container-page">
         <div class="flex flex-wrap items-center gap-3 mb-8">
-          <a href="/work" class="text-xs no-underline transition-colors duration-200" style="color: var(--fg-muted);" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--fg-muted)'">← Retour</a>
+          <a
+            href="/work"
+            class="text-xs no-underline transition-colors duration-200"
+            style="color: var(--fg-muted);"
+            onmouseover="this.style.color='var(--fg)'"
+            onmouseout="this.style.color='var(--fg-muted)'">← Retour</a
+          >
           <span class="text-xs" style="color: var(--fg-muted);">·</span>
-          <span class="text-xs font-mono" style="color: var(--fg-muted);">{study.year}</span>
+          <span class="text-xs font-mono" style="color: var(--fg-muted);"
+            >{study.year}</span
+          >
         </div>
         <span class="label">{study.category}</span>
-        <h1 class="mt-8 text-4xl md:text-5xl lg:text-6xl font-bold leading-[1] tracking-[-0.03em]" style="color: var(--fg);">
+        <h1
+          class="mt-8 text-4xl md:text-5xl lg:text-6xl font-bold leading-none tracking-[-0.03em]"
+          style="color: var(--fg);"
+        >
           {study.title}
         </h1>
-        <p class="mt-6 text-lg leading-relaxed max-w-2xl" style="color: var(--fg-secondary);">
+        <p
+          class="mt-6 text-lg leading-relaxed max-w-2xl"
+          style="color: var(--fg-secondary);"
+        >
           {study.description}
         </p>
         <div class="mt-6 flex flex-wrap gap-2">
-          {study.tags?.map((tag) => (
-            <span class="px-3 py-1 text-xs font-mono uppercase tracking-wider" style="color: var(--fg-muted); border: 1px solid var(--border);">{tag}</span>
-          ))}
+          {
+            study.tags?.map((tag: string) => (
+              <span
+                class="px-3 py-1 text-xs font-mono uppercase tracking-wider"
+                style="color: var(--fg-muted); border: 1px solid var(--border);"
+              >
+                {tag}
+              </span>
+            ))
+          }
         </div>
       </div>
     </section>
 
     <!-- Hero Image Placeholder -->
     <div class="container-page">
-      <div class="w-full aspect-[21/9] flex items-center justify-center gsap-scale" style={`background: ${study.heroColor || 'var(--bg-raised)'}; border: 1px solid var(--border);`}>
-        <span class="font-mono text-sm uppercase tracking-widest opacity-20" style="color: var(--fg);">Image du projet</span>
+      <div
+        class="w-full aspect-21/9 flex items-center justify-center gsap-scale"
+        style={`background: ${study.heroColor || "var(--bg-raised)"}; border: 1px solid var(--border);`}
+      >
+        <span
+          class="font-mono text-sm uppercase tracking-widest opacity-20"
+          style="color: var(--fg);">Image du projet</span
+        >
       </div>
     </div>
 
@@ -67,15 +88,23 @@ if (!study) {
           <!-- Left: challenge -->
           <div class="col-span-12 lg:col-span-5 gsap-slide-left">
             <span class="label">Le défi</span>
-            <h2 class="mt-6 text-2xl md:text-3xl font-bold leading-tight" style="color: var(--fg);">
+            <h2
+              class="mt-6 text-2xl md:text-3xl font-bold leading-tight"
+              style="color: var(--fg);"
+            >
               {study.challenge}
             </h2>
           </div>
 
           <!-- Right: solution -->
-          <div class="col-span-12 lg:col-span-6 lg:col-start-7 gsap-slide-right">
+          <div
+            class="col-span-12 lg:col-span-6 lg:col-start-7 gsap-slide-right"
+          >
             <span class="label">La solution</span>
-            <p class="mt-6 text-sm leading-relaxed" style="color: var(--fg-secondary);">
+            <p
+              class="mt-6 text-sm leading-relaxed"
+              style="color: var(--fg-secondary);"
+            >
               {study.solution}
             </p>
           </div>
@@ -84,59 +113,96 @@ if (!study) {
     </section>
 
     <!-- Flow / Process -->
-    {study.flow && study.flow.length > 0 && (
-      <>
-        <div class="section-divider" aria-hidden="true"></div>
-        <section class="section">
-          <div class="container-page">
-            <div class="max-w-2xl">
-              <span class="label">Processus</span>
-              <h2 class="mt-6 text-2xl md:text-3xl font-bold leading-tight" style="color: var(--fg);">
-                Comment j'aborde ce projet.
-              </h2>
+    {
+      study.flow && study.flow.length > 0 && (
+        <>
+          <div class="section-divider" aria-hidden="true" />
+          <section class="section">
+            <div class="container-page">
+              <div class="max-w-2xl">
+                <span class="label">Processus</span>
+                <h2
+                  class="mt-6 text-2xl md:text-3xl font-bold leading-tight"
+                  style="color: var(--fg);"
+                >
+                  Comment j'aborde ce projet.
+                </h2>
+              </div>
+              <div class="mt-12 space-y-0">
+                {study.flow.map((step: string, i: number) => (
+                  <div
+                    class="flex items-start gap-6 py-6 gsap-reveal"
+                    style="border-bottom: 1px solid var(--border);"
+                  >
+                    <span
+                      class="shrink-0 font-mono text-xs font-semibold w-8 h-8 flex items-center justify-center"
+                      style="color: var(--fg-muted); border: 1px solid var(--border);"
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <p
+                      class="text-sm leading-relaxed pt-1"
+                      style="color: var(--fg-secondary);"
+                    >
+                      {step}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div class="mt-12 space-y-0">
-              {study.flow.map((step, i) => (
-                <div class="flex items-start gap-6 py-6 gsap-reveal" style="border-bottom: 1px solid var(--border);">
-                  <span class="shrink-0 font-mono text-xs font-semibold w-8 h-8 flex items-center justify-center" style="color: var(--fg-muted); border: 1px solid var(--border);">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <p class="text-sm leading-relaxed pt-1" style="color: var(--fg-secondary);">{step}</p>
+          </section>
+        </>
+      )
+    }
+
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <!-- Results -->
+    {
+      study.results && study.results.length > 0 && (
+        <section class="section" style="background: var(--bg-raised);">
+          <div class="container-page">
+            <span class="label">Résultats</span>
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 gsap-stagger-grid">
+              {study.results.map((result: string) => (
+                <div class="p-6" style="border: 1px solid var(--border);">
+                  <p
+                    class="text-sm font-medium leading-relaxed"
+                    style="color: var(--fg);"
+                  >
+                    {result}
+                  </p>
                 </div>
               ))}
             </div>
           </div>
         </section>
-      </>
-    )}
-
-    <div class="section-divider" aria-hidden="true"></div>
-
-    <!-- Results -->
-    {study.results && study.results.length > 0 && (
-      <section class="section" style="background: var(--bg-raised);">
-        <div class="container-page">
-          <span class="label">Résultats</span>
-          <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 gsap-stagger-grid">
-            {study.results.map((result) => (
-              <div class="p-6" style="border: 1px solid var(--border);">
-                <p class="text-sm font-medium leading-relaxed" style="color: var(--fg);">{result}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    )}
+      )
+    }
 
     <!-- CTA -->
     <section class="section" style="border-top: 1px solid var(--border);">
       <div class="container-page text-center">
-        <h2 class="text-3xl md:text-4xl font-bold" style="color: var(--fg);">Projet suivant?</h2>
+        <h2 class="text-3xl md:text-4xl font-bold" style="color: var(--fg);">
+          Projet suivant?
+        </h2>
         <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
-          <a href="/work" class="px-6 py-3 text-sm font-medium no-underline transition-all" style="background: var(--fg); color: var(--bg);" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+          <a
+            href="/work"
+            class="px-6 py-3 text-sm font-medium no-underline transition-all"
+            style="background: var(--fg); color: var(--bg);"
+            onmouseover="this.style.opacity='0.85'"
+            onmouseout="this.style.opacity='1'"
+          >
             Voir tous les projets
           </a>
-          <a href="mailto:hello@votreportfolio.com" class="px-6 py-3 text-sm no-underline transition-all" style="color: var(--fg-secondary); border: 1px solid var(--border-strong);" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--fg-secondary)'">
+          <a
+            href="mailto:hello@votreportfolio.com"
+            class="px-6 py-3 text-sm no-underline transition-all"
+            style="color: var(--fg-secondary); border: 1px solid var(--border-strong);"
+            onmouseover="this.style.color='var(--fg)'"
+            onmouseout="this.style.color='var(--fg-secondary)'"
+          >
             Démarrer un projet
           </a>
         </div>

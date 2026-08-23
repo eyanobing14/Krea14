@@ -18,6 +18,15 @@ function git(cmd) {
   catch (_) { return null; }
 }
 
+function gitWithOutput(cmd) {
+  try {
+    const result = execSync(cmd, { cwd: ROOT, stdio: 'pipe' });
+    return { ok: true, stdout: result.stdout.toString().trim(), stderr: result.stderr.toString().trim() };
+  } catch (err) {
+    return { ok: false, stdout: err.stdout ? err.stdout.toString().trim() : '', stderr: err.stderr ? err.stderr.toString().trim() : '', message: err.message };
+  }
+}
+
 function send(res, data, code) {
   res.writeHead(code || 200, {
     'Content-Type': 'application/json',
@@ -80,25 +89,31 @@ const server = http.createServer(async (req, res) => {
     const status = git('git status --porcelain') || '';
     const modified = status ? status.split('\n').filter(l => l.trim()).length : 0;
     const remoteUrl = git('git remote get-url origin');
-    return send(res, { ok: true, branch, modified, remoteUrl: remoteUrl || null });
+    const gitUser = git('git config user.name');
+    const gitEmail = git('git config user.email');
+    return send(res, { ok: true, branch, modified, remoteUrl: remoteUrl || null, gitUser: gitUser || null, gitEmail: gitEmail || null });
   }
 
   // ── git-commit ──
   if (url === '/api/git-commit' && req.method === 'POST') {
     const body = await readBody(req);
     const msg = body.message || 'Update portfolio ' + new Date().toISOString();
-    git('git add -A');
-    try { git('git diff --cached --quiet'); return send(res, { ok: true, message: 'Nothing to commit' }); } catch (_) {}
-    git('git commit -m "' + msg.replace(/"/g, '\\"') + '"');
-    return send(res, { ok: true, message: 'Committed!' });
+    const logs = [];
+    logs.push({ cmd: 'git add -A', ...gitWithOutput('git add -A') });
+    const diffCheck = gitWithOutput('git diff --cached --quiet');
+    if (diffCheck.ok) return send(res, { ok: true, message: 'Nothing to commit', logs });
+    const commitResult = gitWithOutput('git commit -m "' + msg.replace(/"/g, '\\"') + '"');
+    logs.push({ cmd: 'git commit', ...commitResult });
+    return send(res, { ok: commitResult.ok, message: commitResult.ok ? 'Committed!' : 'Commit failed', logs });
   }
 
   // ── git-push ──
   if (url === '/api/git-push' && req.method === 'POST') {
     const body = await readBody(req);
     const branch = body.branch || 'main';
-    git('git push origin ' + branch);
-    return send(res, { ok: true, message: 'Pushed to origin/' + branch });
+    const pushResult = gitWithOutput('git push origin ' + branch);
+    const logs = [{ cmd: 'git push origin ' + branch, ...pushResult }];
+    return send(res, { ok: pushResult.ok, message: pushResult.ok ? 'Pushed to origin/' + branch : 'Push failed', logs });
   }
 
   send(res, { error: 'Not found' }, 404);

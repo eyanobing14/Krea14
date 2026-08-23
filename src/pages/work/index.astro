@@ -1,19 +1,16 @@
 ---
-import fs from 'node:fs';
-import path from 'node:path';
+import data from '../../../public/data/portfolio.json';
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ScrollReveal from '../../components/ScrollReveal.astro';
 
-const dataPath = path.resolve(process.cwd(), 'public/data/portfolio.json');
-const data = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
 const caseStudies = data.caseStudies || [];
 
 // Extract unique categories (first part before "·")
 const categories = [...new Set(
-  caseStudies.map((s) => s.category.split('·')[0].trim())
-)];
+  caseStudies.map((s: any) => s.category.split('·')[0].trim())
+)] as string[];
 ---
 
 <Layout title="Work — Portfolio">
@@ -22,7 +19,7 @@ const categories = [...new Set(
     <section class="pt-32 pb-16 md:pt-40 md:pb-24">
       <div class="container-page">
         <span class="label">Work</span>
-        <h1 class="mt-8 text-4xl md:text-5xl lg:text-6xl font-bold leading-[1] tracking-[-0.03em]" style="color: var(--fg);">
+        <h1 class="mt-8 text-4xl md:text-5xl lg:text-6xl font-bold leading-none tracking-[-0.03em]" style="color: var(--fg);">
           Tous mes<br/>
           <span style="color: var(--fg-tertiary);">projets.</span>
         </h1>
@@ -38,7 +35,7 @@ const categories = [...new Set(
           >
             Tous
           </button>
-          {categories.map((cat) => (
+          {categories.map((cat: string) => (
             <button
               class="filter-btn px-4 py-2 text-xs font-mono uppercase tracking-wider transition-all duration-300"
               data-category={cat}
@@ -55,7 +52,7 @@ const categories = [...new Set(
     <section class="section">
       <div class="container-page">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 gsap-stagger-grid" id="work-grid">
-          {caseStudies.map((study) => {
+          {caseStudies.map((study: any) => {
             const mainCategory = study.category.split('·')[0].trim();
             return (
               <a
@@ -64,7 +61,7 @@ const categories = [...new Set(
                 style="border: 1px solid var(--border);"
                 data-category={mainCategory}
               >
-                <div class="aspect-[16/9] flex items-center justify-center transition-all duration-500 relative overflow-hidden" style={`background: ${study.heroColor || 'var(--bg-raised)'};`}>
+                <div class="aspect-video flex items-center justify-center transition-all duration-500 relative overflow-hidden" style={`background: ${study.heroColor || 'var(--bg-raised)'};`}>
                   <span class="font-mono text-xs uppercase tracking-widest opacity-30" style="color: var(--fg);">{study.category}</span>
                   <!-- Hover overlay -->
                   <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background: rgba(0,0,0,0.4);">
@@ -78,7 +75,7 @@ const categories = [...new Set(
                   </div>
                   <p class="mt-3 text-sm leading-relaxed" style="color: var(--fg-secondary);">{study.description}</p>
                   <div class="mt-4 flex flex-wrap gap-1.5">
-                    {study.tags?.map((tag) => (
+                    {study.tags?.map((tag: string) => (
                       <span class="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider" style="color: var(--fg-muted); border: 1px solid var(--border);">{tag}</span>
                     ))}
                   </div>
