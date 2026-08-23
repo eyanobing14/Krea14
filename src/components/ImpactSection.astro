@@ -1,0 +1,203 @@
+---
+// ImpactSection — Show what gets delivered and the value created, not the tools used
+import Container from "./Container.astro";
+---
+
+<section class="section">
+  <Container>
+    <h2
+      class="text-2xl sm:text-3xl md:text-4xl font-bold text-center animate-in"
+      style="color: var(--fg);"
+    >
+      L'impact que nous créons.
+    </h2>
+    <p
+      class="mt-4 text-center text-base sm:text-lg max-w-2xl mx-auto animate-in"
+      style="color: var(--fg-secondary); --delay: 0.1s;"
+    >
+      Les technologies changent selon les projets. Ce qui ne change pas, c'est
+      la rigueur, la qualité et les résultats livrés.
+    </p>
+
+    <div class="impact-grid mt-12">
+      <!-- Performance -->
+      <div class="impact-card animate-in" style="--delay: 0.15s;">
+        <div class="impact-num">98+</div>
+        <div class="impact-metric">Score Lighthouse</div>
+        <div class="impact-desc">
+          Sites web performants, optimisés pour le SEO et l'accessibilité.
+          Chaque milliseconde compte.
+        </div>
+      </div>
+
+      <!-- Délai -->
+      <div class="impact-card animate-in" style="--delay: 0.25s;">
+        <div class="impact-num">{"< 2s"}</div>
+        <div class="impact-metric">Temps de chargement</div>
+        <div class="impact-desc">
+          Interfaces instantanées. Lazy loading, code splitting, optimisation
+          des assets — l'utilisateur ne patiente jamais.
+        </div>
+      </div>
+
+      <!-- Livraison -->
+      <div class="impact-card animate-in" style="--delay: 0.35s;">
+        <div class="impact-num">100%</div>
+        <div class="impact-metric">De A à Z</div>
+        <div class="impact-desc">
+          Du wireframe au déploiement, de la maquette au code en production.
+          Un seul interlocuteur, une vision cohérente.
+        </div>
+      </div>
+
+      <!-- Responsive -->
+      <div class="impact-card animate-in" style="----delay: 0.45s; --delay: 0.45s;">
+        <div class="impact-num">∞</div>
+        <div class="impact-metric">Responsive</div>
+        <div class="impact-desc">
+          Chaque écran, chaque device. L'expérience s'adapte — du mobile au
+          grand format — sans compromis visuel.
+        </div>
+      </div>
+    </div>
+
+    <!-- Marquee de résultats -->
+    <div class="impact-marquee animate-in" style="--delay: 0.55s;">
+      <div class="impact-marquee-track">
+        <span>Brandings mémorables</span>
+        <span class="impact-dot" aria-hidden="true">·</span>
+        <span>Interfaces intuitives</span>
+        <span class="impact-dot" aria-hidden="true">·</span>
+        <span>Sites performants</span>
+        <span class="impact-dot" aria-hidden="true">·</span>
+        <span>Applications mobiles</span>
+        <span class="impact-dot" aria-hidden="true">·</span>
+        <span>Systèmes de design</span>
+        <span class="impact-dot" aria-hidden="true">·</span>
+        <span>APIs robustes</span>
+        <span class="impact-dot" aria-hidden="true">·</span>
+        <!-- Duplicate for seamless loop -->
+        <span>Brandings mémorables</span>
+        <span class="impact-dot" aria-hidden="true">·</span>
+        <span>Interfaces intuitives</span>
+        <span class="impact-dot" aria-hidden="true">·</span>
+        <span>Sites performants</span>
+        <span class="impact-dot" aria-hidden="true">·</span>
+        <span>Applications mobiles</span>
+        <span class="impact-dot" aria-hidden="true">·</span>
+        <span>Systèmes de design</span>
+        <span class="impact-dot" aria-hidden="true">·</span>
+        <span>APIs robustes</span>
+        <span class="impact-dot" aria-hidden="true">·</span>
+      </div>
+    </div>
+  </Container>
+</section>
+
+<style>
+  .impact-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  .impact-card {
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: border-color 0.3s ease, transform 0.3s var(--ease-out-expo);
+  }
+  .impact-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-3px);
+  }
+
+  .impact-num {
+    font-family: var(--font-mono);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--fg);
+    line-height: 1;
+  }
+
+  .impact-metric {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+
+  .impact-desc {
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--fg-secondary);
+    margin-top: 0.25rem;
+  }
+
+  /* ── Marquee ── */
+  .impact-marquee {
+    margin-top: 3rem;
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 0;
+  }
+
+  .impact-marquee-track {
+    display: flex;
+    gap: 0;
+    white-space: nowrap;
+    animation: marquee-scroll 25s linear infinite;
+    width: max-content;
+  }
+
+  .impact-marquee-track span {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    padding: 0 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .impact-dot {
+    color: var(--border-hover) !important;
+  }
+
+  @keyframes marquee-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .impact-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .impact-grid {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+    .impact-card {
+      padding: 1rem;
+    }
+    .impact-num {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .impact-marquee-track {
+      animation: none;
+    }
+  }
+</style>
