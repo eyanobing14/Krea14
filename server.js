@@ -20,96 +20,67 @@ const assetsDir = path.join(ROOT, 'public', 'assets');
 if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
 if (!fs.existsSync(assetsDir)) fs.mkdirSync(assetsDir, { recursive: true });
 
-// ── Save portfolio data ──
+function git(cmd) {
+  try { return execSync(cmd, { cwd: ROOT, stdio: 'pipe' }).toString().trim(); }
+  catch (_) { return null; }
+}
+
+// ── Save data ──
 app.post('/api/save-data', (req, res) => {
   try {
-    const filePath = path.join(dataDir, 'portfolio.json');
-    fs.writeFileSync(filePath, JSON.stringify(req.body, null, 2), 'utf-8');
-    res.json({ ok: true, path: 'public/data/portfolio.json' });
-  } catch (err) {
-    res.status(500).json({ ok: false, error: err.message });
-  }
+    fs.writeFileSync(path.join(dataDir, 'portfolio.json'), JSON.stringify(req.body, null, 2));
+    res.json({ ok: true });
+  } catch (err) { res.status(500).json({ ok: false, error: err.message }); }
 });
 
 // ── Read data ──
 app.get('/api/read-data', (req, res) => {
   try {
-    const filePath = path.join(dataDir, 'portfolio.json');
-    if (!fs.existsSync(filePath)) return res.status(404).json({ ok: false });
-    const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-    res.json({ ok: true, data });
-  } catch (err) {
-    res.status(500).json({ ok: false, error: err.message });
-  }
+    const fp = path.join(dataDir, 'portfolio.json');
+    if (!fs.existsSync(fp)) return res.json({ ok: false });
+    res.json({ ok: true, data: JSON.parse(fs.readFileSync(fp, 'utf-8')) });
+  } catch (err) { res.status(500).json({ ok: false, error: err.message }); }
 });
 
 // ── Upload image ──
 app.post('/api/upload-image', (req, res) => {
   try {
-    const { filename, data: base64Data } = req.body;
-    const match = base64Data.match(/^data:image\/(\w+);base64,(.+)$/);
-    if (!match) return res.status(400).json({ ok: false, error: 'Invalid base64' });
-    const ext = match[1];
-    const buffer = Buffer.from(match[2], 'base64');
-    const name = (filename || `img-${Date.now()}.${ext}`).replace(/[^a-zA-Z0-9._-]/g, '_');
-    const filePath = path.join(assetsDir, name);
-    fs.writeFileSync(filePath, buffer);
+    const { filename, data: b64 } = req.body;
+    const m = b64.match(/^data:image\/(\w+);base64,(.+)$/);
+    if (!m) return res.status(400).json({ ok: false });
+    const name = (filename || `img-${Date.now()}.${m[1]}`).replace(/[^a-zA-Z0-9._-]/g, '_');
+    fs.writeFileSync(path.join(assetsDir, name), Buffer.from(m[2], 'base64'));
     res.json({ ok: true, path: `/assets/${name}`, filename: name });
-  } catch (err) {
-    res.status(500).json({ ok: false, error: err.message });
-  }
+  } catch (err) { res.status(500).json({ ok: false, error: err.message }); }
+});
+
+// ── Git status + remote (combined) ──
+app.get('/api/git-info', (req, res) => {
+  const branch = git('git branch --show-current') || 'unknown';
+  const status = git('git status --porcelain') || '';
+  const modified = status ? status.split('\n').filter(l => l.trim()).length : 0;
+  const remoteUrl = git('git remote get-url origin');
+  res.json({ ok: true, branch, modified, remoteUrl: remoteUrl || null });
 });
 
 // ── Git commit ──
 app.post('/api/git-commit', (req, res) => {
   try {
     const msg = req.body.message || `Update portfolio ${new Date().toISOString()}`;
-    execSync('git add -A', { cwd: ROOT, stdio: 'pipe' });
-    try {
-      execSync('git diff --cached --quiet', { cwd: ROOT, stdio: 'pipe' });
-      return res.json({ ok: true, message: 'Nothing to commit' });
-    } catch (_) {}
-    execSync(`git commit -m "${msg.replace(/"/g, '\\"')}"`, { cwd: ROOT, stdio: 'pipe' });
+    git('git add -A');
+    if (git('git diff --cached --quiet') !== null) return res.json({ ok: true, message: 'Nothing to commit' });
+    git(`git commit -m "${msg.replace(/"/g, '\\"')}"`);
     res.json({ ok: true, message: 'Committed!' });
-  } catch (err) {
-    res.status(500).json({ ok: false, error: err.message });
-  }
+  } catch (err) { res.status(500).json({ ok: false, error: err.message }); }
 });
 
 // ── Git push ──
 app.post('/api/git-push', (req, res) => {
   try {
     const branch = req.body.branch || 'main';
-    execSync(`git push origin ${branch}`, { cwd: ROOT, stdio: 'pipe', timeout: 30000 });
+    git(`git push origin ${branch}`);
     res.json({ ok: true, message: `Pushed to origin/${branch}` });
-  } catch (err) {
-    res.status(500).json({ ok: false, error: err.message });
-  }
+  } catch (err) { res.status(500).json({ ok: false, error: err.message }); }
 });
 
-// ── Git status ──
-app.get('/api/status', (req, res) => {
-  try {
-    const branch = execSync('git branch --show-current', { cwd: ROOT, stdio: 'pipe' }).toString().trim();
-    const status = execSync('git status --porcelain', { cwd: ROOT, stdio: 'pipe' }).toString().trim();
-    const modified = status ? status.split('\n').filter(l => l.trim()).length : 0;
-    res.json({ ok: true, branch, modified });
-  } catch (err) {
-    res.status(500).json({ ok: false, error: err.message });
-  }
-});
-
-
-// ── Git remote info ──
-app.get('/api/remote', (req, res) => {
-  try {
-    const url = execSync('git remote get-url origin', { cwd: ROOT, stdio: 'pipe' }).toString().trim();
-    res.json({ ok: true, url });
-  } catch (err) {
-    res.json({ ok: false, error: 'No remote configured' });
-  }
-});
-
-app.listen(PORT, () => {
-  console.log(`[admin-server] http://localhost:${PORT}`);
-});
+app.listen(PORT, () => console.log(`[admin-server] http://localhost:${PORT}`));

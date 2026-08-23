@@ -181,7 +181,7 @@ import Footer from '../components/Footer.astro';
     // ── Git: status ──
     async function refreshGitStatus() {
       try {
-        const resp = await fetch(API + '/api/status');
+        const resp = await fetch(API + '/api/git-info');
         const status = await resp.json();
         const el = document.getElementById('git-status');
         if (el && status.ok) {
@@ -207,9 +207,9 @@ import Footer from '../components/Footer.astro';
     });
 
     // ── Git: push (with modal) ──
-    async function getGitRemote() {
+    async function getGitInfo() {
       try {
-        const resp = await fetch(API + '/api/remote');
+        const resp = await fetch(API + '/api/git-info');
         const data = await resp.json();
         return data.ok ? data : null;
       } catch(e) { return null; }
@@ -223,17 +223,17 @@ import Footer from '../components/Footer.astro';
       const cancelBtn = document.getElementById('push-modal-cancel')!;
 
       // Fetch remote info
-      const remote = await getGitRemote();
-      const status = await (await fetch(API + '/api/status')).json();
+      const gitInfo = await getGitInfo();
+      const status = gitInfo || { branch: 'main', modified: 0 };
       const branch = status.ok ? status.branch : 'main';
       const modified = status.ok ? status.modified : 0;
 
-      if (remote && remote.ok) {
-        infoEl.innerHTML = '<div style="margin-bottom:8px;"><span style="color:var(--fg-muted);font-family:var(--font-mono);font-size:0.625rem;">REMOTE</span><br/><span style="color:var(--fg);font-weight:500;">' + remote.url + '</span></div>' +
+      if (gitInfo && gitInfo.remoteUrl) {
+        infoEl.innerHTML = '<div style="margin-bottom:8px;"><span style="color:var(--fg-muted);font-family:var(--font-mono);font-size:0.625rem;">REMOTE</span><br/><span style="color:var(--fg);font-weight:500;">' + (gitInfo.remoteUrl || 'Non configuré') + '</span></div>' +
           '<div><span style="color:var(--fg-muted);font-family:var(--font-mono);font-size:0.625rem;">BRANCHE</span><br/><span style="color:var(--fg);font-weight:500;">' + branch + '</span></div>' +
           (modified > 0 ? '<div class="mt-2"><span style="color:var(--fg-muted);font-family:var(--font-mono);font-size:0.625rem;">MODIFICATIONS</span><br/><span style="color:var(--fg);">' + modified + ' fichier(s) modifié(s)</span></div>' : '');
       } else {
-        infoEl.innerHTML = '<span style="color:var(--fg-muted);">Remote non configuré. Ajoutez un remote GitHub d&#39;abord :</span><br/><code style="font-size:0.625rem;color:var(--fg);">git remote add origin https://github.com/VOTRE_USER/VOTRE_REPO.git</code>';
+        infoEl.innerHTML = "<span style=\"color:var(--fg-muted);\">Remote non configuré. Ajoutez un remote GitHub d'abord :</span><br/><code style=\"font-size:0.625rem;color:var(--fg);\">git remote add origin https://github.com/VOTRE_USER/VOTRE_REPO.git</code>";
       }
 
       modal.classList.remove('hidden');
