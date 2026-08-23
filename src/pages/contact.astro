@@ -12,7 +12,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
 <Layout title={`Contact — ${profile.name}`}>
   <Header />
   <main>
-    <section class="pt-20 sm:pt-28 pb-8 md:pt-40 md:pb-24">
+    <section class="pt-20 sm:pt-28 pb-8 md:pt-40 md:pb-24 overflow-hidden">
       <div class="container-page">
         <h1
           class="text-3xl sm:text-4xl md:text-5xl font-bold leading-none tracking-[-0.03em]"
@@ -26,7 +26,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
 
     <div class="section-divider" aria-hidden="true"></div>
 
-    <section class="section">
+    <section class="section overflow-hidden">
       <div class="container-page">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-16">
           <!-- Left: Form -->

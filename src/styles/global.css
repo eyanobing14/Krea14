@@ -207,6 +207,13 @@
     max-width: 100vw;
   }
 
+  /* Clip GSAP animations (slide-left/right) inside sections */
+  main > section,
+  main > div:not(.section-divider) {
+    overflow-x: hidden;
+    overflow-x: clip;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after {
