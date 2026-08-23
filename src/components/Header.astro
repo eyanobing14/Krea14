@@ -316,10 +316,11 @@ const currentPath = Astro.url.pathname;
     const langBtnMobile = document.getElementById('lang-toggle-mobile');
     let currentLang = localStorage.getItem('lang') || 'fr';
 
-    // Translation dictionary imported from translations.ts
-    // (bundled at build time by Vite)
-    const T: Record<string, string> = {};
-    const Treverse: Record<string, string> = {};
+    // Translation dictionary imported from translations.ts (bundled by Vite)
+    const Trev: Record<string, string> = {};
+    for (const [key, val] of Object.entries(T)) {
+      Trev[val] = key;
+    }
 
     function applyLang(lang: string) {
       currentLang = lang;
@@ -335,7 +336,7 @@ const currentPath = Astro.url.pathname;
         if (fr && en) el.textContent = lang === 'fr' ? fr : en;
       });
       // Translate text content of key elements
-      const dict = lang === 'fr' ? Treverse : T;
+      const dict = lang === 'fr' ? Trev : T;
       const selectors = 'h1, h2, h3, p, span, a, button, li, label, div';
       document.querySelectorAll(selectors).forEach(el => {
         // Only translate leaf elements (no child elements with text)
