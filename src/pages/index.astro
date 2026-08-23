@@ -15,7 +15,7 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
   <main>
     <!-- Hero -->
     <section
-      class="relative flex flex-col justify-between pb-14 sm:pb-16 md:pb-24 pt-20 sm:pt-28 overflow-hidden md:min-h-[100dvh]"
+      class="relative flex flex-col justify-between pb-14 sm:pb-16 md:pb-24 pt-20 sm:pt-28 overflow-hidden min-h-[100dvh]"
     >
       <div
         class="absolute inset-0 opacity-[0.07] gsap-parallax"
@@ -87,7 +87,7 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
               <a
                 href="/about"
                 class="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm no-underline transition-all duration-200 min-w-[160px]"
-                style="color: var(--fg-secondary); border: 1px solid var(--border-strong);"
+                style="color: var(--fg-secondary); border: 1px solid var(--border-strong); background: var(--bg);"
                 onmouseover="this.style.color='var(--fg)'; this.style.borderColor='var(--fg-muted)'"
                 onmouseout="this.style.color='var(--fg-secondary)'; this.style.borderColor='var(--border-strong)'"
               >
@@ -292,7 +292,7 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
           <a
             href="/work"
             class="px-6 py-3 text-sm no-underline transition-all text-center min-w-[160px]"
-            style="color: var(--fg-secondary); border: 1px solid var(--border-strong);"
+            style="color: var(--fg-secondary); border: 1px solid var(--border-strong); background: var(--bg);"
             onmouseover="this.style.color='var(--fg)'"
             onmouseout="this.style.color='var(--fg-secondary)'"
           >
