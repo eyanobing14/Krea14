@@ -40,6 +40,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
                 </span>
               )
             }
+            <div class="about-wave">👋</div>
           </div>
         </div>
 
@@ -210,12 +211,35 @@ const socials = (profile.socials || {}) as Record<string, string>;
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    overflow: hidden;
+    overflow: visible;
     display: flex;
     align-items: center;
     justify-content: center;
     border: 1px solid var(--border);
     background: var(--bg-raised);
+    position: relative;
+  }
+  .about-photo img {
+    border-radius: 50%;
+  }
+  .about-wave {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    font-size: 1.75rem;
+    line-height: 1;
+    animation: wave-hand 1.8s ease-in-out infinite;
+    transform-origin: 70% 70%;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  }
+  @keyframes wave-hand {
+    0%, 100% { transform: rotate(0deg); }
+    15% { transform: rotate(14deg); }
+    30% { transform: rotate(-8deg); }
+    45% { transform: rotate(14deg); }
+    60% { transform: rotate(-4deg); }
+    75% { transform: rotate(10deg); }
+    90% { transform: rotate(0deg); }
   }
   @media (min-width: 640px) {
     .about-photo {
