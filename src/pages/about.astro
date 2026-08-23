@@ -5,7 +5,8 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import ScrollReveal from "../components/ScrollReveal.astro";
 import Container from "../components/Container.astro";
-import ThinkingProcess from "../components/ThinkingProcess.astro";
+import ThinkingStyles from "../components/ThinkingStyles.astro";
+import OrbitalSkills from "../components/OrbitalSkills.astro";
 
 const profile = data.profile as typeof data.profile & { photo?: string };
 const services = data.services || [];
@@ -15,133 +16,100 @@ const socials = (profile.socials || {}) as Record<string, string>;
 <Layout title={`À propos — ${profile.name}`}>
   <Header />
   <main>
-    <!-- Hero -->
-    <section class="pt-20 sm:pt-28 pb-8 md:pt-40 md:pb-24">
-      <Container>
-        <h1
-          class="text-3xl sm:text-4xl md:text-5xl font-bold leading-none tracking-[-0.03em] animate-in"
-          style="color: var(--fg);"
-        >
-          Qui sommes-nous?
-        </h1>
-      </Container>
-    </section>
+    <!-- Hero — Photo centrée + Identité -->
+    <section class="pt-24 sm:pt-28 pb-12 md:pt-36 md:pb-20">
+      <Container class="flex flex-col items-center text-center">
+        <!-- Photo centrée -->
+        <div class="animate-in">
+          <div
+            class="about-photo"
+          >
+            {
+              profile.photo ? (
+                <img
+                  src={profile.photo}
+                  alt={profile.name}
+                  class="w-full h-full object-cover"
+                />
+              ) : (
+                <span
+                  class="font-mono text-sm uppercase tracking-widest opacity-20"
+                  style="color: var(--fg);"
+                >
+                  Photo
+                </span>
+              )
+            }
+          </div>
+        </div>
 
-    <!-- Processus créatif animé -->
-    <section class="section">
-      <Container>
-        <h2
-          class="text-2xl sm:text-3xl md:text-4xl font-bold text-center animate-in"
-          style="color: var(--fg);"
+        <!-- Nom + Titre -->
+        <h1
+          class="mt-8 text-3xl sm:text-4xl md:text-5xl font-bold leading-none tracking-[-0.03em] animate-in"
+          style="color: var(--fg); --delay: 0.15s;"
         >
-          Comment nous approchons chaque projet.
-        </h2>
+          {profile.name}
+        </h1>
         <p
-          class="mt-4 text-center text-base sm:text-lg max-w-2xl mx-auto animate-in"
-          style="color: var(--fg-secondary); --delay: 0.15s;"
+          class="mt-3 text-sm sm:text-base font-mono uppercase tracking-wider animate-in"
+          style="color: var(--fg-muted); --delay: 0.25s;"
         >
-          Chaque projet commence par une compréhension profonde du besoin, puis se<br class="hidden sm:block" />
-          décline en plusieurs pistes explorées en parallèle avant de converger<br class="hidden sm:block" />
-          vers la direction créative optimale.
+          {profile.title}
         </p>
-        <div class="mt-12 animate-in" style="--delay: 0.3s;">
-          <ThinkingProcess />
+
+        <!-- Bio courte -->
+        <p
+          class="mt-6 max-w-xl text-base sm:text-lg leading-relaxed animate-in"
+          style="color: var(--fg-secondary); --delay: 0.35s;"
+        >
+          {profile.bio}
+        </p>
+
+        <!-- Infos -->
+        <div
+          class="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 animate-in"
+          style="--delay: 0.45s;"
+        >
+          <span class="flex items-center gap-2 text-xs font-mono uppercase tracking-wider" style="color: var(--fg-muted);">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            {profile.location}
+          </span>
+          <span class="flex items-center gap-2 text-xs font-mono uppercase tracking-wider" style="color: var(--fg-muted);">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            {profile.availability}
+          </span>
+        </div>
+
+        <!-- Réseaux -->
+        <div class="mt-6 flex gap-3 animate-in" style="--delay: 0.55s;">
+          {
+            Object.entries(socials).map(([name, url]) => (
+              <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-9 h-9 flex items-center justify-center transition-colors duration-200 no-underline text-xs font-mono uppercase"
+                style="color: var(--fg-muted); border: 1px solid var(--border);"
+                onmouseover="this.style.color='var(--fg)'; this.style.borderColor='var(--border-hover)'"
+                onmouseout="this.style.color='var(--fg-muted)'; this.style.borderColor='var(--border)'"
+              >
+                {name[0].toUpperCase()}
+              </a>
+            ))
+          }
         </div>
       </Container>
     </section>
 
     <div class="section-divider" aria-hidden="true"></div>
 
-    <!-- Bio -->
-    <section class="section">
-      <Container>
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-16">
-          <div class="min-w-0 col-span-12 lg:col-span-5 animate-in">
-            <div
-              class="w-full max-w-[280px] sm:max-w-none aspect-square flex items-center justify-center overflow-hidden"
-              style="background: var(--bg-raised); border: 1px solid var(--border);"
-            >
-              {
-                profile.photo ? (
-                  <img
-                    src={profile.photo}
-                    alt={profile.name}
-                    class="w-full h-full object-cover"
-                  />
-                ) : (
-                  <span
-                    class="font-mono text-sm uppercase tracking-widest opacity-20"
-                    style="color: var(--fg);"
-                  >
-                    Photo
-                  </span>
-                )
-              }
-            </div>
-          </div>
-          <div
-            class="min-w-0 col-span-12 lg:col-span-6 lg:col-start-7 animate-in" style="--delay: 0.15s;"
-          >
-            <p
-              class="text-lg leading-relaxed"
-              style="color: var(--fg-secondary);"
-            >
-              {profile.bio}
-            </p>
-            <div class="mt-8 space-y-4">
-              <div class="flex items-center gap-3">
-                <span
-                  class="text-xs font-mono uppercase tracking-wider w-24 shrink-0"
-                  style="color: var(--fg-muted);">Localisation</span
-                >
-                <span class="text-sm" style="color: var(--fg);"
-                  >{profile.location}</span
-                >
-              </div>
-              <div class="flex items-center gap-3">
-                <span
-                  class="text-xs font-mono uppercase tracking-wider w-24 shrink-0"
-                  style="color: var(--fg-muted);">Email</span
-                >
-                <a
-                  href={`mailto:${profile.email}`}
-                  class="text-sm no-underline transition-colors duration-200 break-all"
-                  style="color: var(--fg);"
-                  onmouseover="this.style.color='var(--fg-secondary)'"
-                  onmouseout="this.style.color='var(--fg)'">{profile.email}</a
-                >
-              </div>
-              <div class="flex items-center gap-3">
-                <span
-                  class="text-xs font-mono uppercase tracking-wider w-24 shrink-0"
-                  style="color: var(--fg-muted);">Statut</span
-                >
-                <span class="text-sm" style="color: var(--fg);"
-                  >{profile.availability}</span
-                >
-              </div>
-            </div>
-            <div class="mt-8 flex gap-3">
-              {
-                Object.entries(socials).map(([name, url]) => (
-                  <a
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="w-10 h-10 flex items-center justify-center transition-colors duration-200 no-underline text-xs font-mono uppercase"
-                    style="color: var(--fg-muted); border: 1px solid var(--border);"
-                    onmouseover="this.style.color='var(--fg)'; this.style.borderColor='var(--border-hover)'"
-                    onmouseout="this.style.color='var(--fg-muted)'; this.style.borderColor='var(--border)'"
-                  >
-                    {name[0].toUpperCase()}
-                  </a>
-                ))
-              }
-            </div>
-          </div>
-        </div>
-      </Container>
-    </section>
+    <!-- Nos façons de penser -->
+    <ThinkingStyles />
+
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <!-- Outils — Système orbital -->
+    <OrbitalSkills />
 
     <div class="section-divider" aria-hidden="true"></div>
 
@@ -149,7 +117,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
     <section class="section" style="background: var(--bg-raised);">
       <Container>
         <h2
-          class="text-3xl sm:text-4xl font-bold"
+          class="text-2xl sm:text-3xl md:text-4xl font-bold"
           style="color: var(--fg);"
         >
           Ce que nous maîtrisons.
@@ -185,10 +153,10 @@ const socials = (profile.socials || {}) as Record<string, string>;
     <!-- CTA -->
     <section class="section" style="border-top: 1px solid var(--border);">
       <Container class="text-center">
-        <h2 class="text-3xl sm:text-4xl font-bold" style="color: var(--fg);">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold" style="color: var(--fg);">
           Travaillons ensemble.
         </h2>
-        <p class="mt-4 max-w-lg mx-auto" style="color: var(--fg-secondary);">
+        <p class="mt-4 max-w-lg mx-auto text-base sm:text-lg" style="color: var(--fg-secondary);">
           {profile.availability}. N'hésitez pas à me contacter pour discuter de
           votre projet.
         </p>
@@ -210,4 +178,28 @@ const socials = (profile.socials || {}) as Record<string, string>;
   <ScrollReveal />
 </Layout>
 
-
+<style>
+  .about-photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    background: var(--bg-raised);
+  }
+  @media (min-width: 640px) {
+    .about-photo {
+      width: 260px;
+      height: 260px;
+    }
+  }
+  @media (min-width: 768px) {
+    .about-photo {
+      width: 300px;
+      height: 300px;
+    }
+  }
+</style>
