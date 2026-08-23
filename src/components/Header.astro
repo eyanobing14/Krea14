@@ -51,6 +51,9 @@ const currentPath = Astro.url.pathname;
 
     <!-- Desktop CTA -->
     <div class="hidden md:flex items-center gap-4">
+      <button id="lang-toggle" class="lang-toggle" aria-label="Changer de langue">
+        <span class="lang-active">FR</span>
+      </button>
       <ThemeToggle />
       <a href="mailto:hello@votreportfolio.com" class="text-sm font-medium px-5 py-2 no-underline transition-all duration-200" style="background: var(--fg); color: var(--bg);" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
         Contact
@@ -59,6 +62,9 @@ const currentPath = Astro.url.pathname;
 
     <!-- Mobile toggle -->
     <div class="md:hidden flex items-center gap-1">
+      <button id="lang-toggle-mobile" class="lang-toggle" aria-label="Changer de langue">
+        <span class="lang-active">FR</span>
+      </button>
       <ThemeToggle />
       <button
         id="mobile-menu-toggle"
@@ -208,6 +214,25 @@ const currentPath = Astro.url.pathname;
   .mobile-burger.is-open #line-3 {
     transform: translateY(-6.5px) rotate(-45deg);
   }
+
+  /* Language toggle */
+  .lang-toggle {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--fg-secondary);
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+    line-height: 1;
+  }
+  .lang-toggle:hover {
+    color: var(--fg);
+    border-color: var(--border-hover);
+  }
 </style>
 
 <script>
@@ -230,8 +255,8 @@ const currentPath = Astro.url.pathname;
         header.style.backdropFilter = 'none';
         header.style.borderBottomColor = isDark ? '#262626' : '#e0e0e0';
       } else if (window.scrollY > 100) {
-        header.style.background = isDark ? 'rgba(0,0,0,0.92)' : 'rgba(255,255,255,0.92)';
-        header.style.backdropFilter = 'blur(12px)';
+        header.style.background = isDark ? 'rgba(0,0,0,0.95)' : 'rgba(255,255,255,0.95)';
+        header.style.backdropFilter = 'none';
         header.style.borderBottomColor = isDark ? '#262626' : '#e0e0e0';
       } else {
         header.style.background = 'transparent';
@@ -282,6 +307,32 @@ const currentPath = Astro.url.pathname;
     });
 
     updateHeader();
+
+    // Language toggle
+    const langBtn = document.getElementById('lang-toggle');
+    const langBtnMobile = document.getElementById('lang-toggle-mobile');
+    let currentLang = localStorage.getItem('lang') || 'fr';
+
+    function applyLang(lang: string) {
+      currentLang = lang;
+      localStorage.setItem('lang', lang);
+      document.documentElement.lang = lang === 'fr' ? 'fr' : 'en';
+      document.querySelectorAll('.lang-active').forEach(el => {
+        el.textContent = lang === 'fr' ? 'FR' : 'EN';
+      });
+      document.querySelectorAll('[data-fr]').forEach(el => {
+        const fr = (el as HTMLElement).dataset.fr;
+        const en = (el as HTMLElement).dataset.en;
+        if (fr && en) {
+          el.textContent = lang === 'fr' ? fr : en;
+        }
+      });
+    }
+
+    langBtn?.addEventListener('click', () => applyLang(currentLang === 'fr' ? 'en' : 'fr'));
+    langBtnMobile?.addEventListener('click', () => applyLang(currentLang === 'fr' ? 'en' : 'fr'));
+
+    applyLang(currentLang);
   }
   document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', init) : init();
 </script>
