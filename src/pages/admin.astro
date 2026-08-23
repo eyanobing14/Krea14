@@ -48,6 +48,7 @@ import Footer from '../components/Footer.astro';
         <button class="admin-tab active px-4 py-2.5 text-xs font-medium transition-colors" data-tab="profile" style="color: var(--fg); border-bottom: 2px solid var(--fg);">Profil</button>
         <button class="admin-tab px-4 py-2.5 text-xs font-medium transition-colors" data-tab="studies" style="color: var(--fg-muted);">Case Studies</button>
         <button class="admin-tab px-4 py-2.5 text-xs font-medium transition-colors" data-tab="services" style="color: var(--fg-muted);">Services</button>
+        <button class="admin-tab px-4 py-2.5 text-xs font-medium transition-colors" data-tab="legal" style="color: var(--fg-muted);">Legal</button>
       </div>
 
       <!-- Profile Tab -->
@@ -107,7 +108,44 @@ import Footer from '../components/Footer.astro';
             </div>
             <div>
               <label class="admin-label">Numéro WhatsApp</label>
-              <input id="p-whatsapp" type="text" class="admin-input" placeholder="25761729788" />
+              <div class="flex gap-2">
+                <select id="p-whatsapp-country" class="admin-input" style="width: 110px; flex-shrink: 0;">
+                  <option value="+257" data-flag="🇧🇮">🇧🇮 +257 Burundi</option>
+                  <option value="+243" data-flag="🇨🇩">🇨🇩 +243 RDC</option>
+                  <option value="+242" data-flag="🇨🇬">🇨🇬 +242 Congo</option>
+                  <option value="+33" data-flag="🇫🇷">🇫🇷 +33 France</option>
+                  <option value="+1" data-flag="🇺🇸">🇺🇸 +1 USA</option>
+                  <option value="+44" data-flag="🇬🇧">🇬🇧 +44 UK</option>
+                  <option value="+212" data-flag="🇲🇦">🇲🇦 +212 Maroc</option>
+                  <option value="+213" data-flag="🇩🇿">🇩🇿 +213 Algérie</option>
+                  <option value="+216" data-flag="🇹🇳">🇹🇳 +216 Tunisie</option>
+                  <option value="+221" data-flag="🇸🇳">🇸🇳 +221 Sénégal</option>
+                  <option value="+225" data-flag="🇨🇮">🇨🇮 +225 Côte d'Ivoire</option>
+                  <option value="+228" data-flag="🇹🇬">🇹🇬 +228 Togo</option>
+                  <option value="+229" data-flag="🇧🇯">🇧🇯 +229 Bénin</option>
+                  <option value="+237" data-flag="🇨🇲">🇨🇲 +237 Cameroun</option>
+                  <option value="+241" data-flag="🇬🇦">🇬🇦 +241 Gabon</option>
+                  <option value="+245" data-flag="🇬🇼">🇬🇼 +245 Guinée-Bissau</option>
+                  <option value="+250" data-flag="🇷🇼">🇷🇼 +250 Rwanda</option>
+                  <option value="+254" data-flag="🇰🇪">🇰🇪 +254 Kenya</option>
+                  <option value="+255" data-flag="🇹🇿">🇹🇿 +255 Tanzanie</option>
+                  <option value="+256" data-flag="🇺🇬">🇺🇬 +256 Ouganda</option>
+                  <option value="+260" data-flag="🇿🇲">🇿🇲 +260 Zambie</option>
+                  <option value="+263" data-flag="🇿🇼">🇿🇼 +263 Zimbabwe</option>
+                  <option value="+265" data-flag="🇲🇼">🇲🇼 +265 Malawi</option>
+                  <option value="+267" data-flag="🇧🇼">🇧🇼 +267 Botswana</option>
+                  <option value="+27" data-flag="🇿🇦">🇿🇦 +27 Afrique du Sud</option>
+                  <option value="+49" data-flag="🇩🇪">🇩🇪 +49 Allemagne</option>
+                  <option value="+34" data-flag="🇪🇸">🇪🇸 +34 Espagne</option>
+                  <option value="+39" data-flag="🇮🇹">🇮🇹 +39 Italie</option>
+                  <option value="+31" data-flag="🇳🇱">🇳🇱 +31 Pays-Bas</option>
+                  <option value="+32" data-flag="🇧🇪">🇧🇪 +32 Belgique</option>
+                  <option value="+41" data-flag="🇨🇭">🇨🇭 +41 Suisse</option>
+                  <option value="+213" data-flag="🇨🇦">🇨🇦 +1 Canada</option>
+                </select>
+                <input id="p-whatsapp" type="tel" class="admin-input" placeholder="61729788" style="flex:1;" />
+              </div>
+              <p class="mt-1 text-[10px]" style="color: var(--fg-muted);">Le lien WhatsApp sera : wa.me/[code]+[numéro]</p>
             </div>
           </div>
           <div class="mt-6 flex justify-end">
@@ -129,6 +167,139 @@ import Footer from '../components/Footer.astro';
         <div id="services-list"></div>
         <div class="mt-6 flex justify-center">
           <button id="btn-add-service" class="admin-btn-outline">+ Ajouter un service</button>
+        </div>
+      </div>
+
+      <!-- Legal Tab -->
+      <div id="tab-legal" class="admin-panel hidden">
+        <div class="admin-section-header">
+          <span class="admin-section-num">01</span>
+          <div>
+            <h2 class="text-sm font-semibold" style="color: var(--fg);">Informations légales</h2>
+            <p class="text-xs" style="color: var(--fg-muted);">Entreprise, juridiction, monnaie</p>
+          </div>
+        </div>
+        <div class="admin-section-body">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div>
+              <label class="admin-label">Nom de l'entreprise</label>
+              <input id="l-company" type="text" class="admin-input" />
+            </div>
+            <div>
+              <label class="admin-label">Email légal</label>
+              <input id="l-email" type="email" class="admin-input" />
+            </div>
+            <div>
+              <label class="admin-label">Juridiction</label>
+              <input id="l-jurisdiction" type="text" class="admin-input" placeholder="Paris, France" />
+            </div>
+            <div>
+              <label class="admin-label">Monnaie</label>
+              <select id="l-currency" class="admin-input">
+                <option value="USD">USD — Dollar américain</option>
+                <option value="EUR">EUR — Euro</option>
+                <option value="GBP">GBP — Livre sterling</option>
+                <option value="CAD">CAD — Dollar canadien</option>
+                <option value="CHF">CHF — Franc suisse</option>
+                <option value="BIF">BIF — Franc burundais</option>
+                <option value="CDF">CDF — Franc congolais</option>
+                <option value="XOF">XOF — Franc CFA</option>
+              </select>
+            </div>
+            <div class="md:col-span-2">
+              <label class="admin-label">Conditions de paiement</label>
+              <input id="l-payment" type="text" class="admin-input" placeholder="50% upfront, 50% on delivery" />
+            </div>
+            <div class="md:col-span-2">
+              <label class="admin-label">Politique de remboursement</label>
+              <textarea id="l-refund" rows="2" class="admin-input"></textarea>
+            </div>
+          </div>
+          <div class="mt-6 flex justify-end">
+            <button id="btn-save-legal" class="admin-btn-primary">Sauvegarder le légal</button>
+          </div>
+        </div>
+
+        <div class="mt-10 admin-section-header">
+          <span class="admin-section-num">02</span>
+          <div>
+            <h2 class="text-sm font-semibold" style="color: var(--fg);">Grille tarifaire</h2>
+            <p class="text-xs" style="color: var(--fg-muted);">Montants min/max par catégorie de service</p>
+          </div>
+        </div>
+        <div class="admin-section-body">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div>
+              <label class="admin-label">Branding / Identité visuelle</label>
+              <div class="flex gap-2 items-center">
+                <input id="l-price-branding-min" type="number" class="admin-input" style="flex:1;" placeholder="Min" />
+                <span style="color:var(--fg-muted);">—</span>
+                <input id="l-price-branding-max" type="number" class="admin-input" style="flex:1;" placeholder="Max" />
+              </div>
+            </div>
+            <div>
+              <label class="admin-label">UI/UX Design</label>
+              <div class="flex gap-2 items-center">
+                <input id="l-price-uiux-min" type="number" class="admin-input" style="flex:1;" placeholder="Min" />
+                <span style="color:var(--fg-muted);">—</span>
+                <input id="l-price-uiux-max" type="number" class="admin-input" style="flex:1;" placeholder="Max" />
+              </div>
+            </div>
+            <div>
+              <label class="admin-label">Frontend Development</label>
+              <div class="flex gap-2 items-center">
+                <input id="l-price-frontend-min" type="number" class="admin-input" style="flex:1;" placeholder="Min" />
+                <span style="color:var(--fg-muted);">—</span>
+                <input id="l-price-frontend-max" type="number" class="admin-input" style="flex:1;" placeholder="Max" />
+              </div>
+            </div>
+            <div>
+              <label class="admin-label">Logo Design</label>
+              <div class="flex gap-2 items-center">
+                <input id="l-price-logo-min" type="number" class="admin-input" style="flex:1;" placeholder="Min" />
+                <span style="color:var(--fg-muted);">—</span>
+                <input id="l-price-logo-max" type="number" class="admin-input" style="flex:1;" placeholder="Max" />
+              </div>
+            </div>
+            <div>
+              <label class="admin-label">Autres projets</label>
+              <div class="flex gap-2 items-center">
+                <input id="l-price-other-min" type="number" class="admin-input" style="flex:1;" placeholder="Min" />
+                <span style="color:var(--fg-muted);">—</span>
+                <input id="l-price-other-max" type="number" class="admin-input" style="flex:1;" placeholder="Max" />
+              </div>
+            </div>
+            <div>
+              <label class="admin-label">Taux horaire</label>
+              <input id="l-price-hourly" type="number" class="admin-input" placeholder="75" />
+            </div>
+          </div>
+          <div class="mt-6 flex justify-end">
+            <button id="btn-save-pricing" class="admin-btn-primary">Sauvegarder les tarifs</button>
+          </div>
+        </div>
+
+        <div class="mt-10 admin-section-header">
+          <span class="admin-section-num">03</span>
+          <div>
+            <h2 class="text-sm font-semibold" style="color: var(--fg);">Contenu des pages légales</h2>
+            <p class="text-xs" style="color: var(--fg-muted);">Politique de confidentialité et conditions générales</p>
+          </div>
+        </div>
+        <div class="admin-section-body">
+          <div class="grid grid-cols-1 gap-5">
+            <div>
+              <label class="admin-label">Politique de confidentialité — Contenu</label>
+              <textarea id="l-privacy-content" rows="8" class="admin-input" style="font-size:0.75rem;line-height:1.6;"></textarea>
+            </div>
+            <div>
+              <label class="admin-label">Conditions générales — Contenu</label>
+              <textarea id="l-terms-content" rows="8" class="admin-input" style="font-size:0.75rem;line-height:1.6;"></textarea>
+            </div>
+          </div>
+          <div class="mt-6 flex justify-end">
+            <button id="btn-save-legal-content" class="admin-btn-primary">Sauvegarder le contenu</button>
+          </div>
         </div>
       </div>
     </div>
@@ -495,7 +666,19 @@ import Footer from '../components/Footer.astro';
       (document.getElementById('p-email') as HTMLInputElement).value = p.email || '';
       (document.getElementById('p-location') as HTMLInputElement).value = p.location || '';
       (document.getElementById('p-availability') as HTMLInputElement).value = p.availability || '';
-      (document.getElementById('p-whatsapp') as HTMLInputElement).value = p.whatsapp || '';
+      // Parse whatsapp: extract country code and local number
+      const wa = p.whatsapp || '';
+      const waSelect = document.getElementById('p-whatsapp-country') as HTMLSelectElement;
+      let waLocal = wa;
+      for (const opt of Array.from(waSelect.options)) {
+        const code = opt.value;
+        if (wa.startsWith(code) && code.length > 1) {
+          waSelect.value = code;
+          waLocal = wa.substring(code.length);
+          break;
+        }
+      }
+      (document.getElementById('p-whatsapp') as HTMLInputElement).value = waLocal;
       // Photo
       const photoImg = document.getElementById('photo-img') as HTMLImageElement;
       const photoPlaceholder = document.getElementById('photo-placeholder');
@@ -552,7 +735,9 @@ import Footer from '../components/Footer.astro';
       data.profile.email = (document.getElementById('p-email') as HTMLInputElement).value;
       data.profile.location = (document.getElementById('p-location') as HTMLInputElement).value;
       data.profile.availability = (document.getElementById('p-availability') as HTMLInputElement).value;
-      data.profile.whatsapp = (document.getElementById('p-whatsapp') as HTMLInputElement).value;
+      const waCode = (document.getElementById('p-whatsapp-country') as HTMLSelectElement).value;
+      const waNum = (document.getElementById('p-whatsapp') as HTMLInputElement).value.replace(/[^0-9]/g, '');
+      data.profile.whatsapp = waNum ? waCode + waNum : '';
       save();
       showToast('Profil sauvegardé!');
     });
@@ -943,9 +1128,71 @@ import Footer from '../components/Footer.astro';
       setTimeout(() => toast.remove(), 2500);
     }
 
+    
+    // ── Legal & Pricing ──
+    function loadLegal() {
+      const l = data.legal || {};
+      const p = l.pricing || {};
+      (document.getElementById('l-company') as HTMLInputElement).value = l.companyName || '';
+      (document.getElementById('l-email') as HTMLInputElement).value = l.companyEmail || '';
+      (document.getElementById('l-jurisdiction') as HTMLInputElement).value = l.jurisdiction || '';
+      (document.getElementById('l-currency') as HTMLSelectElement).value = l.currency || 'USD';
+      (document.getElementById('l-payment') as HTMLInputElement).value = l.paymentTerms || '';
+      (document.getElementById('l-refund') as HTMLTextAreaElement).value = l.refundPolicy || '';
+      const setPrice = (id: string, val: any) => { (document.getElementById(id) as HTMLInputElement).value = val || ''; };
+      setPrice('l-price-branding-min', p.branding?.min);
+      setPrice('l-price-branding-max', p.branding?.max);
+      setPrice('l-price-uiux-min', p.uiux?.min);
+      setPrice('l-price-uiux-max', p.uiux?.max);
+      setPrice('l-price-frontend-min', p.frontend?.min);
+      setPrice('l-price-frontend-max', p.frontend?.max);
+      setPrice('l-price-logo-min', p.logo?.min);
+      setPrice('l-price-logo-max', p.logo?.max);
+      setPrice('l-price-other-min', p.other?.min);
+      setPrice('l-price-other-max', p.other?.max);
+      setPrice('l-price-hourly', p.hourlyRate);
+      (document.getElementById('l-privacy-content') as HTMLTextAreaElement).value = l.privacyContent || '';
+      (document.getElementById('l-terms-content') as HTMLTextAreaElement).value = l.termsContent || '';
+    }
+
+    document.getElementById('btn-save-legal')?.addEventListener('click', () => {
+      if (!data.legal) data.legal = {};
+      data.legal.companyName = (document.getElementById('l-company') as HTMLInputElement).value;
+      data.legal.companyEmail = (document.getElementById('l-email') as HTMLInputElement).value;
+      data.legal.jurisdiction = (document.getElementById('l-jurisdiction') as HTMLInputElement).value;
+      data.legal.currency = (document.getElementById('l-currency') as HTMLSelectElement).value;
+      data.legal.paymentTerms = (document.getElementById('l-payment') as HTMLInputElement).value;
+      data.legal.refundPolicy = (document.getElementById('l-refund') as HTMLTextAreaElement).value;
+      save();
+      showToast('Informations légales sauvegardées!');
+    });
+
+    document.getElementById('btn-save-pricing')?.addEventListener('click', () => {
+      if (!data.legal) data.legal = {};
+      if (!data.legal.pricing) data.legal.pricing = {};
+      const gp = (id: string) => parseInt((document.getElementById(id) as HTMLInputElement).value) || 0;
+      data.legal.pricing.branding = { min: gp('l-price-branding-min'), max: gp('l-price-branding-max'), label: 'Branding / Visual Identity' };
+      data.legal.pricing.uiux = { min: gp('l-price-uiux-min'), max: gp('l-price-uiux-max'), label: 'UI/UX Design' };
+      data.legal.pricing.frontend = { min: gp('l-price-frontend-min'), max: gp('l-price-frontend-max'), label: 'Frontend Development' };
+      data.legal.pricing.logo = { min: gp('l-price-logo-min'), max: gp('l-price-logo-max'), label: 'Logo Design' };
+      data.legal.pricing.other = { min: gp('l-price-other-min'), max: gp('l-price-other-max'), label: 'Other Projects' };
+      data.legal.pricing.hourlyRate = gp('l-price-hourly');
+      save();
+      showToast('Tarifs sauvegardés!');
+    });
+
+    document.getElementById('btn-save-legal-content')?.addEventListener('click', () => {
+      if (!data.legal) data.legal = {};
+      data.legal.privacyContent = (document.getElementById('l-privacy-content') as HTMLTextAreaElement).value;
+      data.legal.termsContent = (document.getElementById('l-terms-content') as HTMLTextAreaElement).value;
+      save();
+      showToast('Contenu légal sauvegardé!');
+    });
+
     refreshGitStatus();
-    loadData().then(() => { loadProfile(); renderStudies(); renderServices(); });
+
   }
+
 
   document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', initAdmin) : initAdmin();
 </script>

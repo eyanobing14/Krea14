@@ -15,6 +15,7 @@ const pricing = legal?.pricing || {};
 const paymentTerms = legal?.paymentTerms || "50% upfront, 50% on delivery";
 const refundPolicy = legal?.refundPolicy || "Refund available within 14 days of initial payment if work has not commenced";
 const lastUpdated = "August 2026";
+const termsContent = legal?.termsContent || '';
 
 function fmtPrice(amount: number) {
   return `${currency === "USD" ? "$" : currency + " "}${amount.toLocaleString("en-US")}`;
@@ -46,6 +47,10 @@ function fmtPrice(amount: number) {
     <section class="section">
       <Container>
         <div class="legal-content">
+          {termsContent && (
+            <div class="custom-legal-content" set:html={termsContent} />
+          )}
+
           <h2>1. Objet</h2>
           <p>
             Les présentes conditions générales régissent l'ensemble des services de design,
@@ -265,5 +270,21 @@ function fmtPrice(amount: number) {
     font-size: 0.8125rem;
     font-weight: 600;
     color: var(--fg);
+  }
+
+  .custom-legal-content {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    background: var(--bg-raised);
+  }
+  .custom-legal-content :global(p) {
+    font-size: 0.875rem;
+    line-height: 1.8;
+    color: var(--fg-secondary);
+    margin-bottom: 0.75rem;
+  }
+  .custom-legal-content :global(p:last-child) {
+    margin-bottom: 0;
   }
 </style>
