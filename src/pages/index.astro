@@ -300,7 +300,7 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
             Voir le portfolio
           </a>
           <a
-            href="https://wa.me/25761729788"
+            href={`https://wa.me/${profile.whatsapp || '25761729788'}`}
             target="_blank"
             rel="noopener noreferrer"
             class="px-6 py-3 text-sm no-underline transition-all text-center min-w-[160px]"

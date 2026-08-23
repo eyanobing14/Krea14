@@ -105,6 +105,10 @@ import Footer from '../components/Footer.astro';
               <label class="admin-label">Disponibilité</label>
               <input id="p-availability" type="text" class="admin-input" />
             </div>
+            <div>
+              <label class="admin-label">Numéro WhatsApp</label>
+              <input id="p-whatsapp" type="text" class="admin-input" placeholder="25761729788" />
+            </div>
           </div>
           <div class="mt-6 flex justify-end">
             <button id="btn-save-profile" class="admin-btn-primary">Sauvegarder le profil</button>
@@ -491,6 +495,7 @@ import Footer from '../components/Footer.astro';
       (document.getElementById('p-email') as HTMLInputElement).value = p.email || '';
       (document.getElementById('p-location') as HTMLInputElement).value = p.location || '';
       (document.getElementById('p-availability') as HTMLInputElement).value = p.availability || '';
+      (document.getElementById('p-whatsapp') as HTMLInputElement).value = p.whatsapp || '';
       // Photo
       const photoImg = document.getElementById('photo-img') as HTMLImageElement;
       const photoPlaceholder = document.getElementById('photo-placeholder');
@@ -547,6 +552,7 @@ import Footer from '../components/Footer.astro';
       data.profile.email = (document.getElementById('p-email') as HTMLInputElement).value;
       data.profile.location = (document.getElementById('p-location') as HTMLInputElement).value;
       data.profile.availability = (document.getElementById('p-availability') as HTMLInputElement).value;
+      data.profile.whatsapp = (document.getElementById('p-whatsapp') as HTMLInputElement).value;
       save();
       showToast('Profil sauvegardé!');
     });

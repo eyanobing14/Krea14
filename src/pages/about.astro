@@ -185,7 +185,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
             Nous contacter
           </a>
           <a
-            href="https://wa.me/25761729788"
+            href={`https://wa.me/${profile.whatsapp || '25761729788'}`}
             target="_blank"
             rel="noopener noreferrer"
             class="px-6 py-3 text-sm font-medium no-underline transition-all border w-full max-w-[260px] text-center"
