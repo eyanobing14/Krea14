@@ -213,7 +213,7 @@ const currentPath = Astro.url.pathname;
         header.style.background = isDark ? '#000000' : '#ffffff';
         header.style.backdropFilter = 'none';
         header.style.borderBottomColor = isDark ? '#262626' : '#e0e0e0';
-      } else if (window.scrollY > 50) {
+      } else if (window.scrollY > 100) {
         header.style.background = isDark ? 'rgba(0,0,0,0.92)' : 'rgba(255,255,255,0.92)';
         header.style.backdropFilter = 'blur(12px)';
         header.style.borderBottomColor = isDark ? '#262626' : '#e0e0e0';
