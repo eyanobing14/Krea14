@@ -15,7 +15,7 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
   <main>
     <!-- Hero -->
     <section
-      class="relative flex flex-col justify-between pb-14 sm:pb-16 md:pb-24 pt-20 sm:pt-28 overflow-hidden min-h-[100dvh]"
+      class="relative flex flex-col justify-between pb-14 sm:pb-16 md:pb-24 pt-20 sm:pt-28 overflow-clip min-h-[100dvh]"
     >
       <div
         class="absolute inset-0 opacity-[0.07] gsap-parallax"
@@ -27,7 +27,7 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
 
       <!-- Horizontal scrolling text -->
       <div class="container-page relative w-full my-auto py-10 md:py-16">
-        <div class="overflow-hidden max-w-full">
+        <div class="overflow-clip max-w-full">
           <div class="hero-scroll-track">
             <div class="hero-scroll-inner">
               <span class="hero-scroll-text">Graphic Design</span>

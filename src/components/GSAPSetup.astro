@@ -78,11 +78,12 @@
       });
     });
 
-    // Slide from left
+    // Slide from left — reduced offset on mobile to prevent overflow
+    const slideOffset = window.innerWidth < 640 ? 20 : 50;
     gsap.utils.toArray<HTMLElement>('.gsap-slide-left').forEach((el) => {
       gsap.from(el, {
         opacity: 0,
-        x: -50,
+        x: -slideOffset,
         duration: 0.9,
         ease: 'power3.out',
         scrollTrigger: {
@@ -93,11 +94,11 @@
       });
     });
 
-    // Slide from right
+    // Slide from right — reduced offset on mobile to prevent overflow
     gsap.utils.toArray<HTMLElement>('.gsap-slide-right').forEach((el) => {
       gsap.from(el, {
         opacity: 0,
-        x: 50,
+        x: slideOffset,
         duration: 0.9,
         ease: 'power3.out',
         scrollTrigger: {
