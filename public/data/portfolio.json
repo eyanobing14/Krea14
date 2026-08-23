@@ -44,7 +44,7 @@
     {
       "slug": "branding-lumiere",
       "title": "Branding — Lumière Café",
-      "category": "Branding · Design Graphique",
+      "category": "Design Graphique · Branding",
       "year": "2025",
       "thumbnail": "",
       "heroColor": "#1a1a1a",
@@ -70,7 +70,7 @@
     {
       "slug": "app-mindflow",
       "title": "App — MindFlow",
-      "category": "UI/UX Design · Mobile",
+      "category": "Design Graphique · Carrousel",
       "year": "2025",
       "thumbnail": "",
       "heroColor": "#0a0a0a",
@@ -96,7 +96,7 @@
     {
       "slug": "site-cipher-studio",
       "title": "Site Web — Cipher Studio",
-      "category": "Frontend Dev · UI/UX",
+      "category": "Frontend Dev · Site Vitrine",
       "year": "2024",
       "thumbnail": "",
       "heroColor": "#111111",
@@ -122,7 +122,7 @@
     {
       "slug": "logo-noctis-ai",
       "title": "Logo — Noctis AI",
-      "category": "Logo Design · Branding",
+      "category": "Logo Design · Cartes de visite",
       "year": "2024",
       "thumbnail": "",
       "heroColor": "#0d0d0d",
@@ -145,6 +145,18 @@
       "tags": ["Logo", "Branding", "Startup"],
       "images": []
     }
+  ],
+  "designSubcategories": [
+    { "id": "flyer", "label": "Flyer" },
+    { "id": "carrousel", "label": "Carrousel" },
+    { "id": "banner", "label": "Banner" },
+    { "id": "cartes-visite", "label": "Cartes de visite" },
+    { "id": "affiche", "label": "Affiche" },
+    { "id": "brochure", "label": "Brochure" },
+    { "id": "packaging", "label": "Packaging" },
+    { "id": "menu", "label": "Menu" },
+    { "id": "credential", "label": "Credential" },
+    { "id": "autre-design", "label": "Autre" }
   ],
   "resources": [
     {

@@ -2,11 +2,11 @@
 import ThemeToggle from './ThemeToggle.astro';
 
 const navLinks = [
-  { label: 'Accueil', href: '/' },
-  { label: 'Work', href: '/work' },
-  { label: 'À propos', href: '/about' },
-  { label: 'Contact', href: '/contact' },
-  { label: 'Admin', href: '/admin' },
+  { label: 'Accueil', labelEn: 'Home', href: '/' },
+  { label: 'Work', labelEn: 'Work', href: '/work' },
+  { label: 'À propos', labelEn: 'About', href: '/about' },
+  { label: 'Contact', labelEn: 'Contact', href: '/contact' },
+  { label: 'Admin', labelEn: 'Admin', href: '/admin' },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -27,8 +27,7 @@ const currentPath = Astro.url.pathname;
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
           <path d="M3 12L6.5 4L10 8L13 2" stroke="var(--bg)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-      </div>
-      <span class="text-sm font-semibold tracking-tight hidden sm:block" style="color: var(--fg);">Portfolio</span>
+      </div>          <span class="text-sm font-semibold tracking-tight hidden sm:block" style="color: var(--fg);" data-fr="Portfolio" data-en="Portfolio">Portfolio</span>
     </a>
 
     <!-- Desktop nav -->
@@ -44,7 +43,7 @@ const currentPath = Astro.url.pathname;
             ? 'color: var(--fg);'
             : 'color: var(--fg-secondary);'}
         >
-          {link.label}
+          <span data-fr={link.label} data-en={link.labelEn}>{link.label}</span>
         </a>
       ))}
     </nav>
@@ -56,7 +55,7 @@ const currentPath = Astro.url.pathname;
       </button>
       <ThemeToggle />
       <a href="mailto:hello@votreportfolio.com" class="text-sm font-medium px-5 py-2 no-underline transition-all duration-200" style="background: var(--fg); color: var(--bg);" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-        Contact
+        <span data-fr="Contact" data-en="Contact">Contact</span>
       </a>
     </div>
 
@@ -96,14 +95,14 @@ const currentPath = Astro.url.pathname;
           onmouseover="this.style.color='var(--fg)'"
           onmouseout="this.style.color='var(--fg-secondary)'"
         >
-          {link.label}
+          <span data-fr={link.label} data-en={link.labelEn}>{link.label}</span>
         </a>
       ))}
       <div
         class="mobile-menu-item flex flex-col gap-3 pt-4 mt-3"
         style={`border-top: 1px solid var(--border); --delay: ${navLinks.length * 45}ms;`}
       >
-        <a href="mailto:hello@votreportfolio.com" class="text-sm font-medium px-5 py-3 text-center no-underline transition-all" style="background: var(--fg); color: var(--bg);">Nous contacter</a>
+        <a href="mailto:hello@votreportfolio.com" class="text-sm font-medium px-5 py-3 text-center no-underline transition-all" style="background: var(--fg); color: var(--bg);"><span data-fr="Nous contacter" data-en="Get in touch">Nous contacter</span></a>
       </div>
     </nav>
   </div>

@@ -593,7 +593,7 @@ import Footer from '../components/Footer.astro';
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div><label class="admin-label">Titre</label><input class="admin-input study-title" data-i="${i}" value="${(study.title || '').replace(/"/g, '&quot;')}" /></div>
               <div><label class="admin-label">Slug</label><input class="admin-input study-slug" data-i="${i}" value="${(study.slug || '').replace(/"/g, '&quot;')}" /></div>
-              <div><label class="admin-label">Catégorie</label><input class="admin-input study-category" data-i="${i}" value="${(study.category || '').replace(/"/g, '&quot;')}" /></div>
+              <div><label class="admin-label">Catégorie</label><select class="admin-input study-category" data-i="${i}"><option value="Design Graphique">Design Graphique</option><option value="UI/UX Design">UI/UX Design</option><option value="Frontend Dev">Frontend Dev</option><option value="Logo Design">Logo Design</option><option value="Branding">Branding</option></select><label class="admin-label mt-2">Sous-catégorie</label><select class="admin-input study-subcategory" data-i="${i}"><option value="">—</option><option value="Flyer">Flyer</option><option value="Carrousel">Carrousel</option><option value="Banner">Banner</option><option value="Cartes de visite">Cartes de visite</option><option value="Affiche">Affiche</option><option value="Brochure">Brochure</option><option value="Packaging">Packaging</option><option value="Menu">Menu</option><option value="Credential">Credential</option><option value="Branding">Branding</option><option value="Site Vitrine">Site Vitrine</option><option value="Mobile">Mobile</option><option value="Autre">Autre</option></select></div>
               <div><label class="admin-label">Année</label><input class="admin-input study-year" data-i="${i}" value="${(study.year || '').replace(/"/g, '&quot;')}" /></div>
               <div class="md:col-span-2"><label class="admin-label">Description</label><textarea class="admin-input study-desc" data-i="${i}" rows="2">${study.description || ''}</textarea></div>
               <div class="md:col-span-2"><label class="admin-label">Défi</label><textarea class="admin-input study-challenge" data-i="${i}" rows="2">${study.challenge || ''}</textarea></div>
@@ -626,6 +626,12 @@ import Footer from '../components/Footer.astro';
           </div>
         `;
         list.appendChild(item);
+        // Set category select value
+        const catParts = (study.category || '').split('·').map((s: string) => s.trim());
+        const catSelect = item.querySelector('.study-category') as HTMLSelectElement;
+        const subSelect = item.querySelector('.study-subcategory') as HTMLSelectElement;
+        if (catSelect) catSelect.value = catParts[0] || '';
+        if (subSelect) subSelect.value = catParts[1] || '';
       });
 
       // Toggle
@@ -646,7 +652,9 @@ import Footer from '../components/Footer.astro';
           const item = (btn as HTMLElement).closest('.admin-item')!;
           data.caseStudies[i].title = (item.querySelector('.study-title') as HTMLInputElement).value;
           data.caseStudies[i].slug = (item.querySelector('.study-slug') as HTMLInputElement).value;
-          data.caseStudies[i].category = (item.querySelector('.study-category') as HTMLInputElement).value;
+          const mainCat = (item.querySelector('.study-category') as HTMLSelectElement).value;
+          const subCat = (item.querySelector('.study-subcategory') as HTMLSelectElement).value;
+          data.caseStudies[i].category = subCat ? `${mainCat} · ${subCat}` : mainCat;
           data.caseStudies[i].year = (item.querySelector('.study-year') as HTMLInputElement).value;
           data.caseStudies[i].description = (item.querySelector('.study-desc') as HTMLTextAreaElement).value;
           data.caseStudies[i].challenge = (item.querySelector('.study-challenge') as HTMLTextAreaElement).value;
@@ -773,7 +781,7 @@ import Footer from '../components/Footer.astro';
       data.caseStudies.push({
         slug: 'nouveau-projet-' + Date.now(),
         title: 'Nouveau projet',
-        category: 'Catégorie',
+        category: 'Design Graphique',
         year: new Date().getFullYear().toString(),
         thumbnail: '',
         heroColor: '#1a1a1a',
