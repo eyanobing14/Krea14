@@ -161,6 +161,10 @@ export const T: Record<string, string> = {
   "Prototypage": "Prototyping",
   "Motion Design": "Motion Design",
 
+  // ── Work page dynamic ──
+  "Voir le projet →": "View project →",
+  "IDENTITÉ VISUELLE": "VISUAL IDENTITY",
+
   // ── Common ──
   "Photo": "Photo",
 

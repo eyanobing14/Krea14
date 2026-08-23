@@ -6,7 +6,7 @@ import Footer from "../components/Footer.astro";
 import ScrollReveal from "../components/ScrollReveal.astro";
 import Container from "../components/Container.astro";
 
-const profile = data.profile;
+const profile = data.profile as typeof data.profile & { taglineEn?: string };
 const services = data.services || [];
 const caseStudies = (data.caseStudies || []).slice(0, 3);
 ---
@@ -64,8 +64,8 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
               class="hero-desc text-base md:text-lg leading-relaxed animate-in"
               style="color: var(--fg-secondary);"
             >
-              {profile.tagline} Nous transformons des idées en expériences numériques
-              mémorables.
+              <span data-fr={`${profile.tagline} Nous transformons des idées en expériences numériques mémorables.`} data-en={`${profile.taglineEn || 'We create digital experiences that leave a mark.'} We turn ideas into memorable digital experiences.`}>{profile.tagline} Nous transformons des idées en expériences numériques
+              mémorables.</span>
             </p>
             <div class="hero-actions mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 animate-in" style="--delay: 0.15s;">
               <a

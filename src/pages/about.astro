@@ -63,7 +63,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
           class="mt-6 max-w-xl text-base sm:text-lg leading-relaxed animate-in"
           style="color: var(--fg-secondary); --delay: 0.35s;"
         >
-          {profile.bio}
+          <span data-fr={profile.bio} data-en="Passionate designer with 5+ years of experience in graphic design, UI/UX and frontend development. We turn complex ideas into elegant and intuitive interfaces.">{profile.bio}</span>
         </p>
 
         <!-- Infos -->

@@ -87,7 +87,7 @@ const categories = [...new Set(
                   <span class="font-mono text-xs uppercase tracking-widest opacity-30" style="color: var(--fg);">{study.category}</span>
                   <!-- Hover overlay -->
                   <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background: rgba(0,0,0,0.4);">
-                    <span class="text-sm font-medium" style="color: #fff;">Voir le projet →</span>
+                    <span class="text-sm font-medium" style="color: #fff;"><span data-fr="Voir le projet →" data-en="View project →">Voir le projet →</span></span>
                   </div>
                 </div>
                 <div class="p-6" style="border-top: 1px solid var(--border);">
@@ -95,7 +95,7 @@ const categories = [...new Set(
                     <h2 class="text-base font-semibold" style="color: var(--fg);">{study.title}</h2>
                     <span class="text-xs font-mono" style="color: var(--fg-muted);">{study.year}</span>
                   </div>
-                  <p class="mt-3 text-sm leading-relaxed" style="color: var(--fg-secondary);">{study.description}</p>
+                  <p class="mt-3 text-sm leading-relaxed" style="color: var(--fg-secondary);"><span data-fr={study.description} data-en={study.descriptionEn || study.description}>{study.description}</span></p>
                   <div class="mt-4 flex flex-wrap gap-1.5">
                     {study.tags?.map((tag: string) => (
                       <span class="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider" style="color: var(--fg-muted); border: 1px solid var(--border);">{tag}</span>
