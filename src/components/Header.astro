@@ -322,6 +322,11 @@ const currentPath = Astro.url.pathname;
       Trev[val] = key;
     }
 
+    // Normalize whitespace for matching
+    function norm(s: string): string {
+      return s.replace(/\s+/g, ' ').trim();
+    }
+
     function applyLang(lang: string) {
       currentLang = lang;
       localStorage.setItem('lang', lang);
@@ -329,33 +334,63 @@ const currentPath = Astro.url.pathname;
       document.querySelectorAll('.lang-active').forEach(el => {
         el.textContent = lang === 'fr' ? 'FR' : 'EN';
       });
-      // data-fr/data-en attributes
+      // data-fr/data-en attributes (reliable, exact match)
       document.querySelectorAll('[data-fr]').forEach(el => {
         const fr = (el as HTMLElement).dataset.fr;
         const en = (el as HTMLElement).dataset.en;
         if (fr && en) el.textContent = lang === 'fr' ? fr : en;
       });
-      // Translate text content of key elements
+      // Walk ALL text nodes in the document and translate them
       const dict = lang === 'fr' ? Trev : T;
-      const selectors = 'h1, h2, h3, p, span, a, button, li, label, div';
-      document.querySelectorAll(selectors).forEach(el => {
-        // Only translate leaf elements (no child elements with text)
-        if (el.children.length > 0) return;
-        const text = el.textContent?.trim();
-        if (!text || !dict[text]) return;
-        el.textContent = dict[text];
-      });
-      // Also handle elements with longer text (contain match)
-      document.querySelectorAll('p, div').forEach(el => {
-        if (el.children.length > 0) return;
-        let text = el.textContent || '';
-        for (const [key, val] of Object.entries(dict)) {
-          if (text.includes(key)) {
-            el.textContent = el.textContent!.replace(key, val);
-            text = el.textContent || '';
+      const sortedKeys = Object.keys(dict).sort((a, b) => b.length - a.length);
+      // Only skip elements that are inside scripts, styles, or the header lang toggle area
+      const skipTags = new Set(['SCRIPT', 'STYLE', 'SVG', 'SELECT', 'OPTION']);
+      const walker = document.createTreeWalker(
+        document.querySelector('main') || document.body,
+        NodeFilter.SHOW_TEXT,
+        {
+          acceptNode(node) {
+            const parent = node.parentElement;
+            if (!parent) return NodeFilter.FILTER_REJECT;
+            if (skipTags.has(parent.tagName)) return NodeFilter.FILTER_REJECT;
+            if (parent.closest('[data-fr]')) return NodeFilter.FILTER_REJECT;
+            if (parent.closest('.lang-active')) return NodeFilter.FILTER_REJECT;
+            if (parent.closest('.hero-scroll-text') || parent.closest('.about-marquee-track')) return NodeFilter.FILTER_REJECT;
+            const raw = node.textContent || '';
+            const cleaned = norm(raw);
+            if (!cleaned) return NodeFilter.FILTER_REJECT;
+            // Exact match
+            if (dict[cleaned]) return NodeFilter.FILTER_ACCEPT;
+            // Partial match: the text node contains a dictionary key
+            for (const key of sortedKeys) {
+              if (cleaned.includes(key)) return NodeFilter.FILTER_ACCEPT;
+            }
+            return NodeFilter.FILTER_REJECT;
           }
         }
-      });
+      ) as TreeWalker;
+      const nodes: Text[] = [];
+      while (walker.nextNode()) nodes.push(walker.currentNode as Text);
+      for (const textNode of nodes) {
+        const raw = textNode.textContent || '';
+        let result = norm(raw);
+        // Skip category text that's not in the dictionary
+        if (!result) continue;
+        // Exact match first
+        if (dict[result]) {
+          textNode.textContent = dict[result];
+          continue;
+        }
+        // Partial match: replace longest keys first
+        for (const key of sortedKeys) {
+          if (result.includes(key)) {
+            result = result.split(key).join(dict[key]);
+          }
+        }
+        if (result !== norm(raw)) {
+          textNode.textContent = result;
+        }
+      }
     }
 
     langBtn?.addEventListener('click', () => {
