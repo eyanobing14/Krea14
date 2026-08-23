@@ -4,6 +4,7 @@ import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import ScrollReveal from "../components/ScrollReveal.astro";
+import Container from "../components/Container.astro";
 
 const profile = data.profile as typeof data.profile & { photo?: string };
 const services = data.services || [];
@@ -15,21 +16,21 @@ const socials = (profile.socials || {}) as Record<string, string>;
   <main>
     <!-- Hero -->
     <section class="pt-20 sm:pt-28 pb-8 md:pt-40 md:pb-24">
-      <div class="container-page">
+      <Container>
         <h1
           class="text-3xl sm:text-4xl md:text-5xl font-bold leading-none tracking-[-0.03em]"
           style="color: var(--fg);"
         >
           Qui suis-je?
         </h1>
-      </div>
+      </Container>
     </section>
 
     <div class="section-divider" aria-hidden="true"></div>
 
     <!-- Bio -->
     <section class="section">
-      <div class="container-page">
+      <Container>
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-16">
           <div class="min-w-0 col-span-12 lg:col-span-5">
             <div
@@ -115,14 +116,14 @@ const socials = (profile.socials || {}) as Record<string, string>;
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     </section>
 
     <div class="section-divider" aria-hidden="true"></div>
 
     <!-- Services -->
     <section class="section" style="background: var(--bg-raised);">
-      <div class="container-page">
+      <Container>
         <h2
           class="text-3xl sm:text-4xl font-bold"
           style="color: var(--fg);"
@@ -154,12 +155,12 @@ const socials = (profile.socials || {}) as Record<string, string>;
             ))
           }
         </div>
-      </div>
+      </Container>
     </section>
 
     <!-- CTA -->
     <section class="section" style="border-top: 1px solid var(--border);">
-      <div class="container-page text-center">
+      <Container class="text-center">
         <h2 class="text-3xl sm:text-4xl font-bold" style="color: var(--fg);">
           Travaillons ensemble.
         </h2>
@@ -178,7 +179,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
             Me contacter
           </a>
         </div>
-      </div>
+      </Container>
     </section>
   </main>
   <Footer />

@@ -4,6 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ScrollReveal from '../../components/ScrollReveal.astro';
+import Container from '../../components/Container.astro';
 
 const caseStudies = data.caseStudies || [];
 
@@ -17,7 +18,7 @@ const categories = [...new Set(
   <Header />
   <main>
     <section class="pt-20 sm:pt-28 pb-8 md:pt-40 md:pb-24">
-      <div class="container-page">
+      <Container>
         <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold leading-none tracking-[-0.03em]" style="color: var(--fg);">
           Tous mes<br/>
           <span style="color: var(--fg-tertiary);">projets.</span>
@@ -43,13 +44,13 @@ const categories = [...new Set(
             </button>
           ))}
         </div>
-      </div>
+      </Container>
     </section>
 
     <div class="section-divider" aria-hidden="true"></div>
 
     <section class="section">
-      <div class="container-page">
+      <Container>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 gsap-stagger-grid" id="work-grid">
           {caseStudies.map((study: any) => {
             const mainCategory = study.category.split('·')[0].trim();
@@ -88,12 +89,12 @@ const categories = [...new Set(
         <div id="work-empty" class="hidden text-center py-20">
           <p class="text-sm" style="color: var(--fg-muted);">Aucun projet dans cette catégorie.</p>
         </div>
-      </div>
+      </Container>
     </section>
 
     <!-- CTA -->
     <section class="section" style="border-top: 1px solid var(--border);">
-      <div class="container-page text-center">
+      <Container class="text-center">
         <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold" style="color: var(--fg);">Envie de collaborer?</h2>
         <p class="mt-4 max-w-lg mx-auto" style="color: var(--fg-secondary);">
           Chaque projet est une nouvelle aventure. Parlons du vôtre.
@@ -103,7 +104,7 @@ const categories = [...new Set(
             Me contacter
           </a>
         </div>
-      </div>
+      </Container>
     </section>
   </main>
   <Footer />

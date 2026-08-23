@@ -4,6 +4,7 @@ import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import ScrollReveal from "../components/ScrollReveal.astro";
+import Container from "../components/Container.astro";
 
 const profile = data.profile;
 const socials = (profile.socials || {}) as Record<string, string>;
@@ -13,7 +14,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
   <Header />
   <main>
     <section class="pt-20 sm:pt-28 pb-8 md:pt-40 md:pb-24">
-      <div class="container-page">
+      <Container>
         <h1
           class="text-3xl sm:text-4xl md:text-5xl font-bold leading-none tracking-[-0.03em]"
           style="color: var(--fg);"
@@ -21,13 +22,13 @@ const socials = (profile.socials || {}) as Record<string, string>;
           Parlons de votre<br />
           <span style="color: var(--fg-tertiary);">projet.</span>
         </h1>
-      </div>
+      </Container>
     </section>
 
     <div class="section-divider" aria-hidden="true"></div>
 
     <section class="section">
-      <div class="container-page">
+      <Container>
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-16">
           <!-- Left: Form -->
           <div class="min-w-0 col-span-12 lg:col-span-7">
@@ -188,7 +189,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   </main>
   <Footer />

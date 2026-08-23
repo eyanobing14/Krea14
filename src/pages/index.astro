@@ -4,6 +4,7 @@ import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import ScrollReveal from "../components/ScrollReveal.astro";
+import Container from "../components/Container.astro";
 
 const profile = data.profile;
 const services = data.services || [];
@@ -26,7 +27,7 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
       </div>
 
       <!-- Horizontal scrolling text -->
-      <div class="container-page relative w-full my-auto py-10 md:py-16">
+      <Container class="relative w-full my-auto py-10 md:py-16">
         <div class="overflow-clip max-w-full">
           <div class="hero-scroll-track">
             <div class="hero-scroll-inner">
@@ -51,10 +52,10 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
             </div>
           </div>
         </div>
-      </div>
+      </Container>
 
       <!-- Bottom content -->
-      <div class="container-page relative w-full">
+      <Container class="relative w-full">
         <div
           class="flex flex-col md:flex-row md:items-end md:justify-between gap-8"
         >
@@ -141,14 +142,14 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     </section>
 
     <div class="section-divider" aria-hidden="true"></div>
 
     <!-- Featured Work -->
     <section class="section">
-      <div class="container-page">
+      <Container>
         <div
           class="flex flex-col md:flex-row md:items-end md:justify-between gap-6"
         >
@@ -225,14 +226,14 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
             ))
           }
         </div>
-      </div>
+      </Container>
     </section>
 
     <div class="section-divider" aria-hidden="true"></div>
 
     <!-- Services -->
     <section class="section" style="background: var(--bg-raised);">
-      <div class="container-page">
+      <Container>
         <div class="max-w-2xl">
           <h2
             class="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.05] tracking-[-0.02em]"
@@ -266,12 +267,12 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
             ))
           }
         </div>
-      </div>
+      </Container>
     </section>
 
     <!-- CTA -->
     <section class="section" style="border-top: 1px solid var(--border);">
-      <div class="container-page text-center">
+      <Container class="text-center">
         <h2 class="text-3xl sm:text-4xl font-bold" style="color: var(--fg);">
           Un projet en tête?
         </h2>
@@ -299,7 +300,7 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
             Voir le portfolio
           </a>
         </div>
-      </div>
+      </Container>
     </section>
   </main>
   <Footer />
