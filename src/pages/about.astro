@@ -7,6 +7,7 @@ import ScrollReveal from "../components/ScrollReveal.astro";
 import Container from "../components/Container.astro";
 import ThinkingStyles from "../components/ThinkingStyles.astro";
 import OrbitalSkills from "../components/OrbitalSkills.astro";
+import DevArchitecture from "../components/DevArchitecture.astro";
 
 const profile = data.profile as typeof data.profile & { photo?: string };
 const services = data.services || [];
@@ -110,6 +111,11 @@ const socials = (profile.socials || {}) as Record<string, string>;
 
     <!-- Outils — Système orbital -->
     <OrbitalSkills />
+
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <!-- Architecture Full-Stack -->
+    <DevArchitecture />
 
     <div class="section-divider" aria-hidden="true"></div>
 
