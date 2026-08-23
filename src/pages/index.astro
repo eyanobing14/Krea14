@@ -16,7 +16,7 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
   <main>
     <!-- Hero -->
     <section
-      class="relative flex flex-col justify-between pb-14 sm:pb-16 md:pb-24 pt-20 sm:pt-28 overflow-clip min-h-[100dvh]"
+      class="relative flex flex-col justify-between pb-14 sm:pb-16 md:pb-24 pt-20 sm:pt-28 overflow-clip hero-height"
     >
       <div
         class="absolute inset-0 opacity-[0.07] gsap-parallax"
@@ -358,6 +358,21 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
     }
     100% {
       transform: translateX(-50%);
+    }
+  }
+
+  /* Hauteur hero stable — pas de saut sur mobile */
+  .hero-height {
+    min-height: 100vh; /* stable, pas de resize avec la barre d'adresse */
+  }
+  @supports (height: 100dvh) {
+    .hero-height {
+      min-height: 100dvh; /* desktop: dvh ok */
+    }
+  }
+  @media (max-width: 768px) {
+    .hero-height {
+      min-height: 100vh; /* mobile: forcer 100vh pour éviter le saut */
     }
   }
 
