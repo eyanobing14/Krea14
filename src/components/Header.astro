@@ -73,6 +73,9 @@ const currentPath = Astro.url.pathname;
     </div>
   </div>
 
+  <!-- Scroll progress bar -->
+  <div id="scroll-progress" class="scroll-progress"></div>
+
   <!-- Mobile menu -->
   <div id="mobile-menu" class="md:hidden">
     <nav
@@ -116,6 +119,18 @@ const currentPath = Astro.url.pathname;
   #mobile-backdrop.is-visible {
     opacity: 1;
     pointer-events: auto;
+  }
+
+  /* Barre de progression du scroll */
+  .scroll-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 1px;
+    background: var(--fg);
+    transition: none;
+    pointer-events: none;
   }
 
   /* Déroulé animé du menu mobile */
@@ -206,10 +221,11 @@ const currentPath = Astro.url.pathname;
 
     let menuOpen = false;
 
+    const progressBar = document.getElementById('scroll-progress');
+
     function updateHeader() {
       const isDark = !document.documentElement.hasAttribute('data-theme');
       if (menuOpen) {
-        // Fond solide quand le menu est déroulé, même en haut de page
         header.style.background = isDark ? '#000000' : '#ffffff';
         header.style.backdropFilter = 'none';
         header.style.borderBottomColor = isDark ? '#262626' : '#e0e0e0';
@@ -221,6 +237,12 @@ const currentPath = Astro.url.pathname;
         header.style.background = 'transparent';
         header.style.backdropFilter = 'none';
         header.style.borderBottomColor = 'transparent';
+      }
+      // Progress bar: fill width based on scroll %
+      if (progressBar) {
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = docHeight > 0 ? Math.min((window.scrollY / docHeight) * 100, 100) : 0;
+        progressBar.style.width = pct + '%';
       }
     }
 
