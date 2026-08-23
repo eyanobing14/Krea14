@@ -20,44 +20,51 @@ import Container from "./Container.astro";
     </p>
 
     <div class="impact-grid mt-12">
-      <!-- Performance -->
+      <!-- Orientation client -->
       <div class="impact-card animate-in" style="--delay: 0.15s;">
-        <div class="impact-num">98+</div>
-        <div class="impact-metric">Score Lighthouse</div>
-        <div class="impact-desc">
-          Sites web performants, optimisés pour le SEO et l'accessibilité.
-          Chaque milliseconde compte.
+        <div class="impact-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
         </div>
+        <h3 class="impact-title">Orientation résultats</h3>
+        <p class="impact-desc">
+          Chaque projet commence par une écoute active. Nous comprenons votre
+          marché, vos utilisateurs et vos contraintes avant de concevoir.
+        </p>
       </div>
 
-      <!-- Délai -->
+      <!-- Qualité -->
       <div class="impact-card animate-in" style="--delay: 0.25s;">
-        <div class="impact-num">{"< 2s"}</div>
-        <div class="impact-metric">Temps de chargement</div>
-        <div class="impact-desc">
-          Interfaces instantanées. Lazy loading, code splitting, optimisation
-          des assets — l'utilisateur ne patiente jamais.
+        <div class="impact-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>
+        <h3 class="impact-title">Qualité sans compromis</h3>
+        <p class="impact-desc">
+          Code lisible, design pixel-perfect, performance optimale. Nous ne
+          livrons jamais un travail que nous n'aurions pas fierté de montrer.
+        </p>
       </div>
-
-      <!-- Livraison -->
+      <!-- A to Z -->
       <div class="impact-card animate-in" style="--delay: 0.35s;">
-        <div class="impact-num">100%</div>
-        <div class="impact-metric">De A à Z</div>
-        <div class="impact-desc">
-          Du wireframe au déploiement, de la maquette au code en production.
-          Un seul interlocuteur, une vision cohérente.
+        <div class="impact-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v20M2 12h20"/></svg>
         </div>
+        <h3 class="impact-title">De A à Z</h3>
+        <p class="impact-desc">
+          Du premier croquis au déploiement en production. Une seule vision,
+          un seul interlocuteur, une cohérence totale du début à la fin.
+        </p>
       </div>
 
-      <!-- Responsive -->
-      <div class="impact-card animate-in" style="----delay: 0.45s; --delay: 0.45s;">
-        <div class="impact-num">∞</div>
-        <div class="impact-metric">Responsive</div>
-        <div class="impact-desc">
-          Chaque écran, chaque device. L'expérience s'adapte — du mobile au
-          grand format — sans compromis visuel.
+      <!-- Équipe -->
+      <div class="impact-card animate-in" style="--delay: 0.45s;">
+        <div class="impact-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
+        <h3 class="impact-title">Intégration fluide</h3>
+        <p class="impact-desc">
+          Nous nous adaptons à votre workflow. Git, sprints, revues de code —
+          nous devenons un membre à part entière de votre équipe.
+        </p>
       </div>
     </div>
 
@@ -115,21 +122,27 @@ import Container from "./Container.astro";
     transform: translateY(-3px);
   }
 
-  .impact-num {
-    font-family: var(--font-mono);
-    font-size: 1.75rem;
-    font-weight: 700;
+  .impact-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    color: var(--fg-secondary);
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .impact-card:hover .impact-icon {
     color: var(--fg);
-    line-height: 1;
+    border-color: var(--border-hover);
   }
 
-  .impact-metric {
+  .impact-title {
     font-family: var(--font-mono);
-    font-size: 0.6875rem;
+    font-size: 0.8125rem;
     font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--fg-muted);
+    letter-spacing: 0.03em;
+    color: var(--fg);
   }
 
   .impact-desc {
@@ -189,9 +202,6 @@ import Container from "./Container.astro";
     }
     .impact-card {
       padding: 1rem;
-    }
-    .impact-num {
-      font-size: 1.5rem;
     }
   }
 
