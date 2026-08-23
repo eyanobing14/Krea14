@@ -209,3 +209,22 @@ import Container from "./Container.astro";
     .impact-chevron { transition: none; }
   }
 </style>
+
+<script>
+  function initAccordion() {
+    const items = document.querySelectorAll('.impact-item');
+    items.forEach((details) => {
+      details.addEventListener('toggle', () => {
+        if ((details as HTMLDetailsElement).open) {
+          items.forEach((other) => {
+            if (other !== details) (other as HTMLDetailsElement).open = false;
+          });
+        }
+      });
+    });
+  }
+  document.readyState === 'loading'
+    ? document.addEventListener('DOMContentLoaded', initAccordion)
+    : initAccordion();
+</script>
+</style>

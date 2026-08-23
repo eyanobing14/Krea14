@@ -272,3 +272,21 @@ import Container from "./Container.astro";
     .ts-chevron { transition: none; }
   }
 </style>
+
+<script>
+  function initTsAccordion() {
+    const items = document.querySelectorAll('.ts-item');
+    items.forEach((details) => {
+      details.addEventListener('toggle', () => {
+        if ((details as HTMLDetailsElement).open) {
+          items.forEach((other) => {
+            if (other !== details) (other as HTMLDetailsElement).open = false;
+          });
+        }
+      });
+    });
+  }
+  document.readyState === 'loading'
+    ? document.addEventListener('DOMContentLoaded', initTsAccordion)
+    : initTsAccordion();
+</script>
