@@ -188,6 +188,7 @@
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     scroll-behavior: smooth;
+    overflow-x: clip;
   }
 
   body {
@@ -199,6 +200,11 @@
     word-break: break-word;
     transition: background-color 0.4s var(--ease-out-expo),
                 color 0.4s var(--ease-out-expo);
+  }
+
+  main {
+    overflow-x: hidden;
+    max-width: 100vw;
   }
 
   @media (prefers-reduced-motion: reduce) {
