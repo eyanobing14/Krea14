@@ -1,5 +1,5 @@
 ---
-// ImpactSection — Show what gets delivered and the value created, not the tools used
+// ImpactSection — Collapsible dropdown cards showing impact (not metrics)
 import Container from "./Container.astro";
 ---
 
@@ -19,120 +19,146 @@ import Container from "./Container.astro";
       la rigueur, la qualité et les résultats livrés.
     </p>
 
-    <div class="impact-grid mt-12">
-      <!-- Orientation client -->
-      <div class="impact-card animate-in" style="--delay: 0.15s;">
-        <div class="impact-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+    <div class="impact-list mt-12">
+      <!-- Orientation résultats -->
+      <details class="impact-item animate-in" style="--delay: 0.15s;">
+        <summary class="impact-summary">
+          <div class="impact-summary-left">
+            <div class="impact-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <span class="impact-title">Orientation résultats</span>
+          </div>
+          <svg class="impact-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="impact-body">
+          <p>
+            Chaque projet commence par une écoute active. Nous comprenons votre
+            marché, vos utilisateurs et vos contraintes avant de concevoir.
+          </p>
         </div>
-        <h3 class="impact-title">Orientation résultats</h3>
-        <p class="impact-desc">
-          Chaque projet commence par une écoute active. Nous comprenons votre
-          marché, vos utilisateurs et vos contraintes avant de concevoir.
-        </p>
-      </div>
+      </details>
 
-      <!-- Qualité -->
-      <div class="impact-card animate-in" style="--delay: 0.25s;">
-        <div class="impact-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <!-- Qualité sans compromis -->
+      <details class="impact-item animate-in" style="--delay: 0.25s;">
+        <summary class="impact-summary">
+          <div class="impact-summary-left">
+            <div class="impact-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <span class="impact-title">Qualité sans compromis</span>
+          </div>
+          <svg class="impact-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="impact-body">
+          <p>
+            Code lisible, design pixel-perfect, performance optimale. Nous ne
+            livrons jamais un travail que nous n'aurions pas fierté de montrer.
+          </p>
         </div>
-        <h3 class="impact-title">Qualité sans compromis</h3>
-        <p class="impact-desc">
-          Code lisible, design pixel-perfect, performance optimale. Nous ne
-          livrons jamais un travail que nous n'aurions pas fierté de montrer.
-        </p>
-      </div>
-      <!-- A to Z -->
-      <div class="impact-card animate-in" style="--delay: 0.35s;">
-        <div class="impact-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v20M2 12h20"/></svg>
-        </div>
-        <h3 class="impact-title">De A à Z</h3>
-        <p class="impact-desc">
-          Du premier croquis au déploiement en production. Une seule vision,
-          un seul interlocuteur, une cohérence totale du début à la fin.
-        </p>
-      </div>
+      </details>
 
-      <!-- Équipe -->
-      <div class="impact-card animate-in" style="--delay: 0.45s;">
-        <div class="impact-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <!-- De A à Z -->
+      <details class="impact-item animate-in" style="--delay: 0.35s;">
+        <summary class="impact-summary">
+          <div class="impact-summary-left">
+            <div class="impact-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v20M2 12h20"/></svg>
+            </div>
+            <span class="impact-title">De A à Z</span>
+          </div>
+          <svg class="impact-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="impact-body">
+          <p>
+            Du premier croquis au déploiement en production. Une seule vision,
+            un seul interlocuteur, une cohérence totale du début à la fin.
+          </p>
         </div>
-        <h3 class="impact-title">Intégration fluide</h3>
-        <p class="impact-desc">
-          Nous nous adaptons à votre workflow. Git, sprints, revues de code —
-          nous devenons un membre à part entière de votre équipe.
-        </p>
-      </div>
-    </div>
+      </details>
 
-    <!-- Marquee de résultats -->
-    <div class="impact-marquee animate-in" style="--delay: 0.55s;">
-      <div class="impact-marquee-track">
-        <span>Brandings mémorables</span>
-        <span class="impact-dot" aria-hidden="true">·</span>
-        <span>Interfaces intuitives</span>
-        <span class="impact-dot" aria-hidden="true">·</span>
-        <span>Sites performants</span>
-        <span class="impact-dot" aria-hidden="true">·</span>
-        <span>Applications mobiles</span>
-        <span class="impact-dot" aria-hidden="true">·</span>
-        <span>Systèmes de design</span>
-        <span class="impact-dot" aria-hidden="true">·</span>
-        <span>APIs robustes</span>
-        <span class="impact-dot" aria-hidden="true">·</span>
-        <!-- Duplicate for seamless loop -->
-        <span>Brandings mémorables</span>
-        <span class="impact-dot" aria-hidden="true">·</span>
-        <span>Interfaces intuitives</span>
-        <span class="impact-dot" aria-hidden="true">·</span>
-        <span>Sites performants</span>
-        <span class="impact-dot" aria-hidden="true">·</span>
-        <span>Applications mobiles</span>
-        <span class="impact-dot" aria-hidden="true">·</span>
-        <span>Systèmes de design</span>
-        <span class="impact-dot" aria-hidden="true">·</span>
-        <span>APIs robustes</span>
-        <span class="impact-dot" aria-hidden="true">·</span>
-      </div>
+      <!-- Intégration fluide -->
+      <details class="impact-item animate-in" style="--delay: 0.45s;">
+        <summary class="impact-summary">
+          <div class="impact-summary-left">
+            <div class="impact-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <span class="impact-title">Intégration fluide</span>
+          </div>
+          <svg class="impact-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="impact-body">
+          <p>
+            Nous nous adaptons à votre workflow. Git, sprints, revues de code —
+            nous devenons un membre à part entière de votre équipe.
+          </p>
+        </div>
+      </details>
     </div>
   </Container>
 </section>
 
 <style>
-  .impact-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-  }
-
-  .impact-card {
-    padding: 1.5rem;
-    border: 1px solid var(--border);
-    background: var(--bg);
+  .impact-list {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    transition: border-color 0.3s ease, transform 0.3s var(--ease-out-expo);
+    gap: 0;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
   }
-  .impact-card:hover {
+
+  .impact-item {
+    border: 1px solid var(--border);
+    border-bottom: none;
+    background: var(--bg);
+    transition: border-color 0.3s;
+  }
+  .impact-item:last-child {
+    border-bottom: 1px solid var(--border);
+  }
+  .impact-item[open] {
     border-color: var(--border-hover);
-    transform: translateY(-3px);
+  }
+  .impact-item[open] + .impact-item {
+    border-top-color: var(--border-hover);
+  }
+
+  .impact-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    transition: background 0.2s;
+  }
+  .impact-summary::-webkit-details-marker { display: none; }
+  .impact-summary::marker { display: none; content: ""; }
+  .impact-summary:hover {
+    background: var(--bg-raised);
+  }
+
+  .impact-summary-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
   }
 
   .impact-icon {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
     border: 1px solid var(--border);
     color: var(--fg-secondary);
+    flex-shrink: 0;
     transition: color 0.3s, border-color 0.3s;
   }
-  .impact-card:hover .impact-icon {
+  .impact-item[open] .impact-icon {
     color: var(--fg);
     border-color: var(--border-hover);
   }
@@ -145,69 +171,41 @@ import Container from "./Container.astro";
     color: var(--fg);
   }
 
-  .impact-desc {
-    font-size: 0.8125rem;
-    line-height: 1.6;
-    color: var(--fg-secondary);
-    margin-top: 0.25rem;
-  }
-
-  /* ── Marquee ── */
-  .impact-marquee {
-    margin-top: 3rem;
-    overflow: hidden;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    padding: 1rem 0;
-  }
-
-  .impact-marquee-track {
-    display: flex;
-    gap: 0;
-    white-space: nowrap;
-    animation: marquee-scroll 25s linear infinite;
-    width: max-content;
-  }
-
-  .impact-marquee-track span {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+  .impact-chevron {
     color: var(--fg-muted);
-    padding: 0 0.75rem;
+    transition: transform 0.3s var(--ease-out-expo);
     flex-shrink: 0;
   }
-
-  .impact-dot {
-    color: var(--border-hover) !important;
+  .impact-item[open] .impact-chevron {
+    transform: rotate(180deg);
   }
 
-  @keyframes marquee-scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+  .impact-body {
+    padding: 0 1.25rem 1.25rem 3.5rem;
+    animation: dropdown-in 0.3s var(--ease-out-expo);
+  }
+  .impact-body p {
+    font-size: 0.8125rem;
+    line-height: 1.7;
+    color: var(--fg-secondary);
   }
 
-  /* ── Responsive ── */
-  @media (max-width: 768px) {
-    .impact-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  @keyframes dropdown-in {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   @media (max-width: 480px) {
-    .impact-grid {
-      grid-template-columns: 1fr;
-      gap: 0.75rem;
+    .impact-summary {
+      padding: 0.75rem 1rem;
     }
-    .impact-card {
-      padding: 1rem;
+    .impact-body {
+      padding: 0 1rem 1rem 2.75rem;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .impact-marquee-track {
-      animation: none;
-    }
+    .impact-body { animation: none; }
+    .impact-chevron { transition: none; }
   }
 </style>
