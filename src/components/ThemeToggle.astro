@@ -33,15 +33,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: none;
-    border: none;
+    background: var(--bg-overlay);
+    border: 1px solid var(--border-strong);
     color: var(--fg-secondary);
-    transition: color 0.2s;
+    transition: color 0.2s, border-color 0.2s;
     cursor: pointer;
+    padding: 0;
     -webkit-tap-highlight-color: transparent;
   }
   .theme-toggle-btn:hover {
     color: var(--fg);
+    border-color: var(--border-hover);
   }
   .theme-icon {
     position: absolute;

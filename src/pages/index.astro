@@ -15,24 +15,19 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
   <main>
     <!-- Hero -->
     <section
-      class="relative min-h-screen flex flex-col justify-between pb-16 md:pb-24 pt-32 overflow-hidden"
+      class="relative min-h-screen flex flex-col justify-between pb-14 sm:pb-16 md:pb-24 pt-28 sm:pt-32 overflow-hidden"
     >
       <div
-        class="absolute inset-0 opacity-[0.03] gsap-parallax"
+        class="absolute inset-0 opacity-[0.07] gsap-parallax"
         data-speed="0.2"
         aria-hidden="true"
         style="background-image: linear-gradient(to right, var(--fg) 1px, transparent 1px), linear-gradient(to bottom, var(--fg) 1px, transparent 1px); background-size: 80px 80px;"
       >
       </div>
 
-      <!-- Top content -->
-      <div class="container-page relative w-full">
-        <span class="label">Portfolio</span>
-      </div>
-
       <!-- Horizontal scrolling text -->
       <div class="container-page relative w-full my-auto py-10 md:py-16">
-        <div class="overflow-hidden">
+        <div class="overflow-hidden max-w-full">
           <div class="hero-scroll-track">
             <div class="hero-scroll-inner">
               <span class="hero-scroll-text">Graphic Design</span>
@@ -63,7 +58,7 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
         <div
           class="flex flex-col md:flex-row md:items-end md:justify-between gap-8"
         >
-          <div class="max-w-xl">
+          <div class="min-w-0 max-w-xl">
             <p
               class="hero-desc text-base md:text-lg leading-relaxed"
               style="color: var(--fg-secondary);"
@@ -101,7 +96,7 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
             </div>
           </div>
 
-          <div class="hero-metrics flex flex-wrap gap-10 md:gap-14">
+          <div class="hero-metrics flex flex-wrap gap-6 sm:gap-10 md:gap-14 min-w-0">
             <div>
               <div
                 class="font-mono text-2xl md:text-3xl font-semibold tabular-nums"
@@ -158,9 +153,8 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
           class="flex flex-col md:flex-row md:items-end md:justify-between gap-6"
         >
           <div class="max-w-2xl">
-            <span class="label">Projets sélectionnés</span>
             <h2
-              class="mt-6 text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.05] tracking-[-0.02em]"
+              class="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.05] tracking-[-0.02em]"
               style="color: var(--fg);"
             >
               Travail récent.
@@ -178,7 +172,7 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
         </div>
 
         <div
-          class="mt-16 md:mt-20 grid grid-cols-1 md:grid-cols-3 gap-4 gsap-stagger-grid"
+          class="mt-10 md:mt-16 lg:mt-20 grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 gsap-stagger-grid"
         >
           {
             caseStudies.map((study: any) => (
@@ -240,9 +234,8 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
     <section class="section" style="background: var(--bg-raised);">
       <div class="container-page">
         <div class="max-w-2xl">
-          <span class="label">Services</span>
           <h2
-            class="mt-6 text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.05] tracking-[-0.02em]"
+            class="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.05] tracking-[-0.02em]"
             style="color: var(--fg);"
           >
             Ce que je fais.
@@ -250,7 +243,7 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
         </div>
 
         <div
-          class="mt-16 md:mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 gsap-stagger-grid"
+          class="mt-10 md:mt-16 lg:mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 gsap-stagger-grid"
         >
           {
             services.map((service: any) => (
@@ -279,7 +272,7 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
     <!-- CTA -->
     <section class="section" style="border-top: 1px solid var(--border);">
       <div class="container-page text-center">
-        <h2 class="text-3xl md:text-4xl font-bold" style="color: var(--fg);">
+        <h2 class="text-3xl sm:text-4xl font-bold" style="color: var(--fg);">
           Un projet en tête?
         </h2>
         <p class="mt-4 max-w-lg mx-auto" style="color: var(--fg-secondary);">

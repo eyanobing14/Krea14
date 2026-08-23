@@ -14,11 +14,10 @@ const socials = (profile.socials || {}) as Record<string, string>;
   <Header />
   <main>
     <!-- Hero -->
-    <section class="pt-32 pb-16 md:pt-40 md:pb-24">
+    <section class="pt-28 pb-14 sm:pt-32 sm:pb-16 md:pt-40 md:pb-24">
       <div class="container-page">
-        <span class="label">À propos</span>
         <h1
-          class="mt-8 text-4xl md:text-5xl lg:text-6xl font-bold leading-none tracking-[-0.03em]"
+          class="text-4xl sm:text-5xl md:text-6xl font-bold leading-none tracking-[-0.03em]"
           style="color: var(--fg);"
         >
           Qui suis-je?
@@ -31,8 +30,8 @@ const socials = (profile.socials || {}) as Record<string, string>;
     <!-- Bio -->
     <section class="section">
       <div class="container-page">
-        <div class="grid grid-cols-12 gap-8 md:gap-16">
-          <div class="col-span-12 lg:col-span-5 gsap-slide-left">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-16">
+          <div class="min-w-0 col-span-12 lg:col-span-5 gsap-slide-left">
             <div
               class="w-full aspect-square flex items-center justify-center overflow-hidden"
               style="background: var(--bg-raised); border: 1px solid var(--border);"
@@ -56,7 +55,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
             </div>
           </div>
           <div
-            class="col-span-12 lg:col-span-6 lg:col-start-7 gsap-slide-right"
+            class="min-w-0 col-span-12 lg:col-span-6 lg:col-start-7 gsap-slide-right"
           >
             <p
               class="text-lg leading-relaxed"
@@ -81,7 +80,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
                 >
                 <a
                   href={`mailto:${profile.email}`}
-                  class="text-sm no-underline transition-colors duration-200"
+                  class="text-sm no-underline transition-colors duration-200 break-all"
                   style="color: var(--fg);"
                   onmouseover="this.style.color='var(--fg-secondary)'"
                   onmouseout="this.style.color='var(--fg)'">{profile.email}</a
@@ -124,9 +123,8 @@ const socials = (profile.socials || {}) as Record<string, string>;
     <!-- Services -->
     <section class="section" style="background: var(--bg-raised);">
       <div class="container-page">
-        <span class="label">Services</span>
         <h2
-          class="mt-6 text-2xl md:text-3xl font-bold"
+          class="text-3xl sm:text-4xl font-bold"
           style="color: var(--fg);"
         >
           Ce que je maîtrise.
@@ -162,7 +160,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
     <!-- CTA -->
     <section class="section" style="border-top: 1px solid var(--border);">
       <div class="container-page text-center">
-        <h2 class="text-3xl md:text-4xl font-bold" style="color: var(--fg);">
+        <h2 class="text-3xl sm:text-4xl font-bold" style="color: var(--fg);">
           Travaillons ensemble.
         </h2>
         <p class="mt-4 max-w-lg mx-auto" style="color: var(--fg-secondary);">

@@ -12,6 +12,13 @@ const navLinks = [
 const currentPath = Astro.url.pathname;
 ---
 
+<!-- Mobile backdrop -->
+<div
+  id="mobile-backdrop"
+  class="md:hidden"
+  aria-hidden="true"
+></div>
+
 <header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500" style="background: transparent; border-bottom: 1px solid transparent;">
   <div class="container-page flex items-center justify-between h-16">
     <!-- Logo -->
@@ -67,14 +74,26 @@ const currentPath = Astro.url.pathname;
   </div>
 
   <!-- Mobile menu -->
-  <div id="mobile-menu" class="md:hidden hidden" style="background: var(--bg); border-top: 1px solid var(--border);">
-    <nav class="container-page py-6 flex flex-col gap-1">
-      {navLinks.map((link) => (
-        <a href={link.href} class="text-base no-underline transition-colors duration-200 py-2.5" style="color: var(--fg-secondary);" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--fg-secondary)'">
+  <div id="mobile-menu" class="md:hidden">
+    <nav
+      class="container-page py-5 flex flex-col gap-0.5"
+      aria-label="Navigation mobile"
+    >
+      {navLinks.map((link, i) => (
+        <a
+          href={link.href}
+          class="mobile-menu-item text-base no-underline transition-colors duration-200 py-2.5"
+          style={`color: var(--fg-secondary); --delay: ${i * 45}ms;`}
+          onmouseover="this.style.color='var(--fg)'"
+          onmouseout="this.style.color='var(--fg-secondary)'"
+        >
           {link.label}
         </a>
       ))}
-      <div class="flex flex-col gap-3 pt-4 mt-3" style="border-top: 1px solid var(--border);">
+      <div
+        class="mobile-menu-item flex flex-col gap-3 pt-4 mt-3"
+        style={`border-top: 1px solid var(--border); --delay: ${navLinks.length * 45}ms;`}
+      >
         <a href="mailto:hello@votreportfolio.com" class="text-sm font-medium px-5 py-3 text-center no-underline transition-all" style="background: var(--fg); color: var(--bg);">Me contacter</a>
       </div>
     </nav>
@@ -82,6 +101,68 @@ const currentPath = Astro.url.pathname;
 </header>
 
 <style>
+  /* Backdrop derrière le menu mobile */
+  #mobile-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    background: rgba(0, 0, 0, 0.65);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  #mobile-backdrop.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Déroulé animé du menu mobile */
+  #mobile-menu {
+    background: var(--bg);
+    border-top: 1px solid transparent;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-12px);
+    transition:
+      max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.3s ease,
+      transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+      border-top-color 0.3s ease,
+      visibility 0s linear 0.45s;
+  }
+  #mobile-menu.is-open {
+    max-height: calc(100dvh - 4rem);
+    overflow-y: auto;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    border-top-color: var(--border);
+    transition:
+      max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.3s ease,
+      transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+      border-top-color 0.3s ease;
+  }
+
+  /* Cascade des liens quand le menu s'ouvre */
+  #mobile-menu .mobile-menu-item {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition:
+      opacity 0.35s ease,
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: 0ms;
+  }
+  #mobile-menu.is-open .mobile-menu-item {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: var(--delay, 0ms);
+  }
+
   .mobile-burger {
     display: flex;
     flex-direction: column;
@@ -90,10 +171,14 @@ const currentPath = Astro.url.pathname;
     width: 36px;
     height: 36px;
     gap: 5px;
-    background: none;
-    border: none;
+    background: var(--bg-overlay);
+    border: 1px solid var(--border-strong);
     cursor: pointer;
     padding: 0;
+    transition: border-color 0.2s;
+  }
+  .mobile-burger:hover {
+    border-color: var(--border-hover);
   }
   .mobile-burger span {
     display: block;
@@ -119,10 +204,20 @@ const currentPath = Astro.url.pathname;
     const header = document.getElementById('site-header');
     if (!header) return;
 
-    let ticking = false;
-    function update() {
+    const toggle = document.getElementById('mobile-menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+    const backdrop = document.getElementById('mobile-backdrop');
+
+    let menuOpen = false;
+
+    function updateHeader() {
       const isDark = !document.documentElement.hasAttribute('data-theme');
-      if (window.scrollY > 50) {
+      if (menuOpen) {
+        // Fond solide quand le menu est déroulé, même en haut de page
+        header.style.background = isDark ? '#000000' : '#ffffff';
+        header.style.backdropFilter = 'none';
+        header.style.borderBottomColor = isDark ? '#262626' : '#e0e0e0';
+      } else if (window.scrollY > 50) {
         header.style.background = isDark ? 'rgba(0,0,0,0.92)' : 'rgba(255,255,255,0.92)';
         header.style.backdropFilter = 'blur(12px)';
         header.style.borderBottomColor = isDark ? '#262626' : '#e0e0e0';
@@ -131,34 +226,44 @@ const currentPath = Astro.url.pathname;
         header.style.backdropFilter = 'none';
         header.style.borderBottomColor = 'transparent';
       }
-      ticking = false;
     }
 
+    let ticking = false;
     window.addEventListener('scroll', () => {
-      if (!ticking) { requestAnimationFrame(update); ticking = true; }
+      if (!ticking) { requestAnimationFrame(() => { updateHeader(); ticking = false; }); ticking = true; }
     });
 
     window.addEventListener('themechange', () => {
-      requestAnimationFrame(update);
+      requestAnimationFrame(updateHeader);
     });
 
-    const toggle = document.getElementById('mobile-menu-toggle');
-    const menu = document.getElementById('mobile-menu');
-    let open = false;
+    function setMenu(next: boolean) {
+      menuOpen = next;
+      toggle?.setAttribute('aria-expanded', String(menuOpen));
+      toggle?.classList.toggle('is-open', menuOpen);
+      menu?.classList.toggle('is-open', menuOpen);
+      backdrop?.classList.toggle('is-visible', menuOpen);
+      // Bloquer le scroll du body quand le menu est ouvert
+      document.body.style.overflow = menuOpen ? 'hidden' : '';
+      updateHeader();
+    }
 
-    toggle?.addEventListener('click', () => {
-      open = !open;
-      toggle.setAttribute('aria-expanded', String(open));
-      toggle.classList.toggle('is-open', open);
-      menu?.classList.toggle('hidden', !open);
+    toggle?.addEventListener('click', () => setMenu(!menuOpen));
+
+    backdrop?.addEventListener('click', () => setMenu(false));
+
+    menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menuOpen) setMenu(false);
     });
 
-    menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      open = false;
-      toggle?.setAttribute('aria-expanded', 'false');
-      toggle?.classList.remove('is-open');
-      menu?.classList.add('hidden');
-    }));
+    // Fermer le menu si on repasse en desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768 && menuOpen) setMenu(false);
+    });
+
+    updateHeader();
   }
   document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', init) : init();
 </script>

@@ -195,6 +195,8 @@
     color: var(--fg);
     line-height: 1.6;
     overflow-x: hidden;
+    overflow-wrap: break-word;
+    word-break: break-word;
     transition: background-color 0.4s var(--ease-out-expo),
                 color 0.4s var(--ease-out-expo);
   }
@@ -234,6 +236,7 @@
     max-width: 1200px;
     margin-inline: auto;
     padding-inline: var(--space-6);
+    min-width: 0;
   }
   @media (min-width: 768px) {
     .container-page { padding-inline: var(--space-8); }
@@ -247,6 +250,11 @@
   }
   @media (min-width: 768px) {
     .section { padding-block: var(--space-32); }
+  }
+  /* Sections plus compactes sur petits téléphones */
+  @media (max-width: 480px) {
+    .section { padding-block: var(--space-16); }
+    .container-page { padding-inline: 1.25rem; }
   }
 
   .section-divider {
@@ -268,6 +276,7 @@
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     overflow: hidden;
+    min-width: 0;
   }
 
   .code-block-header {

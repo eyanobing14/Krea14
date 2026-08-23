@@ -23,7 +23,7 @@ if (!study) {
   <Header />
   <main>
     <!-- Hero -->
-    <section class="pt-32 pb-16 md:pt-40 md:pb-24">
+    <section class="pt-28 pb-14 sm:pt-32 sm:pb-16 md:pt-40 md:pb-24">
       <div class="container-page">
         <div class="flex flex-wrap items-center gap-3 mb-8">
           <a
@@ -38,9 +38,8 @@ if (!study) {
             >{study.year}</span
           >
         </div>
-        <span class="label">{study.category}</span>
         <h1
-          class="mt-8 text-4xl md:text-5xl lg:text-6xl font-bold leading-none tracking-[-0.03em]"
+          class="text-4xl sm:text-5xl md:text-6xl font-bold leading-none tracking-[-0.03em]"
           style="color: var(--fg);"
         >
           {study.title}
@@ -69,7 +68,7 @@ if (!study) {
     <!-- Hero Image Placeholder -->
     <div class="container-page">
       <div
-        class="w-full aspect-21/9 flex items-center justify-center gsap-scale"
+        class="w-full aspect-video lg:aspect-21/9 flex items-center justify-center gsap-scale"
         style={`background: ${study.heroColor || "var(--bg-raised)"}; border: 1px solid var(--border);`}
       >
         <span
@@ -84,12 +83,11 @@ if (!study) {
     <!-- Details -->
     <section class="section">
       <div class="container-page">
-        <div class="grid grid-cols-12 gap-8 md:gap-16">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-16">
           <!-- Left: challenge -->
-          <div class="col-span-12 lg:col-span-5 gsap-slide-left">
-            <span class="label">Le défi</span>
+          <div class="min-w-0 col-span-12 lg:col-span-5 gsap-slide-left">
             <h2
-              class="mt-6 text-2xl md:text-3xl font-bold leading-tight"
+              class="text-3xl md:text-4xl font-bold leading-tight"
               style="color: var(--fg);"
             >
               {study.challenge}
@@ -98,11 +96,10 @@ if (!study) {
 
           <!-- Right: solution -->
           <div
-            class="col-span-12 lg:col-span-6 lg:col-start-7 gsap-slide-right"
+            class="min-w-0 col-span-12 lg:col-span-6 lg:col-start-7 gsap-slide-right"
           >
-            <span class="label">La solution</span>
             <p
-              class="mt-6 text-sm leading-relaxed"
+              class="text-sm leading-relaxed"
               style="color: var(--fg-secondary);"
             >
               {study.solution}
@@ -120,20 +117,18 @@ if (!study) {
           <section class="section">
             <div class="container-page">
               <div class="max-w-2xl">
-                <span class="label">Processus</span>
                 <h2
-                  class="mt-6 text-2xl md:text-3xl font-bold leading-tight"
+                  class="mt-6 text-3xl md:text-4xl font-bold leading-tight"
                   style="color: var(--fg);"
                 >
                   Comment j'aborde ce projet.
                 </h2>
               </div>
-              <div class="mt-12 space-y-0">
-                {study.flow.map((step: string, i: number) => (
-                  <div
-                    class="flex items-start gap-6 py-6 gsap-reveal"
-                    style="border-bottom: 1px solid var(--border);"
-                  >
+              <div class="mt-8 sm:mt-12 space-y-0">
+                {study.flow.map((step: string, i: number) => (                    <div
+                      class="flex items-start gap-4 sm:gap-6 py-5 sm:py-6 gsap-reveal"
+                      style="border-bottom: 1px solid var(--border);"
+                    >
                     <span
                       class="shrink-0 font-mono text-xs font-semibold w-8 h-8 flex items-center justify-center"
                       style="color: var(--fg-muted); border: 1px solid var(--border);"
@@ -162,8 +157,7 @@ if (!study) {
       study.results && study.results.length > 0 && (
         <section class="section" style="background: var(--bg-raised);">
           <div class="container-page">
-            <span class="label">Résultats</span>
-            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 gsap-stagger-grid">
+            <div class="mt-8 sm:mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 gsap-stagger-grid">
               {study.results.map((result: string) => (
                 <div class="p-6" style="border: 1px solid var(--border);">
                   <p
@@ -183,7 +177,7 @@ if (!study) {
     <!-- CTA -->
     <section class="section" style="border-top: 1px solid var(--border);">
       <div class="container-page text-center">
-        <h2 class="text-3xl md:text-4xl font-bold" style="color: var(--fg);">
+        <h2 class="text-3xl sm:text-4xl font-bold" style="color: var(--fg);">
           Projet suivant?
         </h2>
         <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
