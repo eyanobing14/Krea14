@@ -147,12 +147,12 @@ const currentPath = Astro.url.pathname;
     bottom: 0;
     background: var(--bg);
     border-top: 1px solid transparent;
-    max-height: 0;
-    overflow: hidden;
+    overflow-y: auto;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-12px);
     z-index: 45;
+    pointer-events: none;
     transition:
       opacity 0.3s ease,
       transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
@@ -160,9 +160,9 @@ const currentPath = Astro.url.pathname;
       visibility 0s linear 0.45s;
   }
   #mobile-menu.is-open {
-    overflow-y: auto;
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
     transform: translateY(0);
     border-top-color: var(--border);
     transition:
