@@ -129,6 +129,23 @@ import Footer from '../components/Footer.astro';
         </div>
       </div>
     </div>
+
+    <!-- Push Modal -->
+    <div id="push-modal" class="delete-modal hidden">
+      <div class="delete-modal-backdrop"></div>
+      <div class="delete-modal-content" style="text-align:left;">
+        <h3 class="delete-modal-title" style="text-align:left;">Push vers GitHub</h3>
+        <div id="push-modal-info" class="mb-4" style="font-size:0.75rem;color:var(--fg-secondary);line-height:1.6;"></div>
+        <div class="mb-4">
+          <label class="admin-label">Message du commit</label>
+          <input id="push-modal-msg" type="text" class="admin-input" value="Update portfolio data" />
+        </div>
+        <div class="delete-modal-actions" style="justify-content:flex-end;">
+          <button id="push-modal-cancel" class="admin-btn-ghost">Annuler</button>
+          <button id="push-modal-confirm" style="padding:0.5rem 1.25rem;font-size:0.75rem;font-weight:500;background:#16a34a;color:#fff;border:none;">Commit & Push</button>
+        </div>
+      </div>
+    </div>
   </main>
   <Footer />
 </Layout>
@@ -189,18 +206,62 @@ import Footer from '../components/Footer.astro';
       } catch(e) { showToast('Erreur commit: ' + e.message); }
     });
 
-    // ── Git: push ──
-    document.getElementById('btn-git-push')?.addEventListener('click', async () => {
+    // ── Git: push (with modal) ──
+    async function getGitRemote() {
       try {
-        const resp = await fetch(API + '/api/git-push', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ branch: 'main' })
-        });
-        const result = await resp.json();
-        showToast(result.message || 'Push effectué!');
-        refreshGitStatus();
-      } catch(e) { showToast('Erreur push: ' + e.message); }
+        const resp = await fetch(API + '/api/remote');
+        const data = await resp.json();
+        return data.ok ? data : null;
+      } catch(e) { return null; }
+    }
+
+    document.getElementById('btn-git-push')?.addEventListener('click', async () => {
+      const modal = document.getElementById('push-modal')!;
+      const infoEl = document.getElementById('push-modal-info')!;
+      const msgInput = document.getElementById('push-modal-msg') as HTMLInputElement;
+      const confirmBtn = document.getElementById('push-modal-confirm')!;
+      const cancelBtn = document.getElementById('push-modal-cancel')!;
+
+      // Fetch remote info
+      const remote = await getGitRemote();
+      const status = await (await fetch(API + '/api/status')).json();
+      const branch = status.ok ? status.branch : 'main';
+      const modified = status.ok ? status.modified : 0;
+
+      if (remote && remote.ok) {
+        infoEl.innerHTML = '<div style="margin-bottom:8px;"><span style="color:var(--fg-muted);font-family:var(--font-mono);font-size:0.625rem;">REMOTE</span><br/><span style="color:var(--fg);font-weight:500;">' + remote.url + '</span></div>' +
+          '<div><span style="color:var(--fg-muted);font-family:var(--font-mono);font-size:0.625rem;">BRANCHE</span><br/><span style="color:var(--fg);font-weight:500;">' + branch + '</span></div>' +
+          (modified > 0 ? '<div class="mt-2"><span style="color:var(--fg-muted);font-family:var(--font-mono);font-size:0.625rem;">MODIFICATIONS</span><br/><span style="color:var(--fg);">' + modified + ' fichier(s) modifié(s)</span></div>' : '');
+      } else {
+        infoEl.innerHTML = '<span style="color:var(--fg-muted);">Remote non configuré. Ajoutez un remote GitHub d&#39;abord :</span><br/><code style="font-size:0.625rem;color:var(--fg);">git remote add origin https://github.com/VOTRE_USER/VOTRE_REPO.git</code>';
+      }
+
+      modal.classList.remove('hidden');
+
+      const cleanup = () => {
+        modal.classList.add('hidden');
+        cancelBtn.removeEventListener('click', cleanup);
+        confirmBtn.removeEventListener('click', doPush);
+        modal.querySelector('.delete-modal-backdrop')?.removeEventListener('click', cleanup);
+      };
+
+      const doPush = async () => {
+        cleanup();
+        const msg = msgInput.value || 'Update portfolio data';
+        try {
+          showToast('Commit en cours...');
+          await fetch(API + '/api/git-commit', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: msg }) });
+          showToast('Push en cours...');
+          const resp = await fetch(API + '/api/git-push', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ branch }) });
+          const result = await resp.json();
+          showToast(result.message || 'Push effectué!');
+          refreshGitStatus();
+        } catch(e) { showToast('Erreur: ' + e.message); }
+      };
+
+      cancelBtn.addEventListener('click', cleanup);
+      confirmBtn.addEventListener('click', doPush);
+      modal.querySelector('.delete-modal-backdrop')?.addEventListener('click', cleanup);
     });
 
     // ── Tabs ──

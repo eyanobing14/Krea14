@@ -99,6 +99,17 @@ app.get('/api/status', (req, res) => {
   }
 });
 
+
+// ── Git remote info ──
+app.get('/api/remote', (req, res) => {
+  try {
+    const url = execSync('git remote get-url origin', { cwd: ROOT, stdio: 'pipe' }).toString().trim();
+    res.json({ ok: true, url });
+  } catch (err) {
+    res.json({ ok: false, error: 'No remote configured' });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`[admin-server] http://localhost:${PORT}`);
 });
