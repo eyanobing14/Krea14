@@ -130,6 +130,22 @@ import Footer from '../components/Footer.astro';
       </div>
     </div>
 
+    <!-- Commit Modal -->
+    <div id="commit-modal" class="delete-modal hidden">
+      <div class="delete-modal-backdrop"></div>
+      <div class="delete-modal-content" style="text-align:left;">
+        <h3 class="delete-modal-title" style="text-align:left;">Commit Git</h3>
+        <div class="mb-4">
+          <label class="admin-label">Message du commit</label>
+          <input id="commit-modal-msg" type="text" class="admin-input" value="Update portfolio data" />
+        </div>
+        <div class="delete-modal-actions" style="justify-content:flex-end;">
+          <button id="commit-modal-cancel" class="admin-btn-ghost">Annuler</button>
+          <button id="commit-modal-confirm" style="padding:0.5rem 1.25rem;font-size:0.75rem;font-weight:500;background:var(--fg);color:var(--bg);border:none;">Commit</button>
+        </div>
+      </div>
+    </div>
+
     <!-- Push Modal -->
     <div id="push-modal" class="delete-modal hidden">
       <div class="delete-modal-backdrop"></div>
@@ -161,6 +177,7 @@ import Footer from '../components/Footer.astro';
   .delete-modal-actions { display: flex; gap: 0.5rem; justify-content: center; }
   .delete-modal-confirm-btn { padding: 0.5rem 1.25rem; font-size: 0.75rem; font-weight: 500; background: #dc2626; color: #fff; border: none; transition: opacity 0.2s; }
   .delete-modal-confirm-btn:hover { opacity: 0.85; }
+  .admin-btn-primary:disabled, .admin-btn-primary[disabled] { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
 </style>
 
 <script>
@@ -170,49 +187,75 @@ import Footer from '../components/Footer.astro';
     let data: any = null;
 
     async function loadData() {
-      try { const sr = await fetch(API + '/api/read-data'); if (sr.ok) { const d = await sr.json(); if (d.ok) { data = d.data; return; } } } catch(e) {}
-      try { const resp = await fetch(JSON_URL); data = await resp.json(); } catch(e) {}
+      try { const sr = await fetch(API + '/api/read-data', { method: 'POST' }); if (sr.ok) { const d = await sr.json(); if (d.ok) { data = d.data; return; } } } catch(e: unknown) {}
+      try { const resp = await fetch(JSON_URL); data = await resp.json(); } catch(e: unknown) {}
     }
     async function save() {
-      try { await fetch(API + '/api/save-data', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); } catch(e) {}
+      try { await fetch(API + '/api/save-data', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); } catch(e: unknown) {}
     }
 
 
     // ── Git: status ──
+    let gitModifiedCount = 0;
     async function refreshGitStatus() {
       try {
-        const resp = await fetch(API + '/api/git-info');
+        const resp = await fetch(API + '/api/git-info', { method: 'POST' });
         const status = await resp.json();
         const el = document.getElementById('git-status');
+        const commitBtn = document.getElementById('btn-git-commit') as HTMLButtonElement | null;
+        const pushBtn = document.getElementById('btn-git-push') as HTMLButtonElement | null;
         if (el && status.ok) {
+          gitModifiedCount = status.modified;
           el.textContent = status.modified > 0 ? status.modified + ' fichier(s) modifié(s) — ' + status.branch : 'Aucune modification — ' + status.branch;
         }
-      } catch(e) {}
+        if (commitBtn) commitBtn.disabled = gitModifiedCount === 0;
+        if (pushBtn) pushBtn.disabled = gitModifiedCount === 0;
+      } catch(e: unknown) {}
     }
 
-    // ── Git: commit ──
+    // ── Git: commit (with modal) ──
     document.getElementById('btn-git-commit')?.addEventListener('click', async () => {
-      const msg = prompt('Message du commit:', 'Update portfolio data');
-      if (msg === null) return;
-      try {
-        const resp = await fetch(API + '/api/git-commit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: msg })
-        });
-        const result = await resp.json();
-        showToast(result.message || 'Commit effectué!');
-        refreshGitStatus();
-      } catch(e) { showToast('Erreur commit: ' + e.message); }
+      const modal = document.getElementById('commit-modal')!;
+      const msgInput = document.getElementById('commit-modal-msg') as HTMLInputElement;
+      const confirmBtn = document.getElementById('commit-modal-confirm')!;
+      const cancelBtn = document.getElementById('commit-modal-cancel')!;
+
+      modal.classList.remove('hidden');
+
+      const cleanup = () => {
+        modal.classList.add('hidden');
+        cancelBtn.removeEventListener('click', cleanup);
+        confirmBtn.removeEventListener('click', doCommit);
+        modal.querySelector('.delete-modal-backdrop')?.removeEventListener('click', cleanup);
+      };
+
+      const doCommit = async () => {
+        const msg = msgInput.value || 'Update portfolio data';
+        cleanup();
+        try {
+          const resp = await fetch(API + '/api/git-commit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: msg })
+          });
+          const result = await resp.json();
+          showToast(result.message || 'Commit effectué!');
+          refreshGitStatus();
+        } catch(e: unknown) { showToast('Erreur commit: ' + (e instanceof Error ? e.message : String(e))); }
+      };
+
+      cancelBtn.addEventListener('click', cleanup);
+      confirmBtn.addEventListener('click', doCommit);
+      modal.querySelector('.delete-modal-backdrop')?.addEventListener('click', cleanup);
     });
 
     // ── Git: push (with modal) ──
     async function getGitInfo() {
       try {
-        const resp = await fetch(API + '/api/git-info');
+        const resp = await fetch(API + '/api/git-info', { method: 'POST' });
         const data = await resp.json();
         return data.ok ? data : null;
-      } catch(e) { return null; }
+      } catch(e: unknown) { return null; }
     }
 
     document.getElementById('btn-git-push')?.addEventListener('click', async () => {
@@ -256,7 +299,7 @@ import Footer from '../components/Footer.astro';
           const result = await resp.json();
           showToast(result.message || 'Push effectué!');
           refreshGitStatus();
-        } catch(e) { showToast('Erreur: ' + e.message); }
+        } catch(e: unknown) { showToast('Erreur: ' + (e instanceof Error ? e.message : String(e))); }
       };
 
       cancelBtn.addEventListener('click', cleanup);
@@ -324,7 +367,7 @@ import Footer from '../components/Footer.astro';
             loadProfile();
             showToast('Photo uploadée dans public/assets/!');
           }
-        } catch(e) { showToast('Erreur: ' + e.message); }
+        } catch(e: unknown) { showToast('Erreur: ' + (e instanceof Error ? e.message : String(e))); }
       };
       reader.readAsDataURL(file);
     });
@@ -537,7 +580,7 @@ import Footer from '../components/Footer.astro';
                   reopenCard(si);
                   showToast('Image uploadée dans public/assets/!');
                 }
-              } catch(e) { showToast('Erreur upload: ' + e.message); }
+              } catch(e: unknown) { showToast('Erreur upload: ' + (e instanceof Error ? e.message : String(e))); }
             };
             reader.readAsDataURL(file);
           });
