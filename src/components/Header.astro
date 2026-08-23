@@ -236,6 +236,7 @@ const currentPath = Astro.url.pathname;
 </style>
 
 <script>
+  import { T } from '../translations';
   function init() {
     const header = document.getElementById('site-header');
     if (!header) return;
@@ -308,10 +309,15 @@ const currentPath = Astro.url.pathname;
 
     updateHeader();
 
-    // Language toggle
+    // Language toggle — full page translation
     const langBtn = document.getElementById('lang-toggle');
     const langBtnMobile = document.getElementById('lang-toggle-mobile');
     let currentLang = localStorage.getItem('lang') || 'fr';
+
+    // Translation dictionary imported from translations.ts
+    // (bundled at build time by Vite)
+    const T: Record<string, string> = {};
+    const Treverse: Record<string, string> = {};
 
     function applyLang(lang: string) {
       currentLang = lang;
@@ -320,17 +326,43 @@ const currentPath = Astro.url.pathname;
       document.querySelectorAll('.lang-active').forEach(el => {
         el.textContent = lang === 'fr' ? 'FR' : 'EN';
       });
+      // data-fr/data-en attributes
       document.querySelectorAll('[data-fr]').forEach(el => {
         const fr = (el as HTMLElement).dataset.fr;
         const en = (el as HTMLElement).dataset.en;
-        if (fr && en) {
-          el.textContent = lang === 'fr' ? fr : en;
+        if (fr && en) el.textContent = lang === 'fr' ? fr : en;
+      });
+      // Translate text content of key elements
+      const dict = lang === 'fr' ? Treverse : T;
+      const selectors = 'h1, h2, h3, p, span, a, button, li, label, div';
+      document.querySelectorAll(selectors).forEach(el => {
+        // Only translate leaf elements (no child elements with text)
+        if (el.children.length > 0) return;
+        const text = el.textContent?.trim();
+        if (!text || !dict[text]) return;
+        el.textContent = dict[text];
+      });
+      // Also handle elements with longer text (contain match)
+      document.querySelectorAll('p, div').forEach(el => {
+        if (el.children.length > 0) return;
+        let text = el.textContent || '';
+        for (const [key, val] of Object.entries(dict)) {
+          if (text.includes(key)) {
+            el.textContent = el.textContent!.replace(key, val);
+            text = el.textContent || '';
+          }
         }
       });
     }
 
-    langBtn?.addEventListener('click', () => applyLang(currentLang === 'fr' ? 'en' : 'fr'));
-    langBtnMobile?.addEventListener('click', () => applyLang(currentLang === 'fr' ? 'en' : 'fr'));
+    langBtn?.addEventListener('click', () => {
+      localStorage.setItem('lang', currentLang === 'fr' ? 'en' : 'fr');
+      location.reload();
+    });
+    langBtnMobile?.addEventListener('click', () => {
+      localStorage.setItem('lang', currentLang === 'fr' ? 'en' : 'fr');
+      location.reload();
+    });
 
     applyLang(currentLang);
   }
