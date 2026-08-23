@@ -66,10 +66,10 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
               {profile.tagline} Je transforme des idées en expériences numériques
               mémorables.
             </p>
-            <div class="hero-actions mt-8 flex flex-wrap items-center gap-4">
+            <div class="hero-actions mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
               <a
                 href="/work"
-                class="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium no-underline transition-all duration-200"
+                class="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium no-underline transition-all duration-200 min-w-[160px]"
                 style="background: var(--fg); color: var(--bg);"
                 onmouseover="this.style.opacity='0.85'"
                 onmouseout="this.style.opacity='1'"
@@ -86,7 +86,7 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
               </a>
               <a
                 href="/about"
-                class="inline-flex items-center gap-2 px-6 py-3 text-sm no-underline transition-all duration-200"
+                class="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm no-underline transition-all duration-200 min-w-[160px]"
                 style="color: var(--fg-secondary); border: 1px solid var(--border-strong);"
                 onmouseover="this.style.color='var(--fg)'; this.style.borderColor='var(--fg-muted)'"
                 onmouseout="this.style.color='var(--fg-secondary)'; this.style.borderColor='var(--border-strong)'"
@@ -279,10 +279,10 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
           Discutons de votre prochain projet. Je suis disponible pour du
           freelance.
         </p>
-        <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <div class="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4">
           <a
             href="/contact"
-            class="px-6 py-3 text-sm font-medium no-underline transition-all"
+            class="px-6 py-3 text-sm font-medium no-underline transition-all text-center min-w-[160px]"
             style="background: var(--fg); color: var(--bg);"
             onmouseover="this.style.opacity='0.85'"
             onmouseout="this.style.opacity='1'"
@@ -291,7 +291,7 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
           </a>
           <a
             href="/work"
-            class="px-6 py-3 text-sm no-underline transition-all"
+            class="px-6 py-3 text-sm no-underline transition-all text-center min-w-[160px]"
             style="color: var(--fg-secondary); border: 1px solid var(--border-strong);"
             onmouseover="this.style.color='var(--fg)'"
             onmouseout="this.style.color='var(--fg-secondary)'"

@@ -39,13 +39,13 @@ if (!study) {
           >
         </div>
         <h1
-          class="text-3xl sm:text-4xl md:text-5xl font-bold leading-none tracking-[-0.03em]"
+          class="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight tracking-[-0.03em]"
           style="color: var(--fg);"
         >
           {study.title}
         </h1>
         <p
-          class="mt-6 text-lg leading-relaxed max-w-2xl"
+          class="mt-4 text-base sm:text-lg leading-relaxed max-w-2xl"
           style="color: var(--fg-secondary);"
         >
           {study.description}
@@ -177,13 +177,13 @@ if (!study) {
     <!-- CTA -->
     <section class="section" style="border-top: 1px solid var(--border);">
       <div class="container-page text-center">
-        <h2 class="text-3xl sm:text-4xl font-bold" style="color: var(--fg);">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold" style="color: var(--fg);">
           Projet suivant?
         </h2>
-        <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <div class="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4">
           <a
             href="/work"
-            class="px-6 py-3 text-sm font-medium no-underline transition-all"
+            class="px-6 py-3 text-sm font-medium no-underline transition-all text-center min-w-[180px]"
             style="background: var(--fg); color: var(--bg);"
             onmouseover="this.style.opacity='0.85'"
             onmouseout="this.style.opacity='1'"
@@ -192,7 +192,7 @@ if (!study) {
           </a>
           <a
             href="mailto:hello@votreportfolio.com"
-            class="px-6 py-3 text-sm no-underline transition-all"
+            class="px-6 py-3 text-sm no-underline transition-all text-center min-w-[180px]"
             style="color: var(--fg-secondary); border: 1px solid var(--border-strong);"
             onmouseover="this.style.color='var(--fg)'"
             onmouseout="this.style.color='var(--fg-secondary)'"
