@@ -21,9 +21,12 @@ function git(cmd) {
 function gitWithOutput(cmd) {
   try {
     const result = execSync(cmd, { cwd: ROOT, stdio: 'pipe' });
-    return { ok: true, stdout: result.stdout.toString().trim(), stderr: result.stderr.toString().trim() };
+    const stdout = result ? result.toString().trim() : '';
+    return { ok: true, stdout, stderr: '' };
   } catch (err) {
-    return { ok: false, stdout: err.stdout ? err.stdout.toString().trim() : '', stderr: err.stderr ? err.stderr.toString().trim() : '', message: err.message };
+    const stdout = err.stdout ? (Buffer.isBuffer(err.stdout) ? err.stdout.toString().trim() : String(err.stdout).trim()) : '';
+    const stderr = err.stderr ? (Buffer.isBuffer(err.stderr) ? err.stderr.toString().trim() : String(err.stderr).trim()) : '';
+    return { ok: false, stdout, stderr, message: err.message };
   }
 }
 
