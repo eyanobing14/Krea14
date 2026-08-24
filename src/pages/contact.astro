@@ -13,15 +13,105 @@ const socials = (profile.socials || {}) as Record<string, string>;
 <Layout title={`Contact — ${profile.name}`}>
   <Header />
   <main>
-    <section class="pt-20 sm:pt-28 pb-8 md:pt-40 md:pb-24">
+    <!-- Hero: h1 + animation side by side on desktop -->
+    <section class="contact-hero pt-20 sm:pt-28 pb-8 md:pt-40 md:pb-20">
       <Container>
-        <h1
-          class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-[-0.03em]"
-          style="color: var(--fg);"
-        >
-          Parlons de votre<br />
-          <span style="color: var(--fg-tertiary);">projet.</span>
-        </h1>
+        <div class="contact-hero-inner">
+          <!-- H1 -->
+          <div class="contact-hero-text">
+            <h1
+              class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-[-0.03em]"
+              style="color: var(--fg);"
+            >
+              Parlons de votre<br />
+              <span style="color: var(--fg-tertiary);">projet.</span>
+            </h1>
+            <p class="mt-4 text-base sm:text-lg" style="color: var(--fg-secondary);">
+              <span data-fr="Disponible pour freelance. N'hésitez pas à nous contacter pour discuter de votre projet." data-en="Available for freelance. Don't hesitate to contact us to discuss your project.">Disponible pour freelance. N'hésitez pas à nous contacter pour discuter de votre projet.</span>
+            </p>
+          </div>
+          <!-- Animation -->
+          <div class="contact-hero-anim">
+            <svg viewBox="0 0 400 160" fill="none" class="process-svg" id="process-svg">
+              <!-- Background glow -->
+              <circle cx="200" cy="70" r="60" fill="var(--fg)" opacity="0.02" class="anim-glow"/>
+
+              <!-- Step 1: Message (large envelope) -->
+              <g class="anim-step as1">
+                <circle cx="60" cy="70" r="32" stroke="var(--fg-muted)" stroke-width="1" fill="none" opacity="0.3"/>
+                <circle cx="60" cy="70" r="28" stroke="var(--fg)" stroke-width="1.5" fill="none"/>
+                <rect x="42" y="58" width="36" height="24" rx="3" stroke="var(--fg-secondary)" stroke-width="1.2" fill="none"/>
+                <path d="M42 61 L60 73 L78 61" stroke="var(--fg-secondary)" stroke-width="1" fill="none"/>
+                <line x1="48" y1="78" x2="56" y2="78" stroke="var(--fg-muted)" stroke-width="0.75" opacity="0.5"/>
+                <line x1="48" y1="82" x2="54" y2="82" stroke="var(--fg-muted)" stroke-width="0.75" opacity="0.5"/>
+                <text x="60" y="118" text-anchor="middle" fill="var(--fg-secondary)" font-size="10" font-weight="500" font-family="var(--font-mono)" letter-spacing="0.05em">Message</text>
+              </g>
+
+              <!-- Arrow 1 -->
+              <g class="anim-arrow aa1">
+                <line x1="96" y1="70" x2="126" y2="70" stroke="var(--fg-muted)" stroke-width="1.5" stroke-dasharray="4 3"/>
+                <polygon points="130,70 122,65 122,75" fill="var(--fg-muted)"/>
+              </g>
+
+              <!-- Step 2: Discussion (chat bubbles) -->
+              <g class="anim-step as2">
+                <circle cx="156" cy="70" r="32" stroke="var(--fg-muted)" stroke-width="1" fill="none" opacity="0.3"/>
+                <circle cx="156" cy="70" r="28" stroke="var(--fg)" stroke-width="1.5" fill="none"/>
+                <rect x="140" y="58" width="32" height="12" rx="6" stroke="var(--fg-secondary)" stroke-width="1.2" fill="none"/>
+                <line x1="146" y1="63" x2="166" y2="63" stroke="var(--fg-muted)" stroke-width="0.75"/>
+                <line x1="146" y1="67" x2="160" y2="67" stroke="var(--fg-muted)" stroke-width="0.75"/>
+                <rect x="144" y="74" width="28" height="10" rx="5" stroke="var(--fg-muted)" stroke-width="1" fill="none"/>
+                <line x1="150" y1="79" x2="164" y2="79" stroke="var(--fg-muted)" stroke-width="0.75"/>
+                <text x="156" y="118" text-anchor="middle" fill="var(--fg-secondary)" font-size="10" font-weight="500" font-family="var(--font-mono)" letter-spacing="0.05em">Discussion</text>
+              </g>
+
+              <!-- Arrow 2 -->
+              <g class="anim-arrow aa2">
+                <line x1="192" y1="70" x2="222" y2="70" stroke="var(--fg-muted)" stroke-width="1.5" stroke-dasharray="4 3"/>
+                <polygon points="226,70 218,65 218,75" fill="var(--fg-muted)"/>
+              </g>
+
+              <!-- Step 3: Conception (wireframe) -->
+              <g class="anim-step as3">
+                <circle cx="256" cy="70" r="32" stroke="var(--fg-muted)" stroke-width="1" fill="none" opacity="0.3"/>
+                <circle cx="256" cy="70" r="28" stroke="var(--fg)" stroke-width="1.5" fill="none"/>
+                <rect x="238" y="56" width="36" height="28" rx="3" stroke="var(--fg-secondary)" stroke-width="1.2" fill="none"/>
+                <line x1="238" y1="64" x2="274" y2="64" stroke="var(--fg-muted)" stroke-width="0.75"/>
+                <rect x="242" y="68" width="12" height="8" rx="1" stroke="var(--fg-muted)" stroke-width="0.75" fill="none"/>
+                <line x1="258" y1="70" x2="270" y2="70" stroke="var(--fg-muted)" stroke-width="0.5"/>
+                <line x1="258" y1="74" x2="266" y2="74" stroke="var(--fg-muted)" stroke-width="0.5"/>
+                <line x1="242" y1="80" x2="270" y2="80" stroke="var(--fg-muted)" stroke-width="0.5"/>
+                <text x="256" y="118" text-anchor="middle" fill="var(--fg-secondary)" font-size="10" font-weight="500" font-family="var(--font-mono)" letter-spacing="0.05em">Conception</text>
+              </g>
+
+              <!-- Arrow 3 -->
+              <g class="anim-arrow aa3">
+                <line x1="292" y1="70" x2="322" y2="70" stroke="var(--fg-muted)" stroke-width="1.5" stroke-dasharray="4 3"/>
+                <polygon points="326,70 318,65 318,75" fill="var(--fg-muted)"/>
+              </g>
+
+              <!-- Step 4: Livraison (checkmark + sparkle) -->
+              <g class="anim-step as4">
+                <circle cx="356" cy="70" r="32" stroke="var(--fg-muted)" stroke-width="1" fill="none" opacity="0.3"/>
+                <circle cx="356" cy="70" r="28" stroke="var(--fg)" stroke-width="1.5" fill="none"/>
+                <path d="M344 70 L352 78 L370 58" stroke="var(--fg)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" class="anim-check"/>
+                <g class="anim-sparkle">
+                  <line x1="374" y1="54" x2="380" y2="54" stroke="var(--fg)" stroke-width="1"/>
+                  <line x1="377" y1="51" x2="377" y2="57" stroke="var(--fg)" stroke-width="1"/>
+                </g>
+                <g class="anim-sparkle aspk2">
+                  <line x1="336" y1="50" x2="340" y2="50" stroke="var(--fg-muted)" stroke-width="0.75"/>
+                  <line x1="338" y1="48" x2="338" y2="52" stroke="var(--fg-muted)" stroke-width="0.75"/>
+                </g>
+                <text x="356" y="118" text-anchor="middle" fill="var(--fg-secondary)" font-size="10" font-weight="500" font-family="var(--font-mono)" letter-spacing="0.05em">Livraison</text>
+              </g>
+
+              <!-- Progress bar -->
+              <line x1="60" y1="140" x2="356" y2="140" stroke="var(--border)" stroke-width="2" stroke-linecap="round"/>
+              <line x1="60" y1="140" x2="356" y2="140" stroke="var(--fg)" stroke-width="2" stroke-linecap="round" class="anim-progress"/>
+            </svg>
+          </div>
+        </div>
       </Container>
     </section>
 
@@ -37,7 +127,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
                 <div>
                   <label
                     class="block text-xs font-mono uppercase tracking-wider mb-2"
-                    style="color: var(--fg-muted);">Nom</label
+                    style="color: var(--fg-muted);"><span data-fr="Nom" data-en="Name">Nom</span></label
                   >
                   <input
                     type="text"
@@ -50,7 +140,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
                 <div>
                   <label
                     class="block text-xs font-mono uppercase tracking-wider mb-2"
-                    style="color: var(--fg-muted);">Email</label
+                    style="color: var(--fg-muted);"><span data-fr="Email" data-en="Email">Email</span></label
                   >
                   <input
                     type="email"
@@ -64,10 +154,10 @@ const socials = (profile.socials || {}) as Record<string, string>;
               <div>
                 <label
                   class="block text-xs font-mono uppercase tracking-wider mb-2"
-                  style="color: var(--fg-muted);">Type de projet</label
+                  style="color: var(--fg-muted);"><span data-fr="Type de projet" data-en="Project type">Type de projet</span></label
                 >
                 <select name="project-type" class="contact-input">
-                  <option value="">Sélectionnez...</option>
+                  <option value=""><span data-fr="Sélectionnez..." data-en="Select...">Sélectionnez...</span></option>
                   <option value="branding">Branding / Identité visuelle</option>
                   <option value="uiux">UI/UX Design</option>
                   <option value="frontend">Développement Frontend</option>
@@ -78,10 +168,10 @@ const socials = (profile.socials || {}) as Record<string, string>;
               <div>
                 <label
                   class="block text-xs font-mono uppercase tracking-wider mb-2"
-                  style="color: var(--fg-muted);">Budget estimé</label
+                  style="color: var(--fg-muted);"><span data-fr="Budget estimé" data-en="Estimated budget">Budget estimé</span></label
                 >
                 <select name="budget" class="contact-input">
-                  <option value="">Sélectionnez...</option>
+                  <option value=""><span data-fr="Sélectionnez..." data-en="Select...">Sélectionnez...</span></option>
                   <option value="1k-3k">1 000 € — 3 000 €</option>
                   <option value="3k-5k">3 000 € — 5 000 €</option>
                   <option value="5k-10k">5 000 € — 10 000 €</option>
@@ -112,7 +202,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
                   onmouseover="this.style.opacity='0.85'"
                   onmouseout="this.style.opacity='1'"
                 >
-                  Envoyer le message →
+                  <span data-fr="Envoyer le message →" data-en="Send message →">Envoyer le message →</span>
                 </button>
               </div>
             </form>
@@ -122,68 +212,19 @@ const socials = (profile.socials || {}) as Record<string, string>;
               style="border: 1px solid var(--border);"
             >
               <p class="text-sm font-medium" style="color: var(--fg);">
-                Message envoyé!
+                <span data-fr="Message envoyé!" data-en="Message sent!">Message envoyé!</span>
               </p>
               <p class="mt-2 text-xs" style="color: var(--fg-secondary);">
-                Nous vous répondrons dans les plus brefs délais.
+                <span data-fr="Nous vous répondrons dans les plus brefs délais." data-en="We'll get back to you as soon as possible.">Nous vous répondrons dans les plus brefs délais.</span>
               </p>
             </div>
           </div>
 
-          <!-- Right: Process + Info -->
+          <!-- Right: Info -->
           <div class="min-w-0 col-span-12 lg:col-span-5">
-            <!-- Work process animation -->
-            <div class="process-illustration mb-10">
-              <svg viewBox="0 0 320 120" fill="none" class="process-svg">
-                <!-- Step 1: Message -->
-                <g class="process-step ps1">
-                  <circle cx="40" cy="60" r="22" stroke="var(--fg)" stroke-width="1.5" fill="none"/>
-                  <path d="M30 52 L50 52 L50 68 L30 68 Z" stroke="var(--fg-muted)" stroke-width="1" fill="none"/>
-                  <line x1="34" y1="57" x2="46" y2="57" stroke="var(--fg-muted)" stroke-width="0.75"/>
-                  <line x1="34" y1="61" x2="42" y2="61" stroke="var(--fg-muted)" stroke-width="0.75"/>
-                  <text x="40" y="95" text-anchor="middle" fill="var(--fg-secondary)" font-size="8" font-family="var(--font-mono)">Message</text>
-                </g>
-                <!-- Arrow 1 -->
-                <line x1="68" y1="60" x2="92" y2="60" stroke="var(--fg-muted)" stroke-width="1" stroke-dasharray="3 2" class="process-arrow pa1"/>
-                <polygon points="92,60 86,56 86,64" fill="var(--fg-muted)" class="process-arrow pa1"/>
-                <!-- Step 2: Discussion -->
-                <g class="process-step ps2">
-                  <circle cx="112" cy="60" r="22" stroke="var(--fg)" stroke-width="1.5" fill="none"/>
-                  <path d="M102 50 C102 44, 122 44, 122 50 L122 56 C122 62, 102 62, 102 56 Z" stroke="var(--fg-muted)" stroke-width="1" fill="none"/>
-                  <circle cx="107" cy="53" r="1.5" fill="var(--fg-muted)"/>
-                  <circle cx="112" cy="53" r="1.5" fill="var(--fg-muted)"/>
-                  <circle cx="117" cy="53" r="1.5" fill="var(--fg-muted)"/>
-                  <text x="112" y="95" text-anchor="middle" fill="var(--fg-secondary)" font-size="8" font-family="var(--font-mono)">Discussion</text>
-                </g>
-                <!-- Arrow 2 -->
-                <line x1="140" y1="60" x2="164" y2="60" stroke="var(--fg-muted)" stroke-width="1" stroke-dasharray="3 2" class="process-arrow pa2"/>
-                <polygon points="164,60 158,56 158,64" fill="var(--fg-muted)" class="process-arrow pa2"/>
-                <!-- Step 3: Conception -->
-                <g class="process-step ps3">
-                  <circle cx="184" cy="60" r="22" stroke="var(--fg)" stroke-width="1.5" fill="none"/>
-                  <rect x="174" y="50" width="20" height="14" rx="2" stroke="var(--fg-muted)" stroke-width="1" fill="none"/>
-                  <line x1="178" y1="55" x2="190" y2="55" stroke="var(--fg-muted)" stroke-width="0.5"/>
-                  <line x1="178" y1="58" x2="186" y2="58" stroke="var(--fg-muted)" stroke-width="0.5"/>
-                  <line x1="178" y1="61" x2="188" y2="61" stroke="var(--fg-muted)" stroke-width="0.5"/>
-                  <text x="184" y="95" text-anchor="middle" fill="var(--fg-secondary)" font-size="8" font-family="var(--font-mono)">Conception</text>
-                </g>
-                <!-- Arrow 3 -->
-                <line x1="212" y1="60" x2="236" y2="60" stroke="var(--fg-muted)" stroke-width="1" stroke-dasharray="3 2" class="process-arrow pa3"/>
-                <polygon points="236,60 230,56 230,64" fill="var(--fg-muted)" class="process-arrow pa3"/>
-                <!-- Step 4: Livraison -->
-                <g class="process-step ps4">
-                  <circle cx="256" cy="60" r="22" stroke="var(--fg)" stroke-width="1.5" fill="none"/>
-                  <path d="M248 62 L254 68 L266 52" stroke="var(--fg)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="check-mark"/>
-                  <text x="256" y="95" text-anchor="middle" fill="var(--fg-secondary)" font-size="8" font-family="var(--font-mono)">Livraison</text>
-                </g>
-                <!-- Progress line -->
-                <line x1="40" y1="108" x2="256" y2="108" stroke="var(--border)" stroke-width="1"/>
-                <line x1="40" y1="108" x2="256" y2="108" stroke="var(--fg)" stroke-width="1" class="progress-line"/>
-              </svg>
-            </div>
             <div class="space-y-8">
               <div>
-                <span class="label block">Email direct</span>
+                <span class="label block"><span data-fr="Email direct" data-en="Direct email">Email direct</span></span>
                 <a
                   href={`mailto:${profile.email}`}
                   class="mt-3 block text-sm sm:text-base font-medium no-underline transition-colors duration-200 break-all"
@@ -195,19 +236,19 @@ const socials = (profile.socials || {}) as Record<string, string>;
                 </a>
               </div>
               <div>
-                <span class="label">Localisation</span>
+                <span class="label"><span data-fr="Localisation" data-en="Location">Localisation</span></span>
                 <p class="mt-3 text-sm" style="color: var(--fg-secondary);">
                   {profile.location}
                 </p>
               </div>
               <div>
-                <span class="label">Disponibilité</span>
+                <span class="label"><span data-fr="Disponibilité" data-en="Availability">Disponibilité</span></span>
                 <p class="mt-3 text-sm" style="color: var(--fg-secondary);">
                   {profile.availability}
                 </p>
               </div>
               <div>
-                <span class="label">Réseaux</span>
+                <span class="label"><span data-fr="Réseaux" data-en="Socials">Réseaux</span></span>
                 <div class="mt-3 flex gap-3">
                   {
                     Object.entries(socials).map(([name, url]) => (
@@ -234,8 +275,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
                   class="text-xs leading-relaxed"
                   style="color: var(--fg-secondary);"
                 >
-                  Réponse sous 24h ouvrées. Pour les projets urgents,
-                  mentionnez-le dans votre message.
+                  <span data-fr="Réponse sous 24h ouvrées. Pour les projets urgents, mentionnez-le dans votre message." data-en="Response within 24 business hours. For urgent projects, mention it in your message.">Réponse sous 24h ouvrées. Pour les projets urgents, mentionnez-le dans votre message.</span>
                 </p>
               </div>
             </div>
@@ -249,6 +289,46 @@ const socials = (profile.socials || {}) as Record<string, string>;
 </Layout>
 
 <style>
+  /* ── Hero layout ── */
+  .contact-hero-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  @media (min-width: 1024px) {
+    .contact-hero-inner {
+      flex-direction: row;
+      align-items: center;
+      gap: 3rem;
+    }
+  }
+
+  .contact-hero-text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .contact-hero-anim {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .process-svg {
+    width: 100%;
+    max-width: 480px;
+    height: auto;
+    overflow: visible;
+  }
+  @media (max-width: 1023px) {
+    .process-svg {
+      max-width: 100%;
+    }
+  }
+
+  /* ── Form inputs ── */
   .contact-input {
     width: 100%;
     max-width: 100%;
@@ -264,18 +344,11 @@ const socials = (profile.socials || {}) as Record<string, string>;
     -webkit-appearance: none;
     border-radius: 0;
   }
-  .contact-input:focus {
-    border-color: var(--fg);
-  }
-  .contact-input::placeholder {
-    color: var(--fg-muted);
-  }
-  select.contact-input {
-    cursor: pointer;
-  }
-  .textarea-wrapper {
-    position: relative;
-  }
+  .contact-input:focus { border-color: var(--fg); }
+  .contact-input::placeholder { color: var(--fg-muted); }
+  select.contact-input { cursor: pointer; }
+
+  .textarea-wrapper { position: relative; }
   textarea.contact-input {
     resize: vertical;
     min-height: 100px;
@@ -293,73 +366,80 @@ const socials = (profile.socials || {}) as Record<string, string>;
     pointer-events: none;
     transition: opacity 0.2s;
   }
-  textarea.contact-input:focus ~ .resize-hint {
-    opacity: 0.6;
+  textarea.contact-input:focus ~ .resize-hint { opacity: 0.6; }
+
+  /* ── Process animation (looping 3s) ── */
+  .anim-step {
+    opacity: 0;
+    transform-origin: center;
+  }
+  .anim-arrow { opacity: 0; }
+  .anim-check {
+    stroke-dasharray: 40;
+    stroke-dashoffset: 40;
+  }
+  .anim-sparkle { opacity: 0; }
+  .anim-glow { opacity: 0; }
+  .anim-progress {
+    stroke-dasharray: 296;
+    stroke-dashoffset: 296;
   }
 
-  /* ── Process illustration ── */
-  .process-illustration {
-    display: flex;
-    justify-content: center;
-    overflow: visible;
-  }
-  .process-svg {
-    width: 100%;
-    max-width: 320px;
-    height: auto;
-    overflow: visible;
-  }
+  /* Animation cycle: 3s total, then restart */
+  .anim-step { animation: step-in 0.4s ease forwards, step-out 0.3s ease 2.7s forwards; }
+  .as1 { animation-delay: 0s, 2.7s; }
+  .as2 { animation-delay: 0.3s, 2.7s; }
+  .as3 { animation-delay: 0.6s, 2.7s; }
+  .as4 { animation-delay: 0.9s, 2.7s; }
 
-  /* Steps appear sequentially */
-  .process-step { opacity: 0; animation: step-in 0.4s ease forwards; }
-  .ps1 { animation-delay: 0s; }
-  .ps2 { animation-delay: 0.4s; }
-  .ps3 { animation-delay: 0.8s; }
-  .ps4 { animation-delay: 1.2s; }
+  .anim-arrow { animation: arrow-in 0.2s ease forwards, arrow-out 0.2s ease 2.8s forwards; }
+  .aa1 { animation-delay: 0.2s, 2.8s; }
+  .aa2 { animation-delay: 0.5s, 2.8s; }
+  .aa3 { animation-delay: 0.8s, 2.8s; }
+
+  .anim-check { animation: check-draw 0.5s ease 1.2s forwards, check-erase 0.3s ease 2.7s forwards; }
+
+  .anim-sparkle { animation: sparkle-in 0.3s ease 1.5s forwards, sparkle-out 0.2s ease 2.8s forwards; }
+  .aspk2 { animation-delay: 1.7s, 2.8s; }
+
+  .anim-glow { animation: glow-in 0.5s ease 0.3s forwards, glow-out 0.5s ease 2.7s forwards; }
+
+  .anim-progress { animation: progress-fill 2s ease 0.3s forwards, progress-erase 0.5s ease 2.7s forwards; }
+
   @keyframes step-in {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(12px) scale(0.9); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes step-out {
+    from { opacity: 1; transform: translateY(0) scale(1); }
+    to { opacity: 0; transform: translateY(-8px) scale(0.95); }
   }
 
-  /* Arrows draw in */
-  .process-arrow { opacity: 0; animation: arrow-in 0.3s ease forwards; }
-  .pa1 { animation-delay: 0.3s; }
-  .pa2 { animation-delay: 0.7s; }
-  .pa3 { animation-delay: 1.1s; }
-  @keyframes arrow-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
+  @keyframes arrow-in { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes arrow-out { from { opacity: 1; } to { opacity: 0; } }
 
-  /* Checkmark draws */
-  .check-mark {
-    stroke-dasharray: 30;
-    stroke-dashoffset: 30;
-    animation: draw-check 0.6s ease 1.4s forwards;
-  }
-  @keyframes draw-check {
-    to { stroke-dashoffset: 0; }
-  }
+  @keyframes check-draw { to { stroke-dashoffset: 0; } }
+  @keyframes check-erase { to { stroke-dashoffset: 40; } }
 
-  /* Progress line fills */
-  .progress-line {
-    stroke-dasharray: 216;
-    stroke-dashoffset: 216;
-    animation: fill-progress 2s ease 0.2s forwards;
-  }
-  @keyframes fill-progress {
-    to { stroke-dashoffset: 0; }
-  }
+  @keyframes sparkle-in { from { opacity: 0; transform: scale(0); } 60% { transform: scale(1.3); } to { opacity: 1; transform: scale(1); } }
+  @keyframes sparkle-out { from { opacity: 1; } to { opacity: 0; } }
 
-  @media (max-width: 480px) {
-    .process-svg { max-width: 280px; }
-  }
+  @keyframes glow-in { from { opacity: 0; } to { opacity: 0.03; } }
+  @keyframes glow-out { from { opacity: 0.03; } to { opacity: 0; } }
+
+  @keyframes progress-fill { to { stroke-dashoffset: 0; } }
+  @keyframes progress-erase { to { stroke-dashoffset: 296; } }
 
   @media (prefers-reduced-motion: reduce) {
-    .process-step, .process-arrow, .check-mark, .progress-line { animation: none !important; }
-    .process-step { opacity: 1; }
-    .process-arrow { opacity: 1; }
-    .check-mark, .progress-line { stroke-dashoffset: 0; }
+    .anim-step, .anim-arrow, .anim-check, .anim-sparkle, .anim-glow, .anim-progress {
+      animation: none !important;
+    }
+    .anim-step { opacity: 1; }
+    .anim-arrow { opacity: 1; }
+    .anim-check { stroke-dashoffset: 0; }
+    .anim-sparkle { opacity: 1; }
+    .anim-glow { opacity: 0.03; }
+    .anim-progress { stroke-dashoffset: 0; }
   }
 </style>
 
@@ -371,12 +451,24 @@ const socials = (profile.socials || {}) as Record<string, string>;
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      // In a real app this would POST to an API
       form.classList.add("hidden");
       success?.classList.remove("hidden");
     });
+
+    // Loop animation every 3s
+    const svg = document.getElementById("process-svg");
+    if (svg) {
+      setInterval(() => {
+        // Clone and replace all animated elements to restart
+        svg.querySelectorAll('.anim-step, .anim-arrow, .anim-check, .anim-sparkle, .anim-glow, .anim-progress').forEach(el => {
+          const clone = el.cloneNode(true);
+          el.parentNode?.replaceChild(clone, el);
+        });
+      }, 3000);
+    }
   }
   document.readyState === "loading"
     ? document.addEventListener("DOMContentLoaded", initContact)
     : initContact();
 </script>
+</Layout>
