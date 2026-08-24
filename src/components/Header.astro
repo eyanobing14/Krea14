@@ -54,7 +54,7 @@ const currentPath = Astro.url.pathname;
         <span class="lang-active">FR</span>
       </button>
       <ThemeToggle />
-      <a href="mailto:hello@votreportfolio.com" class="text-sm font-medium px-5 py-2 no-underline transition-all duration-200" style="background: var(--fg); color: var(--bg);" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+      <a href="/contact" class="text-sm font-medium px-5 py-2 no-underline transition-all duration-200" style="background: var(--fg); color: var(--bg);" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
         <span data-fr="Contact" data-en="Contact">Contact</span>
       </a>
     </div>
@@ -102,7 +102,7 @@ const currentPath = Astro.url.pathname;
         class="mobile-menu-item flex flex-col gap-3 pt-4 mt-3"
         style={`border-top: 1px solid var(--border); --delay: ${navLinks.length * 45}ms;`}
       >
-        <a href="mailto:hello@votreportfolio.com" class="text-sm font-medium px-5 py-3 text-center no-underline transition-all" style="background: var(--fg); color: var(--bg);"><span data-fr="Nous contacter" data-en="Get in touch">Nous contacter</span></a>
+        <a href="/contact" class="text-sm font-medium px-5 py-3 text-center no-underline transition-all" style="background: var(--fg); color: var(--bg);"><span data-fr="Nous contacter" data-en="Get in touch">Nous contacter</span></a>
       </div>
     </nav>
   </div>
