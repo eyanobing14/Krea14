@@ -23,7 +23,7 @@ import Container from "./Container.astro";
       <div class="orbital-system">
         <!-- Center -->
         <div class="orbital-center">
-          <span class="orbital-center-text">Stack</span>
+          <img src="/favicon.svg" alt="" class="w-8 h-8" style="filter: invert(var(--logo-invert, 0)); opacity: 0.4;" />
         </div>
 
         <!-- Orbit rings (visual dashed circles) -->
@@ -89,6 +89,8 @@ import Container from "./Container.astro";
   }
 
   /* Center node */
+  :root { --logo-invert: 0; }
+  :root:not([data-theme="light"]) { --logo-invert: 1; }
   .orbital-center {
     position: absolute;
     top: 50%;
@@ -96,6 +98,7 @@ import Container from "./Container.astro";
     transform: translate(-50%, -50%);
     width: 64px;
     height: 64px;
+    border-radius: 50%;
     border: 1px solid var(--border-hover);
     display: flex;
     align-items: center;
