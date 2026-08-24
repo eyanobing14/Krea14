@@ -22,6 +22,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
         <div class="about-hero">
           <!-- Left: Photo + Social icons -->
           <div class="about-hero-left">
+            <div class="about-photo-row">
             <div class="animate-in">
               <div class="about-photo">
                 {
@@ -44,8 +45,8 @@ const socials = (profile.socials || {}) as Record<string, string>;
               </div>
             </div>
 
-            <!-- Réseaux sous la photo -->
-            <div class="mt-5 flex gap-3 animate-in" style="--delay: 0.2s;">
+            <!-- Réseaux à côté de la photo, centrés verticalement -->
+            <div class="about-social-icons flex flex-col gap-2 animate-in" style="--delay: 0.2s;">
               {
                 Object.entries(socials).map(([name, url]) => (
                   <a
@@ -61,6 +62,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
                   </a>
                 ))
               }
+            </div>
             </div>
           </div>
 
@@ -231,6 +233,16 @@ const socials = (profile.socials || {}) as Record<string, string>;
     background-position: center center;
     background-blend-mode: overlay;
   }
+  .about-hero-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, transparent, var(--bg));
+    pointer-events: none;
+  }
 
   /* ── Hero split layout ── */
   .about-hero {
@@ -254,6 +266,14 @@ const socials = (profile.socials || {}) as Record<string, string>;
     flex-direction: column;
     align-items: center;
     flex-shrink: 0;
+  }
+  .about-photo-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .about-social-icons {
+    justify-content: center;
   }
   @media (min-width: 1024px) {
     .about-hero-left {

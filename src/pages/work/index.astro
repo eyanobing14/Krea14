@@ -149,6 +149,16 @@ const categories = [...new Set(
     background-position: center center;
     background-blend-mode: overlay;
   }
+  .work-hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, transparent, var(--bg));
+    pointer-events: none;
+  }
 
   .filter-btn {
     color: var(--fg-muted);
