@@ -420,12 +420,10 @@ import Footer from '../components/Footer.astro';
 <script>
   function initAdmin() {
     const API = "http://localhost:4200";
-    const JSON_URL = '/data/portfolio.json';
     let data: any = null;
 
     async function loadData() {
       try { const sr = await fetch(API + '/api/read-data', { method: 'POST' }); if (sr.ok) { const d = await sr.json(); if (d.ok) { data = d.data; return; } } } catch(e: unknown) {}
-      try { const resp = await fetch(JSON_URL); data = await resp.json(); } catch(e: unknown) {}
     }
     async function save() {
       try { await fetch(API + '/api/save-data', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); } catch(e: unknown) {}
@@ -1085,12 +1083,15 @@ import Footer from '../components/Footer.astro';
     // ── Reset ──
     document.getElementById('btn-reset')?.addEventListener('click', () => {
       showDeleteModal('Réinitialiser toutes les données?', async () => {
-        const resp = await fetch(JSON_URL);
-        data = await resp.json();
-        await save();
+        try {
+          const resp = await fetch(API + '/api/reset-data', { method: 'POST' });
+          const result = await resp.json();
+          if (result.ok) { data = result.data; }
+        } catch(e: unknown) {}
         loadProfile();
         renderStudies();
         renderServices();
+        loadLegal();
         showToast('Données réinitialisées.');
       });
     });
@@ -1190,7 +1191,7 @@ import Footer from '../components/Footer.astro';
     });
 
     refreshGitStatus();
-
+    loadData().then(() => { loadProfile(); renderStudies(); renderServices(); loadLegal(); });
   }
 
 

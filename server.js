@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PORT = 4200;
 const ROOT = __dirname;
-const dataDir = path.join(ROOT, 'public', 'data');
+const dataDir = path.join(ROOT, 'data');
 const assetsDir = path.join(ROOT, 'public', 'assets');
 if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
 if (!fs.existsSync(assetsDir)) fs.mkdirSync(assetsDir, { recursive: true });
@@ -70,6 +70,15 @@ const server = http.createServer(async (req, res) => {
     const fp = path.join(dataDir, 'portfolio.json');
     if (!fs.existsSync(fp)) return send(res, { ok: false });
     const data = JSON.parse(fs.readFileSync(fp, 'utf-8'));
+    return send(res, { ok: true, data });
+  }
+
+  // ── reset-data: re-read from public/data/ (committed version) ──
+  if (url === '/api/reset-data' && req.method === 'POST') {
+    const original = path.join(ROOT, 'public', 'data', 'portfolio.json');
+    if (!fs.existsSync(original)) return send(res, { ok: false, message: 'No original data found' });
+    const data = JSON.parse(fs.readFileSync(original, 'utf-8'));
+    fs.writeFileSync(path.join(dataDir, 'portfolio.json'), JSON.stringify(data, null, 2));
     return send(res, { ok: true, data });
   }
 
