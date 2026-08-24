@@ -17,7 +17,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
   <Header />
   <main>
     <!-- Hero — Split: Left = photo + icons, Right = name + bio -->
-    <section class="pt-24 sm:pt-28 pb-12 md:pt-36 md:pb-20">
+    <section class="about-hero-section pt-24 sm:pt-28 pb-12 md:pt-36 md:pb-20">
       <Container>
         <div class="about-hero">
           <!-- Left: Photo + Social icons -->
@@ -221,6 +221,27 @@ const socials = (profile.socials || {}) as Record<string, string>;
 </Layout>
 
 <style>
+  /* ── Hero grid background ── */
+  .about-hero-section {
+    position: relative;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    background-position: center center;
+  }
+  .about-hero-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, var(--bg) 30%, transparent 80%);
+    pointer-events: none;
+  }
+  .about-hero-section > * {
+    position: relative;
+    z-index: 1;
+  }
+
   /* ── Hero split layout ── */
   .about-hero {
     display: flex;
