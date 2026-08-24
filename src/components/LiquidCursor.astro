@@ -77,6 +77,32 @@
     height: 420px;
   }
 
+  /* Text invert effect: mix-blend-mode difference */
+  .cursor-glow.is-text-invert {
+    width: 160px;
+    height: 160px;
+    opacity: 1;
+    background: white;
+    mix-blend-mode: difference;
+    filter: none;
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.4s ease;
+  }
+  .cursor-ring.is-text-invert {
+    width: 160px;
+    height: 160px;
+    border-color: transparent;
+    background: white;
+    mix-blend-mode: difference;
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                background 0.3s ease;
+  }
+  .cursor-dot.is-text-invert {
+    opacity: 0;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .cursor-dot, .cursor-ring, .cursor-glow { display: none; }
   }
@@ -121,16 +147,18 @@
         ring.classList.add('is-hovering');
         dot.classList.add('is-hovering');
         glow.classList.add('is-hovering');
-        ring.classList.remove('is-text-hover');
-        dot.classList.remove('is-text-hover');
+        ring.classList.remove('is-text-hover', 'is-text-invert');
+        dot.classList.remove('is-text-hover', 'is-text-invert');
+        glow.classList.remove('is-text-invert');
         return;
       }
       const textTarget = (e.target as HTMLElement).closest(textSelectors);
       if (textTarget) {
-        ring.classList.add('is-text-hover');
-        dot.classList.add('is-text-hover');
-        ring.classList.remove('is-hovering');
-        dot.classList.remove('is-hovering');
+        ring.classList.add('is-text-invert');
+        dot.classList.add('is-text-invert');
+        glow.classList.add('is-text-invert');
+        ring.classList.remove('is-hovering', 'is-text-hover');
+        dot.classList.remove('is-hovering', 'is-text-hover');
         glow.classList.remove('is-hovering');
       }
     });
@@ -138,9 +166,9 @@
     document.addEventListener('mouseout', (e) => {
       if ((e.target as HTMLElement).closest(interactiveSelectors) ||
           (e.target as HTMLElement).closest(textSelectors)) {
-        ring.classList.remove('is-hovering');
-        dot.classList.remove('is-hovering');
-        glow.classList.remove('is-hovering');
+        ring.classList.remove('is-hovering', 'is-text-invert');
+        dot.classList.remove('is-hovering', 'is-text-invert');
+        glow.classList.remove('is-hovering', 'is-text-invert');
       }
     });
 
