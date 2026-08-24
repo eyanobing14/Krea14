@@ -1,5 +1,7 @@
 ---
 // ThinkingStyles — Collapsible dropdown cards with animated illustrations
+// Layering: low-contrast first, high-contrast last
+// Animations restart on each dropdown open
 import Container from "./Container.astro";
 ---
 
@@ -20,8 +22,8 @@ import Container from "./Container.astro";
     </p>
 
     <div class="ts-list mt-12">
-      <!-- 01 Design Thinking — Lightbulb glow -->
-      <details class="ts-item animate-in" style="--delay: 0.15s;">
+      <!-- 01 Design Thinking — Lightbulb -->
+      <details class="ts-item animate-in" data-illust="bulb" style="--delay: 0.15s;">
         <summary class="ts-summary">
           <div class="ts-summary-left">
             <div class="ts-icon">
@@ -36,20 +38,21 @@ import Container from "./Container.astro";
         </summary>
         <div class="ts-body">
           <div class="ts-illustration">
-            <svg viewBox="0 0 140 90" fill="none" class="illust">
-              <!-- Lightbulb -->
-              <path d="M70 10 C50 10, 40 28, 40 40 C40 50, 50 55, 52 60 L88 60 C90 55, 100 50, 100 40 C100 28, 90 10, 70 10Z" stroke="var(--fg)" stroke-width="1.5" fill="none" class="bulb"/>
-              <line x1="55" y1="64" x2="85" y2="64" stroke="var(--fg-muted)" stroke-width="1"/>
-              <line x1="58" y1="68" x2="82" y2="68" stroke="var(--fg-muted)" stroke-width="1"/>
-              <path d="M65 68 L65 73 L75 73 L75 68" stroke="var(--fg-muted)" stroke-width="1"/>
-              <!-- Glow rays -->
-              <line x1="70" y1="2" x2="70" y2="6" stroke="var(--fg)" stroke-width="1" opacity="0" class="ray r1"/>
-              <line x1="30" y1="20" x2="34" y2="24" stroke="var(--fg)" stroke-width="1" opacity="0" class="ray r2"/>
-              <line x1="110" y1="20" x2="106" y2="24" stroke="var(--fg)" stroke-width="1" opacity="0" class="ray r3"/>
-              <line x1="25" y1="42" x2="32" y2="42" stroke="var(--fg-muted)" stroke-width="0.75" opacity="0" class="ray r4"/>
-              <line x1="115" y1="42" x2="108" y2="42" stroke="var(--fg-muted)" stroke-width="0.75" opacity="0" class="ray r5"/>
-              <!-- Inner glow -->
-              <circle cx="70" cy="38" r="15" fill="var(--fg)" opacity="0" class="glow"/>
+            <svg viewBox="0 0 160 100" fill="none" class="illust">
+              <!-- Layer 1: Inner glow (lowest) -->
+              <circle cx="80" cy="42" r="18" fill="var(--fg-muted)" opacity="0" class="anim-el glow"/>
+              <!-- Layer 2: Rays (background) -->
+              <line x1="80" y1="4" x2="80" y2="10" stroke="var(--fg-muted)" stroke-width="1" opacity="0" class="anim-el ray r1"/>
+              <line x1="38" y1="22" x2="43" y2="27" stroke="var(--fg-muted)" stroke-width="0.75" opacity="0" class="anim-el ray r2"/>
+              <line x1="122" y1="22" x2="117" y2="27" stroke="var(--fg-muted)" stroke-width="0.75" opacity="0" class="anim-el ray r3"/>
+              <line x1="30" y1="46" x2="38" y2="46" stroke="var(--fg-muted)" stroke-width="0.5" opacity="0" class="anim-el ray r4"/>
+              <line x1="130" y1="46" x2="122" y2="46" stroke="var(--fg-muted)" stroke-width="0.5" opacity="0" class="anim-el ray r5"/>
+              <!-- Layer 3: Bulb base (low contrast) -->
+              <line x1="62" y1="70" x2="98" y2="70" stroke="var(--fg-muted)" stroke-width="1" class="anim-el"/>
+              <line x1="66" y1="75" x2="94" y2="75" stroke="var(--fg-muted)" stroke-width="1" class="anim-el"/>
+              <path d="M72 75 L72 82 L88 82 L88 75" stroke="var(--fg-muted)" stroke-width="1" class="anim-el"/>
+              <!-- Layer 4: Bulb outline (high contrast, on top) -->
+              <path d="M80 12 C58 12, 46 32, 46 45 C46 56, 58 62, 62 68 L98 68 C102 62, 114 56, 114 45 C114 32, 102 12, 80 12Z" stroke="var(--fg)" stroke-width="1.5" fill="none" class="anim-el bulb"/>
             </svg>
           </div>
           <p>Placer l'humain au centre. Observer, empathiser, prototyper rapidement. Valider avant de construire.</p>
@@ -59,8 +62,8 @@ import Container from "./Container.astro";
         </div>
       </details>
 
-      <!-- 02 Pensée Stratégique — Chess/strategy -->
-      <details class="ts-item animate-in" style="--delay: 0.25s;">
+      <!-- 02 Pensée Stratégique — Grid -->
+      <details class="ts-item animate-in" data-illust="grid" style="--delay: 0.25s;">
         <summary class="ts-summary">
           <div class="ts-summary-left">
             <div class="ts-icon">
@@ -75,24 +78,25 @@ import Container from "./Container.astro";
         </summary>
         <div class="ts-body">
           <div class="ts-illustration">
-            <svg viewBox="0 0 140 90" fill="none" class="illust">
-              <!-- Grid -->
-              <rect x="25" y="5" width="80" height="75" stroke="var(--border)" stroke-width="0.5" fill="none"/>
-              <line x1="45" y1="5" x2="45" y2="80" stroke="var(--border)" stroke-width="0.5"/>
-              <line x1="65" y1="5" x2="65" y2="80" stroke="var(--border)" stroke-width="0.5"/>
-              <line x1="85" y1="5" x2="85" y2="80" stroke="var(--border)" stroke-width="0.5"/>
-              <line x1="25" y1="28" x2="105" y2="28" stroke="var(--border)" stroke-width="0.5"/>
-              <line x1="25" y1="48" x2="105" y2="48" stroke="var(--border)" stroke-width="0.5"/>
-              <line x1="25" y1="68" x2="105" y2="68" stroke="var(--border)" stroke-width="0.5"/>
-              <!-- Strategy path -->
-              <circle cx="35" cy="72" r="4" stroke="var(--fg-muted)" stroke-width="1" fill="none" class="step s-a"/>
-              <circle cx="55" cy="55" r="4" stroke="var(--fg-muted)" stroke-width="1" fill="none" class="step s-b"/>
-              <circle cx="75" cy="38" r="4" stroke="var(--fg)" stroke-width="1.5" fill="none" class="step s-c"/>
-              <circle cx="95" cy="20" r="4" stroke="var(--fg)" stroke-width="1.5" fill="var(--fg)" opacity="0.2" class="step s-d"/>
-              <!-- Arrows -->
-              <line x1="39" y1="68" x2="51" y2="59" stroke="var(--fg-muted)" stroke-width="0.75" stroke-dasharray="2 2" class="arrow a1"/>
-              <line x1="59" y1="51" x2="71" y2="42" stroke="var(--fg-muted)" stroke-width="0.75" stroke-dasharray="2 2" class="arrow a2"/>
-              <line x1="79" y1="34" x2="91" y2="24" stroke="var(--fg)" stroke-width="0.75" stroke-dasharray="2 2" class="arrow a3"/>
+            <svg viewBox="0 0 160 100" fill="none" class="illust">
+              <!-- Layer 1: Grid (background, lowest contrast) -->
+              <rect x="28" y="6" width="104" height="82" rx="2" stroke="var(--border)" stroke-width="0.5" fill="none" class="anim-el"/>
+              <line x1="54" y1="6" x2="54" y2="88" stroke="var(--border)" stroke-width="0.5" class="anim-el"/>
+              <line x1="80" y1="6" x2="80" y2="88" stroke="var(--border)" stroke-width="0.5" class="anim-el"/>
+              <line x1="106" y1="6" x2="106" y2="88" stroke="var(--border)" stroke-width="0.5" class="anim-el"/>
+              <line x1="28" y1="28" x2="132" y2="28" stroke="var(--border)" stroke-width="0.5" class="anim-el"/>
+              <line x1="28" y1="50" x2="132" y2="50" stroke="var(--border)" stroke-width="0.5" class="anim-el"/>
+              <line x1="28" y1="72" x2="132" y2="72" stroke="var(--border)" stroke-width="0.5" class="anim-el"/>
+              <!-- Layer 2: Arrows (low contrast) -->
+              <line x1="45" y1="78" x2="63" y2="66" stroke="var(--fg-muted)" stroke-width="0.75" stroke-dasharray="2 2" class="anim-el arrow a1"/>
+              <line x1="71" y1="60" x2="89" y2="46" stroke="var(--fg-muted)" stroke-width="0.75" stroke-dasharray="2 2" class="anim-el arrow a2"/>
+              <line x1="97" y1="38" x2="115" y2="24" stroke="var(--fg-secondary)" stroke-width="0.75" stroke-dasharray="2 2" class="anim-el arrow a3"/>
+              <!-- Layer 3: Step dots (medium contrast) -->
+              <circle cx="40" cy="82" r="5" stroke="var(--fg-muted)" stroke-width="1" fill="none" class="anim-el step s-a"/>
+              <circle cx="66" cy="64" r="5" stroke="var(--fg-muted)" stroke-width="1" fill="none" class="anim-el step s-b"/>
+              <!-- Layer 4: Goal dot (highest contrast) -->
+              <circle cx="92" cy="42" r="5" stroke="var(--fg)" stroke-width="1.5" fill="none" class="anim-el step s-c"/>
+              <circle cx="120" cy="20" r="5" stroke="var(--fg)" stroke-width="1.5" fill="var(--fg)" opacity="0.15" class="anim-el step s-d"/>
             </svg>
           </div>
           <p>Comprendre le marché, la concurrence, les objectifs business. Chaque choix visuel a un impact mesurable.</p>
@@ -102,8 +106,8 @@ import Container from "./Container.astro";
         </div>
       </details>
 
-      <!-- 03 Créativité Visuelle — Color palette -->
-      <details class="ts-item animate-in" style="--delay: 0.35s;">
+      <!-- 03 Créativité Visuelle — Palette -->
+      <details class="ts-item animate-in" data-illust="palette" style="--delay: 0.35s;">
         <summary class="ts-summary">
           <div class="ts-summary-left">
             <div class="ts-icon">
@@ -118,18 +122,18 @@ import Container from "./Container.astro";
         </summary>
         <div class="ts-body">
           <div class="ts-illustration">
-            <svg viewBox="0 0 140 90" fill="none" class="illust">
-              <!-- Palette shape -->
-              <ellipse cx="65" cy="42" rx="45" ry="32" stroke="var(--fg)" stroke-width="1.5" fill="none" class="palette"/>
-              <!-- Color dots -->
-              <circle cx="42" cy="28" r="6" fill="var(--fg)" opacity="0.15" class="color-dot c1"/>
-              <circle cx="62" cy="25" r="6" fill="var(--fg)" opacity="0.25" class="color-dot c2"/>
-              <circle cx="82" cy="32" r="6" fill="var(--fg)" opacity="0.4" class="color-dot c3"/>
-              <circle cx="48" cy="50" r="6" fill="var(--fg)" opacity="0.55" class="color-dot c4"/>
-              <circle cx="72" cy="50" r="6" fill="var(--fg)" opacity="0.7" class="color-dot c5"/>
-              <!-- Brush stroke -->
-              <path d="M100 12 C105 18, 112 28, 118 22" stroke="var(--fg-muted)" stroke-width="2" stroke-linecap="round" fill="none" class="brush"/>
-              <line x1="98" y1="10" x2="120" y2="30" stroke="var(--fg-muted)" stroke-width="0.75" class="brush-handle"/>
+            <svg viewBox="0 0 160 100" fill="none" class="illust">
+              <!-- Layer 1: Brush stroke (background) -->
+              <line x1="105" y1="12" x2="130" y2="35" stroke="var(--fg-muted)" stroke-width="0.75" class="anim-el brush-handle"/>
+              <path d="M112 14 C118 22, 126 32, 132 26" stroke="var(--fg-muted)" stroke-width="2" stroke-linecap="round" fill="none" class="anim-el brush"/>
+              <!-- Layer 2: Color dots (background, low contrast) -->
+              <circle cx="52" cy="32" r="7" fill="var(--fg-muted)" opacity="0.1" class="anim-el color-dot c1"/>
+              <circle cx="76" cy="28" r="7" fill="var(--fg-muted)" opacity="0.2" class="anim-el color-dot c2"/>
+              <circle cx="100" cy="35" r="7" fill="var(--fg-muted)" opacity="0.3" class="anim-el color-dot c3"/>
+              <circle cx="60" cy="56" r="7" fill="var(--fg-secondary)" opacity="0.25" class="anim-el color-dot c4"/>
+              <circle cx="86" cy="58" r="7" fill="var(--fg-secondary)" opacity="0.35" class="anim-el color-dot c5"/>
+              <!-- Layer 3: Palette outline (high contrast, on top) -->
+              <ellipse cx="78" cy="46" rx="52" ry="36" stroke="var(--fg)" stroke-width="1.5" fill="none" class="anim-el palette"/>
             </svg>
           </div>
           <p>Explorer des directions inattendues. Typographie, couleur, composition — chaque pixel raconte une histoire.</p>
@@ -139,8 +143,8 @@ import Container from "./Container.astro";
         </div>
       </details>
 
-      <!-- 04 Approche Technique — Code/terminal -->
-      <details class="ts-item animate-in" style="--delay: 0.45s;">
+      <!-- 04 Approche Technique — Terminal -->
+      <details class="ts-item animate-in" data-illust="terminal" style="--delay: 0.45s;">
         <summary class="ts-summary">
           <div class="ts-summary-left">
             <div class="ts-icon">
@@ -155,19 +159,19 @@ import Container from "./Container.astro";
         </summary>
         <div class="ts-body">
           <div class="ts-illustration">
-            <svg viewBox="0 0 140 90" fill="none" class="illust">
-              <!-- Terminal window -->
-              <rect x="18" y="8" width="100" height="70" rx="4" stroke="var(--fg)" stroke-width="1.5" fill="none"/>
-              <line x1="18" y1="22" x2="118" y2="22" stroke="var(--fg-muted)" stroke-width="0.75"/>
-              <circle cx="27" cy="15" r="2" fill="var(--fg-muted)" opacity="0.4"/>
-              <circle cx="35" cy="15" r="2" fill="var(--fg-muted)" opacity="0.4"/>
-              <circle cx="43" cy="15" r="2" fill="var(--fg-muted)" opacity="0.4"/>
-              <!-- Code lines -->
-              <text x="26" y="34" fill="var(--fg-muted)" font-size="6" font-family="var(--font-mono)" class="code-line cl1">&lt;Component /&gt;</text>
-              <text x="26" y="44" fill="var(--fg)" font-size="6" font-family="var(--font-mono)" class="code-line cl2">  render()</text>
-              <text x="26" y="54" fill="var(--fg-muted)" font-size="6" font-family="var(--font-mono)" class="code-line cl3">  return view</text>
-              <!-- Cursor blink -->
-              <rect x="26" y="58" width="4" height="7" fill="var(--fg)" class="cursor-blink"/>
+            <svg viewBox="0 0 160 100" fill="none" class="illust">
+              <!-- Layer 1: Terminal frame (background) -->
+              <rect x="22" y="8" width="116" height="82" rx="5" stroke="var(--fg-muted)" stroke-width="1" fill="none" class="anim-el"/>
+              <line x1="22" y1="24" x2="138" y2="24" stroke="var(--fg-muted)" stroke-width="0.5" class="anim-el"/>
+              <circle cx="32" cy="16" r="2.5" fill="var(--fg-muted)" opacity="0.3" class="anim-el"/>
+              <circle cx="40" cy="16" r="2.5" fill="var(--fg-muted)" opacity="0.3" class="anim-el"/>
+              <circle cx="48" cy="16" r="2.5" fill="var(--fg-muted)" opacity="0.3" class="anim-el"/>
+              <!-- Layer 2: Code lines (medium contrast) -->
+              <text x="32" y="42" fill="var(--fg-muted)" font-size="8" font-family="var(--font-mono)" class="anim-el code-line cl1">&lt;Component /&gt;</text>
+              <text x="32" y="55" fill="var(--fg-secondary)" font-size="8" font-family="var(--font-mono)" class="anim-el code-line cl2">  render()</text>
+              <text x="32" y="68" fill="var(--fg-muted)" font-size="8" font-family="var(--font-mono)" class="anim-el code-line cl3">  return view</text>
+              <!-- Layer 3: Cursor (highest contrast, on top) -->
+              <rect x="32" y="74" width="5" height="9" fill="var(--fg)" class="anim-el cursor-blink"/>
             </svg>
           </div>
           <p>Code propre et performant. Accessibilité, responsive, optimisation — la beauté ne s'arrête pas au maquettage.</p>
@@ -177,8 +181,8 @@ import Container from "./Container.astro";
         </div>
       </details>
 
-      <!-- 05 Collaboration — Handshake/connect -->
-      <details class="ts-item animate-in" style="--delay: 0.55s;">
+      <!-- 05 Collaboration — People -->
+      <details class="ts-item animate-in" data-illust="collab" style="--delay: 0.55s;">
         <summary class="ts-summary">
           <div class="ts-summary-left">
             <div class="ts-icon">
@@ -193,19 +197,24 @@ import Container from "./Container.astro";
         </summary>
         <div class="ts-body">
           <div class="ts-illustration">
-            <svg viewBox="0 0 140 90" fill="none" class="illust">
-              <!-- Two circles representing people -->
-              <circle cx="42" cy="42" r="20" stroke="var(--fg)" stroke-width="1.5" fill="none" class="person p-left"/>
-              <circle cx="42" cy="34" r="5" stroke="var(--fg-muted)" stroke-width="1" fill="none"/>
-              <path d="M27 56 C27 48, 57 48, 57 56" stroke="var(--fg-muted)" stroke-width="1" fill="none"/>
-              <circle cx="92" cy="42" r="20" stroke="var(--fg-muted)" stroke-width="1.5" fill="none" class="person p-right"/>
-              <circle cx="92" cy="34" r="5" stroke="var(--fg-muted)" stroke-width="1" fill="none"/>
-              <path d="M77 56 C77 48, 107 48, 107 56" stroke="var(--fg-muted)" stroke-width="1" fill="none"/>
-              <!-- Connection line -->
-              <line x1="62" y1="42" x2="78" y2="42" stroke="var(--fg)" stroke-width="1" stroke-dasharray="3 2" class="conn-line"/>
-              <!-- Shared sparkles -->
-              <circle cx="67" cy="34" r="2" fill="var(--fg)" opacity="0" class="shared-sparkle sp1"/>
-              <circle cx="67" cy="50" r="1.5" fill="var(--fg-muted)" opacity="0" class="shared-sparkle sp2"/>
+            <svg viewBox="0 0 160 100" fill="none" class="illust">
+              <!-- Layer 1: Connection sparkle (background) -->
+              <circle cx="80" cy="38" r="2" fill="var(--fg-muted)" opacity="0" class="anim-el shared-sparkle sp1"/>
+              <circle cx="80" cy="60" r="1.5" fill="var(--fg-muted)" opacity="0" class="anim-el shared-sparkle sp2"/>
+              <!-- Layer 2: Connection line (low contrast) -->
+              <line x1="70" y1="50" x2="90" y2="50" stroke="var(--fg-muted)" stroke-width="1" stroke-dasharray="3 2" class="anim-el conn-line"/>
+              <!-- Layer 3: Right person (VOUS — lower contrast) -->
+              <g class="anim-el person p-right">
+                <circle cx="105" cy="46" r="22" stroke="var(--fg-muted)" stroke-width="1.5" fill="none"/>
+                <circle cx="105" cy="38" r="6" stroke="var(--fg-muted)" stroke-width="1" fill="none"/>
+                <path d="M89 62 C89 54, 121 54, 121 62" stroke="var(--fg-muted)" stroke-width="1" fill="none"/>
+              </g>
+              <!-- Layer 4: Left person (NOUS — higher contrast, on top) -->
+              <g class="anim-el person p-left">
+                <circle cx="55" cy="46" r="22" stroke="var(--fg)" stroke-width="1.5" fill="none"/>
+                <circle cx="55" cy="38" r="6" stroke="var(--fg-secondary)" stroke-width="1" fill="none"/>
+                <path d="M39 62 C39 54, 71 54, 71 62" stroke="var(--fg-secondary)" stroke-width="1" fill="none"/>
+              </g>
             </svg>
           </div>
           <p>Un projet réussi est un projet partagé. Communication transparente, retours itératifs, co-création avec l'équipe client.</p>
@@ -220,245 +229,110 @@ import Container from "./Container.astro";
 
 <style>
   .ts-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
+    display: flex; flex-direction: column; gap: 0;
+    max-width: 700px; margin-left: auto; margin-right: auto;
   }
-
   .ts-item {
-    border: 1px solid var(--border);
-    border-bottom: none;
-    background: var(--bg);
-    transition: border-color 0.3s;
+    border: 1px solid var(--border); border-bottom: none;
+    background: var(--bg); transition: border-color 0.3s;
   }
-  .ts-item:last-child {
-    border-bottom: 1px solid var(--border);
-  }
-  .ts-item[open] {
-    border-color: var(--border-hover);
-  }
-  .ts-item[open] + .ts-item {
-    border-top-color: var(--border-hover);
-  }
+  .ts-item:last-child { border-bottom: 1px solid var(--border); }
+  .ts-item[open] { border-color: var(--border-hover); }
+  .ts-item[open] + .ts-item { border-top-color: var(--border-hover); }
 
   .ts-summary {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 1.25rem;
-    cursor: pointer;
-    list-style: none;
-    user-select: none;
-    transition: background 0.2s;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 1.25rem; cursor: pointer;
+    list-style: none; user-select: none; transition: background 0.2s;
   }
   .ts-summary::-webkit-details-marker { display: none; }
   .ts-summary::marker { display: none; content: ""; }
-  .ts-summary:hover {
-    background: var(--bg-raised);
-  }
+  .ts-summary:hover { background: var(--bg-raised); }
 
-  .ts-summary-left {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
+  .ts-summary-left { display: flex; align-items: center; gap: 0.75rem; }
 
   .ts-icon {
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--border);
-    color: var(--fg-secondary);
-    flex-shrink: 0;
-    transition: color 0.3s, border-color 0.3s;
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--border); color: var(--fg-secondary);
+    flex-shrink: 0; transition: color 0.3s, border-color 0.3s;
   }
-  .ts-item[open] .ts-icon {
-    color: var(--fg);
-    border-color: var(--border-hover);
-  }
+  .ts-item[open] .ts-icon { color: var(--fg); border-color: var(--border-hover); }
 
-  .ts-text {
-    display: flex;
-    flex-direction: column;
-    gap: 0.125rem;
-  }
+  .ts-text { display: flex; flex-direction: column; gap: 0.125rem; }
+  .ts-tag { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--fg-muted); letter-spacing: 0.1em; }
+  .ts-title { font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.03em; color: var(--fg); }
 
-  .ts-tag {
-    font-family: var(--font-mono);
-    font-size: 0.5625rem;
-    color: var(--fg-muted);
-    letter-spacing: 0.1em;
-  }
+  .ts-chevron { color: var(--fg-muted); transition: transform 0.3s var(--ease-out-expo); flex-shrink: 0; }
+  .ts-item[open] .ts-chevron { transform: rotate(180deg); }
 
-  .ts-title {
-    font-family: var(--font-mono);
-    font-size: 0.8125rem;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-    color: var(--fg);
-  }
+  .ts-body { padding: 0 1.25rem 1.25rem 3.5rem; animation: ts-dropdown-in 0.3s var(--ease-out-expo); }
+  .ts-body p { font-size: 0.8125rem; line-height: 1.7; color: var(--fg-secondary); }
 
-  .ts-chevron {
-    color: var(--fg-muted);
-    transition: transform 0.3s var(--ease-out-expo);
-    flex-shrink: 0;
-  }
-  .ts-item[open] .ts-chevron {
-    transform: rotate(180deg);
-  }
-
-  .ts-body {
-    padding: 0 1.25rem 1.25rem 3.5rem;
-    animation: ts-dropdown-in 0.3s var(--ease-out-expo);
-  }
-  .ts-body p {
-    font-size: 0.8125rem;
-    line-height: 1.7;
-    color: var(--fg-secondary);
-  }
-
-  .ts-keywords {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.375rem;
-    margin-top: 0.75rem;
-  }
+  .ts-keywords { display: flex; flex-wrap: wrap; gap: 0.375rem; margin-top: 0.75rem; }
   .ts-keywords span {
-    font-family: var(--font-mono);
-    font-size: 0.5625rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    padding: 0.25rem 0.5rem;
-    border: 1px solid var(--border);
-    color: var(--fg-muted);
+    font-family: var(--font-mono); font-size: 0.5625rem;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    padding: 0.25rem 0.5rem; border: 1px solid var(--border); color: var(--fg-muted);
   }
 
-  /* Illustrated area */
-  .ts-illustration {
-    margin-bottom: 0.75rem;
-    display: flex;
-    justify-content: center;
-    overflow: visible;
-  }
-  .illust {
-    width: 100%;
-    max-width: 280px;
-    height: auto;
-    overflow: visible;
-  }
+  .ts-illustration { margin-bottom: 0.75rem; display: flex; justify-content: center; overflow: visible; }
+  .illust { width: 100%; max-width: 280px; height: auto; overflow: visible; }
 
-  @keyframes ts-dropdown-in {
-    from { opacity: 0; transform: translateY(-8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes ts-dropdown-in { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
 
-  /* ── Illustration animations ── */
+  /* ── Animations (paused by default, played on open) ── */
+  .anim-el { animation-play-state: paused; }
+  .ts-item[open] .anim-el { animation-play-state: running; }
 
-  /* Lightbulb glow */
+  /* Lightbulb */
   .ray { animation: ray-flash 2s ease-in-out infinite; }
-  .r2 { animation-delay: 0.3s; }
-  .r3 { animation-delay: 0.6s; }
-  .r4 { animation-delay: 0.9s; }
-  .r5 { animation-delay: 1.2s; }
-  @keyframes ray-flash {
-    0%, 100% { opacity: 0; }
-    50% { opacity: 0.8; }
-  }
+  .r2 { animation-delay: 0.3s; } .r3 { animation-delay: 0.6s; } .r4 { animation-delay: 0.9s; } .r5 { animation-delay: 1.2s; }
+  @keyframes ray-flash { 0%, 100% { opacity: 0; } 50% { opacity: 0.7; } }
   .glow { animation: glow-pulse 2s ease-in-out infinite; }
-  @keyframes glow-pulse {
-    0%, 100% { opacity: 0; }
-    50% { opacity: 0.08; }
-  }
+  @keyframes glow-pulse { 0%, 100% { opacity: 0; } 50% { opacity: 0.06; } }
 
-  /* Strategy path */
+  /* Grid */
   .step { animation: step-appear 0.4s ease forwards; opacity: 0; }
-  .s-a { animation-delay: 0s; }
-  .s-b { animation-delay: 0.3s; }
-  .s-c { animation-delay: 0.6s; }
-  .s-d { animation-delay: 0.9s; }
-  @keyframes step-appear {
-    from { opacity: 0; r: 0; }
-    to { opacity: 1; }
-  }
+  .s-a { animation-delay: 0s; } .s-b { animation-delay: 0.3s; } .s-c { animation-delay: 0.6s; } .s-d { animation-delay: 0.9s; }
+  @keyframes step-appear { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
   .arrow { animation: arrow-draw 0.3s ease forwards; stroke-dashoffset: 30; stroke-dasharray: 30; }
-  .a1 { animation-delay: 0.2s; }
-  .a2 { animation-delay: 0.5s; }
-  .a3 { animation-delay: 0.8s; }
-  @keyframes arrow-draw {
-    to { stroke-dashoffset: 0; }
-  }
+  .a1 { animation-delay: 0.2s; } .a2 { animation-delay: 0.5s; } .a3 { animation-delay: 0.8s; }
+  @keyframes arrow-draw { to { stroke-dashoffset: 0; } }
 
-  /* Color palette */
+  /* Palette */
   .color-dot { animation: color-pop 0.3s ease forwards; transform-origin: center; transform: scale(0); }
-  .c1 { animation-delay: 0.1s; }
-  .c2 { animation-delay: 0.25s; }
-  .c3 { animation-delay: 0.4s; }
-  .c4 { animation-delay: 0.55s; }
-  .c5 { animation-delay: 0.7s; }
-  @keyframes color-pop {
-    from { transform: scale(0); }
-    60% { transform: scale(1.3); }
-    to { transform: scale(1); }
-  }
+  .c1 { animation-delay: 0.1s; } .c2 { animation-delay: 0.25s; } .c3 { animation-delay: 0.4s; } .c4 { animation-delay: 0.55s; } .c5 { animation-delay: 0.7s; }
+  @keyframes color-pop { from { transform: scale(0); } 60% { transform: scale(1.3); } to { transform: scale(1); } }
   .brush { stroke-dasharray: 40; stroke-dashoffset: 40; animation: brush-draw 0.8s ease 0.5s forwards; }
   @keyframes brush-draw { to { stroke-dashoffset: 0; } }
 
-  /* Terminal code */
+  /* Terminal */
   .code-line { opacity: 0; animation: code-type 0.3s ease forwards; }
-  .cl1 { animation-delay: 0.1s; }
-  .cl2 { animation-delay: 0.4s; }
-  .cl3 { animation-delay: 0.7s; }
-  @keyframes code-type {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
+  .cl1 { animation-delay: 0.1s; } .cl2 { animation-delay: 0.4s; } .cl3 { animation-delay: 0.7s; }
+  @keyframes code-type { from { opacity: 0; } to { opacity: 1; } }
   .cursor-blink { animation: cursor-blink 1s step-end infinite; }
-  @keyframes cursor-blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
+  @keyframes cursor-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
   /* Collaboration */
   .conn-line { stroke-dashoffset: 20; animation: conn-draw 1.5s ease-in-out infinite alternate; }
-  @keyframes conn-draw {
-    from { stroke-dashoffset: 20; }
-    to { stroke-dashoffset: 0; }
-  }
+  @keyframes conn-draw { from { stroke-dashoffset: 20; } to { stroke-dashoffset: 0; } }
   .shared-sparkle { animation: sparkle-float 2s ease-in-out infinite; }
-  .sp1 { animation-delay: 0s; }
-  .sp2 { animation-delay: 1s; }
-  @keyframes sparkle-float {
-    0%, 100% { opacity: 0; transform: translateY(0); }
-    50% { opacity: 0.7; transform: translateY(-3px); }
-  }
+  .sp1 { animation-delay: 0s; } .sp2 { animation-delay: 1s; }
+  @keyframes sparkle-float { 0%, 100% { opacity: 0; transform: translateY(0); } 50% { opacity: 0.6; transform: translateY(-3px); } }
   .person { animation: person-breathe 3s ease-in-out infinite alternate; }
   .p-right { animation-delay: 1.5s; }
-  @keyframes person-breathe {
-    from { stroke-width: 1.5; }
-    to { stroke-width: 2; }
-  }
+  @keyframes person-breathe { from { stroke-width: 1.5; } to { stroke-width: 2; } }
 
   @media (max-width: 480px) {
-    .ts-summary {
-      padding: 0.75rem 1rem;
-    }
-    .ts-body {
-      padding: 0 1rem 1rem 2.75rem;
-    }
+    .ts-summary { padding: 0.75rem 1rem; }
+    .ts-body { padding: 0 1rem 1rem 2.75rem; }
   }
-
   @media (prefers-reduced-motion: reduce) {
     .ts-body { animation: none; }
     .ts-chevron { transition: none; }
-    .ray, .glow, .step, .arrow, .color-dot, .brush, .code-line,
-    .cursor-blink, .conn-line, .shared-sparkle, .person { animation: none !important; }
-    .step, .code-line { opacity: 1; }
-    .color-dot { transform: scale(1); }
+    .anim-el { animation: none !important; animation-play-state: running !important; }
+    .step, .code-line, .color-dot { opacity: 1; transform: scale(1); }
     .brush, .arrow { stroke-dashoffset: 0; }
   }
 </style>
@@ -471,6 +345,12 @@ import Container from "./Container.astro";
         if ((details as HTMLDetailsElement).open) {
           items.forEach((other) => {
             if (other !== details) (other as HTMLDetailsElement).open = false;
+          });
+          // Restart animations by cloning anim-el elements
+          const animEls = details.querySelectorAll('.anim-el');
+          animEls.forEach((el) => {
+            const clone = el.cloneNode(true);
+            el.parentNode?.replaceChild(clone, el);
           });
         }
       });
