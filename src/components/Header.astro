@@ -112,9 +112,12 @@ const currentPath = Astro.url.pathname;
   /* Backdrop derrière le menu mobile */
   #mobile-backdrop {
     position: fixed;
-    inset: 0;
+    top: 3.5rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
     z-index: 40;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.15);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
@@ -138,6 +141,13 @@ const currentPath = Astro.url.pathname;
   [data-theme="light"] .site-header.is-scrolled {
     background: #ffffff !important;
     border-bottom-color: rgba(0, 0, 0, 0.08) !important;
+  }
+  /* When mobile menu is open, force solid navbar */
+  .site-header.is-menu-open {
+    background: var(--bg) !important;
+    border-bottom-color: var(--border) !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
   }
 
   .scroll-progress {
@@ -267,11 +277,15 @@ const currentPath = Astro.url.pathname;
 
     function updateHeader() {
       if (menuOpen) {
+        header.classList.add('is-menu-open');
         header.classList.remove('is-scrolled');
-      } else if (window.scrollY > 60) {
-        header.classList.add('is-scrolled');
       } else {
-        header.classList.remove('is-scrolled');
+        header.classList.remove('is-menu-open');
+        if (window.scrollY > 60) {
+          header.classList.add('is-scrolled');
+        } else {
+          header.classList.remove('is-scrolled');
+        }
       }
       // Progress bar: fill width based on scroll %
       if (progressBar) {
