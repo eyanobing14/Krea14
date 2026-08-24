@@ -21,8 +21,9 @@ const currentPath = Astro.url.pathname;
 <header id="site-header" class="site-header fixed top-0 left-0 right-0 z-50 transition-all duration-500">
   <div class="container-page flex items-center justify-between h-14 md:h-16">
     <!-- Logo -->
-    <a href="/" class="flex items-center no-underline group">
-      <img src="/Logo.svg" alt="Logo" class="h-4 md:h-5 w-auto" style="filter: invert(var(--logo-invert, 0));" />
+    <a href="/" class="flex items-center gap-2 no-underline group">
+      <img src="/favicon.svg" alt="" class="h-5 w-5 md:h-6 md:w-6 flex-shrink-0" style="filter: invert(var(--logo-invert, 0));" />
+      <img src="/Logo.svg" alt="Logo" class="h-3 md:h-4 w-auto" style="filter: invert(var(--logo-invert, 0));" />
     </a>
 
     <!-- Desktop nav -->
