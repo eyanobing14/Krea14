@@ -183,6 +183,11 @@ import Container from "./Container.astro";
     margin-left: auto;
     margin-right: auto;
   }
+  @media (min-width: 1024px) {
+    .impact-list {
+      max-width: 100%;
+    }
+  }
 
   .impact-item {
     border: 1px solid var(--border);
@@ -277,6 +282,25 @@ import Container from "./Container.astro";
     max-width: 280px;
     height: auto;
     overflow: visible;
+  }
+
+  /* Z-pattern: illustration left on odd, right on even */
+  @media (min-width: 1024px) {
+    .impact-body {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 2rem;
+      padding: 1.5rem 2rem;
+    }
+    .impact-illustration {
+      margin-bottom: 0;
+      flex-shrink: 0;
+      width: 220px;
+    }
+    .impact-item:nth-child(even) .impact-body {
+      flex-direction: row-reverse;
+    }
   }
 
   .impact-keywords {

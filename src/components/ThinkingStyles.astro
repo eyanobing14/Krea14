@@ -227,6 +227,11 @@ import Container from "./Container.astro";
     margin-left: auto;
     margin-right: auto;
   }
+  @media (min-width: 1024px) {
+    .ts-list {
+      max-width: 100%;
+    }
+  }
 
   .ts-item {
     border: 1px solid var(--border);
@@ -320,6 +325,25 @@ import Container from "./Container.astro";
     font-size: 0.8125rem;
     line-height: 1.7;
     color: var(--fg-secondary);
+  }
+
+  /* Z-pattern: illustration left on odd, right on even */
+  @media (min-width: 1024px) {
+    .ts-body {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 2rem;
+      padding: 1.5rem 2rem;
+    }
+    .ts-illustration {
+      margin-bottom: 0;
+      flex-shrink: 0;
+      width: 220px;
+    }
+    .ts-item:nth-child(even) .ts-body {
+      flex-direction: row-reverse;
+    }
   }
 
   .ts-keywords {
