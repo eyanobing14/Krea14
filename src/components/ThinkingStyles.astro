@@ -1089,7 +1089,8 @@ import Container from "./Container.astro";
     function centerOpenItem(details: HTMLDetailsElement) {
       requestAnimationFrame(() => {
         details.scrollIntoView({
-          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
+            .matches
             ? "auto"
             : "smooth",
           block: "center",
