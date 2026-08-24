@@ -164,7 +164,7 @@ const currentPath = Astro.url.pathname;
   /* Déroulé animé du menu mobile */
   #mobile-menu {
     position: fixed;
-    top: 4rem;
+    top: 3.5rem;
     left: 0;
     right: 0;
     bottom: 0;
@@ -304,14 +304,20 @@ const currentPath = Astro.url.pathname;
       requestAnimationFrame(updateHeader);
     });
 
+    let savedScrollY = 0;
     function setMenu(next: boolean) {
       menuOpen = next;
       toggle?.setAttribute('aria-expanded', String(menuOpen));
       toggle?.classList.toggle('is-open', menuOpen);
       menu?.classList.toggle('is-open', menuOpen);
       backdrop?.classList.toggle('is-visible', menuOpen);
-      // Bloquer le scroll du body quand le menu est ouvert
-      document.body.style.overflow = menuOpen ? 'hidden' : '';
+      if (menuOpen) {
+        savedScrollY = window.scrollY;
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+        window.scrollTo(0, savedScrollY);
+      }
       updateHeader();
     }
 
