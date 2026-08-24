@@ -271,12 +271,12 @@ const socials = (profile.socials || {}) as Record<string, string>;
   .about-hero-left {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     flex-shrink: 0;
   }
   .about-photo-row {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 1rem;
   }
   .about-social-icons {
@@ -309,8 +309,8 @@ const socials = (profile.socials || {}) as Record<string, string>;
   .about-photo {
     width: 200px;
     height: 200px;
-    border-radius: 50%;
-    overflow: visible;
+    border-radius: 8px;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -319,7 +319,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
     position: relative;
   }
   .about-photo img {
-    border-radius: 50%;
+    border-radius: 8px;
   }
   .about-wave {
     position: absolute;

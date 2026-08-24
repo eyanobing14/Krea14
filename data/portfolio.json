@@ -8,14 +8,15 @@
     "email": "hello@votreportfolio.com",
     "location": "Paris, France",
     "availability": "Disponible pour freelance",
-    "whatsapp": "25761729788",
+    "whatsapp": "+25725761729788",
     "socials": {
       "dribbble": "https://dribbble.com/votreprofil",
       "behance": "https://behance.net/votreprofil",
       "github": "https://github.com/votreprofil",
       "linkedin": "https://linkedin.com/in/votreprofil",
       "instagram": "https://www.instagram.com/mr_krea_14"
-    }
+    },
+    "photo": "/assets/profile-photo.png"
   },
   "services": [
     {
