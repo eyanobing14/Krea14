@@ -196,7 +196,7 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
                 <div class="p-5" style="border-top: 1px solid var(--border);">
                   <div class="flex items-center justify-between">
                     <h3 class="text-base sm:text-lg font-semibold" style="color: var(--fg);">
-                      {study.title}
+                      <span data-fr={study.title} data-en={study.titleEn || study.title}>{study.title}</span>
                     </h3>
                     <span
                       class="text-xs font-mono"
@@ -208,16 +208,14 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
                   <p
                     class="mt-2 text-sm leading-relaxed"
                     style="color: var(--fg-secondary); overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;"
-                  >
-                    {study.description}
+                  ><span data-fr={study.description} data-en={study.descriptionEn || study.description}>{study.description}</span>
                   </p>
                   <div class="mt-3 flex flex-wrap gap-1.5">
-                    {study.tags?.slice(0, 3).map((tag: string) => (
+                    {study.tags?.slice(0, 3).map((tag: string, i: number) => (
                       <span
                         class="px-2.5 py-1 text-[11px] font-mono uppercase tracking-wider"
                         style="color: var(--fg-muted); border: 1px solid var(--border);"
-                      >
-                        {tag}
+                      ><span data-fr={tag} data-en={study.tagsEn?.[i] || tag}>{tag}</span>
                       </span>
                     ))}
                   </div>
@@ -247,11 +245,49 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
           class="mt-10 md:mt-16 lg:mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 gsap-stagger-grid"
         >
           {
-            services.map((service: any) => (            <div class="p-7 transition-colors duration-300"
+            services.map((service: any) => (
+              <div class="service-card p-7 transition-colors duration-300"
                 style="border: 1px solid var(--border);"
                 onmouseover="this.style.borderColor='var(--border-hover)'"
                 onmouseout="this.style.borderColor='var(--border)'"
               >
+                <div class="service-icon">
+                  <svg viewBox="0 0 48 48" fill="none" class="service-illust">
+                    {service.title === 'Design Graphique' && (
+                      <g>
+                        <rect x="8" y="8" width="32" height="32" rx="4" stroke="var(--fg)" stroke-width="1.5" fill="none" class="svc-shape"/>
+                        <circle cx="20" cy="20" r="6" stroke="var(--fg-muted)" stroke-width="1" fill="none" class="svc-orbit"/>
+                        <circle cx="20" cy="20" r="2" fill="var(--fg)" opacity="0.3"/>
+                        <line x1="28" y1="28" x2="36" y2="36" stroke="var(--fg-muted)" stroke-width="1" stroke-dasharray="2 2" class="svc-line"/>
+                      </g>
+                    )}
+                    {service.title === 'UI/UX Design' && (
+                      <g>
+                        <rect x="6" y="10" width="16" height="28" rx="3" stroke="var(--fg)" stroke-width="1.5" fill="none" class="svc-phone"/>
+                        <line x1="10" y1="18" x2="18" y2="18" stroke="var(--fg-muted)" stroke-width="1"/>
+                        <line x1="10" y1="22" x2="16" y2="22" stroke="var(--fg-muted)" stroke-width="1"/>
+                        <rect x="26" y="14" width="16" height="20" rx="2" stroke="var(--fg-muted)" stroke-width="1" fill="none" class="svc-screen"/>
+                        <circle cx="34" cy="24" r="4" stroke="var(--fg)" stroke-width="1" fill="none" class="svc-pulse"/>
+                      </g>
+                    )}
+                    {service.title === 'Développement Frontend' && (
+                      <g>
+                        <text x="8" y="22" fill="var(--fg)" font-size="14" font-family="var(--font-mono)" class="svc-bracket">&lt;/&gt;</text>
+                        <line x1="8" y1="28" x2="40" y2="28" stroke="var(--fg-muted)" stroke-width="0.75" stroke-dasharray="3 2" class="svc-line"/>
+                        <circle cx="14" cy="36" r="3" stroke="var(--fg-muted)" stroke-width="1" fill="none"/>
+                        <circle cx="24" cy="36" r="3" stroke="var(--fg)" stroke-width="1" fill="none"/>
+                        <circle cx="34" cy="36" r="3" stroke="var(--fg-muted)" stroke-width="1" fill="none"/>
+                      </g>
+                    )}
+                    {service.title === 'Logo Design' && (
+                      <g>
+                        <circle cx="24" cy="22" r="12" stroke="var(--fg)" stroke-width="1.5" fill="none" class="svc-ring"/>
+                        <path d="M18 22 L22 28 L30 18" stroke="var(--fg-muted)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" class="svc-check"/>
+                        <line x1="24" y1="38" x2="24" y2="42" stroke="var(--fg-muted)" stroke-width="1"/>
+                      </g>
+                    )}
+                  </svg>
+                </div>
                 <h3 class="text-base sm:text-lg font-semibold" style="color: var(--fg);">
                   {service.title}
                 </h3>
@@ -345,7 +381,7 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
     <div class="section-divider" aria-hidden="true"></div>
 
     <!-- CTA -->
-    <section class="section" style="border-top: 1px solid var(--border);">
+    <section class="section">
       <Container class="text-center">
         <h2 class="text-3xl sm:text-4xl font-bold" style="color: var(--fg);">
           Un projet en tête?
@@ -551,5 +587,39 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
   }
   @media (prefers-reduced-motion: reduce) {
     .orbital-item, .orbital-particle { animation: none !important; }
+  }
+
+  /* ── Service cards ── */
+  .service-card { text-align: left; }
+  .service-icon {
+    width: 48px; height: 48px;
+    margin-bottom: 0.75rem;
+  }
+  .service-illust { width: 100%; height: 100%; }
+
+  /* Service animations */
+  .svc-shape { stroke-dasharray: 140; stroke-dashoffset: 140; animation: svc-draw 2s ease forwards; }
+  .svc-orbit { animation: svc-orbit-spin 4s linear infinite; transform-origin: 20px 20px; }
+  @keyframes svc-orbit-spin { to { transform: rotate(360deg); } }
+  .svc-line { animation: svc-dash 2s linear infinite; }
+  @keyframes svc-dash { to { stroke-dashoffset: -20; } }
+  .svc-phone { animation: svc-breathe 3s ease-in-out infinite alternate; }
+  @keyframes svc-breathe { from { stroke-width: 1.5; } to { stroke-width: 2; } }
+  .svc-screen { stroke-dasharray: 72; stroke-dashoffset: 72; animation: svc-draw 1.5s ease 0.3s forwards; }
+  .svc-pulse { animation: svc-pulse-ring 2s ease infinite; }
+  @keyframes svc-pulse-ring {
+    0%, 100% { r: 4; opacity: 1; }
+    50% { r: 7; opacity: 0.3; }
+  }
+  .svc-bracket { animation: svc-type 1s ease forwards; opacity: 0; }
+  @keyframes svc-type { from { opacity: 0; } to { opacity: 1; } }
+  .svc-ring { stroke-dasharray: 76; stroke-dashoffset: 76; animation: svc-draw 1.5s ease forwards; }
+  .svc-check { stroke-dasharray: 30; stroke-dashoffset: 30; animation: svc-draw 0.8s ease 0.8s forwards; }
+  @keyframes svc-draw { to { stroke-dashoffset: 0; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .svc-shape, .svc-orbit, .svc-line, .svc-phone, .svc-screen,
+    .svc-pulse, .svc-bracket, .svc-ring, .svc-check { animation: none !important; }
+    .svc-shape, .svc-screen, .svc-ring, .svc-check, .svc-bracket { stroke-dashoffset: 0; opacity: 1; }
   }
 </style>
