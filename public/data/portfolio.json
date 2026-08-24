@@ -21,25 +21,29 @@
       "id": "graphic-design",
       "title": "Design Graphique",
       "description": "Identité visuelle, branding, print design. Nous créons des systèmes visuels cohérents qui racontent votre histoire.",
-      "icon": "palette"
+      "icon": "palette",
+      "descriptionEn": "Visual identity, branding, print design. We create cohesive visual systems that tell your story."
     },
     {
       "id": "uiux",
       "title": "UI/UX Design",
       "description": "Interfaces utilisateur intuitives, wireframing, prototypage. L'expérience utilisateur est au centre de chaque décision.",
-      "icon": "layout"
+      "icon": "layout",
+      "descriptionEn": "Intuitive user interfaces, wireframing, prototyping. User experience is at the center of every decision."
     },
     {
       "id": "frontend",
       "title": "Développement Frontend",
       "description": "Sites web performants avec React, Astro, Tailwind. Du pixel-perfect au code propre.",
-      "icon": "code"
+      "icon": "code",
+      "descriptionEn": "High-performance websites with React, Astro, Tailwind. From pixel-perfect to clean code."
     },
     {
       "id": "logo",
       "title": "Logo Design",
       "description": "Logos mémorables et intemporels. Chaque logo raconte une histoire en un coup d'œil.",
-      "icon": "star"
+      "icon": "star",
+      "descriptionEn": "Memorable and timeless logos. Every logo tells a story at a glance."
     }
   ],
   "caseStudies": [
@@ -77,7 +81,10 @@
         "Branding",
         "Print",
         "Visual Identity"
-      ]
+      ],
+      "titleEn": "Branding — Lumière Café",
+      "challengeEn": "Lumière Café wanted to differentiate itself in a saturated market. The old visual identity no longer reflected the quality of their specialty coffees.",
+      "solutionEn": "We developed a visual system around the play of light and shadow. A warm color palette, custom typography, and consistent applications across all touchpoints."
     },
     {
       "slug": "app-mindflow",
@@ -113,7 +120,10 @@
         "UI/UX",
         "Mobile",
         "Design System"
-      ]
+      ],
+      "titleEn": "App — MindFlow",
+      "challengeEn": "Existing meditation apps lack personalization. Users need a tool that adapts to their routine, not the other way around.",
+      "solutionEn": "Modular interface with customizable 'rituels'. A design system built for scalability, with micro-interactions that reinforce the calming experience."
     },
     {
       "slug": "site-cipher-studio",
@@ -151,7 +161,10 @@
         "GSAP",
         "Astro",
         "Responsive"
-      ]
+      ],
+      "titleEn": "Site Web — Cipher Studio",
+      "challengeEn": "Create a site that impresses visually while remaining fast and accessible. The studio needed a digital showcase that matched their creative work.",
+      "solutionEn": "Astro + GSAP for fluid animations. Scroll-driven animations, responsive grid, optimized performance — beauty meets function."
     },
     {
       "slug": "logo-noctis-ai",
@@ -187,7 +200,10 @@
         "Logo",
         "Branding",
         "Startup"
-      ]
+      ],
+      "titleEn": "Logo — Noctis AI",
+      "challengeEn": "Noctis AI needed a logo that conveys trust and innovation. A brand identity for an AI startup in a crowded market.",
+      "solutionEn": "An abstract symbol combining a star ('noctis' = night) with neural network motifs. Clean, scalable, memorable."
     }
   ],
   "designSubcategories": [

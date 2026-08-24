@@ -91,15 +91,18 @@ const socials = (profile.socials || {}) as Record<string, string>;
               <div>
                 <label
                   class="block text-xs font-mono uppercase tracking-wider mb-2"
-                  style="color: var(--fg-muted);">Message</label
+                  style="color: var(--fg-muted);"><span data-fr="Message" data-en="Message">Message</span></label
                 >
-                <textarea
-                  name="message"
-                  rows="5"
-                  required
-                  class="contact-input"
-                  placeholder="Décrivez votre projet, vos objectifs, votre timeline..."
-                ></textarea>
+                <div class="textarea-wrapper">
+                  <textarea
+                    name="message"
+                    rows="5"
+                    required
+                    class="contact-input"
+                    placeholder="Décrivez votre projet, vos objectifs, votre timeline..."
+                  ></textarea>
+                  <span class="resize-hint" data-fr="↕ Glissez pour agrandir" data-en="↕ Drag to resize">↕ Glissez pour agrandir</span>
+                </div>
               </div>
               <div>
                 <button
@@ -269,6 +272,29 @@ const socials = (profile.socials || {}) as Record<string, string>;
   }
   select.contact-input {
     cursor: pointer;
+  }
+  .textarea-wrapper {
+    position: relative;
+  }
+  textarea.contact-input {
+    resize: vertical;
+    min-height: 100px;
+    max-height: 400px;
+    padding-bottom: 1.5rem;
+  }
+  .resize-hint {
+    position: absolute;
+    bottom: 6px;
+    right: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    color: var(--fg-muted);
+    opacity: 0.4;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  textarea.contact-input:focus ~ .resize-hint {
+    opacity: 0.6;
   }
 
   /* ── Process illustration ── */

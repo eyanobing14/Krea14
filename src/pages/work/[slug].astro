@@ -43,25 +43,20 @@ if (!study) {
           class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-[-0.03em]"
           style="color: var(--fg);"
         >
-          {study.title}
+          <span data-fr={study.title} data-en={study.titleEn || study.title}>{study.title}</span>
         </h1>
         <p
           class="mt-4 text-base sm:text-lg leading-relaxed max-w-2xl"
           style="color: var(--fg-secondary);"
-        >
-          {study.description}
+        ><span data-fr={study.description} data-en={study.descriptionEn || study.description}>{study.description}</span>
         </p>
-        <div class="mt-6 flex flex-wrap gap-2">
-          {
-            study.tags?.map((tag: string) => (
-              <span
-                class="px-3 py-1 text-xs font-mono uppercase tracking-wider"
-                style="color: var(--fg-muted); border: 1px solid var(--border);"
-              >
-                {tag}
-              </span>
-            ))
-          }
+        <div class="mt-6 flex flex-wrap gap-2">                    {study.tags?.map((tag: string, i: number) => (
+                      <span
+                        class="px-3 py-1 text-xs font-mono uppercase tracking-wider"
+                        style="color: var(--fg-muted); border: 1px solid var(--border);"
+                      ><span data-fr={tag} data-en={study.tagsEn?.[i] || tag}>{tag}</span>
+                      </span>
+                    ))}
         </div>
       </Container>
     </section>
@@ -90,8 +85,7 @@ if (!study) {
             <p
               class="text-base sm:text-lg leading-relaxed"
               style="color: var(--fg);"
-            >
-              {study.challenge}
+            ><span data-fr={study.challenge} data-en={study.challengeEn || study.challenge}>{study.challenge}</span>
             </p>
           </div>
 
@@ -102,8 +96,7 @@ if (!study) {
             <p
               class="text-sm leading-relaxed"
               style="color: var(--fg-secondary);"
-            >
-              {study.solution}
+            ><span data-fr={study.solution} data-en={study.solutionEn || study.solution}>{study.solution}</span>
             </p>
           </div>
         </div>
