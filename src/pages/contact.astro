@@ -16,7 +16,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
     <section class="pt-20 sm:pt-28 pb-8 md:pt-40 md:pb-24">
       <Container>
         <h1
-          class="text-2xl sm:text-3xl md:text-5xl font-bold leading-tight sm:leading-none tracking-[-0.03em]"
+          class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-[-0.03em]"
           style="color: var(--fg);"
         >
           Parlons de votre<br />
@@ -127,8 +127,57 @@ const socials = (profile.socials || {}) as Record<string, string>;
             </div>
           </div>
 
-          <!-- Right: Info -->
+          <!-- Right: Process + Info -->
           <div class="min-w-0 col-span-12 lg:col-span-5">
+            <!-- Work process animation -->
+            <div class="process-illustration mb-10">
+              <svg viewBox="0 0 320 120" fill="none" class="process-svg">
+                <!-- Step 1: Message -->
+                <g class="process-step ps1">
+                  <circle cx="40" cy="60" r="22" stroke="var(--fg)" stroke-width="1.5" fill="none"/>
+                  <path d="M30 52 L50 52 L50 68 L30 68 Z" stroke="var(--fg-muted)" stroke-width="1" fill="none"/>
+                  <line x1="34" y1="57" x2="46" y2="57" stroke="var(--fg-muted)" stroke-width="0.75"/>
+                  <line x1="34" y1="61" x2="42" y2="61" stroke="var(--fg-muted)" stroke-width="0.75"/>
+                  <text x="40" y="95" text-anchor="middle" fill="var(--fg-secondary)" font-size="8" font-family="var(--font-mono)">Message</text>
+                </g>
+                <!-- Arrow 1 -->
+                <line x1="68" y1="60" x2="92" y2="60" stroke="var(--fg-muted)" stroke-width="1" stroke-dasharray="3 2" class="process-arrow pa1"/>
+                <polygon points="92,60 86,56 86,64" fill="var(--fg-muted)" class="process-arrow pa1"/>
+                <!-- Step 2: Discussion -->
+                <g class="process-step ps2">
+                  <circle cx="112" cy="60" r="22" stroke="var(--fg)" stroke-width="1.5" fill="none"/>
+                  <path d="M102 50 C102 44, 122 44, 122 50 L122 56 C122 62, 102 62, 102 56 Z" stroke="var(--fg-muted)" stroke-width="1" fill="none"/>
+                  <circle cx="107" cy="53" r="1.5" fill="var(--fg-muted)"/>
+                  <circle cx="112" cy="53" r="1.5" fill="var(--fg-muted)"/>
+                  <circle cx="117" cy="53" r="1.5" fill="var(--fg-muted)"/>
+                  <text x="112" y="95" text-anchor="middle" fill="var(--fg-secondary)" font-size="8" font-family="var(--font-mono)">Discussion</text>
+                </g>
+                <!-- Arrow 2 -->
+                <line x1="140" y1="60" x2="164" y2="60" stroke="var(--fg-muted)" stroke-width="1" stroke-dasharray="3 2" class="process-arrow pa2"/>
+                <polygon points="164,60 158,56 158,64" fill="var(--fg-muted)" class="process-arrow pa2"/>
+                <!-- Step 3: Conception -->
+                <g class="process-step ps3">
+                  <circle cx="184" cy="60" r="22" stroke="var(--fg)" stroke-width="1.5" fill="none"/>
+                  <rect x="174" y="50" width="20" height="14" rx="2" stroke="var(--fg-muted)" stroke-width="1" fill="none"/>
+                  <line x1="178" y1="55" x2="190" y2="55" stroke="var(--fg-muted)" stroke-width="0.5"/>
+                  <line x1="178" y1="58" x2="186" y2="58" stroke="var(--fg-muted)" stroke-width="0.5"/>
+                  <line x1="178" y1="61" x2="188" y2="61" stroke="var(--fg-muted)" stroke-width="0.5"/>
+                  <text x="184" y="95" text-anchor="middle" fill="var(--fg-secondary)" font-size="8" font-family="var(--font-mono)">Conception</text>
+                </g>
+                <!-- Arrow 3 -->
+                <line x1="212" y1="60" x2="236" y2="60" stroke="var(--fg-muted)" stroke-width="1" stroke-dasharray="3 2" class="process-arrow pa3"/>
+                <polygon points="236,60 230,56 230,64" fill="var(--fg-muted)" class="process-arrow pa3"/>
+                <!-- Step 4: Livraison -->
+                <g class="process-step ps4">
+                  <circle cx="256" cy="60" r="22" stroke="var(--fg)" stroke-width="1.5" fill="none"/>
+                  <path d="M248 62 L254 68 L266 52" stroke="var(--fg)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="check-mark"/>
+                  <text x="256" y="95" text-anchor="middle" fill="var(--fg-secondary)" font-size="8" font-family="var(--font-mono)">Livraison</text>
+                </g>
+                <!-- Progress line -->
+                <line x1="40" y1="108" x2="256" y2="108" stroke="var(--border)" stroke-width="1"/>
+                <line x1="40" y1="108" x2="256" y2="108" stroke="var(--fg)" stroke-width="1" class="progress-line"/>
+              </svg>
+            </div>
             <div class="space-y-8">
               <div>
                 <span class="label block">Email direct</span>
@@ -220,6 +269,71 @@ const socials = (profile.socials || {}) as Record<string, string>;
   }
   select.contact-input {
     cursor: pointer;
+  }
+
+  /* ── Process illustration ── */
+  .process-illustration {
+    display: flex;
+    justify-content: center;
+    overflow: visible;
+  }
+  .process-svg {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    overflow: visible;
+  }
+
+  /* Steps appear sequentially */
+  .process-step { opacity: 0; animation: step-in 0.4s ease forwards; }
+  .ps1 { animation-delay: 0s; }
+  .ps2 { animation-delay: 0.4s; }
+  .ps3 { animation-delay: 0.8s; }
+  .ps4 { animation-delay: 1.2s; }
+  @keyframes step-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Arrows draw in */
+  .process-arrow { opacity: 0; animation: arrow-in 0.3s ease forwards; }
+  .pa1 { animation-delay: 0.3s; }
+  .pa2 { animation-delay: 0.7s; }
+  .pa3 { animation-delay: 1.1s; }
+  @keyframes arrow-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* Checkmark draws */
+  .check-mark {
+    stroke-dasharray: 30;
+    stroke-dashoffset: 30;
+    animation: draw-check 0.6s ease 1.4s forwards;
+  }
+  @keyframes draw-check {
+    to { stroke-dashoffset: 0; }
+  }
+
+  /* Progress line fills */
+  .progress-line {
+    stroke-dasharray: 216;
+    stroke-dashoffset: 216;
+    animation: fill-progress 2s ease 0.2s forwards;
+  }
+  @keyframes fill-progress {
+    to { stroke-dashoffset: 0; }
+  }
+
+  @media (max-width: 480px) {
+    .process-svg { max-width: 280px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .process-step, .process-arrow, .check-mark, .progress-line { animation: none !important; }
+    .process-step { opacity: 1; }
+    .process-arrow { opacity: 1; }
+    .check-mark, .progress-line { stroke-dashoffset: 0; }
   }
 </style>
 

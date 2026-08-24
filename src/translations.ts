@@ -184,6 +184,17 @@ export const T: Record<string, string> = {
   "5 000 € — 10 000 €": "$5,000 — $10,000",
   "10 000 € +": "$10,000 +",
 
+  // ── Work detail page ──
+  "← Retour": "← Back",
+  "Image du projet": "Project image",
+  "Comment j'aborde ce projet.": "How I approach this project.",
+  "Projet suivant?": "Next project?",
+  "Voir tous les projets": "View all projects",
+  "Démarrer un projet": "Start a project",
+
+  // ── Homepage orbital ──
+  "Notre expertise.": "Our expertise.",
+
   // ── Common ──
   "Photo": "Photo",
 
