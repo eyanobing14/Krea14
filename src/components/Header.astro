@@ -344,7 +344,7 @@ const currentPath = Astro.url.pathname;
       const dict = lang === 'fr' ? Trev : T;
       const sortedKeys = Object.keys(dict).sort((a, b) => b.length - a.length);
       // Only skip elements that are inside scripts, styles, or the header lang toggle area
-      const skipTags = new Set(['SCRIPT', 'STYLE', 'SVG', 'SELECT', 'OPTION']);
+      const skipTags = new Set(['SCRIPT', 'STYLE', 'SVG', 'SELECT']);
       const walker = document.createTreeWalker(
         document.querySelector('main') || document.body,
         NodeFilter.SHOW_TEXT,

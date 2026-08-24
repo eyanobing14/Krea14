@@ -170,6 +170,20 @@ export const T: Record<string, string> = {
   "Frontend Dev": "Frontend Dev",
   "Logo Design": "Logo Design",
 
+  // ── Profile values ──
+  "Disponible pour freelance": "Available for freelance",
+  "Paris, France": "Paris, France",
+
+  // ── Contact form options ──
+  "Sélectionnez...": "Select...",
+  "Branding / Identité visuelle": "Branding / Visual Identity",
+  "Développement Frontend": "Frontend Development",
+  "Autre": "Other",
+  "1 000 € — 3 000 €": "$1,000 — $3,000",
+  "3 000 € — 5 000 €": "$3,000 — $5,000",
+  "5 000 € — 10 000 €": "$5,000 — $10,000",
+  "10 000 € +": "$10,000 +",
+
   // ── Common ──
   "Photo": "Photo",
 
