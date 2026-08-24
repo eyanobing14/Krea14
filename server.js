@@ -8,9 +8,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PORT = 4200;
 const ROOT = __dirname;
-const dataDir = path.join(ROOT, 'public', 'data');
+const dataFile = path.join(ROOT, 'public', 'data', 'portfolio.json');
 const assetsDir = path.join(ROOT, 'public', 'assets');
-if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
 if (!fs.existsSync(assetsDir)) fs.mkdirSync(assetsDir, { recursive: true });
 
 function git(cmd) {
@@ -64,23 +63,22 @@ const server = http.createServer(async (req, res) => {
   // ── save-data ──
   if (url === '/api/save-data' && req.method === 'POST') {
     const data = await readBody(req);
-    fs.writeFileSync(path.join(dataDir, 'portfolio.json'), JSON.stringify(data, null, 2));
+    fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
     return send(res, { ok: true });
   }
 
   // ── read-data ──
   if (url === '/api/read-data' && req.method === 'POST') {
-    const fp = path.join(dataDir, 'portfolio.json');
+    const fp = dataFile;
     if (!fs.existsSync(fp)) return send(res, { ok: false });
     const data = JSON.parse(fs.readFileSync(fp, 'utf-8'));
     return send(res, { ok: true, data });
   }
 
-  // ── reset-data: re-read original version from git ──
+  // ── reset-data: re-read current file ──
   if (url === '/api/reset-data' && req.method === 'POST') {
-    const original = path.join(ROOT, 'public', 'data', 'portfolio.json');
-    if (!fs.existsSync(original)) return send(res, { ok: false, message: 'No original data found' });
-    const data = JSON.parse(fs.readFileSync(original, 'utf-8'));
+    if (!fs.existsSync(dataFile)) return send(res, { ok: false, message: 'No data file found' });
+    const data = JSON.parse(fs.readFileSync(dataFile, 'utf-8'));
     return send(res, { ok: true, data });
   }
 
