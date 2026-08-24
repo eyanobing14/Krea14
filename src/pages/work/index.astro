@@ -456,4 +456,15 @@ const categories = [...new Set(
   document.readyState === 'loading'
     ? document.addEventListener('DOMContentLoaded', initFilters)
     : initFilters();
+
+  // Loop animation every 3s
+  const workSvg = document.getElementById('work-process-svg');
+  if (workSvg) {
+    setInterval(() => {
+      workSvg.querySelectorAll('.anim-step, .anim-arrow, .anim-check, .anim-sparkle, .anim-glow, .anim-progress').forEach(el => {
+        const clone = el.cloneNode(true);
+        el.parentNode?.replaceChild(clone, el);
+      });
+    }, 3000);
+  }
 </script>
