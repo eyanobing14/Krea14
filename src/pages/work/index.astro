@@ -92,13 +92,13 @@ const categories = [...new Set(
                 </div>
                 <div class="p-6" style="border-top: 1px solid var(--border);">
                   <div class="flex items-center justify-between">
-                    <h2 class="text-base font-semibold" style="color: var(--fg);"><span data-fr={study.title} data-en={study.titleEn || study.title}>{study.title}</span></h2>
+                    <h2 class="text-base font-semibold" style="color: var(--fg);">{study.title}</h2>
                     <span class="text-xs font-mono" style="color: var(--fg-muted);">{study.year}</span>
                   </div>
                   <p class="mt-3 text-sm leading-relaxed" style="color: var(--fg-secondary);"><span data-fr={study.description} data-en={study.descriptionEn || study.description}>{study.description}</span></p>
                   <div class="mt-4 flex flex-wrap gap-1.5">
-                    {study.tags?.map((tag: string, i: number) => (
-                      <span class="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider" style="color: var(--fg-muted); border: 1px solid var(--border);"><span data-fr={tag} data-en={study.tagsEn?.[i] || tag}>{tag}</span></span>
+                    {study.tags?.map((tag: string) => (
+                      <span class="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider" style="color: var(--fg-muted); border: 1px solid var(--border);">{tag}</span>
                     ))}
                   </div>
                 </div>
@@ -122,7 +122,7 @@ const categories = [...new Set(
           Chaque projet est une nouvelle aventure. Parlons du vôtre.
         </p>
         <div class="mt-8 flex flex-col items-center gap-3 w-full max-w-[280px] mx-auto">
-          <a href="/contact" class="px-6 py-3 text-sm font-medium no-underline transition-all text-center w-full" style="background: var(--fg); color: var(--bg);" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+          <a href="mailto:hello@votreportfolio.com" class="px-6 py-3 text-sm font-medium no-underline transition-all text-center w-full" style="background: var(--fg); color: var(--bg);" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
             Nous contacter
           </a>
           <a href={`https://wa.me/${profile.whatsapp || '25761729788'}`} target="_blank" rel="noopener noreferrer" class="px-6 py-3 text-sm no-underline transition-all border w-full text-center" style="color: var(--fg-secondary); border-color: var(--border);" onmouseover="this.style.color='var(--fg)'; this.style.borderColor='var(--border-hover)'" onmouseout="this.style.color='var(--fg-secondary)'; this.style.borderColor='var(--border)'">

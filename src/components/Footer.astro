@@ -9,17 +9,17 @@ const year = new Date().getFullYear();
     <div class="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 md:gap-8">
       <!-- Nav -->
       <div>
-        <h3 class="text-[10px] font-mono uppercase tracking-[0.15em] mb-5" style="color: var(--fg-muted);"><span data-fr="Navigation" data-en="Navigation">Navigation</span></h3>
+        <h3 class="text-[10px] font-mono uppercase tracking-[0.15em] mb-5" style="color: var(--fg-muted);">Navigation</h3>
         <ul class="space-y-3">
           {[
-            { label: 'Accueil', labelEn: 'Home', href: '/' },
-            { label: 'Work', labelEn: 'Work', href: '/work' },
-            { label: 'À propos', labelEn: 'About', href: '/about' },
-            { label: 'Admin', labelEn: 'Admin', href: '/admin' },
+            { label: 'Accueil', href: '/' },
+            { label: 'Work', href: '/work' },
+            { label: 'À propos', href: '/about' },
+            { label: 'Admin', href: '/admin' },
           ].map((link) => (
             <li>
               <a href={link.href} class="text-sm no-underline transition-colors duration-200 hover-link" style="color: var(--fg-secondary);">
-                <span data-fr={link.label} data-en={link.labelEn}>{link.label}</span>
+                {link.label}
               </a>
             </li>
           ))}
@@ -42,7 +42,7 @@ const year = new Date().getFullYear();
 
       <!-- Socials -->
       <div>
-        <h3 class="text-[10px] font-mono uppercase tracking-[0.15em] mb-5" style="color: var(--fg-muted);"><span data-fr="Réseaux" data-en="Socials">Réseaux</span></h3>
+        <h3 class="text-[10px] font-mono uppercase tracking-[0.15em] mb-5" style="color: var(--fg-muted);">Réseaux</h3>
         <ul class="space-y-3">
           {[
             { label: 'Dribbble', href: '#' },
@@ -61,15 +61,15 @@ const year = new Date().getFullYear();
 
       <!-- Legal -->
       <div>
-        <h3 class="text-[10px] font-mono uppercase tracking-[0.15em] mb-5" style="color: var(--fg-muted);"><span data-fr="Légal" data-en="Legal">Légal</span></h3>
+        <h3 class="text-[10px] font-mono uppercase tracking-[0.15em] mb-5" style="color: var(--fg-muted);">Légal</h3>
         <ul class="space-y-3">
           {[
-            { label: 'Confidentialité', labelEn: 'Privacy', href: '/legal/privacy' },
-            { label: 'Conditions générales', labelEn: 'Terms', href: '/legal/terms' },
+            { label: 'Confidentialité', href: '/legal/privacy' },
+            { label: 'Conditions générales', href: '/legal/terms' },
           ].map((link) => (
             <li>
               <a href={link.href} class="text-sm no-underline transition-colors duration-200 hover-link" style="color: var(--fg-secondary);">
-                <span data-fr={link.label} data-en={link.labelEn}>{link.label}</span>
+                {link.label}
               </a>
             </li>
           ))}
@@ -84,9 +84,9 @@ const year = new Date().getFullYear();
       <div class="w-5 h-5 flex items-center justify-center" style="background: var(--fg);">
         <svg width="8" height="8" viewBox="0 0 16 16" fill="none"><path d="M3 12L6.5 4L10 8L13 2" stroke="var(--bg)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
-      <span class="text-xs" style="color: var(--fg-muted);"><span data-fr={`© ${year} ${profileName}. Tous droits réservés.`} data-en={`© ${year} ${profileName}. All rights reserved.`}>© {year} {profileName}. Tous droits réservés.</span></span>
+      <span class="text-xs" style="color: var(--fg-muted);">© {year} {profileName}. Tous droits réservés.</span>
     </div>
-    <span class="text-[10px] font-mono uppercase tracking-widest" style="color: var(--fg-muted);"><span data-fr="Fait avec soin à Paris" data-en="Made with care in Paris">Fait avec soin à Paris</span></span>
+    <span class="text-[10px] font-mono uppercase tracking-widest" style="color: var(--fg-muted);">Fait avec soin à Paris</span>
   </div>
 </footer>
 

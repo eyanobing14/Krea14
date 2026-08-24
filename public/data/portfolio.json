@@ -67,17 +67,8 @@
         "Production des supports print et digitaux",
         "Déploiement et formation de l'équipe"
       ],
-      "tags": [
-        "Branding",
-        "Print",
-        "Identité visuelle"
-      ],
-      "images": [],
-      "tagsEn": [
-        "Branding",
-        "Print",
-        "Visual Identity"
-      ]
+      "tags": ["Branding", "Print", "Identité visuelle"],
+      "images": []
     },
     {
       "slug": "app-mindflow",
@@ -103,17 +94,8 @@
         "Prototypage interactif haute fidélité",
         "Tests utilisateurs et itérations"
       ],
-      "tags": [
-        "UI/UX",
-        "Mobile",
-        "Design System"
-      ],
-      "images": [],
-      "tagsEn": [
-        "UI/UX",
-        "Mobile",
-        "Design System"
-      ]
+      "tags": ["UI/UX", "Mobile", "Design System"],
+      "images": []
     },
     {
       "slug": "site-cipher-studio",
@@ -139,19 +121,8 @@
         "Optimisation performance (lazy load, code split)",
         "Déploiement et tests cross-browser"
       ],
-      "tags": [
-        "Frontend",
-        "GSAP",
-        "Astro",
-        "Responsive"
-      ],
-      "images": [],
-      "tagsEn": [
-        "Frontend",
-        "GSAP",
-        "Astro",
-        "Responsive"
-      ]
+      "tags": ["Frontend", "GSAP", "Astro", "Responsive"],
+      "images": []
     },
     {
       "slug": "logo-noctis-ai",
@@ -177,60 +148,21 @@
         "Définition de la charte d'usage",
         "Livraison des fichiers sources et exports"
       ],
-      "tags": [
-        "Logo",
-        "Branding",
-        "Startup"
-      ],
-      "images": [],
-      "tagsEn": [
-        "Logo",
-        "Branding",
-        "Startup"
-      ]
+      "tags": ["Logo", "Branding", "Startup"],
+      "images": []
     }
   ],
   "designSubcategories": [
-    {
-      "id": "flyer",
-      "label": "Flyer"
-    },
-    {
-      "id": "carrousel",
-      "label": "Carrousel"
-    },
-    {
-      "id": "banner",
-      "label": "Banner"
-    },
-    {
-      "id": "cartes-visite",
-      "label": "Cartes de visite"
-    },
-    {
-      "id": "affiche",
-      "label": "Affiche"
-    },
-    {
-      "id": "brochure",
-      "label": "Brochure"
-    },
-    {
-      "id": "packaging",
-      "label": "Packaging"
-    },
-    {
-      "id": "menu",
-      "label": "Menu"
-    },
-    {
-      "id": "credential",
-      "label": "Credential"
-    },
-    {
-      "id": "autre-design",
-      "label": "Autre"
-    }
+    { "id": "flyer", "label": "Flyer" },
+    { "id": "carrousel", "label": "Carrousel" },
+    { "id": "banner", "label": "Banner" },
+    { "id": "cartes-visite", "label": "Cartes de visite" },
+    { "id": "affiche", "label": "Affiche" },
+    { "id": "brochure", "label": "Brochure" },
+    { "id": "packaging", "label": "Packaging" },
+    { "id": "menu", "label": "Menu" },
+    { "id": "credential", "label": "Credential" },
+    { "id": "autre-design", "label": "Autre" }
   ],
   "legal": {
     "companyName": "Votre Nom",
@@ -238,31 +170,11 @@
     "jurisdiction": "Paris, France",
     "currency": "USD",
     "pricing": {
-      "branding": {
-        "min": 1500,
-        "max": 5000,
-        "label": "Branding / Visual Identity"
-      },
-      "uiux": {
-        "min": 2000,
-        "max": 8000,
-        "label": "UI/UX Design"
-      },
-      "frontend": {
-        "min": 2500,
-        "max": 10000,
-        "label": "Frontend Development"
-      },
-      "logo": {
-        "min": 800,
-        "max": 3000,
-        "label": "Logo Design"
-      },
-      "other": {
-        "min": 1000,
-        "max": 15000,
-        "label": "Other Projects"
-      },
+      "branding": { "min": 1500, "max": 5000, "label": "Branding / Visual Identity" },
+      "uiux": { "min": 2000, "max": 8000, "label": "UI/UX Design" },
+      "frontend": { "min": 2500, "max": 10000, "label": "Frontend Development" },
+      "logo": { "min": 800, "max": 3000, "label": "Logo Design" },
+      "other": { "min": 1000, "max": 15000, "label": "Other Projects" },
       "hourlyRate": 75
     },
     "paymentTerms": "50% upfront, 50% on delivery",

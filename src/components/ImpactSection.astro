@@ -1,7 +1,5 @@
 ---
-// ImpactSection — Collapsible dropdown cards with animated illustrations
-// Layering: low-contrast first, high-contrast last (SVG render order)
-// Animations restart with delay on each dropdown open
+// ImpactSection — Collapsible dropdown cards showing impact (not metrics)
 import Container from "./Container.astro";
 ---
 
@@ -22,48 +20,27 @@ import Container from "./Container.astro";
     </p>
 
     <div class="impact-list mt-12">
-      <!-- 1. Orientation résultats — Target -->
-      <details class="impact-item animate-in" data-illust="target" style="--delay: 0.15s;">
+      <!-- Orientation résultats -->
+      <details class="impact-item animate-in" style="--delay: 0.15s;">
         <summary class="impact-summary">
           <div class="impact-summary-left">
             <div class="impact-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
             </div>
             <span class="impact-title">Orientation résultats</span>
           </div>
           <svg class="impact-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
         </summary>
         <div class="impact-body">
-          <div class="impact-illustration">
-            <svg viewBox="0 0 160 100" fill="none" class="illust">
-              <!-- Layer 1: Pulse rings (lowest, behind everything) -->
-              <circle cx="80" cy="48" r="36" stroke="var(--fg-muted)" stroke-width="0.5" opacity="0" class="anim-el pulse p1"/>
-              <circle cx="80" cy="48" r="36" stroke="var(--fg-muted)" stroke-width="0.5" opacity="0" class="anim-el pulse p2"/>
-              <!-- Layer 2: Outer ring (dashed, low contrast) -->
-              <circle cx="80" cy="48" r="36" stroke="var(--border)" stroke-width="1" stroke-dasharray="5 4" class="anim-el ring ring-1"/>
-              <!-- Layer 3: Middle ring -->
-              <circle cx="80" cy="48" r="24" stroke="var(--fg-muted)" stroke-width="1" stroke-dasharray="3 3" class="anim-el ring ring-2"/>
-              <!-- Layer 4: Arrow line (low contrast) -->
-              <line x1="22" y1="85" x2="72" y2="50" stroke="var(--fg-muted)" stroke-width="1" stroke-dasharray="3 2" class="anim-el arrow-line"/>
-              <polygon points="72,50 64,46 66,54" fill="var(--fg-muted)" class="anim-el arrow-head"/>
-              <!-- Layer 5: Inner ring (medium contrast) -->
-              <circle cx="80" cy="48" r="13" stroke="var(--fg-secondary)" stroke-width="1.5" class="anim-el ring ring-3"/>
-              <!-- Layer 6: Bullseye dot (highest contrast, on top) -->
-              <circle cx="80" cy="48" r="4" fill="var(--fg)" class="anim-el bullseye"/>
-            </svg>
-          </div>
           <p>
             Chaque projet commence par une écoute active. Nous comprenons votre
             marché, vos utilisateurs et vos contraintes avant de concevoir.
           </p>
-          <div class="impact-keywords">
-            <span>Empathie</span><span>Wireframe</span><span>Test</span>
-          </div>
         </div>
       </details>
 
-      <!-- 2. Qualité sans compromis — Diamond -->
-      <details class="impact-item animate-in" data-illust="diamond" style="--delay: 0.25s;">
+      <!-- Qualité sans compromis -->
+      <details class="impact-item animate-in" style="--delay: 0.25s;">
         <summary class="impact-summary">
           <div class="impact-summary-left">
             <div class="impact-icon">
@@ -74,74 +51,34 @@ import Container from "./Container.astro";
           <svg class="impact-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
         </summary>
         <div class="impact-body">
-          <div class="impact-illustration">
-            <svg viewBox="0 0 160 100" fill="none" class="illust">
-              <!-- Layer 1: Sparkles (background) -->
-              <g class="anim-el sparkle s1"><line x1="130" y1="18" x2="138" y2="18" stroke="var(--fg-muted)" stroke-width="0.75"/><line x1="134" y1="14" x2="134" y2="22" stroke="var(--fg-muted)" stroke-width="0.75"/></g>
-              <g class="anim-el sparkle s2"><line x1="18" y1="72" x2="24" y2="72" stroke="var(--fg-muted)" stroke-width="0.5"/><line x1="21" y1="69" x2="21" y2="75" stroke="var(--fg-muted)" stroke-width="0.5"/></g>
-              <g class="anim-el sparkle s3"><line x1="138" y1="65" x2="144" y2="65" stroke="var(--fg-muted)" stroke-width="0.5"/><line x1="141" y1="62" x2="141" y2="68" stroke="var(--fg-muted)" stroke-width="0.5"/></g>
-              <!-- Layer 2: Internal facet lines (low contrast) -->
-              <line x1="80" y1="12" x2="58" y2="50" stroke="var(--fg-muted)" stroke-width="0.5" opacity="0.4" class="anim-el"/>
-              <line x1="80" y1="12" x2="102" y2="50" stroke="var(--fg-muted)" stroke-width="0.5" opacity="0.4" class="anim-el"/>
-              <line x1="58" y1="50" x2="80" y2="88" stroke="var(--fg-muted)" stroke-width="0.5" opacity="0.4" class="anim-el"/>
-              <line x1="102" y1="50" x2="80" y2="88" stroke="var(--fg-muted)" stroke-width="0.5" opacity="0.4" class="anim-el"/>
-              <!-- Layer 3: Mid line -->
-              <line x1="58" y1="50" x2="102" y2="50" stroke="var(--fg-muted)" stroke-width="0.75" class="anim-el diamond-mid"/>
-              <!-- Layer 4: Diamond outline (high contrast, on top) -->
-              <polygon points="80,12 108,50 80,88 52,50" stroke="var(--fg)" stroke-width="1.5" fill="none" class="anim-el diamond"/>
-            </svg>
-          </div>
           <p>
             Code lisible, design pixel-perfect, performance optimale. Nous ne
             livrons jamais un travail que nous n'aurions pas fierté de montrer.
           </p>
-          <div class="impact-keywords">
-            <span>Pixels</span><span>Performance</span><span>Fiabilité</span>
-          </div>
         </div>
       </details>
 
-      <!-- 3. De A à Z — Path -->
-      <details class="impact-item animate-in" data-illust="path" style="--delay: 0.35s;">
+      <!-- De A à Z -->
+      <details class="impact-item animate-in" style="--delay: 0.35s;">
         <summary class="impact-summary">
           <div class="impact-summary-left">
             <div class="impact-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h4l3 8-3 8H4M20 4h-4l-3 8 3 8h4"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v20M2 12h20"/></svg>
             </div>
             <span class="impact-title">De A à Z</span>
           </div>
           <svg class="impact-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
         </summary>
         <div class="impact-body">
-          <div class="impact-illustration">
-            <svg viewBox="0 0 160 100" fill="none" class="illust">
-              <!-- Layer 1: Dashed path (background) -->
-              <path d="M32 50 C50 28, 62 72, 80 50 S110 28, 128 50" stroke="var(--fg-muted)" stroke-width="1" stroke-dasharray="4 3" fill="none" class="anim-el path-line"/>
-              <!-- Layer 2: Milestone dots -->
-              <circle cx="55" cy="38" r="2.5" fill="var(--fg-muted)" opacity="0.4" class="anim-el"/>
-              <circle cx="105" cy="62" r="2.5" fill="var(--fg-muted)" opacity="0.4" class="anim-el"/>
-              <!-- Layer 3: Moving dot (medium contrast) -->
-              <circle cx="80" cy="50" r="3.5" fill="var(--fg-secondary)" class="anim-el moving-dot"/>
-              <!-- Layer 4: A node (high contrast) -->
-              <circle cx="24" cy="50" r="12" stroke="var(--fg-secondary)" stroke-width="1.5" fill="none" class="anim-el node node-a"/>
-              <text x="24" y="55" text-anchor="middle" fill="var(--fg)" font-size="12" font-weight="600" font-family="var(--font-mono)">A</text>
-              <!-- Layer 5: Z node (high contrast, on top) -->
-              <circle cx="136" cy="50" r="12" stroke="var(--fg-secondary)" stroke-width="1.5" fill="none" class="anim-el node node-z"/>
-              <text x="136" y="55" text-anchor="middle" fill="var(--fg)" font-size="12" font-weight="600" font-family="var(--font-mono)">Z</text>
-            </svg>
-          </div>
           <p>
             Du premier croquis au déploiement en production. Une seule vision,
             un seul interlocuteur, une cohérence totale du début à la fin.
           </p>
-          <div class="impact-keywords">
-            <span>Croquis</span><span>Développement</span><span>Déploiement</span>
-          </div>
         </div>
       </details>
 
-      <!-- 4. Intégration fluide — Puzzle -->
-      <details class="impact-item animate-in" data-illust="puzzle" style="--delay: 0.45s;">
+      <!-- Intégration fluide -->
+      <details class="impact-item animate-in" style="--delay: 0.45s;">
         <summary class="impact-summary">
           <div class="impact-summary-left">
             <div class="impact-icon">
@@ -152,31 +89,10 @@ import Container from "./Container.astro";
           <svg class="impact-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
         </summary>
         <div class="impact-body">
-          <div class="impact-illustration">
-            <svg viewBox="0 0 160 100" fill="none" class="illust">
-              <!-- Layer 1: Connection sparkle (background) -->
-              <circle cx="80" cy="50" r="2" fill="var(--fg-muted)" opacity="0" class="anim-el conn-sparkle"/>
-              <!-- Layer 2: Right piece (VOUS — lower contrast) -->
-              <g class="anim-el puzzle-right">
-                <rect x="85" y="18" width="48" height="64" rx="4" stroke="var(--fg-muted)" stroke-width="1.5" fill="none"/>
-                <path d="M85 34 C76 34, 76 66, 85 66" stroke="var(--fg-muted)" stroke-width="1.5" fill="none"/>
-                <text x="109" y="54" text-anchor="middle" fill="var(--fg-muted)" font-size="10" font-family="var(--font-mono)" font-weight="500">VOUS</text>
-              </g>
-              <!-- Layer 3: Left piece (NOUS — higher contrast, on top) -->
-              <g class="anim-el puzzle-left">
-                <rect x="18" y="18" width="48" height="64" rx="4" stroke="var(--fg)" stroke-width="1.5" fill="none"/>
-                <path d="M66 34 C75 34, 75 66, 66 66" stroke="var(--fg)" stroke-width="1.5" fill="none"/>
-                <text x="42" y="54" text-anchor="middle" fill="var(--fg)" font-size="10" font-family="var(--font-mono)" font-weight="600">NOUS</text>
-              </g>
-            </svg>
-          </div>
           <p>
             Nous nous adaptons à votre workflow. Git, sprints, revues de code —
             nous devenons un membre à part entière de votre équipe.
           </p>
-          <div class="impact-keywords">
-            <span>Git</span><span>Sprints</span><span>Co-création</span>
-          </div>
         </div>
       </details>
     </div>
@@ -199,9 +115,15 @@ import Container from "./Container.astro";
     background: var(--bg);
     transition: border-color 0.3s;
   }
-  .impact-item:last-child { border-bottom: 1px solid var(--border); }
-  .impact-item[open] { border-color: var(--border-hover); }
-  .impact-item[open] + .impact-item { border-top-color: var(--border-hover); }
+  .impact-item:last-child {
+    border-bottom: 1px solid var(--border);
+  }
+  .impact-item[open] {
+    border-color: var(--border-hover);
+  }
+  .impact-item[open] + .impact-item {
+    border-top-color: var(--border-hover);
+  }
 
   .impact-summary {
     display: flex;
@@ -215,24 +137,38 @@ import Container from "./Container.astro";
   }
   .impact-summary::-webkit-details-marker { display: none; }
   .impact-summary::marker { display: none; content: ""; }
-  .impact-summary:hover { background: var(--bg-raised); }
+  .impact-summary:hover {
+    background: var(--bg-raised);
+  }
 
-  .impact-summary-left { display: flex; align-items: center; gap: 0.75rem; }
+  .impact-summary-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
 
   .impact-icon {
-    width: 36px; height: 36px;
-    display: flex; align-items: center; justify-content: center;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 1px solid var(--border);
     color: var(--fg-secondary);
     flex-shrink: 0;
     transition: color 0.3s, border-color 0.3s;
   }
-  .impact-item[open] .impact-icon { color: var(--fg); border-color: var(--border-hover); }
+  .impact-item[open] .impact-icon {
+    color: var(--fg);
+    border-color: var(--border-hover);
+  }
 
   .impact-title {
     font-family: var(--font-mono);
-    font-size: 0.8125rem; font-weight: 600;
-    letter-spacing: 0.03em; color: var(--fg);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: var(--fg);
   }
 
   .impact-chevron {
@@ -240,30 +176,18 @@ import Container from "./Container.astro";
     transition: transform 0.3s var(--ease-out-expo);
     flex-shrink: 0;
   }
-  .impact-item[open] .impact-chevron { transform: rotate(180deg); }
+  .impact-item[open] .impact-chevron {
+    transform: rotate(180deg);
+  }
 
   .impact-body {
     padding: 0 1.25rem 1.25rem 3.5rem;
     animation: dropdown-in 0.3s var(--ease-out-expo);
   }
-  .impact-body p { font-size: 0.8125rem; line-height: 1.7; color: var(--fg-secondary); }
-
-  .impact-illustration {
-    margin-bottom: 0.75rem;
-    display: flex; justify-content: center;
-    overflow: visible;
-  }
-  .illust {
-    width: 100%; max-width: 280px; height: auto;
-    overflow: visible;
-  }
-
-  .impact-keywords { display: flex; flex-wrap: wrap; gap: 0.375rem; margin-top: 0.75rem; }
-  .impact-keywords span {
-    font-family: var(--font-mono); font-size: 0.5625rem;
-    letter-spacing: 0.05em; text-transform: uppercase;
-    padding: 0.25rem 0.5rem;
-    border: 1px solid var(--border); color: var(--fg-muted);
+  .impact-body p {
+    font-size: 0.8125rem;
+    line-height: 1.7;
+    color: var(--fg-secondary);
   }
 
   @keyframes dropdown-in {
@@ -271,55 +195,18 @@ import Container from "./Container.astro";
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* ── Animations (paused by default, played via JS on open) ── */
-  .anim-el { animation-play-state: paused; }
-  .impact-item[open] .anim-el { animation-play-state: running; }
-
-  /* Target */
-  .pulse { animation: target-pulse 2s ease-out infinite; }
-  .p2 { animation-delay: 1s; }
-  @keyframes target-pulse { 0% { r: 14; opacity: 0.5; } 100% { r: 40; opacity: 0; } }
-  .ring-1 { animation: ring-rotate 12s linear infinite; }
-  .ring-2 { animation: ring-rotate 8s linear infinite reverse; }
-  .ring-3 { animation: ring-rotate 15s linear infinite; }
-  @keyframes ring-rotate { from { stroke-dashoffset: 0; } to { stroke-dashoffset: 40; } }
-
-  /* Diamond */
-  .sparkle { animation: sparkle-blink 2s ease-in-out infinite; }
-  .s2 { animation-delay: 0.7s; }
-  .s3 { animation-delay: 1.4s; }
-  @keyframes sparkle-blink { 0%, 100% { opacity: 0; transform: scale(0.5); } 50% { opacity: 1; transform: scale(1.2); } }
-  .diamond { stroke-dasharray: 200; stroke-dashoffset: 200; animation: draw-diamond 1.5s ease forwards; }
-  @keyframes draw-diamond { to { stroke-dashoffset: 0; } }
-
-  /* Path */
-  .path-line { animation: path-flow 3s linear infinite; }
-  @keyframes path-flow { to { stroke-dashoffset: -28; } }
-  .moving-dot { animation: move-dot 3s ease-in-out infinite; }
-  @keyframes move-dot {
-    0% { cx: 24; cy: 50; } 25% { cx: 55; cy: 38; }
-    50% { cx: 80; cy: 50; } 75% { cx: 105; cy: 62; }
-    100% { cx: 136; cy: 50; }
-  }
-  .node { animation: node-pulse 2s ease-in-out infinite alternate; }
-  @keyframes node-pulse { from { stroke-width: 1.5; } to { stroke-width: 2.5; } }
-
-  /* Puzzle */
-  .puzzle-left { animation: puzzle-left-move 2.5s ease-in-out infinite alternate; }
-  .puzzle-right { animation: puzzle-right-move 2.5s ease-in-out infinite alternate; }
-  @keyframes puzzle-left-move { from { transform: translateX(-4px); } to { transform: translateX(2px); } }
-  @keyframes puzzle-right-move { from { transform: translateX(4px); } to { transform: translateX(-2px); } }
-  .conn-sparkle { animation: conn-flash 2.5s ease-in-out infinite alternate; }
-  @keyframes conn-flash { 0%, 60% { opacity: 0; r: 1; } 80%, 100% { opacity: 0.7; r: 4; } }
-
   @media (max-width: 480px) {
-    .impact-summary { padding: 0.75rem 1rem; }
-    .impact-body { padding: 0 1rem 1rem 2.75rem; }
+    .impact-summary {
+      padding: 0.75rem 1rem;
+    }
+    .impact-body {
+      padding: 0 1rem 1rem 2.75rem;
+    }
   }
+
   @media (prefers-reduced-motion: reduce) {
     .impact-body { animation: none; }
     .impact-chevron { transition: none; }
-    .anim-el { animation: none !important; animation-play-state: running !important; }
   }
 </style>
 
@@ -329,15 +216,8 @@ import Container from "./Container.astro";
     items.forEach((details) => {
       details.addEventListener('toggle', () => {
         if ((details as HTMLDetailsElement).open) {
-          // Close others
           items.forEach((other) => {
             if (other !== details) (other as HTMLDetailsElement).open = false;
-          });
-          // Restart animations by briefly removing and re-adding anim-el class
-          const animEls = details.querySelectorAll('.anim-el');
-          animEls.forEach((el) => {
-            const clone = el.cloneNode(true);
-            el.parentNode?.replaceChild(clone, el);
           });
         }
       });
@@ -347,3 +227,4 @@ import Container from "./Container.astro";
     ? document.addEventListener('DOMContentLoaded', initAccordion)
     : initAccordion();
 </script>
+</style>
