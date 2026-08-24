@@ -141,7 +141,10 @@ const socials = (profile.socials || {}) as Record<string, string>;
               class="mt-3 text-sm sm:text-base font-mono uppercase tracking-wider animate-in"
               style="color: var(--fg-muted); --delay: 0.2s;"
             >
-              {profile.title}
+              <span
+                data-fr="Designer graphique · UI/UX · Développeur Fullstack"
+                data-en={profile.title}>{profile.title}</span
+              >
             </p>
 
             <p
@@ -288,8 +291,6 @@ const socials = (profile.socials || {}) as Record<string, string>;
         <span class="about-marquee-sep" aria-hidden="true">✦</span>
       </div>
     </div>
-
-    <div class="section-divider" aria-hidden="true"></div>
 
     <!-- L'impact que nous créons -->
     <ImpactSection />
@@ -458,7 +459,9 @@ const socials = (profile.socials || {}) as Record<string, string>;
     position: relative;
   }
   .about-photo img {
+    display: block;
     border-radius: 8px;
+    object-position: center 20%;
   }
   .about-wave {
     position: absolute;

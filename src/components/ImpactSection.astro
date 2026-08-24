@@ -17,39 +17,105 @@ import Container from "./Container.astro";
           class="mt-4 text-base sm:text-lg max-w-xl animate-in"
           style="color: var(--fg-secondary); --delay: 0.1s;"
         >
-          Les technologies changent selon les projets. Ce qui ne change pas, c'est
-          la rigueur, la qualité et les résultats livrés.
+          Les technologies changent selon les projets. Ce qui ne change pas,
+          c'est la rigueur, la qualité et les résultats livrés.
         </p>
       </div>
 
       <div class="impact-list animate-in" style="--delay: 0.15s;">
         <!-- Orientation résultats — Target animation -->
-        <details class="impact-item">
+        <details class="impact-item" open>
           <summary class="impact-summary">
             <div class="impact-summary-left">
               <div class="impact-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  ><circle cx="12" cy="12" r="10"></circle><circle
+                    cx="12"
+                    cy="12"
+                    r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg
+                >
               </div>
               <span class="impact-title">Orientation résultats</span>
             </div>
-            <svg class="impact-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            <svg
+              class="impact-chevron"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg
+            >
           </summary>
           <div class="impact-body">
             <div class="impact-illustration">
               <svg viewBox="0 0 140 90" fill="none" class="illust">
-                <circle cx="70" cy="45" r="35" stroke="var(--border-hover)" stroke-width="1" stroke-dasharray="4 3" class="ring ring-1"/>
-                <circle cx="70" cy="45" r="23" stroke="var(--fg-muted)" stroke-width="1" stroke-dasharray="3 2" class="ring ring-2"/>
-                <circle cx="70" cy="45" r="12" stroke="var(--fg)" stroke-width="1.5" class="ring ring-3"/>
-                <circle cx="70" cy="45" r="3" fill="var(--fg)" class="bullseye"/>
-                <line x1="18" y1="78" x2="65" y2="47" stroke="var(--fg-muted)" stroke-width="1" stroke-dasharray="3 2" class="arrow-line"/>
-                <polygon points="65,47 58,43 60,50" fill="var(--fg-muted)" class="arrow-head"/>
-                <circle cx="70" cy="45" r="35" stroke="var(--fg)" stroke-width="0.5" opacity="0" class="pulse p1"/>
-                <circle cx="70" cy="45" r="35" stroke="var(--fg)" stroke-width="0.5" opacity="0" class="pulse p2"/>
+                <circle
+                  cx="70"
+                  cy="45"
+                  r="35"
+                  stroke="var(--border-hover)"
+                  stroke-width="1"
+                  stroke-dasharray="4 3"
+                  class="target-ring target-ring-outer"></circle>
+                <circle
+                  cx="70"
+                  cy="45"
+                  r="23"
+                  stroke="var(--fg-muted)"
+                  stroke-width="1"
+                  stroke-dasharray="3 2"
+                  class="target-ring target-ring-middle"></circle>
+                <circle
+                  cx="70"
+                  cy="45"
+                  r="12"
+                  stroke="var(--fg)"
+                  stroke-width="1.5"
+                  class="target-ring target-ring-inner"></circle>
+                <circle cx="70" cy="45" r="3" fill="var(--fg)" class="bullseye"
+                ></circle>
+                <line
+                  x1="18"
+                  y1="78"
+                  x2="68"
+                  y2="46.3"
+                  stroke="var(--fg-muted)"
+                  stroke-width="1"
+                  stroke-dasharray="3 2"
+                  class="arrow-line"></line>
+                <polygon
+                  points="68,46.3 59.6,48.2 62.9,53.2"
+                  fill="var(--fg-muted)"
+                  class="arrow-head"></polygon>
+                <circle
+                  cx="70"
+                  cy="45"
+                  r="35"
+                  stroke="var(--fg)"
+                  stroke-width="0.5"
+                  opacity="0"
+                  class="pulse p1"></circle>
+                <circle
+                  cx="70"
+                  cy="45"
+                  r="35"
+                  stroke="var(--fg)"
+                  stroke-width="0.5"
+                  opacity="0"
+                  class="pulse p2"></circle>
               </svg>
             </div>
             <p>
-              Chaque projet commence par une écoute active. Nous comprenons votre
-              marché, vos utilisateurs et vos contraintes avant de concevoir.
+              Chaque projet commence par une écoute active. Nous comprenons
+              votre marché, vos utilisateurs et vos contraintes avant de
+              concevoir.
             </p>
             <div class="impact-keywords">
               <span>Empathie</span><span>Wireframe</span><span>Test</span>
@@ -62,29 +128,130 @@ import Container from "./Container.astro";
           <summary class="impact-summary">
             <div class="impact-summary-left">
               <div class="impact-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  ><path
+                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                  ></path></svg
+                >
               </div>
               <span class="impact-title">Qualité sans compromis</span>
             </div>
-            <svg class="impact-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            <svg
+              class="impact-chevron"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg
+            >
           </summary>
           <div class="impact-body">
             <div class="impact-illustration">
               <svg viewBox="0 0 140 90" fill="none" class="illust">
-                <polygon points="70,10 105,45 70,80 35,45" stroke="var(--fg)" stroke-width="1.5" fill="none" class="diamond"/>
-                <line x1="35" y1="45" x2="105" y2="45" stroke="var(--fg-muted)" stroke-width="0.75" class="diamond-mid"/>
-                <line x1="70" y1="10" x2="52" y2="45" stroke="var(--fg-muted)" stroke-width="0.5" opacity="0.5"/>
-                <line x1="70" y1="10" x2="88" y2="45" stroke="var(--fg-muted)" stroke-width="0.5" opacity="0.5"/>
-                <line x1="52" y1="45" x2="70" y2="80" stroke="var(--fg-muted)" stroke-width="0.5" opacity="0.5"/>
-                <line x1="88" y1="45" x2="70" y2="80" stroke="var(--fg-muted)" stroke-width="0.5" opacity="0.5"/>
-                <g class="sparkle s1"><line x1="118" y1="15" x2="124" y2="15" stroke="var(--fg)" stroke-width="1"/><line x1="121" y1="12" x2="121" y2="18" stroke="var(--fg)" stroke-width="1"/></g>
-                <g class="sparkle s2"><line x1="12" y1="65" x2="18" y2="65" stroke="var(--fg-muted)" stroke-width="0.75"/><line x1="15" y1="62" x2="15" y2="68" stroke="var(--fg-muted)" stroke-width="0.75"/></g>
-                <g class="sparkle s3"><line x1="125" y1="60" x2="130" y2="60" stroke="var(--fg-muted)" stroke-width="0.75"/><line x1="127.5" y1="57" x2="127.5" y2="63" stroke="var(--fg-muted)" stroke-width="0.75"/></g>
+                <polygon
+                  points="70,10 105,45 70,80 35,45"
+                  stroke="var(--fg)"
+                  stroke-width="1.5"
+                  fill="none"
+                  class="diamond"></polygon>
+                <line
+                  x1="35"
+                  y1="45"
+                  x2="105"
+                  y2="45"
+                  stroke="var(--fg-muted)"
+                  stroke-width="0.75"
+                  class="diamond-mid"></line>
+                <line
+                  x1="70"
+                  y1="10"
+                  x2="52"
+                  y2="45"
+                  stroke="var(--fg-muted)"
+                  stroke-width="0.5"
+                  opacity="0.5"></line>
+                <line
+                  x1="70"
+                  y1="10"
+                  x2="88"
+                  y2="45"
+                  stroke="var(--fg-muted)"
+                  stroke-width="0.5"
+                  opacity="0.5"></line>
+                <line
+                  x1="52"
+                  y1="45"
+                  x2="70"
+                  y2="80"
+                  stroke="var(--fg-muted)"
+                  stroke-width="0.5"
+                  opacity="0.5"></line>
+                <line
+                  x1="88"
+                  y1="45"
+                  x2="70"
+                  y2="80"
+                  stroke="var(--fg-muted)"
+                  stroke-width="0.5"
+                  opacity="0.5"></line>
+                <g class="sparkle s1"
+                  ><line
+                    x1="118"
+                    y1="15"
+                    x2="124"
+                    y2="15"
+                    stroke="var(--fg)"
+                    stroke-width="1"></line><line
+                    x1="121"
+                    y1="12"
+                    x2="121"
+                    y2="18"
+                    stroke="var(--fg)"
+                    stroke-width="1"></line></g
+                >
+                <g class="sparkle s2"
+                  ><line
+                    x1="12"
+                    y1="65"
+                    x2="18"
+                    y2="65"
+                    stroke="var(--fg-muted)"
+                    stroke-width="0.75"></line><line
+                    x1="15"
+                    y1="62"
+                    x2="15"
+                    y2="68"
+                    stroke="var(--fg-muted)"
+                    stroke-width="0.75"></line></g
+                >
+                <g class="sparkle s3"
+                  ><line
+                    x1="125"
+                    y1="60"
+                    x2="130"
+                    y2="60"
+                    stroke="var(--fg-muted)"
+                    stroke-width="0.75"></line><line
+                    x1="127.5"
+                    y1="57"
+                    x2="127.5"
+                    y2="63"
+                    stroke="var(--fg-muted)"
+                    stroke-width="0.75"></line></g
+                >
               </svg>
             </div>
             <p>
               Code lisible, design pixel-perfect, performance optimale. Nous ne
-              livrons jamais un travail que nous n'aurions pas fierté de montrer.
+              livrons jamais un travail que nous n'aurions pas fierté de
+              montrer.
             </p>
             <div class="impact-keywords">
               <span>Pixels</span><span>Performance</span><span>Fiabilité</span>
@@ -97,23 +264,88 @@ import Container from "./Container.astro";
           <summary class="impact-summary">
             <div class="impact-summary-left">
               <div class="impact-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h4l3 8-3 8H4M20 4h-4l-3 8 3 8h4"/></svg>
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  ><path d="M4 4h4l3 8-3 8H4M20 4h-4l-3 8 3 8h4"></path></svg
+                >
               </div>
               <span class="impact-title">De A à Z</span>
             </div>
-            <svg class="impact-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            <svg
+              class="impact-chevron"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg
+            >
           </summary>
           <div class="impact-body">
             <div class="impact-illustration">
               <svg viewBox="0 0 140 90" fill="none" class="illust">
-                <circle cx="20" cy="45" r="10" stroke="var(--fg)" stroke-width="1.5" fill="none" class="node node-a"/>
-                <text x="20" y="49" text-anchor="middle" fill="var(--fg)" font-size="10" font-family="var(--font-mono)">A</text>
-                <circle cx="120" cy="45" r="10" stroke="var(--fg)" stroke-width="1.5" fill="none" class="node node-z"/>
-                <text x="120" y="49" text-anchor="middle" fill="var(--fg)" font-size="10" font-family="var(--font-mono)">Z</text>
-                <path d="M30 45 C45 25, 55 65, 70 45 S95 25, 110 45" stroke="var(--fg-muted)" stroke-width="1" stroke-dasharray="4 3" fill="none" class="path-line"/>
-                <circle cx="70" cy="45" r="3" fill="var(--fg)" class="moving-dot"/>
-                <circle cx="48" cy="35" r="2" fill="var(--fg-muted)" opacity="0.5"/>
-                <circle cx="92" cy="55" r="2" fill="var(--fg-muted)" opacity="0.5"/>
+                <circle
+                  cx="20"
+                  cy="45"
+                  r="10"
+                  stroke="var(--fg)"
+                  stroke-width="1.5"
+                  fill="none"
+                  class="node node-a"></circle>
+                <text
+                  x="20"
+                  y="49"
+                  text-anchor="middle"
+                  fill="var(--fg)"
+                  font-size="10"
+                  font-family="var(--font-mono)">A</text
+                >
+                <circle
+                  cx="120"
+                  cy="45"
+                  r="10"
+                  stroke="var(--fg)"
+                  stroke-width="1.5"
+                  fill="none"
+                  class="node node-z"></circle>
+                <text
+                  x="120"
+                  y="49"
+                  text-anchor="middle"
+                  fill="var(--fg)"
+                  font-size="10"
+                  font-family="var(--font-mono)">Z</text
+                >
+                <path
+                  d="M30 45 C45 25, 55 65, 70 45 S95 25, 110 45"
+                  stroke="var(--fg-muted)"
+                  stroke-width="1"
+                  stroke-dasharray="4 3"
+                  fill="none"
+                  class="path-line"></path>
+                <circle
+                  cx="70"
+                  cy="45"
+                  r="3"
+                  fill="var(--fg)"
+                  class="moving-dot"></circle>
+                <circle
+                  cx="48"
+                  cy="35"
+                  r="2"
+                  fill="var(--fg-muted)"
+                  opacity="0.5"></circle>
+                <circle
+                  cx="92"
+                  cy="55"
+                  r="2"
+                  fill="var(--fg-muted)"
+                  opacity="0.5"></circle>
               </svg>
             </div>
             <p>
@@ -121,7 +353,9 @@ import Container from "./Container.astro";
               un seul interlocuteur, une cohérence totale du début à la fin.
             </p>
             <div class="impact-keywords">
-              <span>Croquis</span><span>Développement</span><span>Déploiement</span>
+              <span>Croquis</span><span>Développement</span><span
+                >Déploiement</span
+              >
             </div>
           </div>
         </details>
@@ -131,31 +365,94 @@ import Container from "./Container.astro";
           <summary class="impact-summary">
             <div class="impact-summary-left">
               <div class="impact-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  ><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
+                  ></path><circle cx="9" cy="7" r="4"></circle><path
+                    d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"
+                  ></path></svg
+                >
               </div>
               <span class="impact-title">Intégration fluide</span>
             </div>
-            <svg class="impact-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            <svg
+              class="impact-chevron"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg
+            >
           </summary>
           <div class="impact-body">
             <div class="impact-illustration">
               <svg viewBox="0 0 140 90" fill="none" class="illust">
                 <g class="puzzle-left">
-                  <rect x="12" y="15" width="40" height="50" rx="4" stroke="var(--fg)" stroke-width="1.5" fill="none"/>
-                  <path d="M52 30 C60 30, 60 50, 52 50" stroke="var(--fg)" stroke-width="1.5" fill="none"/>
-                  <text x="32" y="44" text-anchor="middle" fill="var(--fg-muted)" font-size="8" font-family="var(--font-mono)">NOUS</text>
+                  <rect
+                    x="12"
+                    y="15"
+                    width="40"
+                    height="50"
+                    rx="4"
+                    stroke="var(--fg)"
+                    stroke-width="1.5"
+                    fill="none"></rect>
+                  <path
+                    d="M52 30 C60 30, 60 50, 52 50"
+                    stroke="var(--fg)"
+                    stroke-width="1.5"
+                    fill="none"></path>
+                  <text
+                    x="32"
+                    y="44"
+                    text-anchor="middle"
+                    fill="var(--fg-muted)"
+                    font-size="8"
+                    font-family="var(--font-mono)">NOUS</text
+                  >
                 </g>
                 <g class="puzzle-right">
-                  <rect x="75" y="15" width="40" height="50" rx="4" stroke="var(--fg-muted)" stroke-width="1.5" fill="none"/>
-                  <path d="M75 30 C67 30, 67 50, 75 50" stroke="var(--fg-muted)" stroke-width="1.5" fill="none"/>
-                  <text x="95" y="44" text-anchor="middle" fill="var(--fg-muted)" font-size="8" font-family="var(--font-mono)">VOUS</text>
+                  <rect
+                    x="75"
+                    y="15"
+                    width="40"
+                    height="50"
+                    rx="4"
+                    stroke="var(--fg-muted)"
+                    stroke-width="1.5"
+                    fill="none"></rect>
+                  <path
+                    d="M75 30 C67 30, 67 50, 75 50"
+                    stroke="var(--fg-muted)"
+                    stroke-width="1.5"
+                    fill="none"></path>
+                  <text
+                    x="95"
+                    y="44"
+                    text-anchor="middle"
+                    fill="var(--fg-muted)"
+                    font-size="8"
+                    font-family="var(--font-mono)">VOUS</text
+                  >
                 </g>
-                <circle cx="63" cy="40" r="2" fill="var(--fg)" opacity="0" class="conn-sparkle"/>
+                <circle
+                  cx="63"
+                  cy="40"
+                  r="2"
+                  fill="var(--fg)"
+                  opacity="0"
+                  class="conn-sparkle"></circle>
               </svg>
             </div>
             <p>
-              Nous nous adaptons à votre workflow. Git, sprints, revues de code —
-              nous devenons un membre à part entière de votre équipe.
+              Nous nous adaptons à votre workflow. Git, sprints, revues de code
+              — nous devenons un membre à part entière de votre équipe.
             </p>
             <div class="impact-keywords">
               <span>Git</span><span>Sprints</span><span>Co-création</span>
@@ -189,6 +486,18 @@ import Container from "./Container.astro";
     .impact-list {
       flex: 1;
       min-width: 0;
+    }
+
+    @media (min-width: 1024px) {
+      .impact-summary {
+        cursor: default;
+      }
+      .impact-summary .impact-chevron {
+        display: none;
+      }
+      .impact-item > .impact-body {
+        display: block;
+      }
     }
   }
 
@@ -233,8 +542,13 @@ import Container from "./Container.astro";
     user-select: none;
     transition: background 0.2s;
   }
-  .impact-summary::-webkit-details-marker { display: none; }
-  .impact-summary::marker { display: none; content: ""; }
+  .impact-summary::-webkit-details-marker {
+    display: none;
+  }
+  .impact-summary::marker {
+    display: none;
+    content: "";
+  }
   .impact-summary:hover {
     background: var(--bg-raised);
   }
@@ -254,7 +568,9 @@ import Container from "./Container.astro";
     border: 1px solid var(--border);
     color: var(--fg-secondary);
     flex-shrink: 0;
-    transition: color 0.3s, border-color 0.3s;
+    transition:
+      color 0.3s,
+      border-color 0.3s;
   }
   .impact-item[open] .impact-icon {
     color: var(--fg);
@@ -319,74 +635,170 @@ import Container from "./Container.astro";
   }
 
   @keyframes dropdown-in {
-    from { opacity: 0; transform: translateY(-8px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* ── Illustration animations ── */
 
   /* Target pulse */
-  .pulse { animation: target-pulse 2s ease-out infinite; }
-  .p2 { animation-delay: 1s; }
-  @keyframes target-pulse {
-    0% { r: 10; opacity: 0.6; }
-    100% { r: 35; opacity: 0; }
+  .pulse {
+    animation: target-pulse 2s ease-out infinite;
   }
-  .ring { stroke-dashoffset: 0; }
-  .ring-1 { animation: ring-rotate 12s linear infinite; }
-  .ring-2 { animation: ring-rotate 8s linear infinite reverse; }
+  .p2 {
+    animation-delay: 1s;
+  }
+  @keyframes target-pulse {
+    0% {
+      r: 10;
+      opacity: 0.6;
+    }
+    100% {
+      r: 35;
+      opacity: 0;
+    }
+  }
+  .target-ring {
+    stroke-dashoffset: 0;
+  }
+  .target-ring-outer {
+    animation: ring-rotate 12s linear infinite;
+  }
+  .target-ring-middle {
+    animation: ring-rotate 8s linear infinite reverse;
+  }
   @keyframes ring-rotate {
-    from { stroke-dashoffset: 0; }
-    to { stroke-dashoffset: 40; }
+    from {
+      stroke-dashoffset: 0;
+    }
+    to {
+      stroke-dashoffset: 40;
+    }
   }
 
   /* Diamond sparkle */
-  .sparkle { animation: sparkle-blink 2s ease-in-out infinite; }
-  .s2 { animation-delay: 0.7s; }
-  .s3 { animation-delay: 1.4s; }
-  @keyframes sparkle-blink {
-    0%, 100% { opacity: 0; transform: scale(0.5); }
-    50% { opacity: 1; transform: scale(1.2); }
+  .sparkle {
+    animation: sparkle-blink 2s ease-in-out infinite;
   }
-  .diamond { stroke-dasharray: 200; stroke-dashoffset: 200; animation: draw-diamond 1.5s ease forwards; }
+  .s2 {
+    animation-delay: 0.7s;
+  }
+  .s3 {
+    animation-delay: 1.4s;
+  }
+  @keyframes sparkle-blink {
+    0%,
+    100% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+  }
+  .diamond {
+    stroke-dasharray: 200;
+    stroke-dashoffset: 200;
+    animation: draw-diamond 1.5s ease forwards;
+  }
   @keyframes draw-diamond {
-    to { stroke-dashoffset: 0; }
+    to {
+      stroke-dashoffset: 0;
+    }
   }
 
   /* Path A→Z */
-  .path-line { stroke-dasharray: 4 3; stroke-dashoffset: 0; animation: path-flow 3s linear infinite; }
+  .path-line {
+    stroke-dasharray: 4 3;
+    stroke-dashoffset: 0;
+    animation: path-flow 3s linear infinite;
+  }
   @keyframes path-flow {
-    to { stroke-dashoffset: -28; }
+    to {
+      stroke-dashoffset: -28;
+    }
   }
-  .moving-dot { animation: move-along-path 3s ease-in-out infinite; }
+  .moving-dot {
+    animation: move-along-path 3s ease-in-out infinite;
+  }
   @keyframes move-along-path {
-    0% { cx: 20; cy: 45; }
-    25% { cx: 48; cy: 35; }
-    50% { cx: 70; cy: 45; }
-    75% { cx: 92; cy: 55; }
-    100% { cx: 120; cy: 45; }
+    0% {
+      cx: 20;
+      cy: 45;
+    }
+    25% {
+      cx: 48;
+      cy: 35;
+    }
+    50% {
+      cx: 70;
+      cy: 45;
+    }
+    75% {
+      cx: 92;
+      cy: 55;
+    }
+    100% {
+      cx: 120;
+      cy: 45;
+    }
   }
-  .node { animation: node-pulse 2s ease-in-out infinite alternate; }
+  .node {
+    animation: node-pulse 2s ease-in-out infinite alternate;
+  }
   @keyframes node-pulse {
-    from { stroke-width: 1.5; }
-    to { stroke-width: 2.5; }
+    from {
+      stroke-width: 1.5;
+    }
+    to {
+      stroke-width: 2.5;
+    }
   }
 
   /* Puzzle connect */
-  .puzzle-left { animation: puzzle-slide-right 2.5s ease-in-out infinite alternate; }
-  .puzzle-right { animation: puzzle-slide-left 2.5s ease-in-out infinite alternate; }
+  .puzzle-left {
+    animation: puzzle-slide-right 2.5s ease-in-out infinite alternate;
+  }
+  .puzzle-right {
+    animation: puzzle-slide-left 2.5s ease-in-out infinite alternate;
+  }
   @keyframes puzzle-slide-right {
-    from { transform: translateX(-5px); }
-    to { transform: translateX(3px); }
+    from {
+      transform: translateX(-5px);
+    }
+    to {
+      transform: translateX(3px);
+    }
   }
   @keyframes puzzle-slide-left {
-    from { transform: translateX(5px); }
-    to { transform: translateX(-3px); }
+    from {
+      transform: translateX(5px);
+    }
+    to {
+      transform: translateX(-3px);
+    }
   }
-  .conn-sparkle { animation: conn-flash 2.5s ease-in-out infinite alternate; }
+  .conn-sparkle {
+    animation: conn-flash 2.5s ease-in-out infinite alternate;
+  }
   @keyframes conn-flash {
-    0%, 60% { opacity: 0; r: 1; }
-    80%, 100% { opacity: 0.8; r: 4; }
+    0%,
+    60% {
+      opacity: 0;
+      r: 1;
+    }
+    80%,
+    100% {
+      opacity: 0.8;
+      r: 4;
+    }
   }
 
   @media (max-width: 480px) {
@@ -399,18 +811,45 @@ import Container from "./Container.astro";
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .impact-body { animation: none; }
-    .impact-chevron { transition: none; }
-    .pulse, .ring, .sparkle, .diamond, .path-line, .moving-dot, .node,
-    .puzzle-left, .puzzle-right, .conn-sparkle { animation: none !important; }
+    .impact-body {
+      animation: none;
+    }
+    .impact-chevron {
+      transition: none;
+    }
+    .pulse,
+    .target-ring,
+    .sparkle,
+    .diamond,
+    .path-line,
+    .moving-dot,
+    .node,
+    .puzzle-left,
+    .puzzle-right,
+    .conn-sparkle {
+      animation: none !important;
+    }
   }
 </style>
 
 <script>
   function initAccordion() {
-    const items = document.querySelectorAll('.impact-item');
+    const items = document.querySelectorAll(".impact-item");
+    const desktopQuery = window.matchMedia("(min-width: 1024px)");
+
+    function syncAccordionMode() {
+      items.forEach((item, index) => {
+        const details = item as HTMLDetailsElement;
+        details.open = desktopQuery.matches || index === 0;
+      });
+    }
+
     items.forEach((details) => {
-      details.addEventListener('toggle', () => {
+      details.addEventListener("toggle", () => {
+        if (desktopQuery.matches) {
+          (details as HTMLDetailsElement).open = true;
+          return;
+        }
         if ((details as HTMLDetailsElement).open) {
           items.forEach((other) => {
             if (other !== details) (other as HTMLDetailsElement).open = false;
@@ -418,8 +857,11 @@ import Container from "./Container.astro";
         }
       });
     });
+
+    syncAccordionMode();
+    desktopQuery.addEventListener("change", syncAccordionMode);
   }
-  document.readyState === 'loading'
-    ? document.addEventListener('DOMContentLoaded', initAccordion)
+  document.readyState === "loading"
+    ? document.addEventListener("DOMContentLoaded", initAccordion)
     : initAccordion();
 </script>

@@ -8,35 +8,122 @@ import Container from "./Container.astro";
     <div class="ts-layout">
       <div class="ts-list animate-in" style="--delay: 0.15s;">
         <!-- 01 Design Thinking — Lightbulb glow -->
-        <details class="ts-item">
+        <details class="ts-item" open>
           <summary class="ts-summary">
             <div class="ts-summary-left">
               <div class="ts-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  ><path
+                    d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"
+                  ></path></svg
+                >
               </div>
               <div class="ts-text">
                 <span class="ts-tag">01</span>
                 <span class="ts-title">Design Thinking</span>
               </div>
             </div>
-            <svg class="ts-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            <svg
+              class="ts-chevron"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg
+            >
           </summary>
           <div class="ts-body">
             <div class="ts-illustration">
               <svg viewBox="0 0 140 90" fill="none" class="illust">
-                <path d="M70 10 C50 10, 40 28, 40 40 C40 50, 50 55, 52 60 L88 60 C90 55, 100 50, 100 40 C100 28, 90 10, 70 10Z" stroke="var(--fg)" stroke-width="1.5" fill="none" class="bulb"/>
-                <line x1="55" y1="64" x2="85" y2="64" stroke="var(--fg-muted)" stroke-width="1"/>
-                <line x1="58" y1="68" x2="82" y2="68" stroke="var(--fg-muted)" stroke-width="1"/>
-                <path d="M65 68 L65 73 L75 73 L75 68" stroke="var(--fg-muted)" stroke-width="1"/>
-                <line x1="70" y1="2" x2="70" y2="6" stroke="var(--fg)" stroke-width="1" opacity="0" class="ray r1"/>
-                <line x1="30" y1="20" x2="34" y2="24" stroke="var(--fg)" stroke-width="1" opacity="0" class="ray r2"/>
-                <line x1="110" y1="20" x2="106" y2="24" stroke="var(--fg)" stroke-width="1" opacity="0" class="ray r3"/>
-                <line x1="25" y1="42" x2="32" y2="42" stroke="var(--fg-muted)" stroke-width="0.75" opacity="0" class="ray r4"/>
-                <line x1="115" y1="42" x2="108" y2="42" stroke="var(--fg-muted)" stroke-width="0.75" opacity="0" class="ray r5"/>
-                <circle cx="70" cy="38" r="15" fill="var(--fg)" opacity="0" class="glow"/>
+                <path
+                  d="M70 10 C50 10, 40 28, 40 40 C40 50, 50 55, 52 60 L88 60 C90 55, 100 50, 100 40 C100 28, 90 10, 70 10Z"
+                  stroke="var(--fg)"
+                  stroke-width="1.5"
+                  fill="none"
+                  class="bulb"></path>
+                <line
+                  x1="55"
+                  y1="64"
+                  x2="85"
+                  y2="64"
+                  stroke="var(--fg-muted)"
+                  stroke-width="1"></line>
+                <line
+                  x1="58"
+                  y1="68"
+                  x2="82"
+                  y2="68"
+                  stroke="var(--fg-muted)"
+                  stroke-width="1"></line>
+                <path
+                  d="M65 68 L65 73 L75 73 L75 68"
+                  stroke="var(--fg-muted)"
+                  stroke-width="1"></path>
+                <line
+                  x1="70"
+                  y1="2"
+                  x2="70"
+                  y2="6"
+                  stroke="var(--fg)"
+                  stroke-width="1"
+                  opacity="0"
+                  class="ray r1"></line>
+                <line
+                  x1="30"
+                  y1="20"
+                  x2="34"
+                  y2="24"
+                  stroke="var(--fg)"
+                  stroke-width="1"
+                  opacity="0"
+                  class="ray r2"></line>
+                <line
+                  x1="110"
+                  y1="20"
+                  x2="106"
+                  y2="24"
+                  stroke="var(--fg)"
+                  stroke-width="1"
+                  opacity="0"
+                  class="ray r3"></line>
+                <line
+                  x1="25"
+                  y1="42"
+                  x2="32"
+                  y2="42"
+                  stroke="var(--fg-muted)"
+                  stroke-width="0.75"
+                  opacity="0"
+                  class="ray r4"></line>
+                <line
+                  x1="115"
+                  y1="42"
+                  x2="108"
+                  y2="42"
+                  stroke="var(--fg-muted)"
+                  stroke-width="0.75"
+                  opacity="0"
+                  class="ray r5"></line>
+                <circle
+                  cx="70"
+                  cy="38"
+                  r="15"
+                  fill="var(--fg)"
+                  opacity="0"
+                  class="glow"></circle>
               </svg>
             </div>
-            <p>Placer l'humain au centre. Observer, empathiser, prototyper rapidement. Valider avant de construire.</p>
+            <p>
+              Placer l'humain au centre. Observer, empathiser, prototyper
+              rapidement. Valider avant de construire.
+            </p>
             <div class="ts-keywords">
               <span>Empathie</span><span>Wireframe</span><span>Test</span>
             </div>
@@ -48,37 +135,154 @@ import Container from "./Container.astro";
           <summary class="ts-summary">
             <div class="ts-summary-left">
               <div class="ts-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 20h20M5 20V8l7-6 7 6v12M9 20v-6h6v6"/></svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  ><path d="M2 20h20M5 20V8l7-6 7 6v12M9 20v-6h6v6"></path></svg
+                >
               </div>
               <div class="ts-text">
                 <span class="ts-tag">02</span>
                 <span class="ts-title">Pensée Stratégique</span>
               </div>
             </div>
-            <svg class="ts-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            <svg
+              class="ts-chevron"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg
+            >
           </summary>
           <div class="ts-body">
             <div class="ts-illustration">
               <svg viewBox="0 0 140 90" fill="none" class="illust">
-                <rect x="25" y="5" width="80" height="75" stroke="var(--border)" stroke-width="0.5" fill="none"/>
-                <line x1="45" y1="5" x2="45" y2="80" stroke="var(--border)" stroke-width="0.5"/>
-                <line x1="65" y1="5" x2="65" y2="80" stroke="var(--border)" stroke-width="0.5"/>
-                <line x1="85" y1="5" x2="85" y2="80" stroke="var(--border)" stroke-width="0.5"/>
-                <line x1="25" y1="28" x2="105" y2="28" stroke="var(--border)" stroke-width="0.5"/>
-                <line x1="25" y1="48" x2="105" y2="48" stroke="var(--border)" stroke-width="0.5"/>
-                <line x1="25" y1="68" x2="105" y2="68" stroke="var(--border)" stroke-width="0.5"/>
-                <circle cx="35" cy="72" r="4" stroke="var(--fg-muted)" stroke-width="1" fill="none" class="step s-a"/>
-                <circle cx="55" cy="55" r="4" stroke="var(--fg-muted)" stroke-width="1" fill="none" class="step s-b"/>
-                <circle cx="75" cy="38" r="4" stroke="var(--fg)" stroke-width="1.5" fill="none" class="step s-c"/>
-                <circle cx="95" cy="20" r="4" stroke="var(--fg)" stroke-width="1.5" fill="var(--fg)" opacity="0.2" class="step s-d"/>
-                <line x1="39" y1="68" x2="51" y2="59" stroke="var(--fg-muted)" stroke-width="0.75" stroke-dasharray="2 2" class="arrow a1"/>
-                <line x1="59" y1="51" x2="71" y2="42" stroke="var(--fg-muted)" stroke-width="0.75" stroke-dasharray="2 2" class="arrow a2"/>
-                <line x1="79" y1="34" x2="91" y2="24" stroke="var(--fg)" stroke-width="0.75" stroke-dasharray="2 2" class="arrow a3"/>
+                <rect
+                  x="25"
+                  y="5"
+                  width="80"
+                  height="75"
+                  stroke="var(--border)"
+                  stroke-width="0.5"
+                  fill="none"></rect>
+                <line
+                  x1="45"
+                  y1="5"
+                  x2="45"
+                  y2="80"
+                  stroke="var(--border)"
+                  stroke-width="0.5"></line>
+                <line
+                  x1="65"
+                  y1="5"
+                  x2="65"
+                  y2="80"
+                  stroke="var(--border)"
+                  stroke-width="0.5"></line>
+                <line
+                  x1="85"
+                  y1="5"
+                  x2="85"
+                  y2="80"
+                  stroke="var(--border)"
+                  stroke-width="0.5"></line>
+                <line
+                  x1="25"
+                  y1="28"
+                  x2="105"
+                  y2="28"
+                  stroke="var(--border)"
+                  stroke-width="0.5"></line>
+                <line
+                  x1="25"
+                  y1="48"
+                  x2="105"
+                  y2="48"
+                  stroke="var(--border)"
+                  stroke-width="0.5"></line>
+                <line
+                  x1="25"
+                  y1="68"
+                  x2="105"
+                  y2="68"
+                  stroke="var(--border)"
+                  stroke-width="0.5"></line>
+                <circle
+                  cx="35"
+                  cy="72"
+                  r="4"
+                  stroke="var(--fg-muted)"
+                  stroke-width="1"
+                  fill="none"
+                  class="step s-a"></circle>
+                <circle
+                  cx="55"
+                  cy="55"
+                  r="4"
+                  stroke="var(--fg-muted)"
+                  stroke-width="1"
+                  fill="none"
+                  class="step s-b"></circle>
+                <circle
+                  cx="75"
+                  cy="38"
+                  r="4"
+                  stroke="var(--fg)"
+                  stroke-width="1.5"
+                  fill="none"
+                  class="step s-c"></circle>
+                <circle
+                  cx="95"
+                  cy="20"
+                  r="4"
+                  stroke="var(--fg)"
+                  stroke-width="1.5"
+                  fill="var(--fg)"
+                  opacity="0.2"
+                  class="step s-d"></circle>
+                <line
+                  x1="39"
+                  y1="68"
+                  x2="51"
+                  y2="59"
+                  stroke="var(--fg-muted)"
+                  stroke-width="0.75"
+                  stroke-dasharray="2 2"
+                  class="arrow a1"></line>
+                <line
+                  x1="59"
+                  y1="51"
+                  x2="71"
+                  y2="42"
+                  stroke="var(--fg-muted)"
+                  stroke-width="0.75"
+                  stroke-dasharray="2 2"
+                  class="arrow a2"></line>
+                <line
+                  x1="79"
+                  y1="34"
+                  x2="91"
+                  y2="24"
+                  stroke="var(--fg)"
+                  stroke-width="0.75"
+                  stroke-dasharray="2 2"
+                  class="arrow a3"></line>
               </svg>
             </div>
-            <p>Comprendre le marché, la concurrence, les objectifs business. Chaque choix visuel a un impact mesurable.</p>
+            <p>
+              Comprendre le marché, la concurrence, les objectifs business.
+              Chaque choix visuel a un impact mesurable.
+            </p>
             <div class="ts-keywords">
-              <span>Positionnement</span><span>Objectifs</span><span>Métriques</span>
+              <span>Positionnement</span><span>Objectifs</span><span
+                >Métriques</span
+              >
             </div>
           </div>
         </details>
@@ -88,29 +292,100 @@ import Container from "./Container.astro";
           <summary class="ts-summary">
             <div class="ts-summary-left">
               <div class="ts-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  ><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path
+                    d="M2 17l10 5 10-5M2 12l10 5 10-5"></path></svg
+                >
               </div>
               <div class="ts-text">
                 <span class="ts-tag">03</span>
                 <span class="ts-title">Créativité Visuelle</span>
               </div>
             </div>
-            <svg class="ts-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            <svg
+              class="ts-chevron"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg
+            >
           </summary>
           <div class="ts-body">
             <div class="ts-illustration">
               <svg viewBox="0 0 140 90" fill="none" class="illust">
-                <ellipse cx="65" cy="42" rx="45" ry="32" stroke="var(--fg)" stroke-width="1.5" fill="none" class="palette"/>
-                <circle cx="42" cy="28" r="6" fill="var(--fg)" opacity="0.15" class="color-dot c1"/>
-                <circle cx="62" cy="25" r="6" fill="var(--fg)" opacity="0.25" class="color-dot c2"/>
-                <circle cx="82" cy="32" r="6" fill="var(--fg)" opacity="0.4" class="color-dot c3"/>
-                <circle cx="48" cy="50" r="6" fill="var(--fg)" opacity="0.55" class="color-dot c4"/>
-                <circle cx="72" cy="50" r="6" fill="var(--fg)" opacity="0.7" class="color-dot c5"/>
-                <path d="M100 12 C105 18, 112 28, 118 22" stroke="var(--fg-muted)" stroke-width="2" stroke-linecap="round" fill="none" class="brush"/>
-                <line x1="98" y1="10" x2="120" y2="30" stroke="var(--fg-muted)" stroke-width="0.75" class="brush-handle"/>
+                <ellipse
+                  cx="65"
+                  cy="42"
+                  rx="45"
+                  ry="32"
+                  stroke="var(--fg)"
+                  stroke-width="1.5"
+                  fill="none"
+                  class="palette"></ellipse>
+                <circle
+                  cx="42"
+                  cy="28"
+                  r="6"
+                  fill="var(--fg)"
+                  opacity="0.15"
+                  class="color-dot c1"></circle>
+                <circle
+                  cx="62"
+                  cy="25"
+                  r="6"
+                  fill="var(--fg)"
+                  opacity="0.25"
+                  class="color-dot c2"></circle>
+                <circle
+                  cx="82"
+                  cy="32"
+                  r="6"
+                  fill="var(--fg)"
+                  opacity="0.4"
+                  class="color-dot c3"></circle>
+                <circle
+                  cx="48"
+                  cy="50"
+                  r="6"
+                  fill="var(--fg)"
+                  opacity="0.55"
+                  class="color-dot c4"></circle>
+                <circle
+                  cx="72"
+                  cy="50"
+                  r="6"
+                  fill="var(--fg)"
+                  opacity="0.7"
+                  class="color-dot c5"></circle>
+                <path
+                  d="M100 12 C105 18, 112 28, 118 22"
+                  stroke="var(--fg-muted)"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  fill="none"
+                  class="brush"></path>
+                <line
+                  x1="98"
+                  y1="10"
+                  x2="120"
+                  y2="30"
+                  stroke="var(--fg-muted)"
+                  stroke-width="0.75"
+                  class="brush-handle"></line>
               </svg>
             </div>
-            <p>Explorer des directions inattendues. Typographie, couleur, composition — chaque pixel raconte une histoire.</p>
+            <p>
+              Explorer des directions inattendues. Typographie, couleur,
+              composition — chaque pixel raconte une histoire.
+            </p>
             <div class="ts-keywords">
               <span>Identité</span><span>Typo</span><span>Composition</span>
             </div>
@@ -122,32 +397,114 @@ import Container from "./Container.astro";
           <summary class="ts-summary">
             <div class="ts-summary-left">
               <div class="ts-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  ><polyline points="16 18 22 12 16 6"></polyline><polyline
+                    points="8 6 2 12 8 18"></polyline></svg
+                >
               </div>
               <div class="ts-text">
                 <span class="ts-tag">04</span>
                 <span class="ts-title">Approche Technique</span>
               </div>
             </div>
-            <svg class="ts-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            <svg
+              class="ts-chevron"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg
+            >
           </summary>
           <div class="ts-body">
             <div class="ts-illustration">
               <svg viewBox="0 0 140 90" fill="none" class="illust">
-                <rect x="18" y="8" width="100" height="70" rx="4" stroke="var(--fg)" stroke-width="1.5" fill="none"/>
-                <line x1="18" y1="22" x2="118" y2="22" stroke="var(--fg-muted)" stroke-width="0.75"/>
-                <circle cx="27" cy="15" r="2" fill="var(--fg-muted)" opacity="0.4"/>
-                <circle cx="35" cy="15" r="2" fill="var(--fg-muted)" opacity="0.4"/>
-                <circle cx="43" cy="15" r="2" fill="var(--fg-muted)" opacity="0.4"/>
-                <text x="26" y="34" fill="var(--fg-muted)" font-size="6" font-family="var(--font-mono)" class="code-line cl1">&lt;Component /&gt;</text>
-                <text x="26" y="44" fill="var(--fg)" font-size="6" font-family="var(--font-mono)" class="code-line cl2">  render()</text>
-                <text x="26" y="54" fill="var(--fg-muted)" font-size="6" font-family="var(--font-mono)" class="code-line cl3">  return view</text>
-                <rect x="26" y="58" width="4" height="7" fill="var(--fg)" class="cursor-blink"/>
+                <rect
+                  x="18"
+                  y="8"
+                  width="100"
+                  height="70"
+                  rx="4"
+                  stroke="var(--fg)"
+                  stroke-width="1.5"
+                  fill="none"></rect>
+                <line
+                  x1="18"
+                  y1="22"
+                  x2="118"
+                  y2="22"
+                  stroke="var(--fg-muted)"
+                  stroke-width="0.75"></line>
+                <circle
+                  cx="27"
+                  cy="15"
+                  r="2"
+                  fill="var(--fg-muted)"
+                  opacity="0.4"></circle>
+                <circle
+                  cx="35"
+                  cy="15"
+                  r="2"
+                  fill="var(--fg-muted)"
+                  opacity="0.4"></circle>
+                <circle
+                  cx="43"
+                  cy="15"
+                  r="2"
+                  fill="var(--fg-muted)"
+                  opacity="0.4"></circle>
+                <text
+                  x="26"
+                  y="34"
+                  fill="var(--fg-muted)"
+                  font-size="6"
+                  font-family="var(--font-mono)"
+                  class="code-line cl1">&lt;Component /&gt;</text
+                >
+                <text
+                  x="26"
+                  y="44"
+                  fill="var(--fg)"
+                  font-size="6"
+                  font-family="var(--font-mono)"
+                  class="code-line cl2"
+                >
+                  render()</text
+                >
+                <text
+                  x="26"
+                  y="54"
+                  fill="var(--fg-muted)"
+                  font-size="6"
+                  font-family="var(--font-mono)"
+                  class="code-line cl3"
+                >
+                  return view</text
+                >
+                <rect
+                  x="26"
+                  y="58"
+                  width="4"
+                  height="7"
+                  fill="var(--fg)"
+                  class="cursor-blink"></rect>
               </svg>
             </div>
-            <p>Code propre et performant. Accessibilité, responsive, optimisation — la beauté ne s'arrête pas au maquettage.</p>
+            <p>
+              Code propre et performant. Accessibilité, responsive, optimisation
+              — la beauté ne s'arrête pas au maquettage.
+            </p>
             <div class="ts-keywords">
-              <span>Accessibilité</span><span>Performance</span><span>Clean code</span>
+              <span>Accessibilité</span><span>Performance</span><span
+                >Clean code</span
+              >
             </div>
           </div>
         </details>
@@ -157,30 +514,106 @@ import Container from "./Container.astro";
           <summary class="ts-summary">
             <div class="ts-summary-left">
               <div class="ts-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  ><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
+                  ></path><circle cx="9" cy="7" r="4"></circle><path
+                    d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"
+                  ></path></svg
+                >
               </div>
               <div class="ts-text">
                 <span class="ts-tag">05</span>
                 <span class="ts-title">Collaboration</span>
               </div>
             </div>
-            <svg class="ts-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            <svg
+              class="ts-chevron"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg
+            >
           </summary>
           <div class="ts-body">
             <div class="ts-illustration">
               <svg viewBox="0 0 140 90" fill="none" class="illust">
-                <circle cx="42" cy="42" r="20" stroke="var(--fg)" stroke-width="1.5" fill="none" class="person p-left"/>
-                <circle cx="42" cy="34" r="5" stroke="var(--fg-muted)" stroke-width="1" fill="none"/>
-                <path d="M27 56 C27 48, 57 48, 57 56" stroke="var(--fg-muted)" stroke-width="1" fill="none"/>
-                <circle cx="92" cy="42" r="20" stroke="var(--fg-muted)" stroke-width="1.5" fill="none" class="person p-right"/>
-                <circle cx="92" cy="34" r="5" stroke="var(--fg-muted)" stroke-width="1" fill="none"/>
-                <path d="M77 56 C77 48, 107 48, 107 56" stroke="var(--fg-muted)" stroke-width="1" fill="none"/>
-                <line x1="62" y1="42" x2="78" y2="42" stroke="var(--fg)" stroke-width="1" stroke-dasharray="3 2" class="conn-line"/>
-                <circle cx="67" cy="34" r="2" fill="var(--fg)" opacity="0" class="shared-sparkle sp1"/>
-                <circle cx="67" cy="50" r="1.5" fill="var(--fg-muted)" opacity="0" class="shared-sparkle sp2"/>
+                <circle
+                  cx="42"
+                  cy="42"
+                  r="20"
+                  stroke="var(--fg)"
+                  stroke-width="1.5"
+                  fill="none"
+                  class="person p-left"></circle>
+                <circle
+                  cx="42"
+                  cy="34"
+                  r="5"
+                  stroke="var(--fg-muted)"
+                  stroke-width="1"
+                  fill="none"></circle>
+                <path
+                  d="M27 56 C27 48, 57 48, 57 56"
+                  stroke="var(--fg-muted)"
+                  stroke-width="1"
+                  fill="none"></path>
+                <circle
+                  cx="92"
+                  cy="42"
+                  r="20"
+                  stroke="var(--fg-muted)"
+                  stroke-width="1.5"
+                  fill="none"
+                  class="person p-right"></circle>
+                <circle
+                  cx="92"
+                  cy="34"
+                  r="5"
+                  stroke="var(--fg-muted)"
+                  stroke-width="1"
+                  fill="none"></circle>
+                <path
+                  d="M77 56 C77 48, 107 48, 107 56"
+                  stroke="var(--fg-muted)"
+                  stroke-width="1"
+                  fill="none"></path>
+                <line
+                  x1="62"
+                  y1="42"
+                  x2="78"
+                  y2="42"
+                  stroke="var(--fg)"
+                  stroke-width="1"
+                  stroke-dasharray="3 2"
+                  class="conn-line"></line>
+                <circle
+                  cx="67"
+                  cy="34"
+                  r="2"
+                  fill="var(--fg)"
+                  opacity="0"
+                  class="shared-sparkle sp1"></circle>
+                <circle
+                  cx="67"
+                  cy="50"
+                  r="1.5"
+                  fill="var(--fg-muted)"
+                  opacity="0"
+                  class="shared-sparkle sp2"></circle>
               </svg>
             </div>
-            <p>Un projet réussi est un projet partagé. Communication transparente, retours itératifs, co-création avec l'équipe client.</p>
+            <p>
+              Un projet réussi est un projet partagé. Communication
+              transparente, retours itératifs, co-création avec l'équipe client.
+            </p>
             <div class="ts-keywords">
               <span>Ateliers</span><span>Retours</span><span>Co-création</span>
             </div>
@@ -199,8 +632,8 @@ import Container from "./Container.astro";
           class="mt-4 text-base sm:text-lg max-w-xl animate-in"
           style="color: var(--fg-secondary); --delay: 0.1s;"
         >
-          Nous ne sommes pas qu'un seul profil. Chaque projet mobilise différentes
-          facettes de notre approche créative.
+          Nous ne sommes pas qu'un seul profil. Chaque projet mobilise
+          différentes facettes de notre approche créative.
         </p>
       </div>
     </div>
@@ -232,6 +665,18 @@ import Container from "./Container.astro";
     .ts-list {
       flex: 1;
       min-width: 0;
+    }
+
+    @media (min-width: 1024px) {
+      .ts-summary {
+        cursor: default;
+      }
+      .ts-summary .ts-chevron {
+        display: none;
+      }
+      .ts-item > .ts-body {
+        display: block;
+      }
     }
   }
 
@@ -276,8 +721,13 @@ import Container from "./Container.astro";
     user-select: none;
     transition: background 0.2s;
   }
-  .ts-summary::-webkit-details-marker { display: none; }
-  .ts-summary::marker { display: none; content: ""; }
+  .ts-summary::-webkit-details-marker {
+    display: none;
+  }
+  .ts-summary::marker {
+    display: none;
+    content: "";
+  }
   .ts-summary:hover {
     background: var(--bg-raised);
   }
@@ -297,7 +747,9 @@ import Container from "./Container.astro";
     border: 1px solid var(--border);
     color: var(--fg-secondary);
     flex-shrink: 0;
-    transition: color 0.3s, border-color 0.3s;
+    transition:
+      color 0.3s,
+      border-color 0.3s;
   }
   .ts-item[open] .ts-icon {
     color: var(--fg);
@@ -375,94 +827,226 @@ import Container from "./Container.astro";
   }
 
   @keyframes ts-dropdown-in {
-    from { opacity: 0; transform: translateY(-8px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* ── Illustration animations ── */
 
   /* Lightbulb glow */
-  .ray { animation: ray-flash 2s ease-in-out infinite; }
-  .r2 { animation-delay: 0.3s; }
-  .r3 { animation-delay: 0.6s; }
-  .r4 { animation-delay: 0.9s; }
-  .r5 { animation-delay: 1.2s; }
-  @keyframes ray-flash {
-    0%, 100% { opacity: 0; }
-    50% { opacity: 0.8; }
+  .ray {
+    animation: ray-flash 2s ease-in-out infinite;
   }
-  .glow { animation: glow-pulse 2s ease-in-out infinite; }
+  .r2 {
+    animation-delay: 0.3s;
+  }
+  .r3 {
+    animation-delay: 0.6s;
+  }
+  .r4 {
+    animation-delay: 0.9s;
+  }
+  .r5 {
+    animation-delay: 1.2s;
+  }
+  @keyframes ray-flash {
+    0%,
+    100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+  .glow {
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
   @keyframes glow-pulse {
-    0%, 100% { opacity: 0; }
-    50% { opacity: 0.08; }
+    0%,
+    100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0.08;
+    }
   }
 
   /* Strategy path */
-  .step { animation: step-appear 0.4s ease forwards; opacity: 0; }
-  .s-a { animation-delay: 0s; }
-  .s-b { animation-delay: 0.3s; }
-  .s-c { animation-delay: 0.6s; }
-  .s-d { animation-delay: 0.9s; }
-  @keyframes step-appear {
-    from { opacity: 0; r: 0; }
-    to { opacity: 1; }
+  .step {
+    animation: step-appear 0.4s ease forwards;
+    opacity: 0;
   }
-  .arrow { animation: arrow-draw 0.3s ease forwards; stroke-dashoffset: 30; stroke-dasharray: 30; }
-  .a1 { animation-delay: 0.2s; }
-  .a2 { animation-delay: 0.5s; }
-  .a3 { animation-delay: 0.8s; }
+  .s-a {
+    animation-delay: 0s;
+  }
+  .s-b {
+    animation-delay: 0.3s;
+  }
+  .s-c {
+    animation-delay: 0.6s;
+  }
+  .s-d {
+    animation-delay: 0.9s;
+  }
+  @keyframes step-appear {
+    from {
+      opacity: 0;
+      r: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  .arrow {
+    animation: arrow-draw 0.3s ease forwards;
+    stroke-dashoffset: 30;
+    stroke-dasharray: 30;
+  }
+  .a1 {
+    animation-delay: 0.2s;
+  }
+  .a2 {
+    animation-delay: 0.5s;
+  }
+  .a3 {
+    animation-delay: 0.8s;
+  }
   @keyframes arrow-draw {
-    to { stroke-dashoffset: 0; }
+    to {
+      stroke-dashoffset: 0;
+    }
   }
 
   /* Color palette */
-  .color-dot { animation: color-pop 0.3s ease forwards; transform-origin: center; transform: scale(0); }
-  .c1 { animation-delay: 0.1s; }
-  .c2 { animation-delay: 0.25s; }
-  .c3 { animation-delay: 0.4s; }
-  .c4 { animation-delay: 0.55s; }
-  .c5 { animation-delay: 0.7s; }
-  @keyframes color-pop {
-    from { transform: scale(0); }
-    60% { transform: scale(1.3); }
-    to { transform: scale(1); }
+  .color-dot {
+    animation: color-pop 0.3s ease forwards;
+    transform-origin: center;
+    transform: scale(0);
   }
-  .brush { stroke-dasharray: 40; stroke-dashoffset: 40; animation: brush-draw 0.8s ease 0.5s forwards; }
-  @keyframes brush-draw { to { stroke-dashoffset: 0; } }
+  .c1 {
+    animation-delay: 0.1s;
+  }
+  .c2 {
+    animation-delay: 0.25s;
+  }
+  .c3 {
+    animation-delay: 0.4s;
+  }
+  .c4 {
+    animation-delay: 0.55s;
+  }
+  .c5 {
+    animation-delay: 0.7s;
+  }
+  @keyframes color-pop {
+    from {
+      transform: scale(0);
+    }
+    60% {
+      transform: scale(1.3);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  .brush {
+    stroke-dasharray: 40;
+    stroke-dashoffset: 40;
+    animation: brush-draw 0.8s ease 0.5s forwards;
+  }
+  @keyframes brush-draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
 
   /* Terminal code */
-  .code-line { opacity: 0; animation: code-type 0.3s ease forwards; }
-  .cl1 { animation-delay: 0.1s; }
-  .cl2 { animation-delay: 0.4s; }
-  .cl3 { animation-delay: 0.7s; }
-  @keyframes code-type {
-    from { opacity: 0; }
-    to { opacity: 1; }
+  .code-line {
+    opacity: 0;
+    animation: code-type 0.3s ease forwards;
   }
-  .cursor-blink { animation: cursor-blink 1s step-end infinite; }
+  .cl1 {
+    animation-delay: 0.1s;
+  }
+  .cl2 {
+    animation-delay: 0.4s;
+  }
+  .cl3 {
+    animation-delay: 0.7s;
+  }
+  @keyframes code-type {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  .cursor-blink {
+    animation: cursor-blink 1s step-end infinite;
+  }
   @keyframes cursor-blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
   }
 
   /* Collaboration */
-  .conn-line { stroke-dashoffset: 20; animation: conn-draw 1.5s ease-in-out infinite alternate; }
+  .conn-line {
+    stroke-dashoffset: 20;
+    animation: conn-draw 1.5s ease-in-out infinite alternate;
+  }
   @keyframes conn-draw {
-    from { stroke-dashoffset: 20; }
-    to { stroke-dashoffset: 0; }
+    from {
+      stroke-dashoffset: 20;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
   }
-  .shared-sparkle { animation: sparkle-float 2s ease-in-out infinite; }
-  .sp1 { animation-delay: 0s; }
-  .sp2 { animation-delay: 1s; }
+  .shared-sparkle {
+    animation: sparkle-float 2s ease-in-out infinite;
+  }
+  .sp1 {
+    animation-delay: 0s;
+  }
+  .sp2 {
+    animation-delay: 1s;
+  }
   @keyframes sparkle-float {
-    0%, 100% { opacity: 0; transform: translateY(0); }
-    50% { opacity: 0.7; transform: translateY(-3px); }
+    0%,
+    100% {
+      opacity: 0;
+      transform: translateY(0);
+    }
+    50% {
+      opacity: 0.7;
+      transform: translateY(-3px);
+    }
   }
-  .person { animation: person-breathe 3s ease-in-out infinite alternate; }
-  .p-right { animation-delay: 1.5s; }
+  .person {
+    animation: person-breathe 3s ease-in-out infinite alternate;
+  }
+  .p-right {
+    animation-delay: 1.5s;
+  }
   @keyframes person-breathe {
-    from { stroke-width: 1.5; }
-    to { stroke-width: 2; }
+    from {
+      stroke-width: 1.5;
+    }
+    to {
+      stroke-width: 2;
+    }
   }
 
   @media (max-width: 480px) {
@@ -475,21 +1059,57 @@ import Container from "./Container.astro";
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .ts-body { animation: none; }
-    .ts-chevron { transition: none; }
-    .ray, .glow, .step, .arrow, .color-dot, .brush, .code-line,
-    .cursor-blink, .conn-line, .shared-sparkle, .person { animation: none !important; }
-    .step, .code-line { opacity: 1; }
-    .color-dot { transform: scale(1); }
-    .brush, .arrow { stroke-dashoffset: 0; }
+    .ts-body {
+      animation: none;
+    }
+    .ts-chevron {
+      transition: none;
+    }
+    .ray,
+    .glow,
+    .step,
+    .arrow,
+    .color-dot,
+    .brush,
+    .code-line,
+    .cursor-blink,
+    .conn-line,
+    .shared-sparkle,
+    .person {
+      animation: none !important;
+    }
+    .step,
+    .code-line {
+      opacity: 1;
+    }
+    .color-dot {
+      transform: scale(1);
+    }
+    .brush,
+    .arrow {
+      stroke-dashoffset: 0;
+    }
   }
 </style>
 
 <script>
   function initTsAccordion() {
-    const items = document.querySelectorAll('.ts-item');
+    const items = document.querySelectorAll(".ts-item");
+    const desktopQuery = window.matchMedia("(min-width: 1024px)");
+
+    function syncAccordionMode() {
+      items.forEach((item, index) => {
+        const details = item as HTMLDetailsElement;
+        details.open = desktopQuery.matches || index === 0;
+      });
+    }
+
     items.forEach((details) => {
-      details.addEventListener('toggle', () => {
+      details.addEventListener("toggle", () => {
+        if (desktopQuery.matches) {
+          (details as HTMLDetailsElement).open = true;
+          return;
+        }
         if ((details as HTMLDetailsElement).open) {
           items.forEach((other) => {
             if (other !== details) (other as HTMLDetailsElement).open = false;
@@ -497,8 +1117,11 @@ import Container from "./Container.astro";
         }
       });
     });
+
+    syncAccordionMode();
+    desktopQuery.addEventListener("change", syncAccordionMode);
   }
-  document.readyState === 'loading'
-    ? document.addEventListener('DOMContentLoaded', initTsAccordion)
+  document.readyState === "loading"
+    ? document.addEventListener("DOMContentLoaded", initTsAccordion)
     : initTsAccordion();
 </script>

@@ -6,80 +6,146 @@ import Container from "./Container.astro";
 
 <section class="section" style="background: var(--bg-raised);">
   <Container>
-    <h2
-      class="text-2xl sm:text-3xl md:text-4xl font-bold text-center animate-in"
-      style="color: var(--fg);"
-    >
-      Expertise.
-    </h2>
-    <p
-      class="mt-4 text-center text-base sm:text-lg max-w-xl mx-auto animate-in"
-      style="color: var(--fg-secondary); --delay: 0.1s;"
-    >
-      Un écosystème de compétences combinées pour chaque projet.
-    </p>
+    <div class="orbital-layout">
+      <div class="orbital-copy">
+        <h2
+          class="text-2xl sm:text-3xl md:text-4xl font-bold animate-in"
+          style="color: var(--fg);"
+        >
+          Expertise.
+        </h2>
+        <p
+          class="mt-4 text-base sm:text-lg max-w-xl animate-in"
+          style="color: var(--fg-secondary); --delay: 0.1s;"
+        >
+          Un écosystème de compétences combinées pour chaque projet.
+        </p>
+      </div>
 
-    <div class="orbital-container animate-in" style="--delay: 0.2s;">
-      <div class="orbital-system">
-        <!-- Center -->
-        <div class="orbital-center">
-          <img src="/favicon.svg" alt="" class="w-8 h-8" style="filter: invert(var(--logo-invert, 0)); opacity: 0.4;" />
-        </div>
+      <div class="orbital-container animate-in" style="--delay: 0.2s;">
+        <div class="orbital-system">
+          <!-- Center -->
+          <div class="orbital-center">
+            <img
+              src="/favicon.svg"
+              alt=""
+              class="w-8 h-8"
+              style="filter: invert(var(--logo-invert, 0)); opacity: 0.4;"
+            />
+          </div>
 
-        <!-- Orbit rings (visual dashed circles) -->
-        <div class="orbital-ring orbital-ring--1"></div>
-        <div class="orbital-ring orbital-ring--2"></div>
-        <div class="orbital-ring orbital-ring--3"></div>
+          <!-- Orbit rings (visual dashed circles) -->
+          <div class="orbital-ring orbital-ring--1"></div>
+          <div class="orbital-ring orbital-ring--2"></div>
+          <div class="orbital-ring orbital-ring--3"></div>
 
-        <!-- Ring 1 items — radius 90px, 2 items 180° apart -->
-        <div class="orbital-item" style="--r: 90px; --start: 0deg; --speed: 20s;">
-          <span class="orbital-label">UI/UX</span>
-        </div>
-        <div class="orbital-item" style="--r: 90px; --start: 180deg; --speed: 20s;">
-          <span class="orbital-label">Design System</span>
-        </div>
+          <!-- Ring 1 items — radius 90px, 2 items 180° apart -->
+          <div
+            class="orbital-item"
+            style="--r: 90px; --start: 0deg; --speed: 20s;"
+          >
+            <span class="orbital-label">UI/UX</span>
+          </div>
+          <div
+            class="orbital-item"
+            style="--r: 90px; --start: 180deg; --speed: 20s;"
+          >
+            <span class="orbital-label">Design System</span>
+          </div>
 
-        <!-- Ring 2 items — radius 140px, 3 items 120° apart -->
-        <div class="orbital-item" style="--r: 140px; --start: 30deg; --speed: 28s;">
-          <span class="orbital-label">Performance</span>
-        </div>
-        <div class="orbital-item" style="--r: 140px; --start: 150deg; --speed: 28s;">
-          <span class="orbital-label">Accessibilité</span>
-        </div>
-        <div class="orbital-item" style="--r: 140px; --start: 270deg; --speed: 28s;">
-          <span class="orbital-label">Animation</span>
-        </div>
+          <!-- Ring 2 items — radius 140px, 3 items 120° apart -->
+          <div
+            class="orbital-item"
+            style="--r: 140px; --start: 30deg; --speed: 28s;"
+          >
+            <span class="orbital-label">Performance</span>
+          </div>
+          <div
+            class="orbital-item"
+            style="--r: 140px; --start: 150deg; --speed: 28s;"
+          >
+            <span class="orbital-label">Accessibilité</span>
+          </div>
+          <div
+            class="orbital-item"
+            style="--r: 140px; --start: 270deg; --speed: 28s;"
+          >
+            <span class="orbital-label">Animation</span>
+          </div>
 
-        <!-- Ring 3 items — radius 190px, 4 items 90° apart -->
-        <div class="orbital-item" style="--r: 190px; --start: 0deg; --speed: 38s;">
-          <span class="orbital-label">Responsive</span>
-        </div>
-        <div class="orbital-item" style="--r: 190px; --start: 90deg; --speed: 38s;">
-          <span class="orbital-label">Architecture</span>
-        </div>
-        <div class="orbital-item" style="--r: 190px; --start: 180deg; --speed: 38s;">
-          <span class="orbital-label">DevOps</span>
-        </div>
-        <div class="orbital-item" style="--r: 190px; --start: 270deg; --speed: 38s;">
-          <span class="orbital-label">API Design</span>
-        </div>
+          <!-- Ring 3 items — radius 190px, 4 items 90° apart -->
+          <div
+            class="orbital-item"
+            style="--r: 190px; --start: 0deg; --speed: 38s;"
+          >
+            <span class="orbital-label">Responsive</span>
+          </div>
+          <div
+            class="orbital-item"
+            style="--r: 190px; --start: 90deg; --speed: 38s;"
+          >
+            <span class="orbital-label">Architecture</span>
+          </div>
+          <div
+            class="orbital-item"
+            style="--r: 190px; --start: 180deg; --speed: 38s;"
+          >
+            <span class="orbital-label">DevOps</span>
+          </div>
+          <div
+            class="orbital-item"
+            style="--r: 190px; --start: 270deg; --speed: 38s;"
+          >
+            <span class="orbital-label">API Design</span>
+          </div>
 
-        <!-- Ambient particles -->
-        <div class="orbital-particle orbital-particle--1"></div>
-        <div class="orbital-particle orbital-particle--2"></div>
-        <div class="orbital-particle orbital-particle--3"></div>
-        <div class="orbital-particle orbital-particle--4"></div>
-        <div class="orbital-particle orbital-particle--5"></div>
+          <!-- Ambient particles -->
+          <div class="orbital-particle orbital-particle--1"></div>
+          <div class="orbital-particle orbital-particle--2"></div>
+          <div class="orbital-particle orbital-particle--3"></div>
+          <div class="orbital-particle orbital-particle--4"></div>
+          <div class="orbital-particle orbital-particle--5"></div>
+        </div>
       </div>
     </div>
   </Container>
 </section>
 
 <style>
+  .orbital-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
   .orbital-container {
     display: flex;
     justify-content: center;
     padding: 2rem 0;
+  }
+
+  @media (min-width: 1024px) {
+    .orbital-layout {
+      flex-direction: row;
+      align-items: center;
+      gap: 4rem;
+    }
+
+    .orbital-copy {
+      width: 35%;
+      flex-shrink: 0;
+    }
+
+    .orbital-container {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .orbital-system {
+      transform: scale(0.82);
+      transform-origin: center;
+      margin: -2rem;
+    }
   }
 
   .orbital-system {
@@ -118,14 +184,23 @@ import Container from "./Container.astro";
     position: absolute;
     top: 50%;
     left: 50%;
-    border: 1px dashed var(--border);
+    border: 1.25px dashed var(--border-strong);
     border-radius: 50%;
     transform: translate(-50%, -50%);
     pointer-events: none;
   }
-  .orbital-ring--1 { width: 180px; height: 180px; }
-  .orbital-ring--2 { width: 280px; height: 280px; }
-  .orbital-ring--3 { width: 380px; height: 380px; }
+  .orbital-ring--1 {
+    width: 180px;
+    height: 180px;
+  }
+  .orbital-ring--2 {
+    width: 280px;
+    height: 280px;
+  }
+  .orbital-ring--3 {
+    width: 380px;
+    height: 380px;
+  }
 
   /* Orbit items — single smooth circular animation */
   .orbital-item {
@@ -135,14 +210,22 @@ import Container from "./Container.astro";
     width: 0;
     height: 0;
     /* rotate to start angle, then translate out to radius, then counter-rotate label */
-    transform: rotate(var(--start, 0deg)) translateX(var(--r, 90px)) rotate(calc(-1 * var(--start, 0deg)));
+    transform: rotate(var(--start, 0deg)) translateX(var(--r, 90px))
+      rotate(calc(-1 * var(--start, 0deg)));
     animation: orbital-orbit var(--speed, 20s) linear infinite;
     z-index: 2;
   }
 
   @keyframes orbital-orbit {
-    from { transform: rotate(var(--start, 0deg)) translateX(var(--r, 90px)) rotate(calc(-1 * var(--start, 0deg) - 0deg)); }
-    to   { transform: rotate(calc(var(--start, 0deg) + 360deg)) translateX(var(--r, 90px)) rotate(calc(-1 * var(--start, 0deg) - 360deg)); }
+    from {
+      transform: rotate(var(--start, 0deg)) translateX(var(--r, 90px))
+        rotate(calc(-1 * var(--start, 0deg) - 0deg));
+    }
+    to {
+      transform: rotate(calc(var(--start, 0deg) + 360deg))
+        translateX(var(--r, 90px))
+        rotate(calc(-1 * var(--start, 0deg) - 360deg));
+    }
   }
 
   .orbital-label {
@@ -157,7 +240,9 @@ import Container from "./Container.astro";
     border: 1px solid var(--border);
     background: var(--bg-raised);
     white-space: nowrap;
-    transition: color 0.3s, border-color 0.3s;
+    transition:
+      color 0.3s,
+      border-color 0.3s;
     pointer-events: auto;
   }
   .orbital-label:hover {
@@ -174,26 +259,64 @@ import Container from "./Container.astro";
     background: var(--fg-muted);
     opacity: 0.3;
   }
-  .orbital-particle--1 { top: 15%; left: 20%; animation: particle-float 6s ease-in-out infinite; }
-  .orbital-particle--2 { top: 75%; left: 80%; animation: particle-float 8s ease-in-out infinite 1s; }
-  .orbital-particle--3 { top: 30%; left: 85%; animation: particle-float 7s ease-in-out infinite 2s; }
-  .orbital-particle--4 { top: 80%; left: 15%; animation: particle-float 9s ease-in-out infinite 0.5s; }
-  .orbital-particle--5 { top: 50%; left: 90%; animation: particle-float 5s ease-in-out infinite 3s; }
+  .orbital-particle--1 {
+    top: 15%;
+    left: 20%;
+    animation: particle-float 6s ease-in-out infinite;
+  }
+  .orbital-particle--2 {
+    top: 75%;
+    left: 80%;
+    animation: particle-float 8s ease-in-out infinite 1s;
+  }
+  .orbital-particle--3 {
+    top: 30%;
+    left: 85%;
+    animation: particle-float 7s ease-in-out infinite 2s;
+  }
+  .orbital-particle--4 {
+    top: 80%;
+    left: 15%;
+    animation: particle-float 9s ease-in-out infinite 0.5s;
+  }
+  .orbital-particle--5 {
+    top: 50%;
+    left: 90%;
+    animation: particle-float 5s ease-in-out infinite 3s;
+  }
 
   @keyframes particle-float {
-    0%, 100% { transform: translateY(0) translateX(0); opacity: 0.2; }
-    50% { transform: translateY(-8px) translateX(4px); opacity: 0.5; }
+    0%,
+    100% {
+      transform: translateY(0) translateX(0);
+      opacity: 0.2;
+    }
+    50% {
+      transform: translateY(-8px) translateX(4px);
+      opacity: 0.5;
+    }
   }
 
   /* Responsive */
   @media (max-width: 768px) {
-    .orbital-system { width: 300px; height: 300px; transform: scale(0.85); }
+    .orbital-system {
+      width: 300px;
+      height: 300px;
+      transform: scale(0.85);
+    }
   }
   @media (max-width: 480px) {
-    .orbital-system { width: 260px; height: 260px; transform: scale(0.75); }
+    .orbital-system {
+      width: 260px;
+      height: 260px;
+      transform: scale(0.75);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .orbital-item, .orbital-particle { animation: none !important; }
+    .orbital-item,
+    .orbital-particle {
+      animation: none !important;
+    }
   }
 </style>
