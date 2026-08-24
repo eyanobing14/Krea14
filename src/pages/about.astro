@@ -111,10 +111,38 @@ const socials = (profile.socials || {}) as Record<string, string>;
                             <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
                           </>
                         )}
+                        {name === "email" && (
+                          <>
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                            <polyline points="22,6 12,13 2,6" />
+                          </>
+                        )}
                       </svg>
                     </a>
                   ))
                 }
+                <a
+                  href={`mailto:${profile.email}`}
+                  class="w-9 h-9 flex items-center justify-center transition-colors duration-200 no-underline"
+                  style="color: var(--fg); background: var(--fg); border: 1px solid var(--border);"
+                  onmouseover="this.style.opacity='0.8'"
+                  onmouseout="this.style.opacity='1'"
+                  aria-label="Email"
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="var(--bg)"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                    <polyline points="22,6 12,13 2,6" />
+                  </svg>
+                </a>
               </div>
             </div>
           </div>
