@@ -1,6 +1,8 @@
 ---
+import data from '../public/data/portfolio.json';
 const profileName = 'Portfolio';
 const year = new Date().getFullYear();
+const socials = (data.profile.socials || {}) as Record<string, string>;
 ---
 
 <footer>
@@ -43,15 +45,17 @@ const year = new Date().getFullYear();
       <div>
         <h3 class="text-[10px] font-mono uppercase tracking-[0.15em] mb-5" style="color: var(--fg-muted);"><span data-fr="Réseaux" data-en="Socials">Réseaux</span></h3>
         <ul class="space-y-3">
-          {[
-            { label: 'Dribbble', href: '#' },
-            { label: 'Behance', href: '#' },
-            { label: 'GitHub', href: '#' },
-            { label: 'LinkedIn', href: '#' },
-          ].map((link) => (
+          {Object.entries(socials).map(([name, url]) => (
             <li>
-              <a href={link.href} target="_blank" rel="noopener noreferrer" class="text-sm no-underline transition-colors duration-200 hover-link" style="color: var(--fg-secondary);">
-                {link.label}
+              <a href={url} target="_blank" rel="noopener noreferrer" class="text-sm no-underline transition-colors duration-200 hover-link flex items-center gap-2" style="color: var(--fg-secondary);">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  {name === 'dribbble' && <><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></>}
+                  {name === 'behance' && <><path d="M1 12.5h8c1.66 0 3-1.34 3-3s-1.34-3-3-3H1v12h9c2.76 0 5-2.24 5-5s-2.24-5-5-5"/><path d="M15 6h6m-3-3v6"/><path d="M15 15.5c0 2.49 2.01 4.5 4.5 4.5s4.5-2.01 4.5-4.5"/></>}
+                  {name === 'github' && <><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></>}
+                  {name === 'linkedin' && <><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></>}
+                  {name === 'instagram' && <><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></>}
+                </svg>
+                <span style="text-transform: capitalize;">{name}</span>
               </a>
             </li>
           ))}
