@@ -1,63 +1,99 @@
 ---
-import ThemeToggle from './ThemeToggle.astro';
+import ThemeToggle from "./ThemeToggle.astro";
 
 const navLinks = [
-  { label: 'Accueil', labelEn: 'Home', href: '/' },
-  { label: 'Work', labelEn: 'Work', href: '/work' },
-  { label: 'À propos', labelEn: 'About', href: '/about' },
-  { label: 'Contact', labelEn: 'Contact', href: '/contact' },
+  { label: "Accueil", labelEn: "Home", href: "/" },
+  { label: "Work", labelEn: "Work", href: "/work" },
+  { label: "À propos", labelEn: "About", href: "/about" },
+  { label: "Contact", labelEn: "Contact", href: "/contact" },
 ];
 
 const currentPath = Astro.url.pathname;
 ---
 
 <!-- Mobile backdrop -->
-<div
-  id="mobile-backdrop"
-  class="md:hidden"
-  aria-hidden="true"
-></div>
+<div id="mobile-backdrop" class="md:hidden" aria-hidden="true"></div>
 
-<header id="site-header" class="site-header fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+<header
+  id="site-header"
+  class="site-header fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+>
   <div class="container-page flex items-center justify-between h-14 md:h-16">
     <!-- Logo -->
     <a href="/" class="flex items-center gap-2 no-underline group">
-      <img src="/favicon.svg" alt="" class="h-5 w-5 md:h-6 md:w-6 flex-shrink-0" style="filter: invert(var(--logo-invert, 0));" />
-      <img src="/Logo.svg" alt="Logo" class="h-3 md:h-4 w-auto" style="filter: invert(var(--logo-invert, 0));" />
+      <img
+        src="/favicon.svg"
+        alt=""
+        class="h-5 w-5 md:h-6 md:w-6 shrink-0"
+        style="filter: invert(var(--logo-invert, 0));"
+      />
+      <img
+        src="/Logo.svg"
+        alt="Logo"
+        class="h-3 md:h-4 w-auto"
+        style="filter: invert(var(--logo-invert, 0));"
+      />
     </a>
 
     <!-- Desktop nav -->
-    <nav class="hidden md:flex items-center gap-1" aria-label="Navigation principale">
-      {navLinks.map((link) => (
-        <a
-          href={link.href}
-          class:list={[
-            'px-3 py-1.5 text-sm no-underline transition-colors duration-200',
-            currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href)) ? 'font-medium' : ''
-          ]}
-          style={currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
-            ? 'color: var(--fg);'
-            : 'color: var(--fg-secondary);'}
-        >
-          <span data-fr={link.label} data-en={link.labelEn}>{link.label}</span>
-        </a>
-      ))}
+    <nav
+      class="hidden md:flex items-center gap-1"
+      aria-label="Navigation principale"
+    >
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              "px-3 py-1.5 text-sm no-underline transition-colors duration-200",
+              currentPath === link.href ||
+              (link.href !== "/" && currentPath.startsWith(link.href))
+                ? "font-medium"
+                : "",
+            ]}
+            style={
+              currentPath === link.href ||
+              (link.href !== "/" && currentPath.startsWith(link.href))
+                ? "color: var(--fg);"
+                : "color: var(--fg-secondary);"
+            }
+          >
+            <span data-fr={link.label} data-en={link.labelEn}>
+              {link.label}
+            </span>
+          </a>
+        ))
+      }
     </nav>
 
     <!-- Desktop CTA -->
     <div class="hidden md:flex items-center gap-4">
-      <button id="lang-toggle" class="lang-toggle" aria-label="Changer de langue">
+      <button
+        id="lang-toggle"
+        class="lang-toggle"
+        aria-label="Changer de langue"
+      >
         <span class="lang-active">FR</span>
       </button>
       <ThemeToggle />
-      <a href="/contact" class="text-sm font-medium px-5 py-2 no-underline transition-all duration-200" style="background: var(--fg); color: var(--bg);" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+      <a
+        href="/contact"
+        class="text-sm font-medium px-5 py-2 no-underline transition-all duration-200"
+        style="background: var(--fg); color: var(--bg);"
+        onmouseover="this.style.opacity='0.85'"
+        onmouseout="this.style.opacity='1'"
+      >
         <span data-fr="Contact" data-en="Contact">Contact</span>
       </a>
     </div>
 
     <!-- Mobile toggle -->
     <div class="md:hidden flex items-center gap-1">
-      <button id="lang-toggle-mobile" class="lang-toggle" aria-label="Changer de langue">
+      <button
+        id="lang-toggle-mobile"
+        class="lang-toggle"
+        aria-label="Changer de langue"
+      >
         <span class="lang-active">FR</span>
       </button>
       <ThemeToggle />
@@ -83,22 +119,33 @@ const currentPath = Astro.url.pathname;
       class="container-page py-5 flex flex-col gap-0.5"
       aria-label="Navigation mobile"
     >
-      {navLinks.map((link, i) => (
-        <a
-          href={link.href}
-          class="mobile-menu-item text-base no-underline transition-colors duration-200 py-2.5"
-          style={`color: var(--fg-secondary); --delay: ${i * 45}ms;`}
-          onmouseover="this.style.color='var(--fg)'"
-          onmouseout="this.style.color='var(--fg-secondary)'"
-        >
-          <span data-fr={link.label} data-en={link.labelEn}>{link.label}</span>
-        </a>
-      ))}
+      {
+        navLinks.map((link, i) => (
+          <a
+            href={link.href}
+            class="mobile-menu-item text-base no-underline transition-colors duration-200 py-2.5"
+            style={`color: var(--fg-secondary); --delay: ${i * 45}ms;`}
+            onmouseover="this.style.color='var(--fg)'"
+            onmouseout="this.style.color='var(--fg-secondary)'"
+          >
+            <span data-fr={link.label} data-en={link.labelEn}>
+              {link.label}
+            </span>
+          </a>
+        ))
+      }
       <div
         class="mobile-menu-item flex flex-col gap-3 pt-4 mt-3"
         style={`border-top: 1px solid var(--border); --delay: ${navLinks.length * 45}ms;`}
       >
-        <a href="/contact" class="text-sm font-medium px-5 py-3 text-center no-underline transition-all" style="background: var(--fg); color: var(--bg);"><span data-fr="Nous contacter" data-en="Get in touch">Nous contacter</span></a>
+        <a
+          href="/contact"
+          class="text-sm font-medium px-5 py-3 text-center no-underline transition-all"
+          style="background: var(--fg); color: var(--bg);"
+          ><span data-fr="Nous contacter" data-en="Get in touch"
+            >Nous contacter</span
+          ></a
+        >
       </div>
     </nav>
   </div>
@@ -116,7 +163,7 @@ const currentPath = Astro.url.pathname;
     background: rgba(0, 0, 0, 0.25);
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
   #mobile-backdrop.is-visible {
     opacity: 1;
@@ -127,7 +174,10 @@ const currentPath = Astro.url.pathname;
   .site-header {
     background: transparent;
     border-bottom: 1px solid transparent;
-    transition: background 0.12s ease, border-bottom-color 0.12s ease, backdrop-filter 0.12s ease;
+    transition:
+      background 0.12s ease,
+      border-bottom-color 0.12s ease,
+      backdrop-filter 0.12s ease;
   }
   .site-header.is-scrolled {
     background: rgba(0, 0, 0, 0.6);
@@ -171,14 +221,14 @@ const currentPath = Astro.url.pathname;
     overflow-y: auto;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-16px);
+    transform: translateY(-8px);
     z-index: 45;
     pointer-events: none;
     transition:
-      opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-      transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-      border-top-color 0.4s ease,
-      visibility 0s linear 0.5s;
+      opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+      border-top-color 0.25s ease,
+      visibility 0s linear 0.3s;
   }
   #mobile-menu.is-open {
     opacity: 1;
@@ -196,16 +246,16 @@ const currentPath = Astro.url.pathname;
   /* Cascade des liens quand le menu s'ouvre */
   #mobile-menu .mobile-menu-item {
     opacity: 0;
-    transform: translateY(-12px);
+    transform: translateY(-8px);
     transition:
-      opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-      transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     transition-delay: 0ms;
   }
   #mobile-menu.is-open .mobile-menu-item {
     opacity: 1;
     transform: translateY(0);
-    transition-delay: var(--delay, 0ms);
+    transition-delay: calc(var(--delay, 0ms) * 0.5);
   }
 
   .mobile-burger {
@@ -226,7 +276,9 @@ const currentPath = Astro.url.pathname;
     width: 18px;
     height: 1.5px;
     background: var(--fg);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    transition:
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.3s ease;
     transform-origin: center;
   }
   .mobile-burger.is-open #line-1 {
@@ -250,7 +302,9 @@ const currentPath = Astro.url.pathname;
     border: 1px solid var(--border);
     padding: 0.25rem 0.5rem;
     cursor: pointer;
-    transition: color 0.2s, border-color 0.2s;
+    transition:
+      color 0.2s,
+      border-color 0.2s;
     line-height: 1;
   }
   .lang-toggle:hover {
@@ -260,86 +314,95 @@ const currentPath = Astro.url.pathname;
 </style>
 
 <script>
-  import { T } from '../translations';
+  import { T } from "../translations";
   function init() {
-    const header = document.getElementById('site-header');
-    if (!header) return;
+    const siteHeader = document.getElementById("site-header") as HTMLElement;
 
-    const toggle = document.getElementById('mobile-menu-toggle');
-    const menu = document.getElementById('mobile-menu');
-    const backdrop = document.getElementById('mobile-backdrop');
+    const toggle = document.getElementById("mobile-menu-toggle");
+    const menu = document.getElementById("mobile-menu");
+    const backdrop = document.getElementById("mobile-backdrop");
 
     let menuOpen = false;
 
-    const progressBar = document.getElementById('scroll-progress');
+    const progressBar = document.getElementById("scroll-progress");
 
     function updateHeader() {
       if (menuOpen) {
-        header.classList.add('is-menu-open');
-        header.classList.remove('is-scrolled');
+        siteHeader.classList.add("is-menu-open");
+        siteHeader.classList.remove("is-scrolled");
       } else {
-        header.classList.remove('is-menu-open');
+        siteHeader.classList.remove("is-menu-open");
         if (window.scrollY > 60) {
-          header.classList.add('is-scrolled');
+          siteHeader.classList.add("is-scrolled");
         } else {
-          header.classList.remove('is-scrolled');
+          siteHeader.classList.remove("is-scrolled");
         }
       }
       // Progress bar: fill width based on scroll %
       if (progressBar) {
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const pct = docHeight > 0 ? Math.min((window.scrollY / docHeight) * 100, 100) : 0;
-        progressBar.style.width = pct + '%';
+        const docHeight =
+          document.documentElement.scrollHeight - window.innerHeight;
+        const pct =
+          docHeight > 0 ? Math.min((window.scrollY / docHeight) * 100, 100) : 0;
+        progressBar.style.width = pct + "%";
       }
     }
 
     let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (!ticking) { requestAnimationFrame(() => { updateHeader(); ticking = false; }); ticking = true; }
+    window.addEventListener("scroll", () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateHeader();
+          ticking = false;
+        });
+        ticking = true;
+      }
     });
 
-    window.addEventListener('themechange', () => {
+    window.addEventListener("themechange", () => {
       requestAnimationFrame(updateHeader);
     });
 
     let savedScrollY = 0;
     function setMenu(next: boolean) {
       menuOpen = next;
-      toggle?.setAttribute('aria-expanded', String(menuOpen));
-      toggle?.classList.toggle('is-open', menuOpen);
-      menu?.classList.toggle('is-open', menuOpen);
-      backdrop?.classList.toggle('is-visible', menuOpen);
+      toggle?.setAttribute("aria-expanded", String(menuOpen));
+      toggle?.classList.toggle("is-open", menuOpen);
+      menu?.classList.toggle("is-open", menuOpen);
+      backdrop?.classList.toggle("is-visible", menuOpen);
       if (menuOpen) {
         savedScrollY = window.scrollY;
-        document.body.style.overflow = 'hidden';
+        document.body.style.overflow = "hidden";
       } else {
-        document.body.style.overflow = '';
+        document.body.style.overflow = "";
         window.scrollTo(0, savedScrollY);
       }
       updateHeader();
     }
 
-    toggle?.addEventListener('click', () => setMenu(!menuOpen));
+    toggle?.addEventListener("click", () => setMenu(!menuOpen));
 
-    backdrop?.addEventListener('click', () => setMenu(false));
+    backdrop?.addEventListener("click", () => setMenu(false));
 
-    menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+    menu
+      ?.querySelectorAll("a")
+      .forEach((a) => a.addEventListener("click", () => setMenu(false)));
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && menuOpen) setMenu(false);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && menuOpen) setMenu(false);
     });
 
     // Fermer le menu si on repasse en desktop
-    window.addEventListener('resize', () => {
+    window.addEventListener("resize", () => {
       if (window.innerWidth >= 768 && menuOpen) setMenu(false);
     });
 
     updateHeader();
 
     // Language toggle — full page translation
-    const langBtn = document.getElementById('lang-toggle');
-    const langBtnMobile = document.getElementById('lang-toggle-mobile');
-    let currentLang = localStorage.getItem('lang') || 'fr';
+    const langBtn = document.getElementById("lang-toggle");
+    const langBtnMobile = document.getElementById("lang-toggle-mobile");
+    let currentLang = localStorage.getItem("lang") || "fr";
 
     // Translation dictionary imported from translations.ts (bundled by Vite)
     const Trev: Record<string, string> = {};
@@ -349,39 +412,43 @@ const currentPath = Astro.url.pathname;
 
     // Normalize whitespace for matching
     function norm(s: string): string {
-      return s.replace(/\s+/g, ' ').trim();
+      return s.replace(/\s+/g, " ").trim();
     }
 
     function applyLang(lang: string) {
       currentLang = lang;
-      localStorage.setItem('lang', lang);
-      document.documentElement.lang = lang === 'fr' ? 'fr' : 'en';
-      document.querySelectorAll('.lang-active').forEach(el => {
-        el.textContent = lang === 'fr' ? 'FR' : 'EN';
+      localStorage.setItem("lang", lang);
+      document.documentElement.lang = lang === "fr" ? "fr" : "en";
+      document.querySelectorAll(".lang-active").forEach((el) => {
+        el.textContent = lang === "fr" ? "FR" : "EN";
       });
       // data-fr/data-en attributes (reliable, exact match)
-      document.querySelectorAll('[data-fr]').forEach(el => {
+      document.querySelectorAll("[data-fr]").forEach((el) => {
         const fr = (el as HTMLElement).dataset.fr;
         const en = (el as HTMLElement).dataset.en;
-        if (fr && en) el.textContent = lang === 'fr' ? fr : en;
+        if (fr && en) el.textContent = lang === "fr" ? fr : en;
       });
       // Walk ALL text nodes in the document and translate them
-      const dict = lang === 'fr' ? Trev : T;
+      const dict = lang === "fr" ? Trev : T;
       const sortedKeys = Object.keys(dict).sort((a, b) => b.length - a.length);
       // Only skip elements that are inside scripts, styles, or the header lang toggle area
-      const skipTags = new Set(['SCRIPT', 'STYLE', 'SVG', 'SELECT']);
+      const skipTags = new Set(["SCRIPT", "STYLE", "SVG", "SELECT"]);
       const walker = document.createTreeWalker(
-        document.querySelector('main') || document.body,
+        document.querySelector("main") || document.body,
         NodeFilter.SHOW_TEXT,
         {
           acceptNode(node) {
             const parent = node.parentElement;
             if (!parent) return NodeFilter.FILTER_REJECT;
             if (skipTags.has(parent.tagName)) return NodeFilter.FILTER_REJECT;
-            if (parent.closest('[data-fr]')) return NodeFilter.FILTER_REJECT;
-            if (parent.closest('.lang-active')) return NodeFilter.FILTER_REJECT;
-            if (parent.closest('.hero-scroll-text') || parent.closest('.about-marquee-track')) return NodeFilter.FILTER_REJECT;
-            const raw = node.textContent || '';
+            if (parent.closest("[data-fr]")) return NodeFilter.FILTER_REJECT;
+            if (parent.closest(".lang-active")) return NodeFilter.FILTER_REJECT;
+            if (
+              parent.closest(".hero-scroll-text") ||
+              parent.closest(".about-marquee-track")
+            )
+              return NodeFilter.FILTER_REJECT;
+            const raw = node.textContent || "";
             const cleaned = norm(raw);
             if (!cleaned) return NodeFilter.FILTER_REJECT;
             // Exact match
@@ -391,13 +458,13 @@ const currentPath = Astro.url.pathname;
               if (cleaned.includes(key)) return NodeFilter.FILTER_ACCEPT;
             }
             return NodeFilter.FILTER_REJECT;
-          }
-        }
+          },
+        },
       ) as TreeWalker;
       const nodes: Text[] = [];
       while (walker.nextNode()) nodes.push(walker.currentNode as Text);
       for (const textNode of nodes) {
-        const raw = textNode.textContent || '';
+        const raw = textNode.textContent || "";
         let result = norm(raw);
         // Skip category text that's not in the dictionary
         if (!result) continue;
@@ -418,16 +485,18 @@ const currentPath = Astro.url.pathname;
       }
     }
 
-    langBtn?.addEventListener('click', () => {
-      localStorage.setItem('lang', currentLang === 'fr' ? 'en' : 'fr');
+    langBtn?.addEventListener("click", () => {
+      localStorage.setItem("lang", currentLang === "fr" ? "en" : "fr");
       location.reload();
     });
-    langBtnMobile?.addEventListener('click', () => {
-      localStorage.setItem('lang', currentLang === 'fr' ? 'en' : 'fr');
+    langBtnMobile?.addEventListener("click", () => {
+      localStorage.setItem("lang", currentLang === "fr" ? "en" : "fr");
       location.reload();
     });
 
     applyLang(currentLang);
   }
-  document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', init) : init();
+  document.readyState === "loading"
+    ? document.addEventListener("DOMContentLoaded", init)
+    : init();
 </script>
