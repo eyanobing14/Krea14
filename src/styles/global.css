@@ -213,8 +213,6 @@
   main {
     overflow-x: hidden;
     max-width: 100vw;
-    position: relative;
-    z-index: 10000;
   }
 
   /* Clip GSAP animations (slide-left/right) inside sections */
