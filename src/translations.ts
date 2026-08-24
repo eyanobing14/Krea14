@@ -165,6 +165,11 @@ export const T: Record<string, string> = {
   "Voir le projet →": "View project →",
   "IDENTITÉ VISUELLE": "VISUAL IDENTITY",
 
+  // ── Footer services ──
+  "Design Graphique": "Graphic Design",
+  "Frontend Dev": "Frontend Dev",
+  "Logo Design": "Logo Design",
+
   // ── Common ──
   "Photo": "Photo",
 
