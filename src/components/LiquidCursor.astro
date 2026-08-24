@@ -77,27 +77,19 @@
     height: 420px;
   }
 
-  /* Text invert effect: mix-blend-mode difference */
+  /* Text invert: blend without size change */
   .cursor-glow.is-text-invert {
-    width: 160px;
-    height: 160px;
-    opacity: 1;
+    opacity: 0.6;
     background: white;
     mix-blend-mode: difference;
-    filter: none;
-    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                opacity 0.4s ease;
+    filter: blur(24px);
+    transition: opacity 0.3s ease, filter 0.3s ease;
   }
   .cursor-ring.is-text-invert {
-    width: 160px;
-    height: 160px;
     border-color: transparent;
     background: white;
     mix-blend-mode: difference;
-    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                background 0.3s ease;
+    transition: background 0.3s ease, border-color 0.3s ease;
   }
   .cursor-dot.is-text-invert {
     opacity: 0;
