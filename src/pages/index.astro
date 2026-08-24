@@ -326,7 +326,7 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
           <div class="orbital-system">
             <!-- Center -->
             <div class="orbital-center">
-              <span class="orbital-center-text">Nexus</span>
+              <img src="/favicon.svg" alt="" class="w-8 h-8" style="filter: invert(var(--logo-invert, 0));" />
             </div>
 
             <!-- Orbit rings -->
@@ -432,6 +432,8 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
 </Layout>
 
 <style>
+  :root { --logo-invert: 0; }
+  :root:not([data-theme="light"]) { --logo-invert: 1; }
   /* ── Horizontal scroll text ── */
   .hero-scroll-track {
     display: flex;
