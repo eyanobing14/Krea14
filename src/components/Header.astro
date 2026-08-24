@@ -22,12 +22,8 @@ const currentPath = Astro.url.pathname;
 <header id="site-header" class="site-header fixed top-0 left-0 right-0 z-50 transition-all duration-500">
   <div class="container-page flex items-center justify-between h-14 md:h-16">
     <!-- Logo -->
-    <a href="/" class="flex items-center gap-3 no-underline group">
-      <div class="w-7 h-7 flex items-center justify-center transition-colors duration-300" style="background: var(--fg);">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path d="M3 12L6.5 4L10 8L13 2" stroke="var(--bg)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>          <span class="text-sm font-semibold tracking-tight hidden sm:block" style="color: var(--fg);" data-fr="Portfolio" data-en="Portfolio">Portfolio</span>
+    <a href="/" class="flex items-center no-underline group">
+      <img src="/Logo.svg" alt="Logo" class="h-6 md:h-7 w-auto" style="filter: invert(var(--logo-invert, 0));" />
     </a>
 
     <!-- Desktop nav -->
@@ -143,6 +139,11 @@ const currentPath = Astro.url.pathname;
     background: #ffffff !important;
     border-bottom-color: rgba(0, 0, 0, 0.08) !important;
   }
+  /* Logo color adapts to theme */
+  :root { --logo-invert: 0; }
+  [data-theme="light"] { --logo-invert: 0; }
+  :root:not([data-theme="light"]) { --logo-invert: 1; }
+
   /* When mobile menu is open, force solid navbar */
   .site-header.is-menu-open {
     background: var(--bg) !important;
