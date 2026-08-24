@@ -5,187 +5,203 @@ import Container from "./Container.astro";
 
 <section class="section">
   <Container>
-    <h2
-      class="text-2xl sm:text-3xl md:text-4xl font-bold text-center animate-in"
-      style="color: var(--fg);"
-    >
-      L'impact que nous créons.
-    </h2>
-    <p
-      class="mt-4 text-center text-base sm:text-lg max-w-2xl mx-auto animate-in"
-      style="color: var(--fg-secondary); --delay: 0.1s;"
-    >
-      Les technologies changent selon les projets. Ce qui ne change pas, c'est
-      la rigueur, la qualité et les résultats livrés.
-    </p>
+    <div class="impact-layout">
+      <div class="impact-header">
+        <h2
+          class="text-2xl sm:text-3xl md:text-4xl font-bold animate-in"
+          style="color: var(--fg);"
+        >
+          L'impact que nous créons.
+        </h2>
+        <p
+          class="mt-4 text-base sm:text-lg max-w-xl animate-in"
+          style="color: var(--fg-secondary); --delay: 0.1s;"
+        >
+          Les technologies changent selon les projets. Ce qui ne change pas, c'est
+          la rigueur, la qualité et les résultats livrés.
+        </p>
+      </div>
 
-    <div class="impact-list mt-12">
-      <!-- Orientation résultats — Target animation -->
-      <details class="impact-item animate-in" style="--delay: 0.15s;">
-        <summary class="impact-summary">
-          <div class="impact-summary-left">
-            <div class="impact-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+      <div class="impact-list animate-in" style="--delay: 0.15s;">
+        <!-- Orientation résultats — Target animation -->
+        <details class="impact-item">
+          <summary class="impact-summary">
+            <div class="impact-summary-left">
+              <div class="impact-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+              </div>
+              <span class="impact-title">Orientation résultats</span>
             </div>
-            <span class="impact-title">Orientation résultats</span>
+            <svg class="impact-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="impact-body">
+            <div class="impact-illustration">
+              <svg viewBox="0 0 140 90" fill="none" class="illust">
+                <circle cx="70" cy="45" r="35" stroke="var(--border-hover)" stroke-width="1" stroke-dasharray="4 3" class="ring ring-1"/>
+                <circle cx="70" cy="45" r="23" stroke="var(--fg-muted)" stroke-width="1" stroke-dasharray="3 2" class="ring ring-2"/>
+                <circle cx="70" cy="45" r="12" stroke="var(--fg)" stroke-width="1.5" class="ring ring-3"/>
+                <circle cx="70" cy="45" r="3" fill="var(--fg)" class="bullseye"/>
+                <line x1="18" y1="78" x2="65" y2="47" stroke="var(--fg-muted)" stroke-width="1" stroke-dasharray="3 2" class="arrow-line"/>
+                <polygon points="65,47 58,43 60,50" fill="var(--fg-muted)" class="arrow-head"/>
+                <circle cx="70" cy="45" r="35" stroke="var(--fg)" stroke-width="0.5" opacity="0" class="pulse p1"/>
+                <circle cx="70" cy="45" r="35" stroke="var(--fg)" stroke-width="0.5" opacity="0" class="pulse p2"/>
+              </svg>
+            </div>
+            <p>
+              Chaque projet commence par une écoute active. Nous comprenons votre
+              marché, vos utilisateurs et vos contraintes avant de concevoir.
+            </p>
+            <div class="impact-keywords">
+              <span>Empathie</span><span>Wireframe</span><span>Test</span>
+            </div>
           </div>
-          <svg class="impact-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-        </summary>
-        <div class="impact-body">
-          <div class="impact-illustration">
-            <svg viewBox="0 0 140 90" fill="none" class="illust">
-              <!-- Target rings -->
-              <circle cx="70" cy="45" r="35" stroke="var(--border-hover)" stroke-width="1" stroke-dasharray="4 3" class="ring ring-1"/>
-              <circle cx="70" cy="45" r="23" stroke="var(--fg-muted)" stroke-width="1" stroke-dasharray="3 2" class="ring ring-2"/>
-              <circle cx="70" cy="45" r="12" stroke="var(--fg)" stroke-width="1.5" class="ring ring-3"/>
-              <circle cx="70" cy="45" r="3" fill="var(--fg)" class="bullseye"/>
-              <!-- Arrow -->
-              <line x1="18" y1="78" x2="65" y2="47" stroke="var(--fg-muted)" stroke-width="1" stroke-dasharray="3 2" class="arrow-line"/>
-              <polygon points="65,47 58,43 60,50" fill="var(--fg-muted)" class="arrow-head"/>
-              <!-- Pulse rings -->
-              <circle cx="70" cy="45" r="35" stroke="var(--fg)" stroke-width="0.5" opacity="0" class="pulse p1"/>
-              <circle cx="70" cy="45" r="35" stroke="var(--fg)" stroke-width="0.5" opacity="0" class="pulse p2"/>
-            </svg>
-          </div>
-          <p>
-            Chaque projet commence par une écoute active. Nous comprenons votre
-            marché, vos utilisateurs et vos contraintes avant de concevoir.
-          </p>
-          <div class="impact-keywords">
-            <span>Empathie</span><span>Wireframe</span><span>Test</span>
-          </div>
-        </div>
-      </details>
+        </details>
 
-      <!-- Qualité sans compromis — Diamond/sparkle animation -->
-      <details class="impact-item animate-in" style="--delay: 0.25s;">
-        <summary class="impact-summary">
-          <div class="impact-summary-left">
-            <div class="impact-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <!-- Qualité sans compromis — Diamond/sparkle animation -->
+        <details class="impact-item">
+          <summary class="impact-summary">
+            <div class="impact-summary-left">
+              <div class="impact-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              </div>
+              <span class="impact-title">Qualité sans compromis</span>
             </div>
-            <span class="impact-title">Qualité sans compromis</span>
+            <svg class="impact-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="impact-body">
+            <div class="impact-illustration">
+              <svg viewBox="0 0 140 90" fill="none" class="illust">
+                <polygon points="70,10 105,45 70,80 35,45" stroke="var(--fg)" stroke-width="1.5" fill="none" class="diamond"/>
+                <line x1="35" y1="45" x2="105" y2="45" stroke="var(--fg-muted)" stroke-width="0.75" class="diamond-mid"/>
+                <line x1="70" y1="10" x2="52" y2="45" stroke="var(--fg-muted)" stroke-width="0.5" opacity="0.5"/>
+                <line x1="70" y1="10" x2="88" y2="45" stroke="var(--fg-muted)" stroke-width="0.5" opacity="0.5"/>
+                <line x1="52" y1="45" x2="70" y2="80" stroke="var(--fg-muted)" stroke-width="0.5" opacity="0.5"/>
+                <line x1="88" y1="45" x2="70" y2="80" stroke="var(--fg-muted)" stroke-width="0.5" opacity="0.5"/>
+                <g class="sparkle s1"><line x1="118" y1="15" x2="124" y2="15" stroke="var(--fg)" stroke-width="1"/><line x1="121" y1="12" x2="121" y2="18" stroke="var(--fg)" stroke-width="1"/></g>
+                <g class="sparkle s2"><line x1="12" y1="65" x2="18" y2="65" stroke="var(--fg-muted)" stroke-width="0.75"/><line x1="15" y1="62" x2="15" y2="68" stroke="var(--fg-muted)" stroke-width="0.75"/></g>
+                <g class="sparkle s3"><line x1="125" y1="60" x2="130" y2="60" stroke="var(--fg-muted)" stroke-width="0.75"/><line x1="127.5" y1="57" x2="127.5" y2="63" stroke="var(--fg-muted)" stroke-width="0.75"/></g>
+              </svg>
+            </div>
+            <p>
+              Code lisible, design pixel-perfect, performance optimale. Nous ne
+              livrons jamais un travail que nous n'aurions pas fierté de montrer.
+            </p>
+            <div class="impact-keywords">
+              <span>Pixels</span><span>Performance</span><span>Fiabilité</span>
+            </div>
           </div>
-          <svg class="impact-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-        </summary>
-        <div class="impact-body">
-          <div class="impact-illustration">
-            <svg viewBox="0 0 140 90" fill="none" class="illust">
-              <!-- Diamond -->
-              <polygon points="70,10 105,45 70,80 35,45" stroke="var(--fg)" stroke-width="1.5" fill="none" class="diamond"/>
-              <line x1="35" y1="45" x2="105" y2="45" stroke="var(--fg-muted)" stroke-width="0.75" class="diamond-mid"/>
-              <line x1="70" y1="10" x2="52" y2="45" stroke="var(--fg-muted)" stroke-width="0.5" opacity="0.5"/>
-              <line x1="70" y1="10" x2="88" y2="45" stroke="var(--fg-muted)" stroke-width="0.5" opacity="0.5"/>
-              <line x1="52" y1="45" x2="70" y2="80" stroke="var(--fg-muted)" stroke-width="0.5" opacity="0.5"/>
-              <line x1="88" y1="45" x2="70" y2="80" stroke="var(--fg-muted)" stroke-width="0.5" opacity="0.5"/>
-              <!-- Sparkles -->
-              <g class="sparkle s1"><line x1="118" y1="15" x2="124" y2="15" stroke="var(--fg)" stroke-width="1"/><line x1="121" y1="12" x2="121" y2="18" stroke="var(--fg)" stroke-width="1"/></g>
-              <g class="sparkle s2"><line x1="12" y1="65" x2="18" y2="65" stroke="var(--fg-muted)" stroke-width="0.75"/><line x1="15" y1="62" x2="15" y2="68" stroke="var(--fg-muted)" stroke-width="0.75"/></g>
-              <g class="sparkle s3"><line x1="125" y1="60" x2="130" y2="60" stroke="var(--fg-muted)" stroke-width="0.75"/><line x1="127.5" y1="57" x2="127.5" y2="63" stroke="var(--fg-muted)" stroke-width="0.75"/></g>
-            </svg>
-          </div>
-          <p>
-            Code lisible, design pixel-perfect, performance optimale. Nous ne
-            livrons jamais un travail que nous n'aurions pas fierté de montrer.
-          </p>
-          <div class="impact-keywords">
-            <span>Pixels</span><span>Performance</span><span>Fiabilité</span>
-          </div>
-        </div>
-      </details>
+        </details>
 
-      <!-- De A à Z — Path animation -->
-      <details class="impact-item animate-in" style="--delay: 0.35s;">
-        <summary class="impact-summary">
-          <div class="impact-summary-left">
-            <div class="impact-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h4l3 8-3 8H4M20 4h-4l-3 8 3 8h4"/></svg>
+        <!-- De A à Z — Path animation -->
+        <details class="impact-item">
+          <summary class="impact-summary">
+            <div class="impact-summary-left">
+              <div class="impact-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h4l3 8-3 8H4M20 4h-4l-3 8 3 8h4"/></svg>
+              </div>
+              <span class="impact-title">De A à Z</span>
             </div>
-            <span class="impact-title">De A à Z</span>
+            <svg class="impact-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="impact-body">
+            <div class="impact-illustration">
+              <svg viewBox="0 0 140 90" fill="none" class="illust">
+                <circle cx="20" cy="45" r="10" stroke="var(--fg)" stroke-width="1.5" fill="none" class="node node-a"/>
+                <text x="20" y="49" text-anchor="middle" fill="var(--fg)" font-size="10" font-family="var(--font-mono)">A</text>
+                <circle cx="120" cy="45" r="10" stroke="var(--fg)" stroke-width="1.5" fill="none" class="node node-z"/>
+                <text x="120" y="49" text-anchor="middle" fill="var(--fg)" font-size="10" font-family="var(--font-mono)">Z</text>
+                <path d="M30 45 C45 25, 55 65, 70 45 S95 25, 110 45" stroke="var(--fg-muted)" stroke-width="1" stroke-dasharray="4 3" fill="none" class="path-line"/>
+                <circle cx="70" cy="45" r="3" fill="var(--fg)" class="moving-dot"/>
+                <circle cx="48" cy="35" r="2" fill="var(--fg-muted)" opacity="0.5"/>
+                <circle cx="92" cy="55" r="2" fill="var(--fg-muted)" opacity="0.5"/>
+              </svg>
+            </div>
+            <p>
+              Du premier croquis au déploiement en production. Une seule vision,
+              un seul interlocuteur, une cohérence totale du début à la fin.
+            </p>
+            <div class="impact-keywords">
+              <span>Croquis</span><span>Développement</span><span>Déploiement</span>
+            </div>
           </div>
-          <svg class="impact-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-        </summary>
-        <div class="impact-body">
-          <div class="impact-illustration">
-            <svg viewBox="0 0 140 90" fill="none" class="illust">
-              <!-- Path from A to Z -->
-              <circle cx="20" cy="45" r="10" stroke="var(--fg)" stroke-width="1.5" fill="none" class="node node-a"/>
-              <text x="20" y="49" text-anchor="middle" fill="var(--fg)" font-size="10" font-family="var(--font-mono)">A</text>
-              <circle cx="120" cy="45" r="10" stroke="var(--fg)" stroke-width="1.5" fill="none" class="node node-z"/>
-              <text x="120" y="49" text-anchor="middle" fill="var(--fg)" font-size="10" font-family="var(--font-mono)">Z</text>
-              <!-- Dashed path -->
-              <path d="M30 45 C45 25, 55 65, 70 45 S95 25, 110 45" stroke="var(--fg-muted)" stroke-width="1" stroke-dasharray="4 3" fill="none" class="path-line"/>
-              <!-- Moving dot -->
-              <circle cx="70" cy="45" r="3" fill="var(--fg)" class="moving-dot"/>
-              <!-- Milestone dots -->
-              <circle cx="48" cy="35" r="2" fill="var(--fg-muted)" opacity="0.5"/>
-              <circle cx="92" cy="55" r="2" fill="var(--fg-muted)" opacity="0.5"/>
-            </svg>
-          </div>
-          <p>
-            Du premier croquis au déploiement en production. Une seule vision,
-            un seul interlocuteur, une cohérence totale du début à la fin.
-          </p>
-          <div class="impact-keywords">
-            <span>Croquis</span><span>Développement</span><span>Déploiement</span>
-          </div>
-        </div>
-      </details>
+        </details>
 
-      <!-- Intégration fluide — Puzzle/connect animation -->
-      <details class="impact-item animate-in" style="--delay: 0.45s;">
-        <summary class="impact-summary">
-          <div class="impact-summary-left">
-            <div class="impact-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <!-- Intégration fluide — Puzzle/connect animation -->
+        <details class="impact-item">
+          <summary class="impact-summary">
+            <div class="impact-summary-left">
+              <div class="impact-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <span class="impact-title">Intégration fluide</span>
             </div>
-            <span class="impact-title">Intégration fluide</span>
+            <svg class="impact-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="impact-body">
+            <div class="impact-illustration">
+              <svg viewBox="0 0 140 90" fill="none" class="illust">
+                <g class="puzzle-left">
+                  <rect x="12" y="15" width="40" height="50" rx="4" stroke="var(--fg)" stroke-width="1.5" fill="none"/>
+                  <path d="M52 30 C60 30, 60 50, 52 50" stroke="var(--fg)" stroke-width="1.5" fill="none"/>
+                  <text x="32" y="44" text-anchor="middle" fill="var(--fg-muted)" font-size="8" font-family="var(--font-mono)">NOUS</text>
+                </g>
+                <g class="puzzle-right">
+                  <rect x="75" y="15" width="40" height="50" rx="4" stroke="var(--fg-muted)" stroke-width="1.5" fill="none"/>
+                  <path d="M75 30 C67 30, 67 50, 75 50" stroke="var(--fg-muted)" stroke-width="1.5" fill="none"/>
+                  <text x="95" y="44" text-anchor="middle" fill="var(--fg-muted)" font-size="8" font-family="var(--font-mono)">VOUS</text>
+                </g>
+                <circle cx="63" cy="40" r="2" fill="var(--fg)" opacity="0" class="conn-sparkle"/>
+              </svg>
+            </div>
+            <p>
+              Nous nous adaptons à votre workflow. Git, sprints, revues de code —
+              nous devenons un membre à part entière de votre équipe.
+            </p>
+            <div class="impact-keywords">
+              <span>Git</span><span>Sprints</span><span>Co-création</span>
+            </div>
           </div>
-          <svg class="impact-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-        </summary>
-        <div class="impact-body">
-          <div class="impact-illustration">
-            <svg viewBox="0 0 140 90" fill="none" class="illust">
-              <!-- Two puzzle pieces connecting -->
-              <g class="puzzle-left">
-                <rect x="12" y="15" width="40" height="50" rx="4" stroke="var(--fg)" stroke-width="1.5" fill="none"/>
-                <path d="M52 30 C60 30, 60 50, 52 50" stroke="var(--fg)" stroke-width="1.5" fill="none"/>
-                <text x="32" y="44" text-anchor="middle" fill="var(--fg-muted)" font-size="8" font-family="var(--font-mono)">NOUS</text>
-              </g>
-              <g class="puzzle-right">
-                <rect x="75" y="15" width="40" height="50" rx="4" stroke="var(--fg-muted)" stroke-width="1.5" fill="none"/>
-                <path d="M75 30 C67 30, 67 50, 75 50" stroke="var(--fg-muted)" stroke-width="1.5" fill="none"/>
-                <text x="95" y="44" text-anchor="middle" fill="var(--fg-muted)" font-size="8" font-family="var(--font-mono)">VOUS</text>
-              </g>
-              <!-- Connection sparkle -->
-              <circle cx="63" cy="40" r="2" fill="var(--fg)" opacity="0" class="conn-sparkle"/>
-            </svg>
-          </div>
-          <p>
-            Nous nous adaptons à votre workflow. Git, sprints, revues de code —
-            nous devenons un membre à part entière de votre équipe.
-          </p>
-          <div class="impact-keywords">
-            <span>Git</span><span>Sprints</span><span>Co-création</span>
-          </div>
-        </div>
-      </details>
+        </details>
+      </div>
     </div>
   </Container>
 </section>
 
 <style>
+  /* Section-level Z-pattern: header left, list right */
+  .impact-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  @media (min-width: 1024px) {
+    .impact-layout {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 4rem;
+    }
+    .impact-header {
+      width: 35%;
+      flex-shrink: 0;
+      position: sticky;
+      top: 120px;
+    }
+    .impact-list {
+      flex: 1;
+      min-width: 0;
+    }
+  }
+
   .impact-list {
     display: flex;
     flex-direction: column;
     gap: 0;
     max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
   }
-  @media (min-width: 1024px) {
+  @media (max-width: 1023px) {
     .impact-list {
-      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
     }
   }
 
@@ -270,7 +286,7 @@ import Container from "./Container.astro";
     color: var(--fg-secondary);
   }
 
-  /* Illustrated area */
+  /* Illustrated area — centered above text */
   .impact-illustration {
     margin-bottom: 0.75rem;
     display: flex;
@@ -282,25 +298,6 @@ import Container from "./Container.astro";
     max-width: 280px;
     height: auto;
     overflow: visible;
-  }
-
-  /* Z-pattern: illustration left on odd, right on even */
-  @media (min-width: 1024px) {
-    .impact-body {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 2rem;
-      padding: 1.5rem 2rem;
-    }
-    .impact-illustration {
-      margin-bottom: 0;
-      flex-shrink: 0;
-      width: 220px;
-    }
-    .impact-item:nth-child(even) .impact-body {
-      flex-direction: row-reverse;
-    }
   }
 
   .impact-keywords {
