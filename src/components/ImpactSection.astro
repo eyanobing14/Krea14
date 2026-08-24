@@ -487,18 +487,6 @@ import Container from "./Container.astro";
       flex: 1;
       min-width: 0;
     }
-
-    @media (min-width: 1024px) {
-      .impact-summary {
-        cursor: default;
-      }
-      .impact-summary .impact-chevron {
-        display: none;
-      }
-      .impact-item > .impact-body {
-        display: block;
-      }
-    }
   }
 
   .impact-list {
@@ -833,33 +821,50 @@ import Container from "./Container.astro";
 </style>
 
 <script>
+  import gsap from "gsap";
+
   function initAccordion() {
     const items = document.querySelectorAll(".impact-item");
-    const desktopQuery = window.matchMedia("(min-width: 1024px)");
 
-    function syncAccordionMode() {
-      items.forEach((item, index) => {
-        const details = item as HTMLDetailsElement;
-        details.open = desktopQuery.matches || index === 0;
+    function centerOpenItem(details: HTMLDetailsElement) {
+      requestAnimationFrame(() => {
+        details.scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+            ? "auto"
+            : "smooth",
+          block: "center",
+          inline: "nearest",
+        });
       });
     }
 
     items.forEach((details) => {
       details.addEventListener("toggle", () => {
-        if (desktopQuery.matches) {
-          (details as HTMLDetailsElement).open = true;
-          return;
-        }
         if ((details as HTMLDetailsElement).open) {
           items.forEach((other) => {
             if (other !== details) (other as HTMLDetailsElement).open = false;
           });
+          const body = details.querySelector<HTMLElement>(".impact-body");
+          if (
+            body &&
+            !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ) {
+            gsap.fromTo(
+              body,
+              { opacity: 0.65, y: -6 },
+              {
+                opacity: 1,
+                y: 0,
+                duration: 0.24,
+                ease: "power2.out",
+                clearProps: "transform,opacity",
+              },
+            );
+          }
+          centerOpenItem(details as HTMLDetailsElement);
         }
       });
     });
-
-    syncAccordionMode();
-    desktopQuery.addEventListener("change", syncAccordionMode);
   }
   document.readyState === "loading"
     ? document.addEventListener("DOMContentLoaded", initAccordion)
