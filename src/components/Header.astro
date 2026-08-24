@@ -19,8 +19,8 @@ const currentPath = Astro.url.pathname;
   aria-hidden="true"
 ></div>
 
-<header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500" style="background: transparent; border-bottom: 1px solid transparent;">
-  <div class="container-page flex items-center justify-between h-16">
+<header id="site-header" class="site-header fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+  <div class="container-page flex items-center justify-between h-14 md:h-16">
     <!-- Logo -->
     <a href="/" class="flex items-center gap-3 no-underline group">
       <div class="w-7 h-7 flex items-center justify-center transition-colors duration-300" style="background: var(--fg);">
@@ -127,6 +127,40 @@ const currentPath = Astro.url.pathname;
   }
 
   /* Barre de progression du scroll */
+  /* ── Dynamic Island navbar ── */
+  .site-header {
+    background: transparent;
+    border: none;
+  }
+  .site-header.is-scrolled {
+    top: 8px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: min(92%, 900px);
+    background: rgba(0, 0, 0, 0.45);
+    -webkit-backdrop-filter: blur(24px) saturate(1.8);
+    backdrop-filter: blur(24px) saturate(1.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    box-shadow:
+      0 0 0 0.5px rgba(255, 255, 255, 0.04),
+      0 4px 24px rgba(0, 0, 0, 0.35),
+      inset 0 0.5px 0 rgba(255, 255, 255, 0.06);
+  }
+  [data-theme="light"] .site-header.is-scrolled {
+    background: rgba(255, 255, 255, 0.55);
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow:
+      0 0 0 0.5px rgba(0, 0, 0, 0.04),
+      0 4px 24px rgba(0, 0, 0, 0.1),
+      inset 0 0.5px 0 rgba(255, 255, 255, 0.5);
+  }
+  .site-header.is-scrolled .container-page {
+    max-width: 100%;
+    padding-inline: 1.25rem;
+  }
+
   .scroll-progress {
     position: absolute;
     bottom: 0;
@@ -136,6 +170,7 @@ const currentPath = Astro.url.pathname;
     background: var(--fg);
     transition: none;
     pointer-events: none;
+    border-radius: 0 0 999px 999px;
   }
 
   /* Déroulé animé du menu mobile */
@@ -252,19 +287,40 @@ const currentPath = Astro.url.pathname;
     const progressBar = document.getElementById('scroll-progress');
 
     function updateHeader() {
-      const isDark = !document.documentElement.hasAttribute('data-theme');
       if (menuOpen) {
-        header.style.background = isDark ? '#000000' : '#ffffff';
-        header.style.backdropFilter = 'none';
-        header.style.borderBottomColor = isDark ? '#262626' : '#e0e0e0';
-      } else if (window.scrollY > 100) {
-        header.style.background = isDark ? 'rgba(0,0,0,0.95)' : 'rgba(255,255,255,0.95)';
-        header.style.backdropFilter = 'none';
-        header.style.borderBottomColor = isDark ? '#262626' : '#e0e0e0';
+        header.classList.remove('is-scrolled');
+        header.style.background = '';
+        header.style.backdropFilter = '';
+        header.style.border = '';
+        header.style.boxShadow = '';
+        header.style.width = '';
+        header.style.left = '';
+        header.style.right = '';
+        header.style.transform = '';
+        header.style.borderRadius = '';
+      } else if (window.scrollY > 60) {
+        header.classList.add('is-scrolled');
+        // Reset inline styles — CSS class handles everything
+        header.style.background = '';
+        header.style.backdropFilter = '';
+        header.style.border = '';
+        header.style.boxShadow = '';
+        header.style.width = '';
+        header.style.left = '';
+        header.style.right = '';
+        header.style.transform = '';
+        header.style.borderRadius = '';
       } else {
-        header.style.background = 'transparent';
-        header.style.backdropFilter = 'none';
-        header.style.borderBottomColor = 'transparent';
+        header.classList.remove('is-scrolled');
+        header.style.background = '';
+        header.style.backdropFilter = '';
+        header.style.border = '';
+        header.style.boxShadow = '';
+        header.style.width = '';
+        header.style.left = '';
+        header.style.right = '';
+        header.style.transform = '';
+        header.style.borderRadius = '';
       }
       // Progress bar: fill width based on scroll %
       if (progressBar) {

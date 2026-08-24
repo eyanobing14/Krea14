@@ -289,6 +289,27 @@ const socials = (profile.socials || {}) as Record<string, string>;
 </Layout>
 
 <style>
+  /* ── Hero grid background ── */
+  .contact-hero {
+    position: relative;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    background-position: center center;
+  }
+  .contact-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, var(--bg) 30%, transparent 80%);
+    pointer-events: none;
+  }
+  .contact-hero > * {
+    position: relative;
+    z-index: 1;
+  }
+
   /* ── Hero layout ── */
   .contact-hero-inner {
     display: flex;
