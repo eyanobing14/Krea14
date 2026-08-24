@@ -123,6 +123,9 @@
   --glow-inner: rgba(255, 255, 255, 0.15);
   --glow-mid: rgba(255, 255, 255, 0.05);
 
+  /* Logo invert — 1 = inverted (dark mode), 0 = normal (light mode) */
+  --logo-invert: 1;
+
   color-scheme: dark;
 }
 
@@ -169,6 +172,9 @@
   --cursor-hover-bg: rgba(0, 0, 0, 0.06);
   --glow-inner: rgba(0, 0, 0, 0.12);
   --glow-mid: rgba(0, 0, 0, 0.04);
+
+  /* Logo invert — 0 = normal (light mode) */
+  --logo-invert: 0;
 
   color-scheme: light;
 }
@@ -253,6 +259,10 @@
    ============================================ */
 
 @layer components {
+  .hover-link:hover {
+    color: var(--fg) !important;
+  }
+
   .container-page {
     max-width: 1200px;
     margin-inline: auto;

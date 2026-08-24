@@ -139,10 +139,6 @@ const currentPath = Astro.url.pathname;
     background: #ffffff !important;
     border-bottom-color: rgba(0, 0, 0, 0.08) !important;
   }
-  /* Logo color adapts to theme */
-  :root { --logo-invert: 0; }
-  [data-theme="light"] { --logo-invert: 0; }
-  :root:not([data-theme="light"]) { --logo-invert: 1; }
 
   /* When mobile menu is open, force solid navbar */
   .site-header.is-menu-open {
