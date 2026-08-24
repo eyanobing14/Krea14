@@ -1,156 +1,204 @@
-# Guide Admin — Mon Portfolio
+# Guide Admin — Krea14 Portfolio
 
-Comment gérer votre portfolio via le panel d'administration.
+Comment lancer le site et gérer votre portfolio via le panel d'administration.
 
-## Accès
+---
 
-Rendez-vous sur `/admin` depuis votre site. Aucun mot de passe n'est requis (c'est un CMS client-side).
+## 🚀 Lancement du serveur
 
-## Principe de fonctionnement
+Le projet utilise **deux serveurs** qui tournent ensemble :
 
-Toutes les modifications sont sauvegardées dans le **localStorage** de votre navigateur. Cela signifie :
+| Serveur | Port | Rôle |
+|---|---|---|
+| **Astro** (front-end) | `4321` | Le site vitrine, pages statiques |
+| **Node API** (back-end) | `4200` | API pour admin, upload d'images, git |
 
-- ✅ Les données persistent entre vos visites
-- ✅ Aucun backend nécessaire
-- ⚠️ Les données sont liées au navigateur / appareil
-- ⚠️ Vider le navigateur = perte des données (pensez à exporter !)
+### Commande unique (recommandée)
 
-## Structure des onglets
+```bash
+npm run dev:admin
+```
+
+Cela lance Astro + le serveur Node en parallèle via `concurrently`.
+
+### Lancer séparément
+
+```bash
+# Terminal 1 — Site vitrine
+npm run dev
+
+# Terminal 2 — API admin (obligatoire pour l'admin)
+npm run server
+```
+
+> ⚠️ **L'admin ne fonctionne pas sans le serveur Node.** Si vous voyez "Erreur" ou les données ne se sauvegardent pas, vérifiez que `server.js` tourne sur le port 4200.
+
+### Construire pour la production
+
+```bash
+npm run build      # Génère le site dans /dist
+npm run preview    # Prévisualise la version buildée
+```
+
+---
+
+## 🔧 Fonctionnement
+
+### Principe
+
+L'admin (`/admin`) communique avec le serveur Node via des API REST :
+
+| Endpoint | Méthode | Rôle |
+|---|---|---|
+| `/api/read-data` | POST | Lit `public/data/portfolio.json` |
+| `/api/save-data` | POST | Écrit dans `portfolio.json` |
+| `/api/reset-data` | POST | Recharge les données depuis le fichier |
+| `/api/upload-image` | POST | Upload une image dans `public/assets/` |
+| `/api/git-info` | POST | Info branche, remote, modifications |
+| `/api/git-commit` | POST | `git add -A && git commit` |
+| `/api/git-push` | POST | `git push origin <branche>` |
+
+### Données
+
+Toutes les données du portfolio sont dans un seul fichier : **`public/data/portfolio.json`**
+
+- Les modifications via l'admin écrivent directement dans ce fichier
+- Les images uploadées vont dans **`public/assets/`**
+- Les images sont enregistrées en base64 dans le JSON exporté
+
+---
+
+## 📋 Onglets de l'admin
 
 ### 1. Profil
-
-Gérez vos informations personnelles :
 
 | Champ | Description |
 |---|---|
 | **Nom** | Votre nom complet |
-| **Titre** | Votre spécialité (ex: "Graphic Designer · UI/UX") |
-| **Tagline** | Slogan court affiché sur la page d'accueil |
-| **Bio** | Description détaillée (page À propos) |
-| **Photo** | Upload d'une photo de profil (affichée sur About) |
-| **Email** | Adresse de contact |
-| **Localisation** | Ville, pays |
-| **Disponibilité** | Statut actuel (ex: "Disponible pour freelance") |
+| **Titre** | Spécialité (ex: "Graphic Designer · UI/UX") |
+| **Tagline** | Slogan page d'accueil |
+| **Bio** | Description (page À propos) |
+| **Photo de profil** | Upload image (page À propos) |
+| **Email** | Contact |
+| **Localisation** | Pays / ville |
+| **Disponibilité** | Statut actuel |
+| **WhatsApp** | Numéro avec indicatif pays |
 
-**Action** : Cliquez sur "Sauvegarder le profil" après modification.
+→ Cliquez sur **"Sauvegarder le profil"** après modification.
 
-### 2. Case Studies
-
-Gérez vos études de cas / projets.
+### 2. Case Studies (Projets)
 
 #### Ajouter un projet
-1. Cliquez sur "+ Ajouter un case study"
-2. Un nouvel item apparaît (fermé par défaut)
-3. Cliquez sur l'en-tête pour l'ouvrir
-4. Remplissez les champs
-5. Cliquez sur "Sauver"
+1. **"+ Ajouter un case study"** en bas de la liste
+2. Cliquez sur l'en-tête pour ouvrir le formulaire
+3. Remplissez les champs
+4. **"Sauver"** pour valider
 
-#### Champs disponibles
+#### Champs
 
 | Champ | Obligatoire | Description |
 |---|---|---|
-| **Titre** | ✅ | Nom du projet (ex: "Branding — Lumière Café") |
-| **Slug** | ✅ | URL unique (ex: "branding-lumiere") |
-| **Catégorie** | ✅ | Catégorie pour les filtres (ex: "Branding · Design Graphique") |
+| **Titre** | ✅ | Nom du projet |
+| **Slug** | ✅ | URL unique (minuscules, tirets) |
+| **Catégorie** | ✅ | Catégorie principale pour filtres |
+| **Sous-catégorie** | - | Sous-type (Flyer, Carrousel, Mobile…) |
 | **Année** | ✅ | Année de réalisation |
-| **Description** | ✅ | Résumé court du projet |
+| **Description** | ✅ | Résumé court |
 | **Défi** | - | Le problème à résoudre |
-| **Solution** | - | Votre approche et résultats |
-| **Résultats** | - | Un résultat par ligne (ex: "+40% de visibilité") |
-| **Tags** | - | Tags séparés par virgule |
-| **Couleur hero** | - | Couleur d'arrière-plan du thumbnail |
-| **Flow / Étapes** | - | Le processus de travail, étape par étape |
-| **Images** | - | Photos du projet (upload multi-fichiers) |
+| **Solution** | - | Votre approche |
+| **Résultats** | - | Un par ligne |
+| **Tags** | - | Séparés par virgule |
+| **Couleur hero** | - | Fond du thumbnail |
 
-#### Gérer les flows (étapes)
-Le flow montre votre processus de travail sur la page détail du projet.
+#### Images (2 emplacements)
 
-- **Ajouter** : Cliquez sur "+ Ajouter une étape"
-- **Modifier** : Éditez le texte dans l'input
-- **Supprimer** : Cliquez sur le × à droite de l'étape
-- **Réordonner** : Modifiez l'ordre en réorganisant les inputs (les numéros se mettent à jour)
+| Image | Format | Utilisation |
+|---|---|---|
+| **Thumbnail** | 4:3 | Cartes page d'accueil |
+| **Hero** | 16:9 | Page Work + détail projet |
 
-#### Gérer les images
-- **Ajouter** : Cliquez sur "+ Ajouter des images" → sélectionnez vos fichiers
-- **Supprimer** : Cliquez sur le × sur la thumbnail
-- Les images sont stockées en base64 dans le JSON exporté
+> Les images de galerie ont été retirées. Seuls Thumbnail et Hero sont nécessaires.
 
-#### Supprimer un projet
-1. Cliquez sur "Supprimer" dans l'en-tête
-2. Confirmez dans le modal
+#### Flow (Étapes du processus)
+
+Chaque étape contient :
+- **Texte** : Description de l'étape (textarea)
+- **Image optionnelle** : Photo d'illustration (bouton "Ajouter une image")
+- **Bouton ×** : Supprimer l'étape
+
+→ Le flow est affiché sur la page détail de chaque projet.
 
 ### 3. Services
-
-Gérez la liste de vos services.
 
 | Champ | Description |
 |---|---|
 | **Titre** | Nom du service (ex: "UI/UX Design") |
-| **ID** | Identifiant unique (ex: "uiux") |
+| **ID** | Identifiant unique |
 | **Description** | Description du service |
 
-## Exporter les données
+### 4. Légal
 
-### Export JSON
-1. Cliquez sur "Exporter JSON ↓" en haut de la page
-2. Un fichier `portfolio.json` est téléchargé
-3. Remplacez le fichier dans `public/data/portfolio.json`
-4. Reconstruisez le site : `npm run build`
+#### Informations légales
+- Nom d'entreprise, email, juridiction, monnaie ($)
+- Conditions de paiement, politique de remboursement
 
-Le JSON exporté contient **toutes** les données y compris les images en base64.
+#### Grille tarifaire
+Prix min/max par catégorie de service (Branding, UI/UX, Frontend, Logo, Autre, Taux horaire).
 
-### Réinitialiser
-1. Cliquez sur "Réinitialiser" en haut de la page
-2. Confirmez dans le modal
-3. Les données reviennent aux valeurs par défaut du fichier JSON
+#### Contenu des pages légales
+- Politique de confidentialité
+- Conditions générales
 
-## Bonnes pratiques
+---
 
-1. **Exportez régulièrement** — Le localStorage peut être vidé par le navigateur
-2. **Utilisez des slugs propres** — Minuscules, tirets, sans espaces ni caractères spéciaux
-3. **Catégories cohérentes** — La première partie avant le `·` est utilisée comme filtre (ex: "Branding · Design Graphique" → filtre "Branding")
-4. **Images optimisées** — Les images en base64 alourdissent le JSON. Préférez des images < 500KB
-5. **Flow = processus** — Les étapes du flow sont affichées sur la page détail. Décrivez votre démarche de travail
-6. **Sauvegardez avant de quitter** — Les modifications non sauvegardées (bouton "Sauver") sont perdues
+## 🔀 Git intégré
 
-## Structure du JSON
+L'admin intègre des boutons **Commit** et **Push** pour sauvegarder directement via Git.
 
-```json
-{
-  "profile": {
-    "name": "Votre Nom",
-    "title": "Graphic Designer · UI/UX",
-    "tagline": "...",
-    "bio": "...",
-    "photo": "data:image/... (base64)",
-    "email": "...",
-    "location": "...",
-    "availability": "...",
-    "socials": { "dribbble": "...", "behance": "...", "github": "...", "linkedin": "..." }
-  },
-  "services": [
-    { "id": "uiux", "title": "UI/UX Design", "description": "...", "icon": "layout" }
-  ],
-  "caseStudies": [
-    {
-      "slug": "mon-projet",
-      "title": "Mon Projet",
-      "category": "UI/UX · Mobile",
-      "year": "2025",
-      "heroColor": "#1a1a1a",
-      "description": "...",
-      "challenge": "...",
-      "solution": "...",
-      "results": ["Résultat 1", "Résultat 2"],
-      "flow": ["Étape 1", "Étape 2", "Étape 3"],
-      "tags": ["UI/UX", "Mobile"],
-      "images": ["data:image/... (base64)"]
-    }
-  ],
-  "resources": []
-}
-```
+### Commit
+1. Cliquez sur **"Commit"**
+2. Entrez le message de commit
+3. Validez — les logs s'affichent en temps réel
 
-## Raccourcis clavier
+### Push
+1. Cliquez sur **"Push"**
+2. Le commit est fait automatiquement puis le push suit
+3. Les logs montrent les deux étapes
 
-Aucun raccourci n'est implémenté pour le moment. Tout se fait via l'interface graphique.
+### Infos affichées
+- Branche active
+- Nombre de fichiers modifiés
+- Remote configuré
+- Utilisateur Git
+
+---
+
+## 📦 Exporter / Réinitialiser
+
+| Action | Description |
+|---|---|
+| **Exporter** | Télécharge le `portfolio.json` complet |
+| **Réinitialiser** | Recharge les données depuis le fichier disque |
+
+---
+
+## ⚡ Bonnes pratiques
+
+1. **Slugs propres** — Minuscules, tirets, sans espaces ni accents
+2. **Catégories** — La première partie avant `·` sert de filtre
+3. **Images < 500KB** — Évitez d'alourdir le JSON
+4. **Sauvegardez avant de quitter** — Le bouton "Sauver" est obligatoire
+5. **Commit régulièrement** — Utilisez les boutons intégrés pour ne pas perdre de travail
+6. **WhatsApp** — Le numéro complet est formaté automatiquement (ex: `25761729788`)
+
+---
+
+## 🛠 Dépannage
+
+| Problème | Solution |
+|---|---|
+| Admin affiche "Erreur" | Vérifiez que `npm run server` tourne (port 4200) |
+| Images non affichées | Vérifiez que les fichiers existent dans `public/assets/` |
+| Données perdues | Utilisez "Réinitialiser" ou restaurez le `portfolio.json` |
+| Push échoue | Vérifiez `git remote -v` et la connexion réseau |
+| Site ne build pas | Lancez `npm run build` et vérifiez les erreurs |

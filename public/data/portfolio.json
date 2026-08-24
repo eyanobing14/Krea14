@@ -1,12 +1,12 @@
 {
   "profile": {
     "name": "ExauEyano",
-    "title": "Graphic Designer · UI/UX · Frontend Dev",
+    "title": "Graphic Designer · UI/UX · Fullstack Dev",
     "tagline": "Nous concevons des expériences numériques qui marquent.",
     "taglineEn": "We create digital experiences that leave a mark.",
-    "bio": "Designer passionné avec 5+ ans d'expérience en design graphique, UI/UX et développement frontend. Nous transformons des idées complexes en interfaces élégantes et intuitives.",
+    "bio": "Designer passionné avec 5+ ans d'expérience en design graphique, UI/UX et développement fullstack. Nous transformons des idées complexes en interfaces élégantes et intuitives.",
     "email": "exaubing@gmail.com",
-    "location": "Paris, France",
+    "location": "Burundi/Gitega",
     "availability": "Disponible pour freelance",
     "whatsapp": "+25725761729788",
     "socials": {
@@ -51,8 +51,6 @@
       "title": "Branding — Lumière Café",
       "category": "Design Graphique · Branding",
       "year": "2025",
-      "thumbnail": "",
-      "heroColor": "#1a1a1a",
       "description": "Refonte complète de l'identité visuelle d'un café de spécialité parisien. Du logo aux supports print, en passant par l'identité digitale.",
       "descriptionEn": "Complete overhaul of the visual identity for a Parisian specialty coffee shop. From logo to print materials and digital identity.",
       "challenge": "Lumière Café voulait se différencier dans un marché saturé. L'ancienne identité était datée et ne reflétait plus l'ambiance chaleureuse et moderne du lieu.",
@@ -63,19 +61,39 @@
         "Identité déclinée sur 20+ supports"
       ],
       "flow": [
-        "Audit de l'existant et analyse concurrentielle",
-        "Recherche de direction créative (moodboards, références)",
-        "Design du logo et déclinaisons",
-        "Création de la charte graphique complète",
-        "Production des supports print et digitaux",
-        "Déploiement et formation de l'équipe"
+        {
+          "text": "Audit de l'existant et analyse concurrentielle",
+          "image": ""
+        },
+        {
+          "text": "Recherche de direction créative (moodboards, références)",
+          "image": ""
+        },
+        {
+          "text": "Design du logo et déclinaisons",
+          "image": ""
+        },
+        {
+          "text": "Création de la charte graphique complète",
+          "image": ""
+        },
+        {
+          "text": "Production des supports print et digitaux",
+          "image": ""
+        },
+        {
+          "text": "Déploiement et formation de l'équipe",
+          "image": ""
+        }
       ],
       "tags": [
         "Branding",
         "Print",
         "Identité visuelle"
       ],
-      "images": [],
+      "images": [
+        "/assets/profile-photo.jpeg"
+      ],
       "tagsEn": [
         "Branding",
         "Print",
@@ -83,15 +101,17 @@
       ],
       "titleEn": "Branding — Lumière Café",
       "challengeEn": "Lumière Café wanted to differentiate itself in a saturated market. The old visual identity no longer reflected the quality of their specialty coffees.",
-      "solutionEn": "We developed a visual system around the play of light and shadow. A warm color palette, custom typography, and consistent applications across all touchpoints."
+      "solutionEn": "We developed a visual system around the play of light and shadow. A warm color palette, custom typography, and consistent applications across all touchpoints.",
+      "heroImage": "/assets/hero-33417396_8052381.jpg",
+      "heroColor": "#1a1a1a",
+      "thumbnail": "/assets/thumb-33417396_8052381.jpg"
     },
     {
       "slug": "app-mindflow",
       "title": "App — MindFlow",
       "category": "Design Graphique · Carrousel",
       "year": "2025",
-      "thumbnail": "",
-      "heroColor": "#0a0a0a",
+      "thumbnail": "/assets/thumb-26329241_7196878.jpg",
       "description": "Conception d'une application mobile de méditation et productivité. Design system complet et prototypage interactif.",
       "descriptionEn": "Design of a meditation and productivity mobile app. Complete design system and interactive prototyping.",
       "challenge": "Les apps de méditation existantes manquent de personnalisation. Les utilisateurs veulent une expérience qui s'adapte à leur routine, pas l'inverse.",
@@ -102,12 +122,30 @@
         "Note de satisfaction utilisateurs : 4.8/5"
       ],
       "flow": [
-        "Recherche utilisateurs et interviews",
-        "Definition des personas et parcours",
-        "Wireframing des écrans principaux",
-        "Design system et composants UI",
-        "Prototypage interactif haute fidélité",
-        "Tests utilisateurs et itérations"
+        {
+          "text": "Recherche utilisateurs et interviews",
+          "image": ""
+        },
+        {
+          "text": "Definition des personas et parcours",
+          "image": ""
+        },
+        {
+          "text": "Wireframing des écrans principaux",
+          "image": ""
+        },
+        {
+          "text": "Design system et composants UI",
+          "image": ""
+        },
+        {
+          "text": "Prototypage interactif haute fidélité",
+          "image": ""
+        },
+        {
+          "text": "Tests utilisateurs et itérations",
+          "image": ""
+        }
       ],
       "tags": [
         "UI/UX",
@@ -122,7 +160,8 @@
       ],
       "titleEn": "App — MindFlow",
       "challengeEn": "Existing meditation apps lack personalization. Users need a tool that adapts to their routine, not the other way around.",
-      "solutionEn": "Modular interface with customizable 'rituels'. A design system built for scalability, with micro-interactions that reinforce the calming experience."
+      "solutionEn": "Modular interface with customizable 'rituels'. A design system built for scalability, with micro-interactions that reinforce the calming experience.",
+      "heroImage": "/assets/hero-26329241_7196878.jpg"
     },
     {
       "slug": "site-cipher-studio",
@@ -130,7 +169,6 @@
       "category": "Frontend Dev · Site Vitrine",
       "year": "2024",
       "thumbnail": "",
-      "heroColor": "#111111",
       "description": "Développement frontend d'un site vitrine pour un studio créatif. Animations GSAP, responsive, performance optimale.",
       "descriptionEn": "Frontend development for a creative studio showcase website. GSAP animations, responsive, optimal performance.",
       "challenge": "Créer un site qui impressionne visuellement tout en restant rapide et accessible. Le client voulait des animations immersives sans sacrifier les Core Web Vitals.",
@@ -141,12 +179,30 @@
         "+200% de temps passé sur le site"
       ],
       "flow": [
-        "Brief créatif et définition des animations",
-        "Maquettes et prototypes de transitions",
-        "Setup du projet Astro + Tailwind + GSAP",
-        "Développement des composants et animations",
-        "Optimisation performance (lazy load, code split)",
-        "Déploiement et tests cross-browser"
+        {
+          "text": "Brief créatif et définition des animations",
+          "image": ""
+        },
+        {
+          "text": "Maquettes et prototypes de transitions",
+          "image": ""
+        },
+        {
+          "text": "Setup du projet Astro + Tailwind + GSAP",
+          "image": ""
+        },
+        {
+          "text": "Développement des composants et animations",
+          "image": ""
+        },
+        {
+          "text": "Optimisation performance (lazy load, code split)",
+          "image": ""
+        },
+        {
+          "text": "Déploiement et tests cross-browser",
+          "image": ""
+        }
       ],
       "tags": [
         "Frontend",
@@ -163,7 +219,8 @@
       ],
       "titleEn": "Site Web — Cipher Studio",
       "challengeEn": "Create a site that impresses visually while remaining fast and accessible. The studio needed a digital showcase that matched their creative work.",
-      "solutionEn": "Astro + GSAP for fluid animations. Scroll-driven animations, responsive grid, optimized performance — beauty meets function."
+      "solutionEn": "Astro + GSAP for fluid animations. Scroll-driven animations, responsive grid, optimized performance — beauty meets function.",
+      "heroImage": ""
     },
     {
       "slug": "logo-noctis-ai",
@@ -171,7 +228,6 @@
       "category": "Logo Design · Cartes de visite",
       "year": "2024",
       "thumbnail": "",
-      "heroColor": "#0d0d0d",
       "description": "Création du logo et de la charte graphique pour une startup d'IA. Un logo qui évoque l'intelligence et la modernité.",
       "descriptionEn": "Logo and brand guidelines creation for an AI startup. A logo that evokes intelligence and modernity.",
       "challenge": "Noctis AI avait besoin d'un logo qui transmette confiance et innovation, sans tomber dans les clichés du secteur IA (cerveaux, robots, réseaux de neurones).",
@@ -182,12 +238,30 @@
         "Présent sur 500+ cartes de visite"
       ],
       "flow": [
-        "Recherche de positionnement de marque",
-        "Exploration de 3 directions graphiques",
-        "Sélection et raffinement du concept",
-        "Création des variantes (clair, sombre, icon)",
-        "Définition de la charte d'usage",
-        "Livraison des fichiers sources et exports"
+        {
+          "text": "Recherche de positionnement de marque",
+          "image": ""
+        },
+        {
+          "text": "Exploration de 3 directions graphiques",
+          "image": ""
+        },
+        {
+          "text": "Sélection et raffinement du concept",
+          "image": ""
+        },
+        {
+          "text": "Création des variantes (clair, sombre, icon)",
+          "image": ""
+        },
+        {
+          "text": "Définition de la charte d'usage",
+          "image": ""
+        },
+        {
+          "text": "Livraison des fichiers sources et exports",
+          "image": ""
+        }
       ],
       "tags": [
         "Logo",
@@ -202,52 +276,8 @@
       ],
       "titleEn": "Logo — Noctis AI",
       "challengeEn": "Noctis AI needed a logo that conveys trust and innovation. A brand identity for an AI startup in a crowded market.",
-      "solutionEn": "An abstract symbol combining a star ('noctis' = night) with neural network motifs. Clean, scalable, memorable."
-    },
-    {
-      "slug": "nouveau-projet-1787588591240",
-      "title": "Nouveau projet",
-      "category": "Design Graphique",
-      "year": "2026",
-      "thumbnail": "",
-      "heroColor": "#1a1a1a",
-      "description": "",
-      "challenge": "",
-      "solution": "",
-      "results": [],
-      "tags": [],
-      "flow": [],
-      "images": []
-    },
-    {
-      "slug": "nouveau-projet-1787588596752",
-      "title": "Nouveau projet",
-      "category": "Design Graphique",
-      "year": "2026",
-      "thumbnail": "",
-      "heroColor": "#1a1a1a",
-      "description": "",
-      "challenge": "",
-      "solution": "",
-      "results": [],
-      "tags": [],
-      "flow": [],
-      "images": []
-    },
-    {
-      "slug": "nouveau-projet-1787588608848",
-      "title": "Nouveau projet",
-      "category": "Design Graphique",
-      "year": "2026",
-      "thumbnail": "",
-      "heroColor": "#1a1a1a",
-      "description": "",
-      "challenge": "",
-      "solution": "",
-      "results": [],
-      "tags": [],
-      "flow": [],
-      "images": []
+      "solutionEn": "An abstract symbol combining a star ('noctis' = night) with neural network motifs. Clean, scalable, memorable.",
+      "heroImage": ""
     }
   ],
   "designSubcategories": [

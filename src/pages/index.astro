@@ -183,15 +183,24 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
                 style="border: 1px solid var(--border);"
               >
                 <div
-                  class="aspect-4/3 flex items-center justify-center transition-all duration-500"
+                  class="aspect-4/3 relative overflow-hidden transition-all duration-500"
                   style={`background: ${study.heroColor || "var(--bg-raised)"};`}
                 >
-                  <span
-                    class="font-mono text-xs uppercase tracking-widest opacity-30"
-                    style="color: var(--fg);"
-                  >
-                    {study.category}
-                  </span>
+                  {(study.thumbnail) ? (
+                    <img
+                      src={study.thumbnail}
+                      alt={study.title}
+                      class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <span
+                      class="font-mono text-xs uppercase tracking-widest opacity-30"
+                      style="color: var(--fg);"
+                    >
+                      {study.category}
+                    </span>
+                  )}
                 </div>
                 <div class="p-5" style="border-top: 1px solid var(--border);">
                   <div class="flex items-center justify-between">

@@ -162,7 +162,6 @@ export const T: Record<string, string> = {
   "Motion Design": "Motion Design",
 
   // ── Work page dynamic ──
-  "Voir le projet →": "View project →",
   "IDENTITÉ VISUELLE": "VISUAL IDENTITY",
 
   // ── Footer services ──
@@ -172,17 +171,16 @@ export const T: Record<string, string> = {
 
   // ── Profile values ──
   "Disponible pour freelance": "Available for freelance",
-  "Paris, France": "Paris, France",
+  "Paris, France": "France",
 
   // ── Contact form options ──
-  "Sélectionnez...": "Select...",
   "Branding / Identité visuelle": "Branding / Visual Identity",
   "Développement Frontend": "Frontend Development",
   "Autre": "Other",
-  "1 000 € — 3 000 €": "$1,000 — $3,000",
-  "3 000 € — 5 000 €": "$3,000 — $5,000",
-  "5 000 € — 10 000 €": "$5,000 — $10,000",
-  "10 000 € +": "$10,000 +",
+  "$1,000 — $3,000": "$1,000 — $3,000",
+  "$3,000 — $5,000": "$3,000 — $5,000",
+  "$5,000 — $10,000": "$5,000 — $10,000",
+  "$10,000 +": "$10,000 +",
 
   // ── Work detail page ──
   "← Retour": "← Back",

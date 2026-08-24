@@ -191,7 +191,7 @@ import Footer from '../components/Footer.astro';
             </div>
             <div>
               <label class="admin-label">Juridiction</label>
-              <input id="l-jurisdiction" type="text" class="admin-input" placeholder="Paris, France" />
+              <input id="l-jurisdiction" type="text" class="admin-input" placeholder="Juridiction" />
             </div>
             <div>
               <label class="admin-label">Monnaie</label>
@@ -741,14 +741,32 @@ import Footer from '../components/Footer.astro';
     });
 
     // ── Case Studies ──
-    function renderFlows(flows: string[], studyIndex: number): string {
-      const items = (flows || []).map((step, fi) => `
-        <div class="admin-flow-item">
-          <span class="admin-flow-num">${String(fi + 1).padStart(2, '0')}</span>
-          <input class="admin-input study-flow-input" data-si="${studyIndex}" data-fi="${fi}" value="${step.replace(/"/g, '&quot;')}" />
-          <button class="admin-flow-delete study-flow-delete" data-si="${studyIndex}" data-fi="${fi}">×</button>
+    function renderFlows(flows: any[], studyIndex: number): string {
+      const items = (flows || []).map((step, fi) => {
+        const stepText = typeof step === 'string' ? step : (step.text || '');
+        const stepImage = typeof step === 'object' ? (step.image || '') : '';
+        return `
+        <div class="admin-flow-item" style="flex-direction:column;gap:8px;align-items:stretch;">
+          <div style="display:flex;align-items:flex-start;gap:8px;">
+            <span class="admin-flow-num">${String(fi + 1).padStart(2, '0')}</span>
+            <textarea class="admin-input study-flow-input" data-si="${studyIndex}" data-fi="${fi}" rows="2" style="flex:1;min-width:120px;resize:vertical;">${stepText.replace(/"/g, '&quot;')}</textarea>
+            <button class="admin-flow-delete study-flow-delete" data-si="${studyIndex}" data-fi="${fi}" title="Supprimer l'étape" style="width:28px;height:28px;min-width:28px;font-size:14px;background:transparent;color:var(--fg-muted);border:1px solid var(--border-strong);display:flex;align-items:center;justify-content:center;cursor:pointer;margin-top:2px;">×</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;margin-left:36px;">
+            <label class="admin-btn-outline" style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-size:11px;padding:5px 10px;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              ${stepImage ? 'Changer l\'image' : 'Ajouter une image'}
+              <input type="file" accept="image/*" class="study-flow-image-input" data-si="${studyIndex}" data-fi="${fi}" style="display:none;" />
+            </label>
+            ${stepImage ? `
+              <div style="position:relative;">
+                <img src="${stepImage}" style="width:120px;height:72px;object-fit:cover;border:1px solid var(--border-strong);" />
+                <button class="study-flow-image-remove" data-si="${studyIndex}" data-fi="${fi}" title="Supprimer l'image" style="position:absolute;top:4px;right:4px;width:18px;height:18px;font-size:11px;background:var(--fg);color:var(--bg);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;line-height:1;">×</button>
+              </div>
+            ` : `<span style="font-size:10px;color:var(--fg-muted);font-style:italic;">Aucune image pour cette étape</span>`}
+          </div>
         </div>
-      `).join('');
+      `;}).join('');
       return `
         <div class="admin-flow-list" data-si="${studyIndex}">
           ${items}
@@ -793,19 +811,31 @@ import Footer from '../components/Footer.astro';
             </div>
             <!-- Images -->
             <div class="mt-5 pt-5" style="border-top: 1px solid var(--border-strong);">
-              <label class="admin-label">Images du projet</label>
-              <div class="study-images-grid" data-si="${i}" style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.5rem;">
-                ${(study.images || []).map((img: string, ii: number) => `
-                  <div class="study-image-thumb" style="position:relative;width:80px;height:60px;border:1px solid var(--border-strong);overflow:hidden;">
-                    <img src="${img}" style="width:100%;height:100%;object-fit:cover;" />
-                    <button class="study-image-remove" data-si="${i}" data-ii="${ii}" style="position:absolute;top:2px;right:2px;width:16px;height:16px;font-size:10px;background:var(--fg);color:var(--bg);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;line-height:1;">×</button>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Thumbnail (accueil cards - aspect-4/3) -->
+                <div>
+                  <label class="admin-label">Thumbnail — Accueil (format 4:3)</label>
+                  <div class="flex items-center gap-3">
+                    ${study.thumbnail ? `<div style="position:relative;width:80px;height:60px;border:1px solid var(--border-strong);overflow:hidden;"><img src="${study.thumbnail}" style="width:100%;height:100%;object-fit:cover;" /><button class="study-thumb-remove" data-si="${i}" style="position:absolute;top:2px;right:2px;width:16px;height:16px;font-size:10px;background:var(--fg);color:var(--bg);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;line-height:1;">×</button></div>` : ''}
+                    <label class="admin-btn-outline" style="display:inline-block;cursor:pointer;font-size:11px;">
+                      ${study.thumbnail ? 'Changer' : '+ Ajouter'}
+                      <input type="file" accept="image/*" class="study-thumb-input" data-i="${i}" style="display:none;" />
+                    </label>
                   </div>
-                `).join('')}
+                </div>
+                <!-- Hero image (work list + detail - aspect-video) -->
+                <div>
+                  <label class="admin-label">Hero — Work & Détail (format 16:9)</label>
+                  <div class="flex items-center gap-3">
+                    ${study.heroImage ? `<div style="position:relative;width:80px;height:60px;border:1px solid var(--border-strong);overflow:hidden;"><img src="${study.heroImage}" style="width:100%;height:100%;object-fit:cover;" /><button class="study-hero-remove" data-si="${i}" style="position:absolute;top:2px;right:2px;width:16px;height:16px;font-size:10px;background:var(--fg);color:var(--bg);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;line-height:1;">×</button></div>` : ''}
+                    <label class="admin-btn-outline" style="display:inline-block;cursor:pointer;font-size:11px;">
+                      ${study.heroImage ? 'Changer' : '+ Ajouter'}
+                      <input type="file" accept="image/*" class="study-hero-input" data-i="${i}" style="display:none;" />
+                    </label>
+                  </div>
+                </div>
               </div>
-              <label class="admin-btn-outline mt-2" style="display:inline-block;cursor:pointer;">
-                + Ajouter des images
-                <input type="file" accept="image/*" multiple class="study-image-input" data-i="${i}" style="display:none;" />
-              </label>
+
             </div>
             <!-- Flow / Steps -->
             <div class="mt-5 pt-5" style="border-top: 1px solid var(--border);">
@@ -851,9 +881,14 @@ import Footer from '../components/Footer.astro';
           data.caseStudies[i].results = (item.querySelector('.study-results') as HTMLTextAreaElement).value.split('\n').filter((l: string) => l.trim());
           data.caseStudies[i].tags = (item.querySelector('.study-tags') as HTMLInputElement).value.split(',').map((t: string) => t.trim()).filter(Boolean);
           data.caseStudies[i].heroColor = (item.querySelector('.study-color') as HTMLInputElement).value;
-          // Save flows
+          // Save flows (objects with text + image)
           const flowInputs = item.querySelectorAll('.study-flow-input') as NodeListOf<HTMLInputElement>;
-          data.caseStudies[i].flow = Array.from(flowInputs).map((inp) => inp.value).filter(Boolean);
+          const existingFlow = data.caseStudies[i].flow || [];
+          data.caseStudies[i].flow = Array.from(flowInputs).map((inp, fi) => {
+            const existing = existingFlow[fi];
+            const prevImage = typeof existing === 'object' ? (existing.image || '') : '';
+            return { text: inp.value, image: prevImage };
+          }).filter((s: any) => s.text.trim());
           save();
           const titleEl = item.querySelector('.admin-item-title');
           if (titleEl) titleEl.textContent = data.caseStudies[i].title;
@@ -910,45 +945,121 @@ import Footer from '../components/Footer.astro';
         });
       });
 
-      // Image: upload
-      list.querySelectorAll('.study-image-input').forEach((input) => {
+      // Thumbnail upload (accueil cards)
+      list.querySelectorAll('.study-thumb-input').forEach((input) => {
         input.addEventListener('change', (e) => {
           const si = parseInt((input as HTMLElement).dataset.i!);
-          const files = (e.target as HTMLInputElement).files;
-          if (!files || files.length === 0) return;
-          if (!data.caseStudies[si].images) data.caseStudies[si].images = [];
-
-          Array.from(files).forEach(async (file) => {
-            const reader = new FileReader();
-            reader.onload = async () => {
-              try {
-                const resp = await fetch(API + '/api/upload-image', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ filename: file.name, data: reader.result })
-                });
-                const result = await resp.json();
-                if (result.ok) {
-                  data.caseStudies[si].images = data.caseStudies[si].images || [];
-                  data.caseStudies[si].images.push(result.path);
-                  await save();
-                  renderStudies();
-                  reopenCard(si);
-                  showToast('Image uploadée dans public/assets/!');
-                }
-              } catch(e: unknown) { showToast('Erreur upload: ' + (e instanceof Error ? e.message : String(e))); }
-            };
-            reader.readAsDataURL(file);
-          });
+          const file = (e.target as HTMLInputElement).files?.[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = async () => {
+            try {
+              const resp = await fetch(API + '/api/upload-image', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ filename: 'thumb-' + file.name, data: reader.result })
+              });
+              const result = await resp.json();
+              if (result.ok) {
+                data.caseStudies[si].thumbnail = result.path;
+                await save();
+                renderStudies();
+                reopenCard(si);
+                showToast('Thumbnail uploadée!');
+              }
+            } catch(e: unknown) { showToast('Erreur: ' + (e instanceof Error ? e.message : String(e))); }
+          };
+          reader.readAsDataURL(file);
         });
       });
 
-      // Image: remove
-      list.querySelectorAll('.study-image-remove').forEach((btn) => {
+      // Thumbnail remove
+      list.querySelectorAll('.study-thumb-remove').forEach((btn) => {
         btn.addEventListener('click', () => {
           const si = parseInt((btn as HTMLElement).dataset.si!);
-          const ii = parseInt((btn as HTMLElement).dataset.ii!);
-          data.caseStudies[si].images.splice(ii, 1);
+          delete data.caseStudies[si].thumbnail;
+          save();
+          renderStudies();
+          reopenCard(si);
+        });
+      });
+
+      // Hero image upload (work list + detail)
+      list.querySelectorAll('.study-hero-input').forEach((input) => {
+        input.addEventListener('change', (e) => {
+          const si = parseInt((input as HTMLElement).dataset.i!);
+          const file = (e.target as HTMLInputElement).files?.[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = async () => {
+            try {
+              const resp = await fetch(API + '/api/upload-image', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ filename: 'hero-' + file.name, data: reader.result })
+              });
+              const result = await resp.json();
+              if (result.ok) {
+                data.caseStudies[si].heroImage = result.path;
+                await save();
+                renderStudies();
+                reopenCard(si);
+                showToast('Hero image uploadée!');
+              }
+            } catch(e: unknown) { showToast('Erreur: ' + (e instanceof Error ? e.message : String(e))); }
+          };
+          reader.readAsDataURL(file);
+        });
+      });
+
+      // Hero image remove
+      list.querySelectorAll('.study-hero-remove').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const si = parseInt((btn as HTMLElement).dataset.si!);
+          delete data.caseStudies[si].heroImage;
+          save();
+          renderStudies();
+          reopenCard(si);
+        });
+      });
+
+      // Flow image upload
+      list.querySelectorAll('.study-flow-image-input').forEach((input) => {
+        input.addEventListener('change', (e) => {
+          const si = parseInt((input as HTMLElement).dataset.si!);
+          const fi = parseInt((input as HTMLElement).dataset.fi!);
+          const file = (e.target as HTMLInputElement).files?.[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = async () => {
+            try {
+              const resp = await fetch(API + '/api/upload-image', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ filename: `flow-${si}-${fi}-${file.name}`, data: reader.result })
+              });
+              const result = await resp.json();
+              if (result.ok) {
+                const flow = data.caseStudies[si].flow;
+                if (flow && flow[fi]) flow[fi].image = result.path;
+                await save();
+                renderStudies();
+                reopenCard(si);
+                showToast('Image d\'étape uploadée!');
+              }
+            } catch(e: unknown) { showToast('Erreur: ' + (e instanceof Error ? e.message : String(e))); }
+          };
+          reader.readAsDataURL(file);
+        });
+      });
+
+      // Flow image remove
+      list.querySelectorAll('.study-flow-image-remove').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const si = parseInt((btn as HTMLElement).dataset.si!);
+          const fi = parseInt((btn as HTMLElement).dataset.fi!);
+          const flow = data.caseStudies[si].flow;
+          if (flow && flow[fi] && typeof flow[fi] === 'object') flow[fi].image = '';
           save();
           renderStudies();
           reopenCard(si);
@@ -973,7 +1084,7 @@ import Footer from '../components/Footer.astro';
         category: 'Design Graphique',
         year: new Date().getFullYear().toString(),
         thumbnail: '',
-        heroColor: '#1a1a1a',
+        heroImage: '',
         description: '',
         challenge: '',
         solution: '',
