@@ -326,7 +326,7 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
           <div class="orbital-system">
             <!-- Center -->
             <div class="orbital-center">
-              <img src="/favicon.svg" alt="" class="w-8 h-8" style="filter: invert(var(--logo-invert, 0));" />
+              <img src="/favicon.svg" alt="" class="w-8 h-8" style="filter: invert(var(--logo-invert, 0)); opacity: 0.4;" />
             </div>
 
             <!-- Orbit rings -->
@@ -510,6 +510,7 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     width: 64px; height: 64px;
+    border-radius: 50%;
     border: 1px solid var(--border-hover);
     display: flex; align-items: center; justify-content: center;
     background: var(--bg);
