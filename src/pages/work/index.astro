@@ -21,13 +21,84 @@ const categories = [...new Set(
   <main>
     <section class="work-hero min-h-screen flex flex-col justify-center pt-20 sm:min-h-0 sm:block sm:pt-28 pb-20 md:pt-40 md:pb-24">
       <Container>
-        <h1 class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold leading-none tracking-[-0.03em]" style="color: var(--fg);">
-          Tous mes<br/>
-          <span style="color: var(--fg-tertiary);">projets.</span>
-        </h1>
-        <p class="mt-6 text-base sm:text-lg leading-relaxed max-w-2xl" style="color: var(--fg-secondary);">
-          Une sélection de projets en branding, UI/UX, développement frontend et logo design.
-        </p>
+        <div class="work-hero-inner">
+          <div class="work-hero-text">
+            <h1 class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold leading-none tracking-[-0.03em]" style="color: var(--fg);">
+              Tous mes<br/>
+              <span style="color: var(--fg-tertiary);">projets.</span>
+            </h1>
+            <p class="mt-6 text-base sm:text-lg leading-relaxed max-w-2xl" style="color: var(--fg-secondary);">
+              Une sélection de projets en branding, UI/UX, développement frontend et logo design.
+            </p>
+          </div>
+
+          <!-- Animation -->
+          <div class="work-hero-anim">
+            <svg viewBox="0 0 400 160" fill="none" class="work-process-svg" id="work-process-svg">
+              <circle cx="200" cy="70" r="60" fill="var(--fg)" opacity="0.02" class="anim-glow"/>
+
+              <!-- Step 1: Recherche (magnifying glass) -->
+              <g class="anim-step as1">
+                <circle cx="60" cy="70" r="32" stroke="var(--fg-muted)" stroke-width="1" fill="none" opacity="0.3"/>
+                <circle cx="60" cy="70" r="28" stroke="var(--fg)" stroke-width="1.5" fill="none"/>
+                <circle cx="56" cy="66" r="10" stroke="var(--fg-secondary)" stroke-width="1.5" fill="none"/>
+                <line x1="63" y1="73" x2="72" y2="82" stroke="var(--fg-secondary)" stroke-width="1.5" stroke-linecap="round"/>
+                <text x="60" y="118" text-anchor="middle" fill="var(--fg-secondary)" font-size="10" font-weight="500" font-family="var(--font-mono)" letter-spacing="0.05em">Recherche</text>
+              </g>
+
+              <g class="anim-arrow aa1">
+                <line x1="96" y1="70" x2="126" y2="70" stroke="var(--fg-muted)" stroke-width="1.5" stroke-dasharray="4 3"/>
+                <polygon points="130,70 122,65 122,75" fill="var(--fg-muted)"/>
+              </g>
+
+              <!-- Step 2: Analyse (bar chart) -->
+              <g class="anim-step as2">
+                <circle cx="156" cy="70" r="32" stroke="var(--fg-muted)" stroke-width="1" fill="none" opacity="0.3"/>
+                <circle cx="156" cy="70" r="28" stroke="var(--fg)" stroke-width="1.5" fill="none"/>
+                <rect x="142" y="72" width="5" height="12" rx="1" stroke="var(--fg-secondary)" stroke-width="1" fill="none"/>
+                <rect x="150" y="64" width="5" height="20" rx="1" stroke="var(--fg-secondary)" stroke-width="1" fill="none"/>
+                <rect x="158" y="68" width="5" height="16" rx="1" stroke="var(--fg-secondary)" stroke-width="1" fill="none"/>
+                <rect x="166" y="60" width="5" height="24" rx="1" stroke="var(--fg-muted)" stroke-width="1" fill="none"/>
+                <text x="156" y="118" text-anchor="middle" fill="var(--fg-secondary)" font-size="10" font-weight="500" font-family="var(--font-mono)" letter-spacing="0.05em">Analyse</text>
+              </g>
+
+              <g class="anim-arrow aa2">
+                <line x1="192" y1="70" x2="222" y2="70" stroke="var(--fg-muted)" stroke-width="1.5" stroke-dasharray="4 3"/>
+                <polygon points="226,70 218,65 218,75" fill="var(--fg-muted)"/>
+              </g>
+
+              <!-- Step 3: Création (pen/pencil) -->
+              <g class="anim-step as3">
+                <circle cx="256" cy="70" r="32" stroke="var(--fg-muted)" stroke-width="1" fill="none" opacity="0.3"/>
+                <circle cx="256" cy="70" r="28" stroke="var(--fg)" stroke-width="1.5" fill="none"/>
+                <path d="M248 82 L264 58 L268 62 L252 86 Z" stroke="var(--fg-secondary)" stroke-width="1.2" fill="none"/>
+                <line x1="264" y1="58" x2="268" y2="62" stroke="var(--fg-secondary)" stroke-width="1.5"/>
+                <line x1="248" y1="82" x2="252" y2="86" stroke="var(--fg-secondary)" stroke-width="1"/>
+                <text x="256" y="118" text-anchor="middle" fill="var(--fg-secondary)" font-size="10" font-weight="500" font-family="var(--font-mono)" letter-spacing="0.05em">Création</text>
+              </g>
+
+              <g class="anim-arrow aa3">
+                <line x1="292" y1="70" x2="322" y2="70" stroke="var(--fg-muted)" stroke-width="1.5" stroke-dasharray="4 3"/>
+                <polygon points="326,70 318,65 318,75" fill="var(--fg-muted)"/>
+              </g>
+
+              <!-- Step 4: Résultat (star) -->
+              <g class="anim-step as4">
+                <circle cx="356" cy="70" r="32" stroke="var(--fg-muted)" stroke-width="1" fill="none" opacity="0.3"/>
+                <circle cx="356" cy="70" r="28" stroke="var(--fg)" stroke-width="1.5" fill="none"/>
+                <path d="M356 56 L359 66 L370 66 L361 72 L364 82 L356 76 L348 82 L351 72 L342 66 L353 66 Z" stroke="var(--fg)" stroke-width="1.2" fill="none" class="anim-check"/>
+                <g class="anim-sparkle">
+                  <line x1="374" y1="54" x2="380" y2="54" stroke="var(--fg)" stroke-width="1"/>
+                  <line x1="377" y1="51" x2="377" y2="57" stroke="var(--fg)" stroke-width="1"/>
+                </g>
+                <text x="356" y="118" text-anchor="middle" fill="var(--fg-secondary)" font-size="10" font-weight="500" font-family="var(--font-mono)" letter-spacing="0.05em">Résultat</text>
+              </g>
+
+              <line x1="60" y1="140" x2="356" y2="140" stroke="var(--border)" stroke-width="2" stroke-linecap="round"/>
+              <line x1="60" y1="140" x2="356" y2="140" stroke="var(--fg)" stroke-width="2" stroke-linecap="round" class="anim-progress"/>
+            </svg>
+          </div>
+        </div>
 
         <!-- Category Filters -->
         <div class="mt-10 flex flex-wrap gap-2" id="work-filters">
@@ -193,6 +264,137 @@ const categories = [...new Set(
     color: var(--bg);
     background: var(--fg);
     border-color: var(--fg);
+  }
+
+  /* ── Work hero split layout ── */
+  .work-hero-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  @media (min-width: 1024px) {
+    .work-hero-inner {
+      flex-direction: row;
+      align-items: center;
+      gap: 4rem;
+    }
+  }
+
+  .work-hero-text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .work-hero-anim {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(ellipse at center, var(--bg) 50%, transparent 100%);
+    border-radius: 1rem;
+    padding: 1.5rem;
+  }
+
+  .work-process-svg {
+    width: 100%;
+    max-width: 480px;
+    height: auto;
+    overflow: visible;
+  }
+  @media (max-width: 1023px) {
+    .work-process-svg {
+      max-width: 100%;
+    }
+  }
+
+  /* ── Process animation (looping 3s) ── */
+  .anim-step {
+    opacity: 0;
+    transform-origin: center;
+  }
+  .anim-arrow { opacity: 0; }
+  .anim-check {
+    stroke-dasharray: 40;
+    stroke-dashoffset: 40;
+  }
+  .anim-sparkle { opacity: 0; }
+  .anim-glow { opacity: 0; }
+  .anim-progress {
+    stroke-dasharray: 296;
+    stroke-dashoffset: 296;
+  }
+
+  .anim-step { animation: step-in 0.4s ease forwards, step-out 0.3s ease 2.7s forwards; }
+  .as1 { animation-delay: 0s, 2.7s; }
+  .as2 { animation-delay: 0.3s, 2.7s; }
+  .as3 { animation-delay: 0.6s, 2.7s; }
+  .as4 { animation-delay: 0.9s, 2.7s; }
+
+  .anim-arrow { animation: arrow-in 0.2s ease forwards, arrow-out 0.2s ease 2.8s forwards; }
+  .aa1 { animation-delay: 0.2s, 2.8s; }
+  .aa2 { animation-delay: 0.5s, 2.8s; }
+  .aa3 { animation-delay: 0.8s, 2.8s; }
+
+  .anim-check { animation: check-draw 0.5s ease 1.2s forwards, check-erase 0.3s ease 2.7s forwards; }
+  .anim-sparkle { animation: sparkle-in 0.3s ease 1.5s forwards, sparkle-out 0.2s ease 2.8s forwards; }
+  .anim-glow { animation: glow-in 0.5s ease 0.3s forwards, glow-out 0.5s ease 2.7s forwards; }
+  .anim-progress { animation: progress-fill 2s ease 0.3s forwards, progress-erase 0.5s ease 2.7s forwards; }
+
+  @keyframes step-in {
+    from { opacity: 0; transform: scale(0.8) translateY(8px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  @keyframes step-out {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(0.9); }
+  }
+  @keyframes arrow-in {
+    from { opacity: 0; }
+    to { opacity: 0.6; }
+  }
+  @keyframes arrow-out {
+    from { opacity: 0.6; }
+    to { opacity: 0; }
+  }
+  @keyframes check-draw {
+    to { stroke-dashoffset: 0; }
+  }
+  @keyframes check-erase {
+    to { stroke-dashoffset: 40; }
+  }
+  @keyframes sparkle-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes sparkle-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+  @keyframes glow-in {
+    from { opacity: 0; }
+    to { opacity: 0.02; }
+  }
+  @keyframes glow-out {
+    from { opacity: 0.02; }
+    to { opacity: 0; }
+  }
+  @keyframes progress-fill {
+    from { stroke-dashoffset: 296; }
+    to { stroke-dashoffset: 0; }
+  }
+  @keyframes progress-erase {
+    from { stroke-dashoffset: 0; }
+    to { stroke-dashoffset: 296; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .anim-step, .anim-arrow, .anim-check, .anim-sparkle, .anim-glow, .anim-progress {
+      animation: none !important;
+      opacity: 1;
+    }
+    .anim-check { stroke-dashoffset: 0; }
+    .anim-progress { stroke-dashoffset: 0; }
   }
 </style>
 
