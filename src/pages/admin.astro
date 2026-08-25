@@ -676,6 +676,11 @@ import Footer from '../components/Footer.astro';
           break;
         }
       }
+      // Also strip the country digits if user previously typed full number without '+'
+      const codeDigits = waSelect.value.replace('+', '');
+      if (waLocal.startsWith(codeDigits) && !wa.startsWith('+')) {
+        waLocal = waLocal.substring(codeDigits.length);
+      }
       (document.getElementById('p-whatsapp') as HTMLInputElement).value = waLocal;
       // Photo
       const photoImg = document.getElementById('photo-img') as HTMLImageElement;
@@ -734,7 +739,11 @@ import Footer from '../components/Footer.astro';
       data.profile.location = (document.getElementById('p-location') as HTMLInputElement).value;
       data.profile.availability = (document.getElementById('p-availability') as HTMLInputElement).value;
       const waCode = (document.getElementById('p-whatsapp-country') as HTMLSelectElement).value;
-      const waNum = (document.getElementById('p-whatsapp') as HTMLInputElement).value.replace(/[^0-9]/g, '');
+      let waNum = (document.getElementById('p-whatsapp') as HTMLInputElement).value.replace(/[^0-9]/g, '');
+      // If user typed full number including country code (e.g. '25761729788' with +257 selected), strip the prefix
+      if (waNum.startsWith(waCode.replace('+', ''))) {
+        waNum = waNum.substring(waCode.length - 1);
+      }
       data.profile.whatsapp = waNum ? waCode + waNum : '';
       save();
       showToast('Profil sauvegardé!');
