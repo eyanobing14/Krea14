@@ -257,15 +257,28 @@ const socials = (profile.socials || {}) as Record<string, string>;
             </form>
             <div
               id="contact-success"
-              class="hidden mt-6 p-6"
-              style="border: 1px solid var(--border);"
+              class="hidden mt-8 p-8 text-center success-card"
+              style="border: 1px solid var(--border); background: var(--bg-raised);"
             >
-              <p class="text-sm font-medium" style="color: var(--fg);">
+              <div class="success-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <circle cx="24" cy="24" r="22" stroke="var(--fg)" stroke-width="1.5" fill="none" opacity="0.15"/>
+                  <circle cx="24" cy="24" r="18" stroke="var(--fg)" stroke-width="2" fill="none" class="success-check-circle"/>
+                  <path d="M16 24 L22 30 L33 18" stroke="var(--fg)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" class="success-check-path"/>
+                </svg>
+              </div>
+              <p class="mt-4 text-lg font-semibold" style="color: var(--fg);">
                 <span data-fr="Message envoyé!" data-en="Message sent!">Message envoyé!</span>
               </p>
-              <p class="mt-2 text-xs" style="color: var(--fg-secondary);">
+              <p class="mt-2 text-sm" style="color: var(--fg-secondary);">
                 <span data-fr="Nous vous répondrons dans les plus brefs délais." data-en="We'll get back to you as soon as possible.">Nous vous répondrons dans les plus brefs délais.</span>
               </p>
+              <div class="mt-6 bounce-arrow">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--fg-muted)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 5 L12 19" />
+                  <path d="M5 12 L12 19 L19 12" />
+                </svg>
+              </div>
             </div>
           </div>
 
@@ -494,6 +507,46 @@ const socials = (profile.socials || {}) as Record<string, string>;
   .submit-btn.is-loading { pointer-events: none; opacity: 0.8; }
   .submit-btn.is-loading::before { animation: none; }
 
+  /* Success card animation */
+  .success-card { animation: success-in 0.5s ease-out; }
+  @keyframes success-in {
+    from { opacity: 0; transform: translateY(16px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .success-icon { animation: icon-pop 0.6s ease 0.2s both; }
+  @keyframes icon-pop {
+    from { opacity: 0; transform: scale(0.5); }
+    60% { transform: scale(1.15); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .success-check-circle {
+    stroke-dasharray: 113;
+    stroke-dashoffset: 113;
+    animation: check-draw-circle 0.8s ease 0.4s forwards;
+  }
+  @keyframes check-draw-circle { to { stroke-dashoffset: 0; } }
+  .success-check-path {
+    stroke-dasharray: 30;
+    stroke-dashoffset: 30;
+    animation: check-draw-path 0.4s ease 1s forwards;
+  }
+  @keyframes check-draw-path { to { stroke-dashoffset: 0; } }
+  .bounce-arrow {
+    animation: bounce-down 1.2s ease-in-out 1.4s infinite;
+    opacity: 0.5;
+  }
+  @keyframes bounce-down {
+    0%, 100% { transform: translateY(0); opacity: 0.5; }
+    50% { transform: translateY(6px); opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .success-card, .success-icon, .success-check-circle, .success-check-path, .bounce-arrow {
+      animation: none !important;
+    }
+    .success-check-circle { stroke-dashoffset: 0; }
+    .success-check-path { stroke-dashoffset: 0; }
+  }
+
   /* Expand button — visible on mobile only */
   .textarea-expand-btn {
     display: none;
@@ -684,6 +737,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
         if (result.success) {
           form.classList.add("hidden");
           success?.classList.remove("hidden");
+          success?.scrollIntoView({ behavior: 'smooth', block: 'center' });
         } else {
           if (btn) { btn.classList.remove('is-loading'); btn.disabled = false; }
           if (textEl) textEl.classList.remove('hidden');
