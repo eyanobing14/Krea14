@@ -236,6 +236,9 @@ const socials = (profile.socials || {}) as Record<string, string>;
                   ></textarea>
                 </div>
               </div>
+              <div class="turnstile-wrapper">
+                <div class="cf-turnstile" data-sitekey="0x4AAAAAAEbkK8fRpYwWkrXC" data-theme="dark"></div>
+              </div>
               <div>
                 <button
                   type="submit"
@@ -433,6 +436,18 @@ const socials = (profile.socials || {}) as Record<string, string>;
     transition: opacity 0.2s;
   }
   textarea.contact-input:focus ~ .resize-hint { opacity: 0.6; }
+
+  /* Turnstile wrapper — match site design */
+  .turnstile-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 0;
+  }
+  .turnstile-wrapper .cf-turnstile {
+    border: 1px solid var(--border-strong);
+    border-radius: 0;
+    background: var(--bg-raised);
+  }
 
   /* Expand button — visible on mobile only */
   .textarea-expand-btn {
