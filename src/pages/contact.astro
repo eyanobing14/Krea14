@@ -149,6 +149,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
           <div class="min-w-0 col-span-12 lg:col-span-7">
             <form id="contact-form" class="space-y-4 sm:space-y-6" style="scroll-margin-top: 5rem;">
               <input type="hidden" name="access_key" value="d1a28911-1279-4832-8c64-231783cd8e80" />
+              <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label
@@ -236,8 +237,6 @@ const socials = (profile.socials || {}) as Record<string, string>;
                   ></textarea>
                 </div>
               </div>
-              <!-- Turnstile: invisible, executes on submit -->
-              <div class="cf-turnstile" data-sitekey="0x4AAAAAAEbkK8fRpYwWkrXC" data-theme="dark" data-execution="execute" style="position:absolute;left:-9999px;opacity:0;pointer-events:none;"></div>
               <div>
                 <button
                   id="submit-btn"
@@ -465,9 +464,6 @@ const socials = (profile.socials || {}) as Record<string, string>;
   }
   textarea.contact-input:focus ~ .resize-hint { opacity: 0.6; }
 
-  /* Turnstile: fully hidden */
-  .cf-turnstile { position: absolute !important; left: -9999px !important; opacity: 0 !important; pointer-events: none !important; }
-
   /* Submit button states */
   .submit-btn { position: relative; overflow: hidden; }
   .submit-btn::before {
@@ -653,8 +649,6 @@ const socials = (profile.socials || {}) as Record<string, string>;
     const success = document.getElementById("contact-success");
     if (!form) return;
 
-    // Turnstile: execute on submit (invisible mode)
-
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       const btn = document.getElementById('submit-btn') as HTMLButtonElement;
@@ -665,21 +659,6 @@ const socials = (profile.socials || {}) as Record<string, string>;
       if (loadingEl) loadingEl.classList.remove('hidden');
 
       const data = new FormData(form);
-
-      // Execute Turnstile silently before submitting
-      try {
-        const cfWidget = document.querySelector('.cf-turnstile') as HTMLElement;
-        if (cfWidget && (window as any).turnstile) {
-          await new Promise<void>((resolve, reject) => {
-            (window as any).turnstile.execute(cfWidget, {
-              callback: (token: string) => { data.set('cf-turnstile-response', token); resolve(); },
-              'error-callback': () => reject(new Error('Turnstile failed')),
-            });
-          });
-        }
-      } catch (_) {
-        // Proceed even if Turnstile fails — Web3Forms has its own fallback
-      }
       try {
         const resp = await fetch("https://api.web3forms.com/submit", {
           method: "POST",
