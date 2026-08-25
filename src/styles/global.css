@@ -126,6 +126,9 @@
   /* Logo invert — 1 = inverted (dark mode), 0 = normal (light mode) */
   --logo-invert: 1;
 
+  /* Hero grid — subtle background lines */
+  --grid-color: rgba(255, 255, 255, 0.05);
+
   color-scheme: dark;
 }
 
@@ -175,6 +178,9 @@
 
   /* Logo invert — 0 = normal (light mode) */
   --logo-invert: 0;
+
+  /* Hero grid — subtle background lines */
+  --grid-color: rgba(0, 0, 0, 0.08);
 
   color-scheme: light;
 }
