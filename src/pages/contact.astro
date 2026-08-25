@@ -482,7 +482,9 @@ const socials = (profile.socials || {}) as Record<string, string>;
     0% { left: -100%; }
     50%, 100% { left: 100%; }
   }
-  .submit-btn-loading { display: inline-flex; align-items: center; gap: 0.4rem; }
+  .submit-btn-loading.hidden { display: none !important; }
+  .submit-btn-loading:not(.hidden) { display: inline-flex; align-items: center; gap: 0.4rem; }
+  .submit-btn-loading { align-items: center; gap: 0.4rem; }
   .submit-spinner {
     width: 14px;
     height: 14px;
