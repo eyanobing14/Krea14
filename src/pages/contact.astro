@@ -150,6 +150,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
             <form id="contact-form" class="space-y-4 sm:space-y-6" style="scroll-margin-top: 5rem;">
               <input type="hidden" name="access_key" value="d1a28911-1279-4832-8c64-231783cd8e80" />
               <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
+              <input type="hidden" name="form_load_time" id="form-load-time" />
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label
@@ -649,6 +650,11 @@ const socials = (profile.socials || {}) as Record<string, string>;
     const success = document.getElementById("contact-success");
     if (!form) return;
 
+    // Record form load time for anti-bot delay
+    const loadTs = Date.now();
+    const loadInput = document.getElementById('form-load-time') as HTMLInputElement;
+    if (loadInput) loadInput.value = String(loadTs);
+
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       const btn = document.getElementById('submit-btn') as HTMLButtonElement;
@@ -657,6 +663,16 @@ const socials = (profile.socials || {}) as Record<string, string>;
       if (btn) { btn.classList.add('is-loading'); btn.disabled = true; }
       if (textEl) textEl.classList.add('hidden');
       if (loadingEl) loadingEl.classList.remove('hidden');
+
+      // Anti-bot: reject if submitted in under 3 seconds
+      const elapsed = Date.now() - loadTs;
+      if (elapsed < 3000) {
+        if (btn) { btn.classList.remove('is-loading'); btn.disabled = false; }
+        if (textEl) textEl.classList.remove('hidden');
+        if (loadingEl) loadingEl.classList.add('hidden');
+        alert('Veuillez patienter avant d\'envoyer.');
+        return;
+      }
 
       const data = new FormData(form);
       try {
