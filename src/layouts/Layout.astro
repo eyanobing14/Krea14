@@ -8,9 +8,12 @@ interface Props {
   description?: string;
 }
 
+const BASE_URL = Astro.url.origin;
+const canonicalURL = `${BASE_URL}${Astro.url.pathname}`.replace(/\?.$/, '');
+
 const {
-  title = 'Algokreation — Algorithmic Trading Strategies',
-  description = 'Design, backtest, and deploy algorithmic trading strategies with institutional-grade precision.'
+  title = 'ExauEyano — Graphic Designer · UI/UX · Fullstack Dev',
+  description = 'Designer graphique, UI/UX et développeur fullstack basé au Burundi. Nous créons des expériences numériques qui marquent.'
 } = Astro.props;
 ---
 
@@ -20,14 +23,30 @@ const {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#000000" />
+    <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content="ExauEyano" />
+    <meta property="og:image" content={`${BASE_URL}/og-image.png`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${BASE_URL}/og-image.png`} />
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalURL} />
     <!-- i18n: hreflang for SEO -->
-    <link rel="alternate" hreflang="fr" href={`${Astro.url.origin}${Astro.url.pathname}`} />
-    <link rel="alternate" hreflang="en" href={`${Astro.url.origin}${Astro.url.pathname}?lang=en`} />
-    <link rel="alternate" hreflang="x-default" href={`${Astro.url.origin}${Astro.url.pathname}`} />
+    <link rel="alternate" hreflang="fr" href={canonicalURL} />
+    <link rel="alternate" hreflang="en" href={`${canonicalURL}?lang=en`} />
+    <link rel="alternate" hreflang="x-default" href={canonicalURL} />
     <link rel="icon" type="image/svg+xml" href="/favicon-browser.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -36,6 +55,24 @@ const {
       rel="stylesheet"
     />
     <title>{title}</title>
+    <!-- Schema.org Person structured data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'ExauEyano',
+      jobTitle: 'Graphic Designer · UI/UX · Fullstack Developer',
+      url: BASE_URL,
+      sameAs: [
+        'https://github.com/eyanobing14',
+        'https://www.instagram.com/krea14/'
+      ],
+      address: {
+        '@type': 'PostalAddress',
+        addressCountry: 'BI',
+        addressLocality: 'Gitega'
+      },
+      knowsAbout: ['UI/UX Design', 'Graphic Design', 'Web Development', 'Frontend Development']
+    })} />
     <!-- Prevent FOUC: apply theme before paint -->
     <script is:inline>
       (function() {
