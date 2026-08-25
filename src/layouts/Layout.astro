@@ -24,6 +24,10 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <!-- i18n: hreflang for SEO -->
+    <link rel="alternate" hreflang="fr" href={`${Astro.url.origin}${Astro.url.pathname}`} />
+    <link rel="alternate" hreflang="en" href={`${Astro.url.origin}${Astro.url.pathname}?lang=en`} />
+    <link rel="alternate" hreflang="x-default" href={`${Astro.url.origin}${Astro.url.pathname}`} />
     <link rel="icon" type="image/svg+xml" href="/favicon-browser.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
