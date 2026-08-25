@@ -177,10 +177,7 @@ export const T: Record<string, string> = {
   "Branding / Identité visuelle": "Branding / Visual Identity",
   "Développement Frontend": "Frontend Development",
   "Autre": "Other",
-  "$1,000 — $3,000": "$1,000 — $3,000",
-  "$3,000 — $5,000": "$3,000 — $5,000",
-  "$5,000 — $10,000": "$5,000 — $10,000",
-  "$10,000 +": "$10,000 +",
+  "$1,000 +": "$1,000 +",
 
   // ── Work detail page ──
   "← Retour": "← Back",
