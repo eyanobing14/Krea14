@@ -210,6 +210,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
                 >
                 <div class="textarea-wrapper">
                   <textarea
+                    id="contact-message"
                     name="message"
                     rows="5"
                     required
@@ -217,6 +218,22 @@ const socials = (profile.socials || {}) as Record<string, string>;
                     placeholder="Décrivez votre projet, vos objectifs, votre timeline..."
                   ></textarea>
                   <span class="resize-hint" data-fr="↕ Glissez pour agrandir" data-en="↕ Drag to resize">↕ Glissez pour agrandir</span>
+                  <button type="button" id="textarea-expand" class="textarea-expand-btn" aria-label="Ouvrir l'éditeur">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+                  </button>
+                </div>
+                <!-- Mobile fullscreen editor -->
+                <div id="mobile-editor" class="mobile-editor hidden">
+                  <div class="mobile-editor-header">
+                    <button type="button" id="mobile-editor-close" class="mobile-editor-btn">Annuler</button>
+                    <span class="mobile-editor-title">Message</span>
+                    <button type="button" id="mobile-editor-save" class="mobile-editor-btn mobile-editor-save">Enregistrer</button>
+                  </div>
+                  <textarea
+                    id="mobile-editor-textarea"
+                    class="mobile-editor-textarea"
+                    placeholder="Décrivez votre projet, vos objectifs, votre timeline..."
+                  ></textarea>
                 </div>
               </div>
               <div>
@@ -404,13 +421,6 @@ const socials = (profile.socials || {}) as Record<string, string>;
     max-height: 400px;
     padding-bottom: 1.5rem;
   }
-  @media (max-width: 640px) {
-    textarea.contact-input {
-      min-height: 160px;
-      resize: none;
-    }
-    .resize-hint { display: none; }
-  }
   .resize-hint {
     position: absolute;
     bottom: 6px;
@@ -423,6 +433,81 @@ const socials = (profile.socials || {}) as Record<string, string>;
     transition: opacity 0.2s;
   }
   textarea.contact-input:focus ~ .resize-hint { opacity: 0.6; }
+
+  /* Expand button — visible on mobile only */
+  .textarea-expand-btn {
+    display: none;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    border: 1px solid var(--border-strong);
+    color: var(--fg-muted);
+    cursor: pointer;
+    z-index: 2;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .textarea-expand-btn:hover { color: var(--fg); border-color: var(--fg); }
+  @media (max-width: 640px) {
+    .textarea-expand-btn { display: flex; }
+    textarea.contact-input { min-height: 120px; resize: none; padding-right: 2.5rem; }
+    .resize-hint { display: none; }
+  }
+
+  /* Mobile fullscreen editor */
+  .mobile-editor {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483646;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    animation: editor-slide-in 0.25s ease-out;
+  }
+  .mobile-editor.hidden { display: none; }
+  .mobile-editor-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .mobile-editor-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--fg);
+  }
+  .mobile-editor-btn {
+    font-size: 0.875rem;
+    color: var(--fg-secondary);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem 0;
+  }
+  .mobile-editor-save { color: var(--fg); font-weight: 600; }
+  .mobile-editor-textarea {
+    flex: 1;
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    font-family: var(--font-body);
+    color: var(--fg);
+    background: var(--bg);
+    border: none;
+    outline: none;
+    resize: none;
+    line-height: 1.6;
+  }
+  @keyframes editor-slide-in {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
 
   /* ── Process animation (looping 3s) ── */
   .anim-step {
@@ -516,6 +601,31 @@ const socials = (profile.socials || {}) as Record<string, string>;
       } catch (_) {}
       form.classList.add("hidden");
       success?.classList.remove("hidden");
+    });
+
+    // Mobile fullscreen textarea editor
+    const expandBtn = document.getElementById('textarea-expand');
+    const mobileEditor = document.getElementById('mobile-editor');
+    const mobileTextarea = document.getElementById('mobile-editor-textarea') as HTMLTextAreaElement;
+    const mainTextarea = document.getElementById('contact-message') as HTMLTextAreaElement;
+    const editorClose = document.getElementById('mobile-editor-close');
+    const editorSave = document.getElementById('mobile-editor-save');
+
+    expandBtn?.addEventListener('click', () => {
+      if (!mobileEditor || !mobileTextarea || !mainTextarea) return;
+      mobileTextarea.value = mainTextarea.value;
+      mobileEditor.classList.remove('hidden');
+      mobileTextarea.focus();
+    });
+
+    editorClose?.addEventListener('click', () => {
+      mobileEditor?.classList.add('hidden');
+    });
+
+    editorSave?.addEventListener('click', () => {
+      if (!mainTextarea || !mobileTextarea) return;
+      mainTextarea.value = mobileTextarea.value;
+      mobileEditor?.classList.add('hidden');
     });
 
     // Loop animation every 3s
