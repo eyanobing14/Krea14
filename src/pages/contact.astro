@@ -236,13 +236,8 @@ const socials = (profile.socials || {}) as Record<string, string>;
                   ></textarea>
                 </div>
               </div>
-              <div class="turnstile-wrapper">
-                <div class="cf-turnstile" data-sitekey="0x4AAAAAAEbkK8fRpYwWkrXC" data-theme="dark"></div>
-                <div id="turnstile-status" class="turnstile-status">
-                  <span class="turnstile-dot"></span>
-                  <span data-fr="Vérification en cours…" data-en="Verifying…">Vérification en cours…</span>
-                </div>
-              </div>
+              <!-- Turnstile: invisible, executes on submit -->
+              <div class="cf-turnstile" data-sitekey="0x4AAAAAAEbkK8fRpYwWkrXC" data-theme="dark" data-execution="execute" style="position:absolute;left:-9999px;opacity:0;pointer-events:none;"></div>
               <div>
                 <button
                   id="submit-btn"
@@ -278,24 +273,6 @@ const socials = (profile.socials || {}) as Record<string, string>;
           <div class="min-w-0 col-span-12 lg:col-span-5">
             <div class="space-y-8">
               <div>
-                <span class="label block"><span data-fr="Email direct" data-en="Direct email">Email direct</span></span>
-                <a
-                  href={`mailto:${profile.email}`}
-                  class="mt-3 block text-sm sm:text-base font-medium no-underline transition-colors duration-200 break-all"
-                  style="color: var(--fg);"
-                  onmouseover="this.style.color='var(--fg-secondary)'"
-                  onmouseout="this.style.color='var(--fg)'"
-                >
-                  {profile.email}
-                </a>
-              </div>
-              <div>
-                <span class="label"><span data-fr="Localisation" data-en="Location">Localisation</span></span>
-                <p class="mt-3 text-sm" style="color: var(--fg-secondary);">
-                  {profile.location}
-                </p>
-              </div>
-              <div>
                 <span class="label"><span data-fr="Disponibilité" data-en="Availability">Disponibilité</span></span>
                 <p class="mt-3 text-sm" style="color: var(--fg-secondary);">
                   {profile.availability}
@@ -303,22 +280,64 @@ const socials = (profile.socials || {}) as Record<string, string>;
               </div>
               <div>
                 <span class="label"><span data-fr="Réseaux" data-en="Socials">Réseaux</span></span>
-                <div class="mt-3 flex gap-3">
+                <div class="mt-3 flex gap-2">
                   {
                     Object.entries(socials).map(([name, url]) => (
                       <a
                         href={url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="w-10 h-10 flex items-center justify-center transition-colors duration-200 no-underline text-xs font-mono uppercase"
-                        style="color: var(--fg-muted); border: 1px solid var(--border);"
-                        onmouseover="this.style.color='var(--fg)'; this.style.borderColor='var(--border-hover)'"
-                        onmouseout="this.style.color='var(--fg-muted)'; this.style.borderColor='var(--border)'"
+                        class="w-9 h-9 flex items-center justify-center transition-colors duration-200 no-underline"
+                        style="color: var(--fg); background: var(--fg); border: 1px solid var(--border);"
+                        onmouseover="this.style.opacity='0.8'"
+                        onmouseout="this.style.opacity='1'"
+                        aria-label={name}
                       >
-                        {name[0].toUpperCase()}
+                        <svg
+                          width="14"
+                          height="14"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="var(--bg)"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          {name === "github" && (
+                            <>
+                              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                            </>
+                          )}
+                          {name === "instagram" && (
+                            <>
+                              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                            </>
+                          )}
+                          {name === "email" && (
+                            <>
+                              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                              <polyline points="22,6 12,13 2,6" />
+                            </>
+                          )}
+                        </svg>
                       </a>
                     ))
                   }
+                  <a
+                    href={`mailto:${profile.email}`}
+                    class="w-9 h-9 flex items-center justify-center transition-colors duration-200 no-underline"
+                    style="color: var(--fg); background: var(--fg); border: 1px solid var(--border);"
+                    onmouseover="this.style.opacity='0.8'"
+                    onmouseout="this.style.opacity='1'"
+                    aria-label="Email"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--bg)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                      <polyline points="22,6 12,13 2,6" />
+                    </svg>
+                  </a>
                 </div>
               </div>
               <div
@@ -446,49 +465,23 @@ const socials = (profile.socials || {}) as Record<string, string>;
   }
   textarea.contact-input:focus ~ .resize-hint { opacity: 0.6; }
 
-  /* Turnstile wrapper — match site design */
-  .turnstile-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 0;
-  }
-  .turnstile-wrapper .cf-turnstile {
-    border: 1px solid var(--border-strong);
-    border-radius: 0;
-    background: var(--bg-raised);
-  }
-  .turnstile-status {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.6875rem;
-    font-family: var(--font-mono);
-    color: var(--fg-muted);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .turnstile-status.is-visible { opacity: 1; }
-  .turnstile-status.is-done { color: #22c55e; }
-  .turnstile-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--fg-muted);
-    animation: pulse-dot 1s ease-in-out infinite;
-  }
-  .turnstile-status.is-done .turnstile-dot {
-    background: #22c55e;
-    animation: none;
-  }
-  @keyframes pulse-dot {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
+  /* Turnstile: fully hidden */
+  .cf-turnstile { position: absolute !important; left: -9999px !important; opacity: 0 !important; pointer-events: none !important; }
 
   /* Submit button states */
   .submit-btn { position: relative; overflow: hidden; }
+  .submit-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    animation: btn-shimmer 2.5s ease-in-out infinite;
+  }
+  @keyframes btn-shimmer {
+    0% { left: -100%; }
+    50%, 100% { left: 100%; }
+  }
   .submit-btn-loading { display: inline-flex; align-items: center; gap: 0.4rem; }
   .submit-spinner {
     width: 14px;
@@ -500,6 +493,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
   .submit-btn.is-loading { pointer-events: none; opacity: 0.8; }
+  .submit-btn.is-loading::before { animation: none; }
 
   /* Expand button — visible on mobile only */
   .textarea-expand-btn {
@@ -657,28 +651,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
     const success = document.getElementById("contact-success");
     if (!form) return;
 
-    // Turnstile verification status
-    const turnstileStatus = document.getElementById('turnstile-status');
-    const turnstileInput = form.querySelector('[name="cf-turnstile-response"]') as HTMLInputElement;
-    let turnstileVerified = false;
-
-    // Poll turnstile response (Turnstile sets a hidden input when done)
-    const checkTurnstile = setInterval(() => {
-      if (turnstileInput && turnstileInput.value) {
-        turnstileVerified = true;
-        turnstileStatus?.classList.add('is-done');
-        turnstileStatus?.querySelector('span:last-child')?.setAttribute('data-fr', 'Vérifié ✓');
-        turnstileStatus?.querySelector('span:last-child')?.setAttribute('data-en', 'Verified ✓');
-        const label = turnstileStatus?.querySelector('span:last-child');
-        if (label) label.textContent = 'Vérifié ✓';
-        clearInterval(checkTurnstile);
-      }
-    }, 500);
-
-    // Show status when Turnstile starts loading
-    setTimeout(() => {
-      if (!turnstileVerified) turnstileStatus?.classList.add('is-visible');
-    }, 1000);
+    // Turnstile: execute on submit (invisible mode)
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -690,6 +663,21 @@ const socials = (profile.socials || {}) as Record<string, string>;
       if (loadingEl) loadingEl.classList.remove('hidden');
 
       const data = new FormData(form);
+
+      // Execute Turnstile silently before submitting
+      try {
+        const cfWidget = document.querySelector('.cf-turnstile') as HTMLElement;
+        if (cfWidget && (window as any).turnstile) {
+          await new Promise<void>((resolve, reject) => {
+            (window as any).turnstile.execute(cfWidget, {
+              callback: (token: string) => { data.set('cf-turnstile-response', token); resolve(); },
+              'error-callback': () => reject(new Error('Turnstile failed')),
+            });
+          });
+        }
+      } catch (_) {
+        // Proceed even if Turnstile fails — Web3Forms has its own fallback
+      }
       try {
         const resp = await fetch("https://api.web3forms.com/submit", {
           method: "POST",
