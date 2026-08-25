@@ -12,7 +12,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
 
 <Layout title={`Contact — ${profile.name}`}>
   <Header />
-  <main>
+  <main id="main-content">
     <!-- Hero: h1 + animation side by side on desktop -->
     <section class="contact-hero min-h-screen flex flex-col justify-center pt-20 sm:min-h-0 sm:block sm:pt-28 pb-20 md:pt-40 md:pb-20">
       <Container>
@@ -147,7 +147,8 @@ const socials = (profile.socials || {}) as Record<string, string>;
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-16">
           <!-- Left: Form -->
           <div class="min-w-0 col-span-12 lg:col-span-7">
-            <form id="contact-form" class="space-y-4 sm:space-y-6" style="scroll-margin-top: 5rem;">
+            <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-4 sm:space-y-6" style="scroll-margin-top: 5rem;">
+              <input type="hidden" name="access_key" value="d1a28911-1279-4832-8c64-231783cd8e80" />
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label
@@ -500,8 +501,15 @@ const socials = (profile.socials || {}) as Record<string, string>;
     const success = document.getElementById("contact-success");
     if (!form) return;
 
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      const data = new FormData(form);
+      try {
+        await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          body: data,
+        });
+      } catch (_) {}
       form.classList.add("hidden");
       success?.classList.remove("hidden");
     });

@@ -249,6 +249,31 @@
     outline-offset: 2px;
   }
 
+  /* Skip link — hidden until focused via keyboard */
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 1rem;
+    z-index: 2147483647;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--bg);
+    background: var(--fg);
+    text-decoration: none;
+    transition: top 0.2s ease;
+  }
+  .skip-link:focus {
+    top: 1rem;
+  }
+
+  /* Restore native cursor on interactive elements when custom cursor is active */
+  @media (pointer: fine) {
+    a, button, input, textarea, select, [role="button"], [role="link"], [role="tab"] {
+      cursor: pointer !important;
+    }
+  }
+
   ::selection {
     background: var(--selection-bg);
     color: var(--selection-fg);
