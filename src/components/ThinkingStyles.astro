@@ -776,7 +776,11 @@ import Container from "./Container.astro";
 
   .ts-body {
     padding: 0 1.25rem 1.25rem 3.5rem;
-    animation: ts-dropdown-in 0.3s var(--ease-out-expo);
+    display: none;
+  }
+  .ts-item[open] > .ts-body {
+    display: block;
+    animation: ts-dropdown-in 0.9s var(--ease-out-expo);
   }
   .ts-body p {
     font-size: 0.8125rem;

@@ -584,7 +584,11 @@ import Container from "./Container.astro";
 
   .impact-body {
     padding: 0 1.25rem 1.25rem 3.5rem;
-    animation: dropdown-in 0.3s var(--ease-out-expo);
+    display: none;
+  }
+  .impact-item[open] > .impact-body {
+    display: block;
+    animation: dropdown-in 0.9s var(--ease-out-expo);
   }
   .impact-body p {
     font-size: 0.8125rem;
