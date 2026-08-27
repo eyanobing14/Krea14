@@ -583,12 +583,16 @@ import Container from "./Container.astro";
   }
 
   .impact-body {
-    padding: 0 1.25rem 1.25rem 3.5rem;
-    display: none;
+    padding: 0 1.25rem 0 3.5rem;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s var(--ease-out-expo), opacity 0.35s ease, padding 0.5s var(--ease-out-expo);
   }
   .impact-item[open] > .impact-body {
-    display: block;
-    animation: dropdown-in 0.9s var(--ease-out-expo);
+    padding: 0 1.25rem 1.25rem 3.5rem;
+    max-height: 600px;
+    opacity: 1;
   }
   .impact-body p {
     font-size: 0.8125rem;
@@ -624,17 +628,6 @@ import Container from "./Container.astro";
     padding: 0.25rem 0.5rem;
     border: 1px solid var(--border);
     color: var(--fg-muted);
-  }
-
-  @keyframes dropdown-in {
-    from {
-      opacity: 0;
-      transform: translateY(-8px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 
   /* ── Illustration animations ── */
@@ -825,23 +818,8 @@ import Container from "./Container.astro";
 </style>
 
 <script>
-  import gsap from "gsap";
-
   function initAccordion() {
     const items = document.querySelectorAll(".impact-item");
-
-    function centerOpenItem(details: HTMLDetailsElement) {
-      requestAnimationFrame(() => {
-        details.scrollIntoView({
-          behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
-            .matches
-            ? "auto"
-            : "smooth",
-          block: "center",
-          inline: "nearest",
-        });
-      });
-    }
 
     items.forEach((details) => {
       details.addEventListener("toggle", () => {
@@ -849,24 +827,6 @@ import Container from "./Container.astro";
           items.forEach((other) => {
             if (other !== details) (other as HTMLDetailsElement).open = false;
           });
-          const body = details.querySelector<HTMLElement>(".impact-body");
-          if (
-            body &&
-            !window.matchMedia("(prefers-reduced-motion: reduce)").matches
-          ) {
-            gsap.fromTo(
-              body,
-              { opacity: 0.65, y: -6 },
-              {
-                opacity: 1,
-                y: 0,
-                duration: 0.24,
-                ease: "power2.out",
-                clearProps: "transform,opacity",
-              },
-            );
-          }
-          centerOpenItem(details as HTMLDetailsElement);
         }
       });
     });
