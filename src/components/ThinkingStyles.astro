@@ -779,12 +779,18 @@ import Container from "./Container.astro";
     max-height: 0;
     opacity: 0;
     overflow: hidden;
-    transition: max-height 0.5s var(--ease-out-expo), opacity 0.35s ease, padding 0.5s var(--ease-out-expo);
+    transition:
+      max-height 0.12s var(--ease-out-expo),
+      opacity 0.1s ease,
+      padding 0.12s var(--ease-out-expo);
   }
   .ts-item[open] > .ts-body {
     padding: 0 1.25rem 1.25rem 3.5rem;
     max-height: 600px;
     opacity: 1;
+  }
+  .ts-item:not([open]) .ts-body * {
+    animation: none !important;
   }
   .ts-body p {
     font-size: 0.8125rem;
@@ -1082,6 +1088,19 @@ import Container from "./Container.astro";
     const items = document.querySelectorAll(".ts-item");
 
     items.forEach((details) => {
+      details.querySelector("summary")?.addEventListener("click", (event) => {
+        event.preventDefault();
+        const isOpen = (details as HTMLDetailsElement).open;
+
+        items.forEach((other) => {
+          (other as HTMLDetailsElement).open = false;
+        });
+
+        if (!isOpen) {
+          (details as HTMLDetailsElement).open = true;
+        }
+      });
+
       details.addEventListener("toggle", () => {
         if ((details as HTMLDetailsElement).open) {
           items.forEach((other) => {
