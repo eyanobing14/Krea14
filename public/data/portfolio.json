@@ -47,237 +47,470 @@
   ],
   "caseStudies": [
     {
-      "slug": "branding-lumiere",
-      "title": "Branding — Lumière Café",
-      "category": "Design Graphique · Branding",
-      "year": "2025",
-      "description": "Refonte complète de l'identité visuelle d'un café de spécialité parisien. Du logo aux supports print, en passant par l'identité digitale.",
-      "descriptionEn": "Complete overhaul of the visual identity for a Parisian specialty coffee shop. From logo to print materials and digital identity.",
-      "challenge": "Lumière Café voulait se différencier dans un marché saturé. L'ancienne identité était datée et ne reflétait plus l'ambiance chaleureuse et moderne du lieu.",
-      "solution": "Nous avons développé un système visuel autour du jeu de lumière et d'ombre. Un logo minimaliste inspiré du verre à espresso, une palette noir & blanc contrastée, et une typographie contemporaine.",
+      "slug": "leagues-quiz-competitions",
+      "title": "TheSA Leagues — Compétitions de quiz",
+      "category": "Fullstack Dev · Web App",
+      "year": "2026",
+      "thumbnail": "",
+      "heroImage": "",
+      "heroColor": "#151515",
+      "description": "Le terrain de jeu qui transforme l'apprentissage en compétition : quiz chronométrés, classements live et cartes de révision pour plus de 300 étudiants de la communauté TheSA.",
+      "descriptionEn": "The playground that turns learning into competition: timed quizzes, live rankings and revision cards for 300+ students in the TheSA community.",
+      "challenge": "Comment garder une communauté de traders engagée lorsqu'il s'agit de réviser et d'ancrer les connaissances ? Les quiz statiques cassaient la motivation : aucun défi, aucun classement, aucune preuve de progression.",
+      "challengeEn": "How do you keep a trading community engaged when it comes to revising and mastering knowledge? Static quizzes killed motivation: no challenge, no rankings, no visible progress.",
+      "solution": "Nous avons conçu une plateforme de compétition complète : quiz chronométrés avec scoring automatisé, vérification par checker, cartes de révision navigables, classements en temps réel et historique des tentatives. L'apprentissage devient un sport.",
+      "solutionEn": "We designed a complete competition platform: timed quizzes with automated scoring, checker-based verification, browsable revision cards, real-time rankings and full attempt history. Learning becomes a sport.",
       "results": [
-        "+40% de visibilité sur les réseaux sociaux",
-        "Couverture dans 3 magazines spécialisés",
-        "Identité déclinée sur 20+ supports"
+        "Correcteur automatique — zéro erreur manuelle",
+        "Classements live + historique des tentatives",
+        "Import/export de questions et cartes de révision",
+        "Adoption massive par la communauté d'étudiants"
       ],
       "flow": [
         {
-          "text": "Audit de l'existant et analyse concurrentielle",
+          "text": "Analyse des besoins : formats de quiz compétitifs et mapping des questions",
           "image": ""
         },
         {
-          "text": "Recherche de direction créative (moodboards, références)",
+          "text": "Conception de la base de données (leagues, questions, tentatives, révisions)",
           "image": ""
         },
         {
-          "text": "Design du logo et déclinaisons",
+          "text": "Développement des endpoints quiz & tentatives (CRUD, scoring, vérification automatique)",
           "image": ""
         },
         {
-          "text": "Création de la charte graphique complète",
+          "text": "Interface de compétition : chronomètre, progression et feedback instantané",
           "image": ""
         },
         {
-          "text": "Production des supports print et digitaux",
+          "text": "Panneau de classement avec historique et snapshots de ranking",
           "image": ""
         },
         {
-          "text": "Déploiement et formation de l'équipe",
+          "text": "Tests multi-utilisateurs, seed des questions et déploiement en production",
           "image": ""
         }
       ],
       "tags": [
-        "Branding",
-        "Print",
-        "Identité visuelle"
+        "Fullstack",
+        "Quiz",
+        "Realtime",
+        "EdTech"
       ],
-      "images": [
-        "/assets/profile-photo.jpeg"
-      ],
+      "images": [],
       "tagsEn": [
-        "Branding",
-        "Print",
-        "Visual Identity"
+        "Fullstack",
+        "Quiz",
+        "Realtime",
+        "EdTech"
       ],
-      "titleEn": "Branding — Lumière Café",
-      "challengeEn": "Lumière Café wanted to differentiate itself in a saturated market. The old visual identity no longer reflected the quality of their specialty coffees.",
-      "solutionEn": "We developed a visual system around the play of light and shadow. A warm color palette, custom typography, and consistent applications across all touchpoints.",
-      "heroImage": "/assets/hero-33417396_8052381.jpg",
+      "titleEn": "TheSA Leagues — Quiz Competitions",
+      "gallery": [
+        {
+          "image": "",
+          "caption": "Classement en temps réel",
+          "captionEn": "Real-time leaderboard"
+        },
+        {
+          "image": "",
+          "caption": "Quiz chronométré",
+          "captionEn": "Timed quiz"
+        },
+        {
+          "image": "",
+          "caption": "Cartes de révision",
+          "captionEn": "Revision cards"
+        },
+        {
+          "image": "",
+          "caption": "Historique des tentatives",
+          "captionEn": "Attempt history"
+        }
+      ]
+    },
+    {
+      "slug": "trading-journal-mt5",
+      "title": "TheSA Trading Journal — Analyse MT5",
+      "category": "Fullstack Dev · Web App",
+      "year": "2026",
+      "thumbnail": "",
+      "heroImage": "",
+      "heroColor": "#101010",
+      "description": "Le copilote de chaque trader de TheSA : journal de trades connecté MT5, métriques de risque en temps réel et plan de trading personnel.",
+      "descriptionEn": "The copilot of every TheSA trader: MT5-connected trade journal, real-time risk metrics and a personal trading plan.",
+      "challenge": "Sur le trading, l'émotion tue la performance. Les traders de la communauté jonglaient entre Excel et leurs plateformes MT5, sans vision claire de leurs erreurs, de leur risque ou de leurs vraies performances par compte.",
+      "challengeEn": "In trading, emotion kills performance. The community's traders juggled between spreadsheets and MT5 platforms, with no clear view of their mistakes, their risk or their real per-account performance.",
+      "solution": "Un journal de trading intelligent : sélecteur de comptes MT5, opérations de balance, deals en attente, vue de performance globale, métriques de risque, distribution des profits, meilleures/pires trades et plan de trading éditable. Chaque trade devient une leçon.",
+      "solutionEn": "A smart trading journal: MT5 account selector, balance operations, pending deals, overall performance view, risk metrics, profit distribution, best/worst trades and an editable trading plan. Every trade becomes a lesson.",
+      "results": [
+        "Vue consolidée multi-comptes MT5",
+        "Métriques de risque calculées en temps réel",
+        "Plan de trading personnalisé par compte",
+        "Historique complet des snapshots et positions"
+      ],
+      "flow": [
+        {
+          "text": "Analyse des besoins traders et des données MT5 disponibles",
+          "image": ""
+        },
+        {
+          "text": "API MT5 unifiée : opérations, balances, deals en attente",
+          "image": ""
+        },
+        {
+          "text": "Dashboard performance (metrics, distributions, meilleures/pires trades)",
+          "image": ""
+        },
+        {
+          "text": "Plan de trading éditable par compte, customisé via localStorage",
+          "image": ""
+        },
+        {
+          "text": "Snapshots et historique des positions",
+          "image": ""
+        },
+        {
+          "text": "Optimisation performance et déploiement",
+          "image": ""
+        }
+      ],
+      "tags": [
+        "MT5",
+        "Analytics",
+        "Risk",
+        "Fintech"
+      ],
+      "images": [],
+      "tagsEn": [
+        "MT5",
+        "Analytics",
+        "Risk",
+        "Fintech"
+      ],
+      "titleEn": "TheSA Trading Journal — MT5 Analytics",
+      "gallery": [
+        {
+          "image": "",
+          "caption": "Dashboard performance MT5",
+          "captionEn": "MT5 performance dashboard"
+        },
+        {
+          "image": "",
+          "caption": "Métriques de risque",
+          "captionEn": "Risk metrics"
+        },
+        {
+          "image": "",
+          "caption": "Distribution des profits",
+          "captionEn": "Profit distribution"
+        },
+        {
+          "image": "",
+          "caption": "Plan de trading",
+          "captionEn": "Trading plan"
+        }
+      ]
+    },
+    {
+      "slug": "annonces-publications",
+      "title": "TheSA Annonces — Publication de contenus",
+      "category": "Fullstack Dev · Web App",
+      "year": "2026",
+      "thumbnail": "",
+      "heroImage": "",
       "heroColor": "#1a1a1a",
-      "thumbnail": "/assets/thumb-33417396_8052381.jpg"
-    },
-    {
-      "slug": "app-mindflow",
-      "title": "App — MindFlow",
-      "category": "Design Graphique · Carrousel",
-      "year": "2025",
-      "thumbnail": "/assets/thumb-26329241_7196878.jpg",
-      "description": "Conception d'une application mobile de méditation et productivité. Design system complet et prototypage interactif.",
-      "descriptionEn": "Design of a meditation and productivity mobile app. Complete design system and interactive prototyping.",
-      "challenge": "Les apps de méditation existantes manquent de personnalisation. Les utilisateurs veulent une expérience qui s'adapte à leur routine, pas l'inverse.",
-      "solution": "Interface modulaire avec des « rituels » personnalisables. Un design system en dark mode avec des micro-animations douces. Prototype Figma interactif avec 40+ écrans.",
+      "description": "Le canal officiel d'information de TheSA : un éditeur de contenus riches et modéré pour annoncer formations, maintenances et nouveautés à toute la communauté.",
+      "descriptionEn": "TheSA's official information channel: a rich, moderated content editor to announce courses, maintenance and news to the whole community.",
+      "challenge": "Annoncer une formation, un changement ou une maintenance sans ambiguïté est critique pour une communauté de traders. Les anciennes communications manquaient de structure et de modération, créant confusion et bruit.",
+      "challengeEn": "Announcing a course, a change or a maintenance without ambiguity is critical for a trading community. Previous communications lacked structure and moderation, creating confusion and noise.",
+      "solution": "Un système d'annonces professionnel : éditeur de blocs riches (paragraphes, titres, images, vidéos, listes, boutons d'action), workflow de publication avec statuts, visibilité contrôlée par l'admin et pages de lecture dédiées, optimisées sur mobile.",
+      "solutionEn": "A professional announcement system: rich block editor (paragraphs, headings, images, videos, lists, action buttons), publishing workflow with statuses, admin-controlled visibility and dedicated reading pages, mobile-optimized.",
       "results": [
-        "40+ écrans designés",
-        "Design system avec 120+ composants",
-        "Note de satisfaction utilisateurs : 4.8/5"
+        "Éditeur riche par blocs — 7 types de contenus",
+        "Publication/masquage contrôlé par l'admin",
+        "Lecture fluide sur tous les appareils",
+        "Communications claires, zéro ambiguïté"
       ],
       "flow": [
         {
-          "text": "Recherche utilisateurs et interviews",
+          "text": "Briefing : typologie des annonces et rôles (édition, modération)",
           "image": ""
         },
         {
-          "text": "Definition des personas et parcours",
+          "text": "Modèle de données annonce + blocs de contenu",
           "image": ""
         },
         {
-          "text": "Wireframing des écrans principaux",
+          "text": "Éditeur de blocs enrichi (rich text, images, vidéos, boutons)",
           "image": ""
         },
         {
-          "text": "Design system et composants UI",
+          "text": "Workflow de publication et statuts (brouillon → publié → masqué)",
           "image": ""
         },
         {
-          "text": "Prototypage interactif haute fidélité",
+          "text": "Pages publiques d'annonces et détails",
           "image": ""
         },
         {
-          "text": "Tests utilisateurs et itérations",
+          "text": "Tests, seed de contenu et déploiement",
           "image": ""
         }
       ],
       "tags": [
-        "UI/UX",
-        "Mobile",
-        "Design System"
+        "CMS",
+        "Editor",
+        "Publishing",
+        "Community"
       ],
       "images": [],
       "tagsEn": [
-        "UI/UX",
-        "Mobile",
-        "Design System"
+        "CMS",
+        "Editor",
+        "Publishing",
+        "Community"
       ],
-      "titleEn": "App — MindFlow",
-      "challengeEn": "Existing meditation apps lack personalization. Users need a tool that adapts to their routine, not the other way around.",
-      "solutionEn": "Modular interface with customizable 'rituels'. A design system built for scalability, with micro-interactions that reinforce the calming experience.",
-      "heroImage": "/assets/hero-26329241_7196878.jpg"
+      "titleEn": "TheSA Announcements — Content Publishing",
+      "gallery": [
+        {
+          "image": "",
+          "caption": "Éditeur de blocs de contenu",
+          "captionEn": "Content block editor"
+        },
+        {
+          "image": "",
+          "caption": "Workflow de publication",
+          "captionEn": "Publishing workflow"
+        },
+        {
+          "image": "",
+          "caption": "Pages publiques",
+          "captionEn": "Public pages"
+        },
+        {
+          "image": "",
+          "caption": "Visibilité admin",
+          "captionEn": "Admin visibility"
+        }
+      ]
     },
     {
-      "slug": "site-cipher-studio",
-      "title": "Site Web — Cipher Studio",
-      "category": "Frontend Dev · Site Vitrine",
-      "year": "2024",
+      "slug": "programme-partenariat",
+      "title": "TheSA Programme de partenariat",
+      "category": "Fullstack Dev · Web App",
+      "year": "2026",
       "thumbnail": "",
-      "description": "Développement frontend d'un site vitrine pour un studio créatif. Animations GSAP, responsive, performance optimale.",
-      "descriptionEn": "Frontend development for a creative studio showcase website. GSAP animations, responsive, optimal performance.",
-      "challenge": "Créer un site qui impressionne visuellement tout en restant rapide et accessible. Le client voulait des animations immersives sans sacrifier les Core Web Vitals.",
-      "solution": "Astro + GSAP pour des animations fluides. Scroll-driven animations, curseur custom, transitions de page. Score Lighthouse 98/100.",
+      "heroImage": "",
+      "heroColor": "#0f0f0f",
+      "description": "Le moteur de croissance communautaire de TheSA : les membres parrainent, suivent leurs références et sont récompensés en temps réel.",
+      "descriptionEn": "TheSA's community growth engine: members refer, track their referrals and get rewarded in real time.",
+      "challenge": "Comment faire grandir la communauté sans dépenser en publicité ? TheSA avait besoin d'un programme où chaque membre devient ambassadeur, avec un suivi transparent des parrainages et des commissions.",
+      "challengeEn": "How do you grow a community without spending on ads? TheSA needed a program where every member becomes an ambassador, with transparent tracking of referrals and commissions.",
+      "solution": "Une plateforme partenaire complète : dashboard temps réel avec statistiques, liste des références par utilisateur, activation du statut partenaire via vérification documentaire et suivi des paiements et commissions.",
+      "solutionEn": "A complete partner platform: real-time dashboard with statistics, per-user referral list, partner status activation via document verification, and payments and commissions tracking.",
       "results": [
-        "Lighthouse score 98/100",
-        "Temps de chargement < 1s",
-        "+200% de temps passé sur le site"
+        "Dashboard partenaire temps réel",
+        "Suivi transparent des références et conversions",
+        "Activation sécurisée avec vérification documentaire",
+        "Croissance communautaire organique"
       ],
       "flow": [
         {
-          "text": "Brief créatif et définition des animations",
+          "text": "Définition du modèle de récompense et des règles d'éligibilité",
           "image": ""
         },
         {
-          "text": "Maquettes et prototypes de transitions",
+          "text": "Schéma base de données : partenaires, référencements, commissions",
           "image": ""
         },
         {
-          "text": "Setup du projet Astro + Tailwind + GSAP",
+          "text": "API d'activation et de suivi des références",
           "image": ""
         },
         {
-          "text": "Développement des composants et animations",
+          "text": "Dashboard partenaire (stats, liste, statuts)",
           "image": ""
         },
         {
-          "text": "Optimisation performance (lazy load, code split)",
+          "text": "Module documents de vérification",
           "image": ""
         },
         {
-          "text": "Déploiement et tests cross-browser",
+          "text": "Tests de bout en bout et déploiement",
           "image": ""
         }
       ],
       "tags": [
-        "Frontend",
-        "GSAP",
-        "Astro",
-        "Responsive"
+        "Referrals",
+        "Dashboard",
+        "Payments",
+        "Community"
       ],
       "images": [],
       "tagsEn": [
-        "Frontend",
-        "GSAP",
-        "Astro",
-        "Responsive"
+        "Referrals",
+        "Dashboard",
+        "Payments",
+        "Community"
       ],
-      "titleEn": "Site Web — Cipher Studio",
-      "challengeEn": "Create a site that impresses visually while remaining fast and accessible. The studio needed a digital showcase that matched their creative work.",
-      "solutionEn": "Astro + GSAP for fluid animations. Scroll-driven animations, responsive grid, optimized performance — beauty meets function.",
-      "heroImage": ""
+      "titleEn": "TheSA Partnership Program",
+      "gallery": [
+        {
+          "image": "",
+          "caption": "Dashboard temps réel",
+          "captionEn": "Real-time dashboard"
+        },
+        {
+          "image": "",
+          "caption": "Liste des références",
+          "captionEn": "Referrals list"
+        },
+        {
+          "image": "",
+          "caption": "Vérification documentaire",
+          "captionEn": "Document verification"
+        },
+        {
+          "image": "",
+          "caption": "Suivi des commissions",
+          "captionEn": "Commission tracking"
+        }
+      ]
     },
     {
-      "slug": "logo-noctis-ai",
-      "title": "Logo — Noctis AI",
-      "category": "Logo Design · Cartes de visite",
-      "year": "2024",
+      "slug": "easycompta",
+      "title": "EasyCompta — Comptabilité OHADA",
+      "titleEn": "EasyCompta — OHADA Accounting Suite",
+      "category": "Fullstack Dev · Desktop App",
+      "year": "2026",
       "thumbnail": "",
-      "description": "Création du logo et de la charte graphique pour une startup d'IA. Un logo qui évoque l'intelligence et la modernité.",
-      "descriptionEn": "Logo and brand guidelines creation for an AI startup. A logo that evokes intelligence and modernity.",
-      "challenge": "Noctis AI avait besoin d'un logo qui transmette confiance et innovation, sans tomber dans les clichés du secteur IA (cerveaux, robots, réseaux de neurones).",
-      "solution": "Un symbole abstrait combinant une étoile (« noctis » = nuit en latin) et un motif géométrique suggérant la structure des données. Variante animée pour le digital.",
-      "results": [
-        "Logo utilisé par 3 filiales",
-        "Décliné en 12 variantes",
-        "Présent sur 500+ cartes de visite"
+      "heroImage": "",
+      "heroColor": "#101010",
+      "description": "Une suite comptable professionnelle OHADA, pensée pour les PME d’Afrique centrale : application desktop Tauri avec données locales SQLite, synchronisation cloud en temps réel et reporting conforme au plan SYSCOHADA.",
+      "descriptionEn": "A professional OHADA accounting suite for African SMEs: a Tauri desktop app with local SQLite storage, real-time cloud sync and reporting fully compliant with the SYSCOHADA chart of accounts.",
+      "challenge": "Les PME tenaient leur comptabilité dans des tableurs Excel ou des logiciels fermés, sans aucune conformité OHADA. Résultat : erreurs de saisie, clôtures bancales, aucune piste d’audit et aucune collaboration possible entre l’expert-comptable et son client. Les montants étaient stockés en flottants — des centimes perdus partout.",
+      "challengeEn": "SMEs kept their books in Excel sheets or closed-source software, with zero OHADA compliance. The result: entry errors, broken year-end closes, no audit trail and no collaboration between accountant and client. Amounts were stored as floats — cents lost everywhere.",
+      "solution": "Nous avons conçu une suite complète : plan comptable SYSCOHADA de ~400 comptes, moteur comptable isolé en TypeScript pur, journal, grand livre, balance, bilan comparatif, CPC, gestion des exercices avec clôture et RAN. Le tout dans un desktop Tauri (<5 MB) aux données locales SQLite (WAL), synchronisé avec un serveur Express + PostgreSQL, protégé par JWT, avec permissions et audit SHA-256.",
+      "solutionEn": "We built a complete suite: a ~400-account SYSCOHADA chart, an isolated pure-TypeScript accounting engine, journals, general ledger, trial balance, comparative balance sheet, income statement, fiscal years with closing and RAN. All in a Tauri desktop app (<5 MB) with local SQLite (WAL) data, synced with an Express + PostgreSQL server, secured with JWT, permissions and SHA-256 audit trail.",
+      "stats": [
+        {
+          "value": "230+",
+          "label": "Tests automatisés",
+          "labelEn": "Automated tests"
+        },
+        {
+          "value": "11",
+          "label": "Entités synchronisées",
+          "labelEn": "Synced entities"
+        },
+        {
+          "value": "< 5 MB",
+          "label": "Application desktop",
+          "labelEn": "Desktop app"
+        },
+        {
+          "value": "~400",
+          "label": "Comptes SYSCOHADA",
+          "labelEn": "SYSCOHADA accounts"
+        }
       ],
+      "keyVisual": {
+        "image": "",
+        "caption": "Clôture d’exercice : le moteur calcule RAN et reports à nouveau automatiquement.",
+        "captionEn": "Year-end close: the engine computes RAN and carried-forward balances automatically."
+      },
+      "architecture": {
+        "text": "Deux tiers complémentaires. Côté client, un moteur comptable pur en TypeScript isolé de la base, une UI React 19 + Tailwind + shadcn/ui, et SQLite en mode WAL pour des montants en centimes (INTEGER). Côté serveur, Express + PostgreSQL avec sync push/pull de 11 entités OHADA, numérotation des écritures, WebSocket pour les invitations et conflits, hachage PBKDF2 et audit SHA-256.",
+        "textEn": "Two complementary tiers. Client-side, a pure TypeScript accounting engine isolated from storage, a React 19 + Tailwind + shadcn/ui interface, and SQLite in WAL mode storing amounts as integer cents. Server-side: Express + PostgreSQL with push/pull sync of 11 OHADA entities, entry numbering, WebSocket for invites and conflicts, PBKDF2 hashing and SHA-256 audit.",
+        "stack": [
+          "Tauri 2",
+          "React 19",
+          "TailwindCSS 4",
+          "SQLite WAL",
+          "Express",
+          "PostgreSQL",
+          "Socket.io",
+          "TypeScript"
+        ]
+      },
       "flow": [
         {
-          "text": "Recherche de positionnement de marque",
+          "text": "Audit terrain : analyser les douleurs des PME et les exigences OHADA",
           "image": ""
         },
         {
-          "text": "Exploration de 3 directions graphiques",
+          "text": "Concevoir le schéma : 8 tables locales, montants en centimes, soft delete",
           "image": ""
         },
         {
-          "text": "Sélection et raffinement du concept",
+          "text": "Extraire le moteur comptable en TypeScript pur, testable sans base",
           "image": ""
         },
         {
-          "text": "Création des variantes (clair, sombre, icon)",
+          "text": "Bâtir le desktop Tauri : journal, balance, bilan, CPC, grand livre, exercices",
           "image": ""
         },
         {
-          "text": "Définition de la charte d'usage",
+          "text": "Synchroniser : 11 entités push/pull, permissions, WebSocket temps réel",
           "image": ""
         },
         {
-          "text": "Livraison des fichiers sources et exports",
+          "text": "Tester (230+), déployer serveur + app et itérer sur les retours comptables",
           "image": ""
         }
       ],
+      "gallery": [
+        {
+          "image": "",
+          "caption": "Journal & écritures",
+          "captionEn": "Journal & entries"
+        },
+        {
+          "image": "",
+          "caption": "Balance des comptes",
+          "captionEn": "Trial balance"
+        },
+        {
+          "image": "",
+          "caption": "Bilan comparatif",
+          "captionEn": "Comparative balance sheet"
+        },
+        {
+          "image": "",
+          "caption": "CPC & analyse",
+          "captionEn": "Income statement & analysis"
+        },
+        {
+          "image": "",
+          "caption": "Plan comptable SYSCOHADA",
+          "captionEn": "SYSCOHADA chart of accounts"
+        },
+        {
+          "image": "",
+          "caption": "Collaboration & permissions",
+          "captionEn": "Collaboration & permissions"
+        }
+      ],
+      "results": [
+        "230+ tests : client, moteur comptable et serveur couverts",
+        "Offline-first : données locales, sync temps réel quand disponible",
+        "Conformité OHADA : SYSCOHADA ~400 comptes, clôture avec RAN",
+        "Desktop léger : ~5 MB grâce à Tauri"
+      ],
       "tags": [
-        "Logo",
-        "Branding",
-        "Startup"
+        "Fullstack",
+        "Desktop",
+        "Comptabilité",
+        "OHADA"
       ],
-      "images": [],
       "tagsEn": [
-        "Logo",
-        "Branding",
-        "Startup"
+        "Fullstack",
+        "Desktop",
+        "Accounting",
+        "OHADA"
       ],
-      "titleEn": "Logo — Noctis AI",
-      "challengeEn": "Noctis AI needed a logo that conveys trust and innovation. A brand identity for an AI startup in a crowded market.",
-      "solutionEn": "An abstract symbol combining a star ('noctis' = night) with neural network motifs. Clean, scalable, memorable.",
-      "heroImage": ""
+      "images": []
     }
   ],
   "designSubcategories": [
@@ -362,7 +595,7 @@
     {
       "id": "figma-toolkit",
       "title": "UI/UX Design Toolkit",
-      "description": "Ma collection de composants Figma réutilisables pour démarrer rapidement tout projet UI/UX.",
+      "description": "Notre collection de composants Figma réutilisables pour démarrer rapidement tout projet UI/UX.",
       "type": "tool",
       "link": "#"
     },

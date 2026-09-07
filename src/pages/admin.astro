@@ -786,6 +786,12 @@ import Footer from '../components/Footer.astro';
 
     function renderStudies() {
       const list = document.getElementById('studies-list')!;
+      // Snapshot UI state so the re-render doesn't reset open cards or the hero color picker
+      const openSet = new Set<number>();
+      list.querySelectorAll('.admin-item').forEach((item, idx) => {
+        const body = item.querySelector('.admin-item-body');
+        if (body && !body.classList.contains('collapsed')) openSet.add(idx);
+      });
       list.innerHTML = '';
       (data.caseStudies || []).forEach((study: any, i: number) => {
         const item = document.createElement('div');
@@ -809,14 +815,15 @@ import Footer from '../components/Footer.astro';
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div><label class="admin-label">Titre</label><input class="admin-input study-title" data-i="${i}" value="${(study.title || '').replace(/"/g, '&quot;')}" /></div>
               <div><label class="admin-label">Slug</label><input class="admin-input study-slug" data-i="${i}" value="${(study.slug || '').replace(/"/g, '&quot;')}" /></div>
-              <div><label class="admin-label">Catégorie</label><select class="admin-input study-category" data-i="${i}"><option value="Design Graphique">Design Graphique</option><option value="UI/UX Design">UI/UX Design</option><option value="Frontend Dev">Frontend Dev</option><option value="Logo Design">Logo Design</option><option value="Branding">Branding</option></select><label class="admin-label mt-2">Sous-catégorie</label><select class="admin-input study-subcategory" data-i="${i}"><option value="">—</option><option value="Flyer">Flyer</option><option value="Carrousel">Carrousel</option><option value="Banner">Banner</option><option value="Cartes de visite">Cartes de visite</option><option value="Affiche">Affiche</option><option value="Brochure">Brochure</option><option value="Packaging">Packaging</option><option value="Menu">Menu</option><option value="Credential">Credential</option><option value="Branding">Branding</option><option value="Site Vitrine">Site Vitrine</option><option value="Mobile">Mobile</option><option value="Autre">Autre</option></select></div>
+              <div><label class="admin-label">Catégorie</label><select class="admin-input study-category" data-i="${i}"><option value="Design Graphique">Design Graphique</option><option value="UI/UX Design">UI/UX Design</option><option value="Frontend Dev">Frontend Dev</option><option value="Fullstack Dev">Fullstack Dev</option><option value="Logo Design">Logo Design</option><option value="Branding">Branding</option></select><label class="admin-label mt-2">Sous-catégorie</label><select class="admin-input study-subcategory" data-i="${i}"><option value="">—</option><option value="Web App">Web App</option><option value="Flyer">Flyer</option><option value="Carrousel">Carrousel</option><option value="Banner">Banner</option><option value="Cartes de visite">Cartes de visite</option><option value="Affiche">Affiche</option><option value="Brochure">Brochure</option><option value="Packaging">Packaging</option><option value="Menu">Menu</option><option value="Credential">Credential</option><option value="Branding">Branding</option><option value="Site Vitrine">Site Vitrine</option><option value="Mobile">Mobile</option><option value="Desktop App">Desktop App</option><option value="Autre">Autre</option></select></div>
               <div><label class="admin-label">Année</label><input class="admin-input study-year" data-i="${i}" value="${(study.year || '').replace(/"/g, '&quot;')}" /></div>
               <div class="md:col-span-2"><label class="admin-label">Description</label><textarea class="admin-input study-desc" data-i="${i}" rows="2">${study.description || ''}</textarea></div>
               <div class="md:col-span-2"><label class="admin-label">Défi</label><textarea class="admin-input study-challenge" data-i="${i}" rows="2">${study.challenge || ''}</textarea></div>
               <div class="md:col-span-2"><label class="admin-label">Solution</label><textarea class="admin-input study-solution" data-i="${i}" rows="2">${study.solution || ''}</textarea></div>
               <div class="md:col-span-2"><label class="admin-label">Résultats (un par ligne)</label><textarea class="admin-input study-results" data-i="${i}" rows="2">${(study.results || []).join('\n')}</textarea></div>
+              <div class="md:col-span-2"><label class="admin-label">Stats (valeur | libellé — un par ligne)</label><textarea class="admin-input study-stats" data-i="${i}" rows="2">${(study.stats || []).map((s: any) => `${s.value} | ${s.label}`).join('\n')}</textarea></div>
               <div class="md:col-span-2"><label class="admin-label">Tags (virgule)</label><input class="admin-input study-tags" data-i="${i}" value="${(study.tags || []).join(', ')}" /></div>
-              <div><label class="admin-label">Couleur hero</label><input class="admin-input study-color" data-i="${i}" value="${study.heroColor || '#1a1a1a'}" type="color" style="height:34px; padding:4px;" /></div>
+              </div>
             </div>
             <!-- Images -->
             <div class="mt-5 pt-5" style="border-top: 1px solid var(--border-strong);">
@@ -845,6 +852,40 @@ import Footer from '../components/Footer.astro';
                 </div>
               </div>
 
+            </div>
+            <!-- Extended fields: keyVisual, architecture, gallery -->
+            <div class="mt-5 pt-5" style="border-top: 1px solid var(--border-strong);">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="md:col-span-2"><label class="admin-label">Visuel clé — caption (optionnel)</label><input class="admin-input study-keyvisual-caption" data-i="${i}" value="${(study.keyVisual?.caption || '').replace(/"/g, '&quot;')}" /></div>
+                <div class="md:col-span-2">
+                  <label class="admin-label">Visuel clé — image (pleine largeur)</label>
+                  <div class="flex items-center gap-3">
+                    ${study.keyVisual?.image ? `<div style="position:relative;width:120px;height:72px;border:1px solid var(--border-strong);overflow:hidden;"><img src="${study.keyVisual.image}" style="width:100%;height:100%;object-fit:cover;" /><button class="study-keyvisual-remove" data-si="${i}" style="position:absolute;top:4px;right:4px;width:18px;height:18px;font-size:11px;background:var(--fg);color:var(--bg);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;line-height:1;">×</button></div>` : ''}
+                    <label class="admin-btn-outline" style="display:inline-block;cursor:pointer;font-size:11px;">
+                      ${study.keyVisual?.image ? 'Changer' : '+ Ajouter'}
+                      <input type="file" accept="image/*" class="study-keyvisual-input" data-i="${i}" style="display:none;" />
+                    </label>
+                  </div>
+                </div>
+                <div class="md:col-span-2"><label class="admin-label">Architecture — texte</label><textarea class="admin-input study-architecture" data-i="${i}" rows="3">${study.architecture?.text || ''}</textarea></div>
+                <div class="md:col-span-2"><label class="admin-label">Architecture — stack (virgule)</label><input class="admin-input study-architecture-stack" data-i="${i}" value="${(study.architecture?.stack || []).join(', ')}" /></div>
+                <div class="md:col-span-2">
+                  <label class="admin-label">Galerie — captions (un par ligne)</label>
+                  <textarea class="admin-input study-gallery" data-i="${i}" rows="3">${(study.gallery || []).map((g: any) => g.caption || '').join('\n')}</textarea>
+                  <div class="mt-3 space-y-2">
+                    ${(study.gallery || []).map((g: any, gi: number) => `
+                      <div class="flex items-center gap-3">
+                        ${g.image ? `<div style="position:relative;width:80px;height:60px;border:1px solid var(--border-strong);overflow:hidden;"><img src="${g.image}" style="width:100%;height:100%;object-fit:cover;" /><button class="study-gallery-image-remove" data-si="${i}" data-gi="${gi}" style="position:absolute;top:2px;right:2px;width:16px;height:16px;font-size:10px;background:var(--fg);color:var(--bg);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;line-height:1;">×</button></div>` : ''}
+                        <span style="font-size:10px;color:var(--fg-muted);flex:1;">Écran ${String(gi + 1).padStart(2, '0')} — ${g.caption || 'sans caption'}</span>
+                        <label class="admin-btn-outline" style="display:inline-block;cursor:pointer;font-size:11px;">
+                          ${g.image ? 'Changer' : '+ Ajouter une image'}
+                          <input type="file" accept="image/*" class="study-gallery-image-input" data-si="${i}" data-gi="${gi}" style="display:none;" />
+                        </label>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+              </div>
             </div>
             <!-- Flow / Steps -->
             <div class="mt-5 pt-5" style="border-top: 1px solid var(--border);">
@@ -888,8 +929,21 @@ import Footer from '../components/Footer.astro';
           data.caseStudies[i].challenge = (item.querySelector('.study-challenge') as HTMLTextAreaElement).value;
           data.caseStudies[i].solution = (item.querySelector('.study-solution') as HTMLTextAreaElement).value;
           data.caseStudies[i].results = (item.querySelector('.study-results') as HTMLTextAreaElement).value.split('\n').filter((l: string) => l.trim());
+          // Extended fields
+          const statsVal = (item.querySelector('.study-stats') as HTMLTextAreaElement).value;
+          const existingStats = data.caseStudies[i].stats || [];
+          data.caseStudies[i].stats = statsVal.split('\n').map((l: string, li: number) => { const [value, ...rest] = l.split('|').map((s: string) => s.trim()); return value ? { value, label: rest.join('|').trim(), labelEn: existingStats[li]?.labelEn || '' } : null; }).filter(Boolean);
+          const kvCaption = (item.querySelector('.study-keyvisual-caption') as HTMLInputElement).value;
+          const kv = data.caseStudies[i].keyVisual || {};
+          data.caseStudies[i].keyVisual = { image: kv.image || '', caption: kvCaption, captionEn: (data.caseStudies[i].keyVisual?.captionEn) || '' };
+          const archText = (item.querySelector('.study-architecture') as HTMLTextAreaElement).value;
+          const archStack = (item.querySelector('.study-architecture-stack') as HTMLInputElement).value;
+          const arch = data.caseStudies[i].architecture || {};
+          data.caseStudies[i].architecture = { text: archText, textEn: arch.textEn || '', stack: archStack.split(',').map((s: string) => s.trim()).filter(Boolean), stackEn: arch.stackEn || undefined };
+          const galleryCaptions = (item.querySelector('.study-gallery') as HTMLTextAreaElement).value.split('\n').map((l: string) => l.trim()).filter(Boolean);
+          const existingGallery = data.caseStudies[i].gallery || [];
+          data.caseStudies[i].gallery = galleryCaptions.map((caption: string, gi: number) => ({ image: existingGallery[gi]?.image || '', caption, captionEn: existingGallery[gi]?.captionEn || '' }));
           data.caseStudies[i].tags = (item.querySelector('.study-tags') as HTMLInputElement).value.split(',').map((t: string) => t.trim()).filter(Boolean);
-          data.caseStudies[i].heroColor = (item.querySelector('.study-color') as HTMLInputElement).value;
           // Save flows (objects with text + image)
           const flowInputs = item.querySelectorAll('.study-flow-input') as NodeListOf<HTMLInputElement>;
           const existingFlow = data.caseStudies[i].flow || [];
@@ -1032,6 +1086,90 @@ import Footer from '../components/Footer.astro';
         });
       });
 
+      // Key visual image upload
+      list.querySelectorAll('.study-keyvisual-input').forEach((input) => {
+        input.addEventListener('change', (e) => {
+          const si = parseInt((input as HTMLElement).dataset.i!);
+          const file = (e.target as HTMLInputElement).files?.[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = async () => {
+            try {
+              const resp = await fetch(API + '/api/upload-image', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ filename: `kv-${si}-${file.name}`, data: reader.result })
+              });
+              const result = await resp.json();
+              if (result.ok) {
+                if (!data.caseStudies[si].keyVisual) data.caseStudies[si].keyVisual = { image: '', caption: '' };
+                data.caseStudies[si].keyVisual.image = result.path;
+                await save();
+                renderStudies();
+                reopenCard(si);
+                showToast('Visuel clé uploadé!');
+              }
+            } catch(e: unknown) { showToast('Erreur: ' + (e instanceof Error ? e.message : String(e))); }
+          };
+          reader.readAsDataURL(file);
+        });
+      });
+
+      // Key visual image remove
+      list.querySelectorAll('.study-keyvisual-remove').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const si = parseInt((btn as HTMLElement).dataset.si!);
+          if (data.caseStudies[si].keyVisual) data.caseStudies[si].keyVisual.image = '';
+          save();
+          renderStudies();
+          reopenCard(si);
+        });
+      });
+
+      // Gallery image upload
+      list.querySelectorAll('.study-gallery-image-input').forEach((input) => {
+        input.addEventListener('change', (e) => {
+          const si = parseInt((input as HTMLElement).dataset.si!);
+          const gi = parseInt((input as HTMLElement).dataset.gi!);
+          const file = (e.target as HTMLInputElement).files?.[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = async () => {
+            try {
+              const resp = await fetch(API + '/api/upload-image', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ filename: `gallery-${si}-${gi}-${file.name}`, data: reader.result })
+              });
+              const result = await resp.json();
+              if (result.ok) {
+                if (!data.caseStudies[si].gallery) data.caseStudies[si].gallery = [];
+                if (!data.caseStudies[si].gallery[gi]) data.caseStudies[si].gallery[gi] = { image: '', caption: '' };
+                data.caseStudies[si].gallery[gi].image = result.path;
+                await save();
+                renderStudies();
+                reopenCard(si);
+                showToast('Image de galerie uploadée!');
+              }
+            } catch(e: unknown) { showToast('Erreur: ' + (e instanceof Error ? e.message : String(e))); }
+          };
+          reader.readAsDataURL(file);
+        });
+      });
+
+      // Gallery image remove
+      list.querySelectorAll('.study-gallery-image-remove').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const si = parseInt((btn as HTMLElement).dataset.si!);
+          const gi = parseInt((btn as HTMLElement).dataset.gi!);
+          const gal = data.caseStudies[si].gallery;
+          if (gal && gal[gi]) gal[gi].image = '';
+          save();
+          renderStudies();
+          reopenCard(si);
+        });
+      });
+
       // Flow image upload
       list.querySelectorAll('.study-flow-image-input').forEach((input) => {
         input.addEventListener('change', (e) => {
@@ -1074,6 +1212,18 @@ import Footer from '../components/Footer.astro';
           reopenCard(si);
         });
       });
+
+      // Restore open cards + hero colors captured before re-render
+      list.querySelectorAll('.admin-item').forEach((item, idx) => {
+        if (openSet.has(idx)) {
+          const body = item.querySelector('.admin-item-body');
+          const chevron = item.querySelector('.chevron');
+          body?.classList.remove('collapsed');
+          chevron?.classList.add('is-open');
+        }
+        const color = item.querySelector('.study-color') as HTMLInputElement;
+        if (color && colorVals[idx]) color.value = colorVals[idx];
+      });
     }
 
     function reopenCard(index: number) {
@@ -1101,6 +1251,10 @@ import Footer from '../components/Footer.astro';
         tags: [],
         flow: [],
         images: [],
+        stats: [],
+        keyVisual: { image: '', caption: '' },
+        architecture: { text: '', stack: [] },
+        gallery: [],
       });
       save();
       renderStudies();

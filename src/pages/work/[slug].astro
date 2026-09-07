@@ -18,6 +18,17 @@ const study = (data.caseStudies || []).find((s: any) => s.slug === slug);
 if (!study) {
   return Astro.redirect("/work");
 }
+
+const heroSrcs = [
+  study.heroImage || study.thumbnail,
+  ...(study.gallery || []).map((g: any) => (typeof g === 'object' ? g.image : '')),
+  ...(study.flow || []).map((s: any) => (typeof s === 'object' ? s.image : ''))
+].filter((s: string) => typeof s === 'string' && s.trim() !== '');
+const heroGridClass =
+  heroSrcs.length >= 4 ? 'grid-cols-4' :
+  heroSrcs.length === 3 ? 'grid-cols-3 [&>*:first-child]:col-span-2' :
+  heroSrcs.length === 2 ? 'grid-cols-2' : '';
+const heroGridImages = heroSrcs.slice(0, 4);
 ---
 
 <Layout title={`${study.title} — Portfolio`}>
@@ -67,9 +78,23 @@ if (!study) {
         class="w-full aspect-video lg:aspect-21/9 relative overflow-hidden gsap-scale"
         style={`background: ${study.heroColor || "var(--bg-raised)"}; border: 1px solid var(--border);`}
       >
-        {(study.heroImage || study.thumbnail) ? (
+        <div
+          class="absolute inset-0 opacity-[0.07]"
+          aria-hidden="true"
+          style="background-image: linear-gradient(to right, var(--fg) 1px, transparent 1px), linear-gradient(to bottom, var(--fg) 1px, transparent 1px); background-size: 80px 80px;"
+        >
+        </div>
+        {heroGridImages.length > 1 ? (
+          <div class={`w-full h-full grid ${heroGridClass}`}>
+            {heroGridImages.map((src: string, i: number) => (
+              <div class="relative overflow-hidden" style={i > 0 ? "border-left: 1px solid var(--border);" : undefined}>
+                <img src={src} alt={study.title} class="absolute inset-0 w-full h-full object-cover" loading={i === 0 ? "eager" : "lazy"} />
+              </div>
+            ))}
+          </div>
+        ) : heroGridImages.length === 1 ? (
           <img
-            src={study.heroImage || study.thumbnail}
+            src={heroGridImages[0]}
             alt={study.title}
             class="absolute inset-0 w-full h-full object-cover"
             loading="eager"
@@ -84,6 +109,27 @@ if (!study) {
     </Container>
 
     <div class="section-divider mt-8 sm:mt-16" aria-hidden="true"></div>
+
+    <!-- Stats band -->
+    {
+      study.stats && study.stats.length > 0 && (
+        <section class="section">
+          <Container>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 gsap-stagger-grid">
+              {study.stats.map((stat: any, i: number) => (
+                <div class="p-6 sm:p-8" style="border: 1px solid var(--border); background: var(--bg-raised);">
+                  <p class="font-mono text-xs uppercase tracking-widest mb-3" style="color: var(--fg-muted);">{String(i + 1).padStart(2, "0")}</p>
+                  <p class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-[-0.02em]" style="color: var(--fg);">{stat.value}</p>
+                  <p class="mt-2 text-sm leading-relaxed" style="color: var(--fg-secondary);"><span data-fr={stat.label} data-en={stat.labelEn || stat.label}>{stat.label}</span></p>
+                </div>
+              ))}
+            </div>
+          </Container>
+        </section>
+      )
+    }
+
+    <div class="section-divider" aria-hidden="true"></div>
 
     <!-- Details -->
     <section class="section">
@@ -112,6 +158,68 @@ if (!study) {
       </Container>
     </section>
 
+    <!-- Key visual (full-width) -->
+    {
+      study.keyVisual && (study.keyVisual.image || study.keyVisual.caption) && (
+        <section class="section" style="background: var(--bg-raised);">
+          <Container>
+            <figure>
+              {study.keyVisual.image ? (
+                <img
+                  src={study.keyVisual.image}
+                  alt={study.keyVisual.caption || ''}
+                  class="w-full aspect-video object-cover"
+                  style="border: 1px solid var(--border);"
+                  loading="lazy"
+                />
+              ) : (
+                <div
+                  class="w-full aspect-video relative overflow-hidden flex items-center justify-center"
+                  style="border: 1px solid var(--border); background: var(--bg-raised);"
+                >
+                  <span class="font-mono text-sm uppercase tracking-widest opacity-20" style="color: var(--fg);">Visuel clé</span>
+                </div>
+              )}
+              {study.keyVisual.caption && (
+                <figcaption class="mt-3 font-mono text-xs uppercase tracking-wider" style="color: var(--fg-muted);">
+                  <span data-fr={study.keyVisual.caption} data-en={study.keyVisual.captionEn || study.keyVisual.caption}>{study.keyVisual.caption}</span>
+                </figcaption>
+              )}
+            </figure>
+          </Container>
+        </section>
+      )
+    }
+
+    <!-- Architecture -->
+    {
+      study.architecture && (study.architecture.text || (study.architecture.stack && study.architecture.stack.length)) && (
+        <section class="section">
+          <Container>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-16">
+              <div class="min-w-0 col-span-12 lg:col-span-7">
+                <h2 class="text-xl md:text-2xl font-bold leading-tight mb-4" style="color: var(--fg);">
+                  L&apos;architecture.
+                </h2>
+                <p class="text-sm leading-relaxed" style="color: var(--fg-secondary);">
+                  <span data-fr={study.architecture.text} data-en={study.architecture.textEn || study.architecture.text}>{study.architecture.text}</span>
+                </p>
+                {study.architecture.stack && study.architecture.stack.length > 0 && (
+                  <div class="mt-6 flex flex-wrap gap-2">
+                    {study.architecture.stack.map((t: string, i: number) => (
+                      <span class="px-3 py-1 text-xs font-mono uppercase tracking-wider" style="color: var(--fg-muted); border: 1px solid var(--border);">
+                        <span data-fr={t} data-en={study.architecture.stackEn?.[i] || t}>{t}</span>
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </Container>
+        </section>
+      )
+    }
+
     <!-- Flow / Process -->
     {
       study.flow && study.flow.length > 0 && (
@@ -124,7 +232,7 @@ if (!study) {
                   class="mt-6 text-xl md:text-2xl font-bold leading-tight"
                   style="color: var(--fg);"
                 >
-                  Comment j'aborde ce projet.
+                  Comment nous abordons ce projet.
                 </h2>
               </div>
               <div class="mt-8 sm:mt-12 space-y-0">
@@ -137,21 +245,32 @@ if (!study) {
                       style="border-bottom: 1px solid var(--border);"
                     >
                     <span
-                      class="shrink-0 font-mono text-xs font-semibold w-8 h-8 flex items-center justify-center"
+                      class="shrink-0 font-mono text-sm font-semibold w-11 h-11 flex items-center justify-center"
                       style="color: var(--fg-muted); border: 1px solid var(--border);"
                     >
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <div class="flex-1 min-w-0">
                       <p
-                        class="text-sm leading-relaxed pt-1"
+                        class="text-lg leading-relaxed pt-1"
                         style="color: var(--fg-secondary);"
                       >
                         {stepText}
                       </p>
                       {stepImage && (
-                        <div class="mt-3 aspect-video max-w-sm relative overflow-hidden rounded" style="border: 1px solid var(--border);">
-                          <img src={stepImage} alt={`Étape ${i + 1}`} class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                        <div class="mt-4 w-full max-w-2xl relative" style="border: 1px solid var(--border); background: var(--bg-raised);">
+                          <img
+                            src={stepImage}
+                            alt={`Étape ${i + 1} — ${stepText || ''}`}
+                            class="w-full aspect-video object-cover block"
+                            loading="lazy"
+                          />
+                          <span
+                            class="absolute top-2 right-2 font-mono text-[10px] uppercase tracking-wider px-2 py-1"
+                            style="background: var(--bg); color: var(--fg-muted); border: 1px solid var(--border);"
+                          >
+                            Étape {String(i + 1).padStart(2, "0")}
+                          </span>
                         </div>
                       )}
                     </div>
@@ -161,6 +280,46 @@ if (!study) {
             </Container>
           </section>
         </>
+      )
+    }
+
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <!-- Gallery -->
+    {
+      study.gallery && study.gallery.length > 0 && (
+        <section class="section">
+          <Container>
+            <h2 class="text-xl md:text-2xl font-bold leading-tight" style="color: var(--fg);">
+              Écrans clés.
+            </h2>
+            <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 gsap-stagger-grid">
+              {study.gallery.map((item: any, i: number) => (
+                <figure class="group">
+                  {item.image ? (
+                    <img
+                      src={item.image}
+                      alt={item.caption || ''}
+                      class="w-full aspect-video object-cover transition-transform duration-500 group-hover:scale-105"
+                      style="border: 1px solid var(--border); background: var(--bg-raised);"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div
+                      class="w-full aspect-video relative overflow-hidden flex items-center justify-center"
+                      style="border: 1px solid var(--border); background: var(--bg-raised);"
+                    >
+                      <span class="font-mono text-xs uppercase tracking-widest opacity-20" style="color: var(--fg);">Écran {String(i + 1).padStart(2, "0")}</span>
+                    </div>
+                  )}
+                  <figcaption class="mt-3 font-mono text-xs uppercase tracking-wider" style="color: var(--fg-muted);">
+                    <span data-fr={item.caption} data-en={item.captionEn || item.caption}>{item.caption}</span>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </Container>
+        </section>
       )
     }
 
