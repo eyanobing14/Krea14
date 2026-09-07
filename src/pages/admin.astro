@@ -823,7 +823,6 @@ import Footer from '../components/Footer.astro';
               <div class="md:col-span-2"><label class="admin-label">Résultats (un par ligne)</label><textarea class="admin-input study-results" data-i="${i}" rows="2">${(study.results || []).join('\n')}</textarea></div>
               <div class="md:col-span-2"><label class="admin-label">Stats (valeur | libellé — un par ligne)</label><textarea class="admin-input study-stats" data-i="${i}" rows="2">${(study.stats || []).map((s: any) => `${s.value} | ${s.label}`).join('\n')}</textarea></div>
               <div class="md:col-span-2"><label class="admin-label">Tags (virgule)</label><input class="admin-input study-tags" data-i="${i}" value="${(study.tags || []).join(', ')}" /></div>
-              </div>
             </div>
             <!-- Images -->
             <div class="mt-5 pt-5" style="border-top: 1px solid var(--border-strong);">
