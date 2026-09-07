@@ -25,3 +25,8 @@ data/
 
 # jetbrains setting folder
 .idea/
+
+# EasyCompta project (not part of this portfolio repo)
+/compta/
+/minicompta-server/
+/soko-dist/
