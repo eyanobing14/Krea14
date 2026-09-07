@@ -186,7 +186,14 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
           class="mt-10 md:mt-16 lg:mt-20 grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 gsap-stagger-grid"
         >
           {
-            caseStudies.map((study: any) => (
+            caseStudies.map((study: any) => {
+              const titlePartsFr = (study.title || '').split(' — ');
+              const titlePartsEn = (study.titleEn || study.title || '').split(' — ');
+              const titleMainFr = titlePartsFr[0];
+              const titleMainEn = titlePartsEn[0];
+              const titleSubFr = titlePartsFr[1] || '';
+              const titleSubEn = titlePartsEn[1] || '';
+              return (
               <a
                 href={`/work/${study.slug}`}
                 class="group block no-underline"
@@ -213,25 +220,30 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
                   )}
                 </div>
                 <div class="p-5" style="border-top: 1px solid var(--border);">
-                  <div class="flex items-center justify-between">
+                  <div class="flex items-center justify-between gap-3">
                     <h3
-                      class="text-base sm:text-lg font-semibold"
+                      class="text-base sm:text-lg font-semibold leading-tight"
                       style="color: var(--fg);"
                     >
                       <span
-                        data-fr={study.title}
-                        data-en={study.titleEn || study.title}
+                        data-fr={titleMainFr}
+                        data-en={titleMainEn}
                       >
-                        {study.title}
+                        {titleMainFr}
                       </span>
                     </h3>
                     <span
-                      class="text-xs font-mono"
+                      class="text-xs font-mono whitespace-nowrap shrink-0"
                       style="color: var(--fg-muted);"
                     >
                       {study.year}
                     </span>
                   </div>
+                  {titleSubFr && (
+                    <p class="mt-1 text-xs leading-snug" style="color: var(--fg-secondary);">
+                      <span data-fr={titleSubFr} data-en={titleSubEn}>{titleSubFr}</span>
+                    </p>
+                  )}
                   <p
                     class="mt-2 text-sm leading-relaxed"
                     style="color: var(--fg-secondary); overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;"
@@ -257,7 +269,8 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
                   </div>
                 </div>
               </a>
-            ))
+              );
+            })
           }
         </div>
       </Container>
