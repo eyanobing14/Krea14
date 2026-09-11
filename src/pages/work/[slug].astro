@@ -38,9 +38,11 @@ const heroGridImages = heroSrcs.slice(0, 4);
   <Header />
   <main id="main-content">
     <!-- Hero -->
-    <section class="pt-20 sm:pt-28 pb-8 md:pt-40 md:pb-24">
+    <section class="relative overflow-hidden pt-20 sm:pt-28 pb-8 md:pt-40 md:pb-24">
+      <!-- Grid lines — theme-aware -->
+      <div class="absolute inset-0 opacity-[0.08] dark:opacity-[0.1]" aria-hidden="true" style="z-index: -1; background-image: linear-gradient(to right, var(--fg) 1px, transparent 1px), linear-gradient(to bottom, var(--fg) 1px, transparent 1px); background-size: 80px 80px;"></div>
       <Container>
-        <div class="flex flex-wrap items-center gap-3 mb-8">
+        <div class="flex flex-wrap items-center gap-3 mb-8 relative z-10">
           <a
             href="/work"
             class="text-xs no-underline transition-colors duration-200"
@@ -81,12 +83,6 @@ const heroGridImages = heroSrcs.slice(0, 4);
         class="w-full aspect-video lg:aspect-21/9 relative overflow-hidden gsap-scale"
         style={`background: ${study.heroColor || "var(--bg-raised)"}; border: 1px solid var(--border);`}
       >
-        <div
-          class="absolute inset-0 opacity-[0.07]"
-          aria-hidden="true"
-          style="background-image: linear-gradient(to right, var(--fg) 1px, transparent 1px), linear-gradient(to bottom, var(--fg) 1px, transparent 1px); background-size: 80px 80px;"
-        >
-        </div>
         {heroGridImages.length > 1 ? (
           <div class={`w-full h-full grid ${heroGridClass}`}>
             {heroGridImages.map((src: string, i: number) => (
@@ -109,6 +105,8 @@ const heroGridImages = heroSrcs.slice(0, 4);
             style="color: var(--fg);">Image du projet</span
           >
         )}
+        <!-- Grid lines over image — theme-aware -->
+        <div class="absolute inset-0 opacity-[0.08]" aria-hidden="true" style="background-image: linear-gradient(to right, var(--fg) 1px, transparent 1px), linear-gradient(to bottom, var(--fg) 1px, transparent 1px); background-size: 80px 80px;"></div>
       </div>
     </Container>
 
@@ -197,14 +195,19 @@ const heroGridImages = heroSrcs.slice(0, 4);
     <!-- Architecture -->
     {
       study.architecture && (study.architecture.text || (study.architecture.stack && study.architecture.stack.length)) && (
-        <section class="section">
+        <section class="section relative overflow-hidden">
           <Container>
+            <div
+              class="absolute inset-0 opacity-[0.08] dark:opacity-[0.1]"
+              aria-hidden="true"
+              style="z-index: -1; background-image: linear-gradient(to right, var(--fg) 1px, transparent 1px), linear-gradient(to bottom, var(--fg) 1px, transparent 1px); background-size: 80px 80px;"
+            ></div>
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-16">
-              <div class="min-w-0 col-span-12 lg:col-span-7">
-                <h2 class="text-xl md:text-2xl font-bold leading-tight mb-4" style="color: var(--fg);">
+              <div class="min-w-0 col-span-12 lg:col-span-8">
+                <h2 class="text-2xl md:text-3xl font-bold leading-tight mb-6" style="color: var(--fg);">
                   Le principe.
                 </h2>
-                <p class="text-sm leading-relaxed" style="color: var(--fg-secondary);">
+                <p class="text-base sm:text-lg leading-relaxed" style="color: var(--fg-secondary);">
                   <span data-fr={study.architecture.text} data-en={study.architecture.textEn || study.architecture.text}>{study.architecture.text}</span>
                 </p>
               </div>
@@ -260,33 +263,47 @@ const heroGridImages = heroSrcs.slice(0, 4);
               Écrans clés.
             </h2>
             <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 gsap-stagger-grid">
-              {study.gallery.map((item: any, i: number) => (
-                <figure class="group">
-                  {item.image ? (
-                    <PortfolioImage
-                      src={item.image}
-                      alt={item.caption || ''}
-                      class="w-full aspect-video object-cover transition-transform duration-500 group-hover:scale-105"
-                      style="border: 1px solid var(--border); background: var(--bg-raised);"
-                      loading="lazy"
-                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                    />
-                  ) : (
-                    <div
-                      class="w-full aspect-video relative overflow-hidden flex items-center justify-center"
-                      style="border: 1px solid var(--border); background: var(--bg-raised);"
-                    >
-                      <span class="font-mono text-xs uppercase tracking-widest opacity-20" style="color: var(--fg);">Écran {String(i + 1).padStart(2, "0")}</span>
-                    </div>
-                  )}
-                  <figcaption class="mt-3 font-mono text-xs uppercase tracking-wider" style="color: var(--fg-muted);">
-                    <span data-fr={item.caption} data-en={item.captionEn || item.caption}>{item.caption}</span>
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
-          </Container>
-        </section>
+              {study.gallery.map((item: any, i: number) => {
+                const n = study.gallery.length;
+                const spanClass =
+                  n === 1 ? '' :
+                  n === 2 ? 'lg:col-span-3' :
+                  i === 0 ? 'lg:col-span-2 lg:row-span-2' :
+                  i === 3 && n === 4 ? 'lg:col-span-3' :
+                  i === 3 && n === 5 ? 'lg:col-span-2' :
+                  '';
+                return (
+                  <figure class={`group ${spanClass}`}>
+                    {item.image ? (
+                      <PortfolioImage
+                        src={item.image}
+                        alt={item.caption || ''}
+                        class="w-full aspect-video object-cover transition-transform duration-500 group-hover:scale-105"
+                        style="border: 1px solid var(--border); background: var(--bg-raised);"
+                        loading="lazy"
+                        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                      />
+                    ) : (
+                      <div
+                        class="w-full aspect-video relative overflow-hidden flex items-center justify-center"
+                        style="border: 1px solid var(--border); background: var(--bg-raised);"
+                      >
+                        <span class="font-mono text-xs uppercase tracking-widest opacity-20" style="color: var(--fg);">Écran {String(i + 1).padStart(2, "0")}</span>
+                      </div>
+                    )}
+                    <figcaption class="mt-3 font-mono text-xs uppercase tracking-wider" style="color: var(--fg-muted);">
+<span data-fr={item.caption} data-en={item.captionEn || item.caption}>{item.caption}</span>
+      </figcaption>
+    </figure>
+  );
+})}
+</div>
+</Container>
+</section>
+
+<style>
+  .kg-featured { display:flex; flex-direction:column; height:100%; }
+</style>
       )
     }
 
