@@ -182,7 +182,7 @@ export const T: Record<string, string> = {
   // ── Work detail page ──
   "← Retour": "← Back",
   "Image du projet": "Project image",
-  "Comment nous abordons ce projet.": "How we approach this project.",
+  "Comment ce projet a été abordé.": "How this project was approached.",
   "L'architecture.": "Architecture.",
   "Écrans clés.": "Key screens.",
   "Projet suivant?": "Next project?",

@@ -4,13 +4,21 @@ import img_thumb_ChatGPT_Image_10_sept__2026__14_56_25_png from '../assets/portf
 import img_hero_ChatGPT_Image_10_sept__2026__14_56_25_png from '../assets/portfolio/hero-ChatGPT_Image_10_sept._2026__14_56_25.png';
 import img_thumb_ChatGPT_Image_10_sept__2026__12_44_07_png from '../assets/portfolio/thumb-ChatGPT_Image_10_sept._2026__12_44_07.png';
 import img_hero_ChatGPT_Image_10_sept__2026__12_44_07_png from '../assets/portfolio/hero-ChatGPT_Image_10_sept._2026__12_44_07.png';
+import img_thumb_ChatGPT_Image_12_sept__2026__00_h_08_min_24_s_jpg from '../assets/portfolio/thumb-ChatGPT_Image_12_sept._2026__00_h_08_min_24_s.jpg';
+import img_hero_ChatGPT_Image_12_sept__2026__00_h_15_min_32_s_jpg from '../assets/portfolio/hero-ChatGPT_Image_12_sept._2026__00_h_15_min_32_s.jpg';
+import img_thumb_ChatGPT_Image_11_sept__2026__23_28_18_jpg from '../assets/portfolio/thumb-ChatGPT_Image_11_sept._2026__23_28_18.jpg';
+import img_hero_ChatGPT_Image_11_sept__2026__23_h_46_min_50_s_jpg from '../assets/portfolio/hero-ChatGPT_Image_11_sept._2026__23_h_46_min_50_s.jpg';
 
 const imageMap: Record<string, any> = {
   "/assets/profile-photo.jpeg": img_profile_photo_jpeg,
   "/assets/thumb-ChatGPT_Image_10_sept._2026__14_56_25.png": img_thumb_ChatGPT_Image_10_sept__2026__14_56_25_png,
   "/assets/hero-ChatGPT_Image_10_sept._2026__14_56_25.png": img_hero_ChatGPT_Image_10_sept__2026__14_56_25_png,
   "/assets/thumb-ChatGPT_Image_10_sept._2026__12_44_07.png": img_thumb_ChatGPT_Image_10_sept__2026__12_44_07_png,
-  "/assets/hero-ChatGPT_Image_10_sept._2026__12_44_07.png": img_hero_ChatGPT_Image_10_sept__2026__12_44_07_png
+  "/assets/hero-ChatGPT_Image_10_sept._2026__12_44_07.png": img_hero_ChatGPT_Image_10_sept__2026__12_44_07_png,
+  "/assets/thumb-ChatGPT_Image_12_sept._2026__00_h_08_min_24_s.jpg": img_thumb_ChatGPT_Image_12_sept__2026__00_h_08_min_24_s_jpg,
+  "/assets/hero-ChatGPT_Image_12_sept._2026__00_h_15_min_32_s.jpg": img_hero_ChatGPT_Image_12_sept__2026__00_h_15_min_32_s_jpg,
+  "/assets/thumb-ChatGPT_Image_11_sept._2026__23_28_18.jpg": img_thumb_ChatGPT_Image_11_sept__2026__23_28_18_jpg,
+  "/assets/hero-ChatGPT_Image_11_sept._2026__23_h_46_min_50_s.jpg": img_hero_ChatGPT_Image_11_sept__2026__23_h_46_min_50_s_jpg
 };
 
 export default imageMap;

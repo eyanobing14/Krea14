@@ -125,8 +125,6 @@ function loopRow<T>(row: T[]): T[] {
             style="color: var(--fg);">Image du projet</span
           >
         )}
-        <!-- Grid lines over image — theme-aware -->
-        <div class="absolute inset-0 opacity-[0.08]" aria-hidden="true" style="background-image: linear-gradient(to right, var(--fg) 1px, transparent 1px), linear-gradient(to bottom, var(--fg) 1px, transparent 1px); background-size: 80px 80px;"></div>
         {heroGridImages.length > 0 && (
           <button type="button" class="kg-hero-open" aria-label="Agrandir l'image">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"
@@ -348,7 +346,7 @@ function loopRow<T>(row: T[]): T[] {
                   class="mt-6 text-xl md:text-2xl font-bold leading-tight"
                   style="color: var(--fg);"
                 >
-                  Comment nous abordons ce projet.
+                  Comment ce projet a été abordé.
                 </h2>
               </div>
               <div class="mt-8 sm:mt-12 bento-grid">
@@ -666,6 +664,8 @@ function loopRow<T>(row: T[]): T[] {
     margin: 0;
     overflow-y: auto;
     overscroll-behavior: contain;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     opacity: 0;
     /* compositor-friendly: only transform + opacity animate */
     transform: translate3d(0, 8px, 0) scale(0.985);
@@ -675,6 +675,9 @@ function loopRow<T>(row: T[]): T[] {
     transition:
       transform 0.24s var(--ease-out-quart),
       opacity 0.16s linear;
+  }
+  .kg-modal-figure::-webkit-scrollbar {
+    display: none;
   }
   .kg-modal[data-state='open'] .kg-modal-figure {
     opacity: 1;

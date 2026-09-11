@@ -14,13 +14,11 @@ const { index, text, image = '', total } = Astro.props;
 // Layout 6 étapes : 2 cols × 2 rows — col 1 = 30%, col 2-3 = 70% (50/50)
 // Étape 1 → haut gauche, étapes 2-5 → bloc 70%, étape 6 → bas gauche.
 let posClass = '';
-let anchor = false;
 let compact = false;
 let spanClass = '';
 
 if (total === 6) {
   posClass = ['bento-p1', 'bento-p2', 'bento-p3', 'bento-p4', 'bento-p5', 'bento-p6'][index] || '';
-  anchor = index === 0 || index === 5;
   compact = index === 2 || index === 3;
 } else {
   let variant: 'tall' | 'wide' | 'feature' | 'normal' = 'normal';
@@ -38,7 +36,7 @@ if (total === 6) {
 }
 ---
 
-<div class={`bento-card ${posClass} ${spanClass} ${anchor ? 'bento-anchor' : ''} ${compact ? 'bento-compact' : ''} gsap-reveal`}>
+<div class={`bento-card ${posClass} ${spanClass} ${compact ? 'bento-compact' : ''} gsap-reveal`}>
   <span class="bento-watermark" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
   <div class="bento-card-head">
     <StepIcon text={text} index={index} showNum={false} />
@@ -83,19 +81,6 @@ if (total === 6) {
   .bento-p4 { grid-column: 2; grid-row: 2; }
   .bento-p5 { grid-column: 3; grid-row: 2; }
   .bento-p6 { grid-column: 1; grid-row: 2; }
-
-  /* ── Colonne 30% (étapes 1 & 6) ── */
-  .bento-anchor {
-    background: var(--bg-overlay);
-  }
-  .bento-anchor .bento-text {
-    font-size: 1.0625rem;
-    font-weight: 500;
-    color: var(--fg);
-  }
-  .bento-anchor .bento-watermark {
-    opacity: 0.05;
-  }
 
   /* ── Étapes 3 & 4 (compact) ── */
   .bento-compact .bento-card-head {

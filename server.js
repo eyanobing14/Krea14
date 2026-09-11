@@ -54,12 +54,12 @@ async function optimizeImage(inputPath, name) {
   const isSvg = ext === '.svg';
   const outputName = isSvg
     ? name
-    : name.replace(/\.[^.]+$/, '.webp');
+    : name.replace(/\.[^.]+$/, '.jpg');
   const outputPath = path.join(path.dirname(inputPath), outputName);
   if (!isSvg) {
     await sharp(inputPath)
       .resize({ width: 1200, withoutEnlargement: true })
-      .webp({ quality: 80 })
+      .jpeg({ quality: 85, mozjpeg: true })
       .toFile(outputPath);
     fs.unlinkSync(inputPath);
   }
@@ -89,6 +89,7 @@ const server = http.createServer(async (req, res) => {
   if (url === '/api/save-data' && req.method === 'POST') {
     const data = await readBody(req);
     fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
+    regenerateRegistry();
     return send(res, { ok: true });
   }
 
