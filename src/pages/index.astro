@@ -5,6 +5,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import ScrollReveal from "../components/ScrollReveal.astro";
 import Container from "../components/Container.astro";
+import PortfolioImage from "../components/PortfolioImage.astro";
 
 const profile = data.profile as typeof data.profile & { taglineEn?: string };
 const services = data.services || [];
@@ -204,7 +205,7 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
                   style={`background: ${study.heroColor || "var(--bg-raised)"};`}
                 >
                   {study.thumbnail ? (
-                    <img
+                    <PortfolioImage
                       src={study.thumbnail}
                       alt={study.title}
                       class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"

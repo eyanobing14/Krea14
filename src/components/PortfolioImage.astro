@@ -1,0 +1,37 @@
+---
+import { Image } from 'astro:assets';
+import imageMap from '../generated/imageMap';
+
+interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  widths?: number[];
+  sizes?: string;
+  loading?: 'lazy' | 'eager';
+  style?: string;
+}
+
+const { src, alt, class: className, widths, sizes, loading = 'lazy', style } = Astro.props;
+const resolved = imageMap[src];
+---
+
+{resolved ? (
+  <Image
+    src={resolved}
+    alt={alt}
+    class:list={[className]}
+    widths={widths || [400, 800, 1200]}
+    sizes={sizes || '(max-width: 768px) 100vw, 50vw'}
+    loading={loading}
+    style={style}
+  />
+) : (
+  <img
+    src={src}
+    alt={alt}
+    class={className}
+    loading={loading}
+    style={style}
+  />
+)}

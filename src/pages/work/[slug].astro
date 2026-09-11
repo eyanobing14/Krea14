@@ -5,6 +5,7 @@ import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import ScrollReveal from "../../components/ScrollReveal.astro";
 import Container from "../../components/Container.astro";
+import PortfolioImage from "../../components/PortfolioImage.astro";
 
 export function getStaticPaths() {
   return (data.caseStudies || []).map((study: any) => ({
@@ -88,16 +89,17 @@ const heroGridImages = heroSrcs.slice(0, 4);
           <div class={`w-full h-full grid ${heroGridClass}`}>
             {heroGridImages.map((src: string, i: number) => (
               <div class="relative overflow-hidden" style={i > 0 ? "border-left: 1px solid var(--border);" : undefined}>
-                <img src={src} alt={study.title} class="absolute inset-0 w-full h-full object-cover" loading={i === 0 ? "eager" : "lazy"} />
+                <PortfolioImage src={src} alt={study.title} class="absolute inset-0 w-full h-full object-cover" loading={i === 0 ? "eager" : "lazy"} sizes="(min-width: 1024px) 25vw, 50vw" />
               </div>
             ))}
           </div>
         ) : heroGridImages.length === 1 ? (
-          <img
+          <PortfolioImage
             src={heroGridImages[0]}
             alt={study.title}
             class="absolute inset-0 w-full h-full object-cover"
             loading="eager"
+            sizes="(min-width: 1024px) 70vw, 100vw"
           />
         ) : (
           <span
@@ -165,7 +167,7 @@ const heroGridImages = heroSrcs.slice(0, 4);
           <Container>
             <figure>
               {study.keyVisual.image ? (
-                <img
+                <PortfolioImage
                   src={study.keyVisual.image}
                   alt={study.keyVisual.caption || ''}
                   class="w-full aspect-video object-cover"
@@ -259,11 +261,12 @@ const heroGridImages = heroSrcs.slice(0, 4);
                       </p>
                       {stepImage && (
                         <div class="mt-4 w-full max-w-2xl relative" style="border: 1px solid var(--border); background: var(--bg-raised);">
-                          <img
+                          <PortfolioImage
                             src={stepImage}
                             alt={`Étape ${i + 1} — ${stepText || ''}`}
                             class="w-full aspect-video object-cover block"
                             loading="lazy"
+                            sizes="(min-width: 1024px) 42rem, 100vw"
                           />
                           <span
                             class="absolute top-2 right-2 font-mono text-[10px] uppercase tracking-wider px-2 py-1"
@@ -297,12 +300,13 @@ const heroGridImages = heroSrcs.slice(0, 4);
               {study.gallery.map((item: any, i: number) => (
                 <figure class="group">
                   {item.image ? (
-                    <img
+                    <PortfolioImage
                       src={item.image}
                       alt={item.caption || ''}
                       class="w-full aspect-video object-cover transition-transform duration-500 group-hover:scale-105"
                       style="border: 1px solid var(--border); background: var(--bg-raised);"
                       loading="lazy"
+                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                     />
                   ) : (
                     <div

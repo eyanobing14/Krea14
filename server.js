@@ -9,7 +9,8 @@ const __dirname = path.dirname(__filename);
 const PORT = 4200;
 const ROOT = __dirname;
 const dataFile = path.join(ROOT, 'public', 'data', 'portfolio.json');
-const assetsDir = path.join(ROOT, 'public', 'assets');
+const assetsDir = path.join(ROOT, 'src', 'assets', 'portfolio');
+const registryScript = path.join(ROOT, 'scripts', 'build-image-registry.mjs');
 if (!fs.existsSync(assetsDir)) fs.mkdirSync(assetsDir, { recursive: true });
 
 function git(cmd) {
@@ -45,6 +46,30 @@ function readBody(req) {
     req.on('data', (c) => body += c);
     req.on('end', () => { try { resolve(JSON.parse(body)); } catch (_) { resolve({}); } });
   });
+}
+
+async function optimizeImage(inputPath, name) {
+  const sharp = (await import('sharp')).default;
+  const ext = path.extname(name).toLowerCase();
+  const isSvg = ext === '.svg';
+  const outputName = isSvg
+    ? name
+    : name.replace(/\.[^.]+$/, '.webp');
+  const outputPath = path.join(path.dirname(inputPath), outputName);
+  if (!isSvg) {
+    await sharp(inputPath)
+      .resize({ width: 1200, withoutEnlargement: true })
+      .webp({ quality: 80 })
+      .toFile(outputPath);
+    fs.unlinkSync(inputPath);
+  }
+  return { outputName, outputPath };
+}
+
+function regenerateRegistry() {
+  try {
+    execSync(`node "${registryScript}"`, { cwd: ROOT, stdio: 'pipe' });
+  } catch (_) { /* registry errors are non-fatal for the API */ }
 }
 
 const server = http.createServer(async (req, res) => {
@@ -88,8 +113,15 @@ const server = http.createServer(async (req, res) => {
     const m = b64.match(/^data:image\/(\w+);base64,(.+)$/);
     if (!m) return send(res, { ok: false }, 400);
     const name = (filename || 'img-' + Date.now() + '.' + m[1]).replace(/[^a-zA-Z0-9._-]/g, '_');
-    fs.writeFileSync(path.join(assetsDir, name), Buffer.from(m[2], 'base64'));
-    return send(res, { ok: true, path: '/assets/' + name, filename: name });
+    const inputPath = path.join(assetsDir, name);
+    fs.writeFileSync(inputPath, Buffer.from(m[2], 'base64'));
+    try {
+      const { outputName } = await optimizeImage(inputPath, name);
+      regenerateRegistry();
+      return send(res, { ok: true, path: '/assets/' + outputName, filename: outputName });
+    } catch (err) {
+      return send(res, { ok: false, message: 'Optimization failed: ' + err.message }, 500);
+    }
   }
 
   // ── git-info ──

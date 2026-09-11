@@ -5,6 +5,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ScrollReveal from '../../components/ScrollReveal.astro';
 import Container from '../../components/Container.astro';
+import PortfolioImage from '../../components/PortfolioImage.astro';
 
 const profile = data.profile;
 const caseStudies = data.caseStudies || [];
@@ -198,7 +199,7 @@ const categories = [...new Set(
               >
                 <div class="aspect-video flex items-center justify-center transition-all duration-500 relative overflow-hidden" style={`background: ${study.heroColor || 'var(--bg-raised)'};`}>
                   {(study.heroImage || study.thumbnail) ? (
-                    <img src={study.heroImage || study.thumbnail} alt={study.title} class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                    <PortfolioImage src={study.heroImage || study.thumbnail} alt={study.title} class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
                   ) : (
                     <span class="font-mono text-xs uppercase tracking-widest opacity-60" style="color: var(--fg);">{study.category}</span>
                   )}

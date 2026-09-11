@@ -6,8 +6,11 @@
     "node": ">=22.12.0"
   },
   "scripts": {
+    "predev": "node scripts/build-image-registry.mjs",
+    "prebuild": "node scripts/build-image-registry.mjs",
+    "build:registry": "node scripts/build-image-registry.mjs",
     "dev": "astro dev",
-    "dev:admin": "concurrently \"astro dev\" \"node server.js\"",
+    "dev:admin": "concurrently \"npm run predev && astro dev\" \"node server.js\"",
     "server": "node server.js",
     "build": "astro build",
     "preview": "astro preview",
@@ -20,6 +23,7 @@
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "gsap": "^3.15.0",
+    "sharp": "^0.35.0",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
