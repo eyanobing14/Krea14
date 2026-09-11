@@ -72,11 +72,11 @@
           "image": ""
         },
         {
-          "text": "Conception de la base de données (leagues, questions, tentatives, révisions)",
+          "text": "Concevoir la structure des quiz, des tentatives et des révisions",
           "image": ""
         },
         {
-          "text": "Développement des endpoints quiz & tentatives (CRUD, scoring, vérification automatique)",
+          "text": "Automatiser le scoring et la vérification des réponses",
           "image": ""
         },
         {
@@ -88,7 +88,7 @@
           "image": ""
         },
         {
-          "text": "Tests multi-utilisateurs, seed des questions et déploiement en production",
+          "text": "Lancer en production et suivre l'adoption des 300 étudiants",
           "image": ""
         }
       ],
@@ -155,7 +155,7 @@
           "image": ""
         },
         {
-          "text": "API MT5 unifiée : opérations, balances, deals en attente",
+          "text": "Unifier les données MT5 : opérations, balances, deals en attente",
           "image": ""
         },
         {
@@ -163,7 +163,7 @@
           "image": ""
         },
         {
-          "text": "Plan de trading éditable par compte, customisé via localStorage",
+          "text": "Plan de trading éditable et personnalisé par compte",
           "image": ""
         },
         {
@@ -171,7 +171,7 @@
           "image": ""
         },
         {
-          "text": "Optimisation performance et déploiement",
+          "text": "Peaufiner la performance et accompagner le lancement",
           "image": ""
         }
       ],
@@ -238,11 +238,11 @@
           "image": ""
         },
         {
-          "text": "Modèle de données annonce + blocs de contenu",
+          "text": "Concevoir la structure d'une publication et de ses blocs",
           "image": ""
         },
         {
-          "text": "Éditeur de blocs enrichi (rich text, images, vidéos, boutons)",
+          "text": "Éditeur de blocs : textes variés, images, vidéos, boutons",
           "image": ""
         },
         {
@@ -254,7 +254,7 @@
           "image": ""
         },
         {
-          "text": "Tests, seed de contenu et déploiement",
+          "text": "Lancer sur les canaux quotidiens de la communauté",
           "image": ""
         }
       ],
@@ -321,11 +321,11 @@
           "image": ""
         },
         {
-          "text": "Schéma base de données : partenaires, référencements, commissions",
+          "text": "Structurer les données : partenaires, référencements, commissions",
           "image": ""
         },
         {
-          "text": "API d'activation et de suivi des références",
+          "text": "Activer et suivre les références de bout en bout",
           "image": ""
         },
         {
@@ -337,7 +337,7 @@
           "image": ""
         },
         {
-          "text": "Tests de bout en bout et déploiement",
+          "text": "Valider le parcours complet et lancer",
           "image": ""
         }
       ],
@@ -387,22 +387,22 @@
       "thumbnail": "",
       "heroImage": "",
       "heroColor": "#101010",
-      "description": "Une suite comptable professionnelle OHADA, pensée pour les PME d’Afrique centrale : application desktop Tauri avec données locales SQLite, synchronisation cloud en temps réel et reporting conforme au plan SYSCOHADA.",
-      "descriptionEn": "A professional OHADA accounting suite for African SMEs: a Tauri desktop app with local SQLite storage, real-time cloud sync and reporting fully compliant with the SYSCOHADA chart of accounts.",
+      "description": "Une suite comptable professionnelle conforme OHADA, pensée pour les PME d’Afrique centrale : données locales toujours fiables, synchronisation cloud en temps réel et reporting conforme au plan SYSCOHADA.",
+      "descriptionEn": "A professional OHADA-compliant accounting suite for Central African SMEs: always-reliable local data, real-time cloud sync and reporting fully compliant with the SYSCOHADA chart of accounts.",
       "challenge": "Un chef d'entreprise en RDC ouvre Excel, tape ses chiffres, sauvegarde. Son comptable reçoit un fichier par WhatsApp, recrée tout à zéro. Les virgules dérivent, les centimes disparaissent, et personne ne peut dire si le bilan est fiable. 400 comptes SYSCOHADA, zéro automatisation.",
       "challengeEn": "A business owner in DRC opens Excel, types numbers, saves. Their accountant receives the file via WhatsApp, recreates everything from scratch. Decimals drift, cents vanish, and nobody can tell if the balance sheet is reliable. 400 SYSCOHADA accounts, zero automation.",
-      "solution": "Nous avons conçu une suite complète : plan comptable SYSCOHADA de ~400 comptes, moteur comptable isolé en TypeScript pur, journal, grand livre, balance, bilan comparatif, CPC, gestion des exercices avec clôture et RAN. Le tout dans un desktop Tauri (<5 MB) aux données locales SQLite (WAL), synchronisé avec un serveur Express + PostgreSQL, protégé par JWT, avec permissions et audit SHA-256.",
-      "solutionEn": "We built a complete suite: a ~400-account SYSCOHADA chart, an isolated pure-TypeScript accounting engine, journals, general ledger, trial balance, comparative balance sheet, income statement, fiscal years with closing and RAN. All in a Tauri desktop app (<5 MB) with local SQLite (WAL) data, synced with an Express + PostgreSQL server, secured with JWT, permissions and SHA-256 audit trail.",
+      "solution": "Nous avons inversé la logique : la saisie reste simple, la fiabilité devient automatique. Chaque montant est stocké au centime dans une base locale, donc les chiffres restent exacts même sans connexion, et remontent en temps réel dès que le réseau revient. Le chef d'entreprise saisit, le comptable vérifie et clôture l'exercice (avec RAN) à distance : mêmes données, mêmes résultats, plus aucun fichier qui circule sur WhatsApp.",
+      "solutionEn": "We flipped the logic: entry stays simple, reliability becomes automatic. Every amount is stored to the nearest cent in a local database, so figures stay exact even offline, and sync in real time as soon as the network returns. The owner enters, the accountant verifies and closes the fiscal year (with RAN) remotely: same data, same results, no more files circulating over WhatsApp.",
       "stats": [
         {
-          "value": "230+",
-          "label": "Tests automatisés",
-          "labelEn": "Automated tests"
+          "value": "100%",
+          "label": "Chiffres au centime",
+          "labelEn": "Figures to the cent"
         },
         {
-          "value": "11",
-          "label": "Entités synchronisées",
-          "labelEn": "Synced entities"
+          "value": "24/7",
+          "label": "Données accessibles",
+          "labelEn": "Data accessible 24/7"
         },
         {
           "value": "< 5 MB",
@@ -421,18 +421,9 @@
         "captionEn": "Year-end close: the engine computes RAN and carried-forward balances automatically."
       },
       "architecture": {
-        "text": "Deux tiers complémentaires. Côté client, un moteur comptable pur en TypeScript isolé de la base, une UI React 19 + Tailwind + shadcn/ui, et SQLite en mode WAL pour des montants en centimes (INTEGER). Côté serveur, Express + PostgreSQL avec sync push/pull de 11 entités OHADA, numérotation des écritures, WebSocket pour les invitations et conflits, hachage PBKDF2 et audit SHA-256.",
-        "textEn": "Two complementary tiers. Client-side, a pure TypeScript accounting engine isolated from storage, a React 19 + Tailwind + shadcn/ui interface, and SQLite in WAL mode storing amounts as integer cents. Server-side: Express + PostgreSQL with push/pull sync of 11 OHADA entities, entry numbering, WebSocket for invites and conflicts, PBKDF2 hashing and SHA-256 audit.",
-        "stack": [
-          "Tauri 2",
-          "React 19",
-          "TailwindCSS 4",
-          "SQLite WAL",
-          "Express",
-          "PostgreSQL",
-          "Socket.io",
-          "TypeScript"
-        ]
+        "text": "Le principe tient en une phrase : la machine de l’entreprise garde ses chiffres en local et reste utilisable sans connexion, pendant que le cloud relie la machine du patron à celle du comptable pour qu’ils travaillent sur les mêmes données, en temps réel. Chaque montant est manipulé au centime, chaque écriture est numérotée et datée, et chaque action est tracée — on sait toujours qui a fait quoi.",
+        "textEn": "The principle fits in one sentence: the company’s machine keeps its figures locally and stays usable offline, while the cloud connects the owner’s machine to the accountant’s so both work on the same data, in real time. Every amount is handled to the cent, every entry is numbered and dated, and every action is traceable — you always know who did what.",
+        "stack": []
       },
       "flow": [
         {
@@ -440,23 +431,23 @@
           "image": ""
         },
         {
-          "text": "Concevoir le schéma : 8 tables locales, montants en centimes, soft delete",
+          "text": "Concevoir les données pour qu’aucun centime ne puisse se perdre",
           "image": ""
         },
         {
-          "text": "Extraire le moteur comptable en TypeScript pur, testable sans base",
+          "text": "Isoler les règles métier comptables pour une fiabilité maximale",
           "image": ""
         },
         {
-          "text": "Bâtir le desktop Tauri : journal, balance, bilan, CPC, grand livre, exercices",
+          "text": "Livrer le desktop : journal, balance, bilan, CPC, grand livre, exercices",
           "image": ""
         },
         {
-          "text": "Synchroniser : 11 entités push/pull, permissions, WebSocket temps réel",
+          "text": "Synchroniser les données en temps réel avec des rôles et permissions claires",
           "image": ""
         },
         {
-          "text": "Tester (230+), déployer serveur + app et itérer sur les retours comptables",
+          "text": "Valider sur des scénarios réels, déployer et itérer avec les comptables",
           "image": ""
         }
       ],
@@ -493,10 +484,10 @@
         }
       ],
       "results": [
-        "230+ tests : client, moteur comptable et serveur couverts",
-        "Offline-first : données locales, sync temps réel quand disponible",
-        "Conformité OHADA : SYSCOHADA ~400 comptes, clôture avec RAN",
-        "Desktop léger : ~5 MB grâce à Tauri"
+        "Chiffres exacts au centime, même quand la connexion coupe",
+        "Le patron et le comptable voient les mêmes données, en temps réel",
+        "Conformité OHADA : ~400 comptes, clôture d’exercice avec RAN",
+        "Desktop léger et réactif sur les machines du terrain"
       ],
       "tags": [
         "Fullstack",

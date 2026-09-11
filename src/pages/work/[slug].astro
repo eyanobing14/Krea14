@@ -6,6 +6,8 @@ import Footer from "../../components/Footer.astro";
 import ScrollReveal from "../../components/ScrollReveal.astro";
 import Container from "../../components/Container.astro";
 import PortfolioImage from "../../components/PortfolioImage.astro";
+import StepIcon from "../../components/StepIcon.astro";
+import BentoCard from "../../components/BentoCard.astro";
 
 export function getStaticPaths() {
   return (data.caseStudies || []).map((study: any) => ({
@@ -120,7 +122,6 @@ const heroGridImages = heroSrcs.slice(0, 4);
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 gsap-stagger-grid">
               {study.stats.map((stat: any, i: number) => (
                 <div class="p-6 sm:p-8" style="border: 1px solid var(--border); background: var(--bg-raised);">
-                  <p class="font-mono text-xs uppercase tracking-widest mb-3" style="color: var(--fg-muted);">{String(i + 1).padStart(2, "0")}</p>
                   <p class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-[-0.02em]" style="color: var(--fg);">{stat.value}</p>
                   <p class="mt-2 text-sm leading-relaxed" style="color: var(--fg-secondary);"><span data-fr={stat.label} data-en={stat.labelEn || stat.label}>{stat.label}</span></p>
                 </div>
@@ -201,20 +202,11 @@ const heroGridImages = heroSrcs.slice(0, 4);
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-16">
               <div class="min-w-0 col-span-12 lg:col-span-7">
                 <h2 class="text-xl md:text-2xl font-bold leading-tight mb-4" style="color: var(--fg);">
-                  L&apos;architecture.
+                  Le principe.
                 </h2>
                 <p class="text-sm leading-relaxed" style="color: var(--fg-secondary);">
                   <span data-fr={study.architecture.text} data-en={study.architecture.textEn || study.architecture.text}>{study.architecture.text}</span>
                 </p>
-                {study.architecture.stack && study.architecture.stack.length > 0 && (
-                  <div class="mt-6 flex flex-wrap gap-2">
-                    {study.architecture.stack.map((t: string, i: number) => (
-                      <span class="px-3 py-1 text-xs font-mono uppercase tracking-wider" style="color: var(--fg-muted); border: 1px solid var(--border);">
-                        <span data-fr={t} data-en={study.architecture.stackEn?.[i] || t}>{t}</span>
-                      </span>
-                    ))}
-                  </div>
-                )}
               </div>
             </div>
           </Container>
@@ -237,48 +229,19 @@ const heroGridImages = heroSrcs.slice(0, 4);
                   Comment nous abordons ce projet.
                 </h2>
               </div>
-              <div class="mt-8 sm:mt-12 space-y-0">
+              <div class="mt-8 sm:mt-12 bento-grid">
                 {study.flow.map((step: any, i: number) => {
                   const stepText = typeof step === 'string' ? step : step.text;
                   const stepImage = typeof step === 'object' ? step.image : '';
                   return (
-                    <div
-                      class="flex items-start gap-4 sm:gap-6 py-5 sm:py-6 gsap-reveal"
-                      style="border-bottom: 1px solid var(--border);"
-                    >
-                    <span
-                      class="shrink-0 font-mono text-sm font-semibold w-11 h-11 flex items-center justify-center"
-                      style="color: var(--fg-muted); border: 1px solid var(--border);"
-                    >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <div class="flex-1 min-w-0">
-                      <p
-                        class="text-lg leading-relaxed pt-1"
-                        style="color: var(--fg-secondary);"
-                      >
-                        {stepText}
-                      </p>
-                      {stepImage && (
-                        <div class="mt-4 w-full max-w-2xl relative" style="border: 1px solid var(--border); background: var(--bg-raised);">
-                          <PortfolioImage
-                            src={stepImage}
-                            alt={`Étape ${i + 1} — ${stepText || ''}`}
-                            class="w-full aspect-video object-cover block"
-                            loading="lazy"
-                            sizes="(min-width: 1024px) 42rem, 100vw"
-                          />
-                          <span
-                            class="absolute top-2 right-2 font-mono text-[10px] uppercase tracking-wider px-2 py-1"
-                            style="background: var(--bg); color: var(--fg-muted); border: 1px solid var(--border);"
-                          >
-                            Étape {String(i + 1).padStart(2, "0")}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )})}
+                    <BentoCard
+                      index={i}
+                      text={stepText}
+                      image={stepImage}
+                      total={study.flow.length}
+                    />
+                  );
+                })}
               </div>
             </Container>
           </section>
@@ -382,3 +345,25 @@ const heroGridImages = heroSrcs.slice(0, 4);
   <Footer />
   <ScrollReveal />
 </Layout>
+
+<style>
+  .bento-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 3.5fr) minmax(0, 3.5fr);
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .bento-grid {
+      gap: 1rem;
+    }
+  }
+  @media (max-width: 767px) {
+    .bento-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      gap: 0.75rem;
+    }
+  }
+</style>
