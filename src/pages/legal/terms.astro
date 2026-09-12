@@ -22,7 +22,7 @@ function fmtPrice(amount: number) {
 }
 ---
 
-<Layout title={`Conditions générales — ${name}`}>
+<Layout title={`Conditions générales · ${name}`}>
   <Header />
   <main id="main-content">
     <section class="pt-24 sm:pt-28 pb-16 md:pt-36 md:pb-24">
@@ -67,31 +67,31 @@ function fmtPrice(amount: number) {
           {pricing.branding && (
             <div class="price-row">
               <span class="price-label">{pricing.branding.label}</span>
-              <span class="price-value">{fmtPrice(pricing.branding.min)} — {fmtPrice(pricing.branding.max)}</span>
+              <span class="price-value">{fmtPrice(pricing.branding.min)} à {fmtPrice(pricing.branding.max)}</span>
             </div>
           )}
           {pricing.uiux && (
             <div class="price-row">
               <span class="price-label">{pricing.uiux.label}</span>
-              <span class="price-value">{fmtPrice(pricing.uiux.min)} — {fmtPrice(pricing.uiux.max)}</span>
+              <span class="price-value">{fmtPrice(pricing.uiux.min)} à {fmtPrice(pricing.uiux.max)}</span>
             </div>
           )}
           {pricing.frontend && (
             <div class="price-row">
               <span class="price-label">{pricing.frontend.label}</span>
-              <span class="price-value">{fmtPrice(pricing.frontend.min)} — {fmtPrice(pricing.frontend.max)}</span>
+              <span class="price-value">{fmtPrice(pricing.frontend.min)} à {fmtPrice(pricing.frontend.max)}</span>
             </div>
           )}
           {pricing.logo && (
             <div class="price-row">
               <span class="price-label">{pricing.logo.label}</span>
-              <span class="price-value">{fmtPrice(pricing.logo.min)} — {fmtPrice(pricing.logo.max)}</span>
+              <span class="price-value">{fmtPrice(pricing.logo.min)} à {fmtPrice(pricing.logo.max)}</span>
             </div>
           )}
           {pricing.other && (
             <div class="price-row">
               <span class="price-label">{pricing.other.label}</span>
-              <span class="price-value">{fmtPrice(pricing.other.min)} — {fmtPrice(pricing.other.max)}</span>
+              <span class="price-value">{fmtPrice(pricing.other.min)} à {fmtPrice(pricing.other.max)}</span>
             </div>
           )}
           {pricing.hourlyRate && (
@@ -235,7 +235,7 @@ function fmtPrice(amount: number) {
     margin-bottom: 0.25rem;
   }
   .legal-content li::before {
-    content: "—";
+    content: "·";
     position: absolute;
     left: 0;
     color: var(--fg-muted);

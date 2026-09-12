@@ -17,7 +17,7 @@ const categories = [...new Set(
 )] as string[];
 ---
 
-<Layout title="Work — Portfolio">
+<Layout title="Work · Portfolio">
   <Header />
   <main id="main-content">
     <section class="work-hero min-h-screen flex flex-col justify-center pt-20 sm:min-h-0 sm:block sm:pt-28 pb-20 md:pt-40 md:pb-24">
@@ -183,8 +183,8 @@ const categories = [...new Set(
           {caseStudies.map((study: any) => {
             const mainCategory = study.category.split('·')[0].trim();
             const subCategory = (study.category.split('·')[1] || '').trim();
-            const titlePartsFr = (study.title || '').split(' — ');
-            const titlePartsEn = (study.titleEn || study.title || '').split(' — ');
+            const titlePartsFr = (study.title || '').split(' · ');
+            const titlePartsEn = (study.titleEn || study.title || '').split(' · ');
             const titleMainFr = titlePartsFr[0];
             const titleMainEn = titlePartsEn[0];
             const titleSubFr = titlePartsFr[1] || '';

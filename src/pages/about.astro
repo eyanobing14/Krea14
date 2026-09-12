@@ -14,7 +14,7 @@ const profile = data.profile as typeof data.profile & { photo?: string };
 const socials = (profile.socials || {}) as Record<string, string>;
 ---
 
-<Layout title={`À propos — ${profile.name}`}>
+<Layout title={`À propos · ${profile.name}`}>
   <Header />
   <main id="main-content">
     <!-- Hero — Split: Left = photo + icons, Right = name + bio -->

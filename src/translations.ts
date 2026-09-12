@@ -70,8 +70,8 @@ export const T: Record<string, string> = {
   "Du premier croquis au déploiement en production. Une seule vision, un seul interlocuteur, une cohérence totale du début à la fin.":
     "From first sketch to production deployment. One vision, one point of contact, total coherence from start to finish.",
   "Intégration fluide": "Smooth integration",
-  "Nous nous adaptons à votre workflow. Git, sprints, revues de code — nous devenons un membre à part entière de votre équipe.":
-    "We adapt to your workflow. Git, sprints, code reviews — we become a full member of your team.",
+  "Nous nous adaptons à votre workflow. Git, sprints, revues de code : nous devenons un membre à part entière de votre équipe.":
+    "We adapt to your workflow. Git, sprints, code reviews : we become a full member of your team.",
   "Plusieurs façons de penser.": "Multiple ways of thinking.",
   "Nous ne sommes pas qu'un seul profil. Chaque projet mobilise différentes facettes de notre approche créative.":
     "We're not just one profile. Every project mobilizes different facets of our creative approach.",
@@ -79,10 +79,10 @@ export const T: Record<string, string> = {
     "Put people at the center. Observe, empathize, prototype quickly. Validate before building.",
   "Comprendre le marché, la concurrence, les objectifs business. Chaque choix visuel a un impact mesurable.":
     "Understand the market, competition, business goals. Every visual choice has a measurable impact.",
-  "Explorer des directions inattendues. Typographie, couleur, composition — chaque pixel raconte une histoire.":
-    "Explore unexpected directions. Typography, color, composition — every pixel tells a story.",
-  "Code propre et performant. Accessibilité, responsive, optimisation — la beauté ne s'arrête pas au maquettage.":
-    "Clean and performant code. Accessibility, responsive, optimization — beauty doesn't stop at mockups.",
+  "Explorer des directions inattendues. Typographie, couleur, composition : chaque pixel raconte une histoire.":
+    "Explore unexpected directions. Typography, color, composition : every pixel tells a story.",
+  "Code propre et performant. Accessibilité, responsive, optimisation : la beauté ne s'arrête pas au maquettage.":
+    "Clean and performant code. Accessibility, responsive, optimization : beauty doesn't stop at mockups.",
   "Un projet réussi est un projet partagé. Communication transparente, retours itératifs, co-création avec l'équipe client.":
     "A successful project is a shared project. Transparent communication, iterative feedback, co-creation with the client team.",
   "Expertise.": "Expertise.",

@@ -12,7 +12,7 @@ const services = data.services || [];
 const caseStudies = (data.caseStudies || []).slice(0, 3);
 ---
 
-<Layout title={`${profile.name} — ${profile.title}`}>
+<Layout title={`${profile.name} · ${profile.title}`}>
   <Header />
   <main id="main-content">
     <!-- Hero -->
@@ -33,23 +33,23 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
           <div class="hero-scroll-track">
             <div class="hero-scroll-inner">
               <span class="hero-scroll-text">Graphic Design</span>
-              <span class="hero-scroll-sep" aria-hidden="true">—</span>
+              <span class="hero-scroll-sep" aria-hidden="true">·</span>
               <span class="hero-scroll-text">UI/UX Design</span>
-              <span class="hero-scroll-sep" aria-hidden="true">—</span>
+              <span class="hero-scroll-sep" aria-hidden="true">·</span>
               <span class="hero-scroll-text">Frontend Development</span>
-              <span class="hero-scroll-sep" aria-hidden="true">—</span>
+              <span class="hero-scroll-sep" aria-hidden="true">·</span>
               <span class="hero-scroll-text">Logo Design</span>
-              <span class="hero-scroll-sep" aria-hidden="true">—</span>
+              <span class="hero-scroll-sep" aria-hidden="true">·</span>
             </div>
             <div class="hero-scroll-inner" aria-hidden="true">
               <span class="hero-scroll-text">Graphic Design</span>
-              <span class="hero-scroll-sep">—</span>
+              <span class="hero-scroll-sep">·</span>
               <span class="hero-scroll-text">UI/UX Design</span>
-              <span class="hero-scroll-sep">—</span>
+              <span class="hero-scroll-sep">·</span>
               <span class="hero-scroll-text">Frontend Development</span>
-              <span class="hero-scroll-sep">—</span>
+              <span class="hero-scroll-sep">·</span>
               <span class="hero-scroll-text">Logo Design</span>
-              <span class="hero-scroll-sep">—</span>
+              <span class="hero-scroll-sep">·</span>
             </div>
           </div>
         </div>
@@ -188,8 +188,8 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
         >
           {
             caseStudies.map((study: any) => {
-              const titlePartsFr = (study.title || '').split(' — ');
-              const titlePartsEn = (study.titleEn || study.title || '').split(' — ');
+              const titlePartsFr = (study.title || '').split(' · ');
+              const titlePartsEn = (study.titleEn || study.title || '').split(' · ');
               const titleMainFr = titlePartsFr[0];
               const titleMainEn = titlePartsEn[0];
               const titleSubFr = titlePartsFr[1] || '';

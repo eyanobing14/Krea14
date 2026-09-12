@@ -4,7 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 ---
 
-<Layout title="Admin — Portfolio">
+<Layout title="Admin · Portfolio">
   <Header />
   <main id="main-content" class="pt-24 pb-16">
     <div class="container-page">
@@ -196,14 +196,14 @@ import Footer from '../components/Footer.astro';
             <div>
               <label class="admin-label">Monnaie</label>
               <select id="l-currency" class="admin-input">
-                <option value="USD">USD — Dollar américain</option>
-                <option value="EUR">EUR — Euro</option>
-                <option value="GBP">GBP — Livre sterling</option>
-                <option value="CAD">CAD — Dollar canadien</option>
-                <option value="CHF">CHF — Franc suisse</option>
-                <option value="BIF">BIF — Franc burundais</option>
-                <option value="CDF">CDF — Franc congolais</option>
-                <option value="XOF">XOF — Franc CFA</option>
+                <option value="USD">USD · Dollar américain</option>
+                <option value="EUR">EUR · Euro</option>
+                <option value="GBP">GBP · Livre sterling</option>
+                <option value="CAD">CAD · Dollar canadien</option>
+                <option value="CHF">CHF · Franc suisse</option>
+                <option value="BIF">BIF · Franc burundais</option>
+                <option value="CDF">CDF · Franc congolais</option>
+                <option value="XOF">XOF · Franc CFA</option>
               </select>
             </div>
             <div class="md:col-span-2">
@@ -233,7 +233,7 @@ import Footer from '../components/Footer.astro';
               <label class="admin-label">Branding / Identité visuelle</label>
               <div class="flex gap-2 items-center">
                 <input id="l-price-branding-min" type="number" class="admin-input" style="flex:1;" placeholder="Min" />
-                <span style="color:var(--fg-muted);">—</span>
+                <span style="color:var(--fg-muted);">·</span>
                 <input id="l-price-branding-max" type="number" class="admin-input" style="flex:1;" placeholder="Max" />
               </div>
             </div>
@@ -241,7 +241,7 @@ import Footer from '../components/Footer.astro';
               <label class="admin-label">UI/UX Design</label>
               <div class="flex gap-2 items-center">
                 <input id="l-price-uiux-min" type="number" class="admin-input" style="flex:1;" placeholder="Min" />
-                <span style="color:var(--fg-muted);">—</span>
+                <span style="color:var(--fg-muted);">·</span>
                 <input id="l-price-uiux-max" type="number" class="admin-input" style="flex:1;" placeholder="Max" />
               </div>
             </div>
@@ -249,7 +249,7 @@ import Footer from '../components/Footer.astro';
               <label class="admin-label">Frontend Development</label>
               <div class="flex gap-2 items-center">
                 <input id="l-price-frontend-min" type="number" class="admin-input" style="flex:1;" placeholder="Min" />
-                <span style="color:var(--fg-muted);">—</span>
+                <span style="color:var(--fg-muted);">·</span>
                 <input id="l-price-frontend-max" type="number" class="admin-input" style="flex:1;" placeholder="Max" />
               </div>
             </div>
@@ -257,7 +257,7 @@ import Footer from '../components/Footer.astro';
               <label class="admin-label">Logo Design</label>
               <div class="flex gap-2 items-center">
                 <input id="l-price-logo-min" type="number" class="admin-input" style="flex:1;" placeholder="Min" />
-                <span style="color:var(--fg-muted);">—</span>
+                <span style="color:var(--fg-muted);">·</span>
                 <input id="l-price-logo-max" type="number" class="admin-input" style="flex:1;" placeholder="Max" />
               </div>
             </div>
@@ -265,7 +265,7 @@ import Footer from '../components/Footer.astro';
               <label class="admin-label">Autres projets</label>
               <div class="flex gap-2 items-center">
                 <input id="l-price-other-min" type="number" class="admin-input" style="flex:1;" placeholder="Min" />
-                <span style="color:var(--fg-muted);">—</span>
+                <span style="color:var(--fg-muted);">·</span>
                 <input id="l-price-other-max" type="number" class="admin-input" style="flex:1;" placeholder="Max" />
               </div>
             </div>
@@ -289,11 +289,11 @@ import Footer from '../components/Footer.astro';
         <div class="admin-section-body">
           <div class="grid grid-cols-1 gap-5">
             <div>
-              <label class="admin-label">Politique de confidentialité — Contenu</label>
+              <label class="admin-label">Politique de confidentialité : Contenu</label>
               <textarea id="l-privacy-content" rows="8" class="admin-input" style="font-size:0.75rem;line-height:1.6;"></textarea>
             </div>
             <div>
-              <label class="admin-label">Conditions générales — Contenu</label>
+              <label class="admin-label">Conditions générales : Contenu</label>
               <textarea id="l-terms-content" rows="8" class="admin-input" style="font-size:0.75rem;line-height:1.6;"></textarea>
             </div>
           </div>
@@ -440,7 +440,7 @@ import Footer from '../components/Footer.astro';
         const accountEl = document.getElementById('git-account');
         if (el && status.ok) {
           gitModifiedCount = status.modified;
-          el.textContent = status.modified > 0 ? status.modified + ' fichier(s) modifié(s) — ' + status.branch : 'Aucune modification — ' + status.branch;
+          el.textContent = status.modified > 0 ? status.modified + ' fichier(s) modifié(s) · ' + status.branch : 'Aucune modification · ' + status.branch;
         }
         if (accountEl && status.ok && status.gitUser) {
           const repo = status.remoteUrl ? status.remoteUrl.replace(/.*github\.com[/:]/, '').replace(/\.git$/, '') : '';
@@ -815,13 +815,13 @@ import Footer from '../components/Footer.astro';
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div><label class="admin-label">Titre</label><input class="admin-input study-title" data-i="${i}" value="${(study.title || '').replace(/"/g, '&quot;')}" /></div>
               <div><label class="admin-label">Slug</label><input class="admin-input study-slug" data-i="${i}" value="${(study.slug || '').replace(/"/g, '&quot;')}" /></div>
-              <div><label class="admin-label">Catégorie</label><select class="admin-input study-category" data-i="${i}"><option value="Design Graphique">Design Graphique</option><option value="UI/UX Design">UI/UX Design</option><option value="Frontend Dev">Frontend Dev</option><option value="Fullstack Dev">Fullstack Dev</option><option value="Logo Design">Logo Design</option><option value="Branding">Branding</option></select><label class="admin-label mt-2">Sous-catégorie</label><select class="admin-input study-subcategory" data-i="${i}"><option value="">—</option><option value="Web App">Web App</option><option value="Flyer">Flyer</option><option value="Carrousel">Carrousel</option><option value="Banner">Banner</option><option value="Cartes de visite">Cartes de visite</option><option value="Affiche">Affiche</option><option value="Brochure">Brochure</option><option value="Packaging">Packaging</option><option value="Menu">Menu</option><option value="Credential">Credential</option><option value="Branding">Branding</option><option value="Site Vitrine">Site Vitrine</option><option value="Mobile">Mobile</option><option value="Desktop App">Desktop App</option><option value="Autre">Autre</option></select></div>
+              <div><label class="admin-label">Catégorie</label><select class="admin-input study-category" data-i="${i}"><option value="Design Graphique">Design Graphique</option><option value="UI/UX Design">UI/UX Design</option><option value="Frontend Dev">Frontend Dev</option><option value="Fullstack Dev">Fullstack Dev</option><option value="Logo Design">Logo Design</option><option value="Branding">Branding</option></select><label class="admin-label mt-2">Sous-catégorie</label><select class="admin-input study-subcategory" data-i="${i}"><option value="">·</option><option value="Web App">Web App</option><option value="Flyer">Flyer</option><option value="Carrousel">Carrousel</option><option value="Banner">Banner</option><option value="Cartes de visite">Cartes de visite</option><option value="Affiche">Affiche</option><option value="Brochure">Brochure</option><option value="Packaging">Packaging</option><option value="Menu">Menu</option><option value="Credential">Credential</option><option value="Branding">Branding</option><option value="Site Vitrine">Site Vitrine</option><option value="Mobile">Mobile</option><option value="Desktop App">Desktop App</option><option value="Autre">Autre</option></select></div>
               <div><label class="admin-label">Année</label><input class="admin-input study-year" data-i="${i}" value="${(study.year || '').replace(/"/g, '&quot;')}" /></div>
               <div class="md:col-span-2"><label class="admin-label">Description</label><textarea class="admin-input study-desc" data-i="${i}" rows="2">${study.description || ''}</textarea></div>
               <div class="md:col-span-2"><label class="admin-label">Défi</label><textarea class="admin-input study-challenge" data-i="${i}" rows="2">${study.challenge || ''}</textarea></div>
               <div class="md:col-span-2"><label class="admin-label">Solution</label><textarea class="admin-input study-solution" data-i="${i}" rows="2">${study.solution || ''}</textarea></div>
               <div class="md:col-span-2"><label class="admin-label">Résultats (un par ligne)</label><textarea class="admin-input study-results" data-i="${i}" rows="2">${(study.results || []).join('\n')}</textarea></div>
-              <div class="md:col-span-2"><label class="admin-label">Stats (valeur | libellé — un par ligne)</label><textarea class="admin-input study-stats" data-i="${i}" rows="2">${(study.stats || []).map((s: any) => `${s.value} | ${s.label}`).join('\n')}</textarea></div>
+              <div class="md:col-span-2"><label class="admin-label">Stats (valeur | libellé : un par ligne)</label><textarea class="admin-input study-stats" data-i="${i}" rows="2">${(study.stats || []).map((s: any) => `${s.value} | ${s.label}`).join('\n')}</textarea></div>
               <div class="md:col-span-2"><label class="admin-label">Tags (virgule)</label><input class="admin-input study-tags" data-i="${i}" value="${(study.tags || []).join(', ')}" /></div>
             </div>
             <!-- Images -->
@@ -829,7 +829,7 @@ import Footer from '../components/Footer.astro';
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <!-- Thumbnail (accueil cards - aspect-4/3) -->
                 <div>
-                  <label class="admin-label">Thumbnail — Accueil (format 4:3)</label>
+                  <label class="admin-label">Thumbnail : Accueil (format 4:3)</label>
                   <div class="flex items-center gap-3">
                     ${study.thumbnail ? `<div style="position:relative;width:80px;height:60px;border:1px solid var(--border-strong);overflow:hidden;"><img src="${study.thumbnail}" style="width:100%;height:100%;object-fit:cover;" /><button class="study-thumb-remove" data-si="${i}" style="position:absolute;top:2px;right:2px;width:16px;height:16px;font-size:10px;background:var(--fg);color:var(--bg);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;line-height:1;">×</button></div>` : ''}
                     <label class="admin-btn-outline" style="display:inline-block;cursor:pointer;font-size:11px;">
@@ -840,7 +840,7 @@ import Footer from '../components/Footer.astro';
                 </div>
                 <!-- Hero image (work list + detail - aspect-video) -->
                 <div>
-                  <label class="admin-label">Hero — Work & Détail (format 16:9)</label>
+                  <label class="admin-label">Hero : Work & Détail (format 16:9)</label>
                   <div class="flex items-center gap-3">
                     ${study.heroImage ? `<div style="position:relative;width:80px;height:60px;border:1px solid var(--border-strong);overflow:hidden;"><img src="${study.heroImage}" style="width:100%;height:100%;object-fit:cover;" /><button class="study-hero-remove" data-si="${i}" style="position:absolute;top:2px;right:2px;width:16px;height:16px;font-size:10px;background:var(--fg);color:var(--bg);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;line-height:1;">×</button></div>` : ''}
                     <label class="admin-btn-outline" style="display:inline-block;cursor:pointer;font-size:11px;">
@@ -855,9 +855,9 @@ import Footer from '../components/Footer.astro';
             <!-- Extended fields: keyVisual, architecture, gallery -->
             <div class="mt-5 pt-5" style="border-top: 1px solid var(--border-strong);">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="md:col-span-2"><label class="admin-label">Visuel clé — caption (optionnel)</label><input class="admin-input study-keyvisual-caption" data-i="${i}" value="${(study.keyVisual?.caption || '').replace(/"/g, '&quot;')}" /></div>
+                <div class="md:col-span-2"><label class="admin-label">Visuel clé : caption (optionnel)</label><input class="admin-input study-keyvisual-caption" data-i="${i}" value="${(study.keyVisual?.caption || '').replace(/"/g, '&quot;')}" /></div>
                 <div class="md:col-span-2">
-                  <label class="admin-label">Visuel clé — image (pleine largeur)</label>
+                  <label class="admin-label">Visuel clé : image (pleine largeur)</label>
                   <div class="flex items-center gap-3">
                     ${study.keyVisual?.image ? `<div style="position:relative;width:120px;height:72px;border:1px solid var(--border-strong);overflow:hidden;"><img src="${study.keyVisual.image}" style="width:100%;height:100%;object-fit:cover;" /><button class="study-keyvisual-remove" data-si="${i}" style="position:absolute;top:4px;right:4px;width:18px;height:18px;font-size:11px;background:var(--fg);color:var(--bg);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;line-height:1;">×</button></div>` : ''}
                     <label class="admin-btn-outline" style="display:inline-block;cursor:pointer;font-size:11px;">
@@ -866,16 +866,16 @@ import Footer from '../components/Footer.astro';
                     </label>
                   </div>
                 </div>
-                <div class="md:col-span-2"><label class="admin-label">Architecture — texte</label><textarea class="admin-input study-architecture" data-i="${i}" rows="3">${study.architecture?.text || ''}</textarea></div>
-                <div class="md:col-span-2"><label class="admin-label">Architecture — stack (virgule)</label><input class="admin-input study-architecture-stack" data-i="${i}" value="${(study.architecture?.stack || []).join(', ')}" /></div>
+                <div class="md:col-span-2"><label class="admin-label">Architecture : texte</label><textarea class="admin-input study-architecture" data-i="${i}" rows="3">${study.architecture?.text || ''}</textarea></div>
+                <div class="md:col-span-2"><label class="admin-label">Architecture : stack (virgule)</label><input class="admin-input study-architecture-stack" data-i="${i}" value="${(study.architecture?.stack || []).join(', ')}" /></div>
                 <div class="md:col-span-2">
-                  <label class="admin-label">Galerie — captions (un par ligne)</label>
+                  <label class="admin-label">Galerie : captions (un par ligne)</label>
                   <textarea class="admin-input study-gallery" data-i="${i}" rows="3">${(study.gallery || []).map((g: any) => g.caption || '').join('\n')}</textarea>
                   <div class="mt-3 space-y-2">
                     ${(study.gallery || []).map((g: any, gi: number) => `
                       <div class="flex items-center gap-3">
                         ${g.image ? `<div style="position:relative;width:80px;height:60px;border:1px solid var(--border-strong);overflow:hidden;"><img src="${g.image}" style="width:100%;height:100%;object-fit:cover;" /><button class="study-gallery-image-remove" data-si="${i}" data-gi="${gi}" style="position:absolute;top:2px;right:2px;width:16px;height:16px;font-size:10px;background:var(--fg);color:var(--bg);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;line-height:1;">×</button></div>` : ''}
-                        <span style="font-size:10px;color:var(--fg-muted);flex:1;">Écran ${String(gi + 1).padStart(2, '0')} — ${g.caption || 'sans caption'}</span>
+                        <span style="font-size:10px;color:var(--fg-muted);flex:1;">Écran ${String(gi + 1).padStart(2, '0')} : ${g.caption || 'sans caption'}</span>
                         <label class="admin-btn-outline" style="display:inline-block;cursor:pointer;font-size:11px;">
                           ${g.image ? 'Changer' : '+ Ajouter une image'}
                           <input type="file" accept="image/*" class="study-gallery-image-input" data-si="${i}" data-gi="${gi}" style="display:none;" />

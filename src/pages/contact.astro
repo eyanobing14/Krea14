@@ -10,7 +10,7 @@ const profile = data.profile;
 const socials = (profile.socials || {}) as Record<string, string>;
 ---
 
-<Layout title={`Contact — ${profile.name}`}>
+<Layout title={`Contact · ${profile.name}`}>
   <Header />
   <main id="main-content">
     <!-- Hero: h1 + animation side by side on desktop -->
@@ -200,8 +200,8 @@ const socials = (profile.socials || {}) as Record<string, string>;
                 >
                 <select name="budget" class="contact-input">
                   <option value=""><span data-fr="Sélectionnez..." data-en="Select...">Sélectionnez...</span></option>
-                  <option value="50-500">$50 — $500</option>
-                  <option value="500-1k">$500 — $1,000</option>
+                  <option value="50-500">$50 à $500</option>
+                  <option value="500-1k">$500 à $1,000</option>
                   <option value="1k+">$1,000 +</option>
                 </select>
               </div>

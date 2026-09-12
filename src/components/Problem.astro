@@ -12,7 +12,7 @@
           Vous avez l'idée. Pas l'infrastructure.
         </h2>
         <p class="mt-6 leading-relaxed" style="color: var(--fg-secondary);">
-          Un trader passe des semaines à écrire une stratégie prometteuse —
+          Un trader passe des semaines à écrire une stratégie prometteuse,
           puis réalise qu'il n'a aucun moyen fiable de la tester. Il colmate les brêches avec
           trois outils qui ne se parlent pas, et déploye en priant. Le résultat ? Des mois de travail
           pour un pipeline qui casse au premier contact avec le réel.
@@ -21,8 +21,8 @@
 
       <div class="min-w-0 col-span-12 lg:col-span-6 lg:col-start-7 space-y-4 gsap-stagger-group">
           {[
-            { num: '01', title: 'Trois outils, zéro cohérence', desc: 'Jupyter pour chercher, un moteur de backtest pour tester, un script maison pour déployer. Chaque main opère dans un monde différent — et les erreurs naissent dans les coutures.' },
-            { num: '02', title: 'Des backtests qui mentent', desc: 'Le rapport dit +40%. En live, c\'est -15%. Biais de survie, données biaisées, simulateur irréaliste — vous optimisez un mirage, pas une stratégie.' },
+            { num: '01', title: 'Trois outils, zéro cohérence', desc: 'Jupyter pour chercher, un moteur de backtest pour tester, un script maison pour déployer. Chaque main opère dans un monde différent, et les erreurs naissent dans les coutures.' },
+            { num: '02', title: 'Des backtests qui mentent', desc: 'Le rapport dit +40%. En live, c\'est -15%. Biais de survie, données biaisées, simulateur irréaliste : vous optimisez un mirage, pas une stratégie.' },
             { num: '03', title: 'Le mur du déploiement', desc: 'Votre code fonctionne en local. Mais passer en production ? Réécrire l\'infrastructure, connecter les courtiers, gérer les risques. Des mois de DevOps avant le premier ordre réel.' },
           ].map((item) => (
           <div class="p-5 transition-colors duration-300" style="border: 1px solid var(--border);" onmouseover="this.style.borderColor='var(--border-hover)'" onmouseout="this.style.borderColor='var(--border)'">
@@ -53,16 +53,16 @@
         </h2>
         <p class="mt-6 leading-relaxed" style="color: var(--fg-secondary);">
           Algokreation ferme la boucle. Vous écrivez votre stratégie,
-          vous la testez sur des données réelles, et vous la déployez sur les marchés —
+          vous la testez sur des données réelles, et vous la déployez sur les marchés,
           le tout dans un seul environnement, sans changer de tab.
         </p>
       </div>
 
       <div class="min-w-0 col-span-12 lg:col-span-6 lg:col-start-7 space-y-6 gsap-stagger-group">
           {[
-            { title: 'Un seul écran, tout s\'y passe', desc: 'Écrivez, testez, surveillez — dans le même éditeur. Votre code, vos données, vos résultats, sans jamais changer d\'onglet.' },
+            { title: 'Un seul écran, tout s\'y passe', desc: 'Écrivez, testez, surveillez, dans le même éditeur. Votre code, vos données, vos résultats, sans jamais changer d\'onglet.' },
             { title: 'Des backtests qui disent la vérité', desc: 'Données tick-level, slippage simulé, commissions réelles. Ce que le backtest montre, c\'est ce que le marché vous donnera.' },
-            { title: 'Un bouton pour tout lâcher', desc: 'Paper trading ou exécution réelle, en une commande. Les gardes-fous sont déjà là — drawdown, limites de perte, arrêt d\'urgence.' },
+            { title: 'Un bouton pour tout lâcher', desc: 'Paper trading ou exécution réelle, en une commande. Les gardes-fous sont déjà là : drawdown, limites de perte, arrêt d\'urgence.' },
           ].map((item) => (
           <div class="flex gap-4">
             <div class="shrink-0 w-px self-stretch" style="background: var(--fg);"></div>

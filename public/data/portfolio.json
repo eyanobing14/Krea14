@@ -48,7 +48,7 @@
   "caseStudies": [
     {
       "slug": "leagues-quiz-competitions",
-      "title": "TheSA Leagues — Compétitions de quiz",
+      "title": "TheSA Leagues · Compétitions de quiz",
       "category": "Fullstack Dev · Web App",
       "year": "2026",
       "thumbnail": "/assets/thumb-ChatGPT_Image_10_sept._2026__14_56_25.png",
@@ -56,12 +56,12 @@
       "heroColor": "#151515",
       "description": "Le terrain de jeu qui transforme l'apprentissage en compétition : quiz chronométrés, classements live et cartes de révision pour plus de 300 étudiants de la communauté TheSA.",
       "descriptionEn": "The playground that turns learning into competition: timed quizzes, live rankings and revision cards for 300+ students in the TheSA community.",
-      "challenge": "300 étudiants qui veulent apprendre, mais aucun moyen de mesurer qui avance. Les quiz papier tombaient dans l'oubli, les révisions sans objectif se perdaient dans le bruit. La communauté avait soif de défi — mais rien ne structurait cette énergie.",
-      "challengeEn": "300 students hungry to learn, but no way to measure who's making progress. Paper quizzes were forgotten, revisions without goals dissolved into noise. The community craved challenge — but nothing channeled that energy.",
+      "challenge": "300 étudiants qui veulent apprendre, mais aucun moyen de mesurer qui avance. Les quiz papier tombaient dans l'oubli, les révisions sans objectif se perdaient dans le bruit. La communauté avait soif de défi, mais rien ne structurait cette énergie.",
+      "challengeEn": "300 students hungry to learn, but no way to measure who's making progress. Paper quizzes were forgotten, revisions without goals dissolved into noise. The community craved challenge, but nothing channeled that energy.",
       "solution": "Nous avons conçu une plateforme de compétition complète : quiz chronométrés avec scoring automatisé, vérification par checker, cartes de révision navigables, classements en temps réel et historique des tentatives. L'apprentissage devient un sport.",
       "solutionEn": "We designed a complete competition platform: timed quizzes with automated scoring, checker-based verification, browsable revision cards, real-time rankings and full attempt history. Learning becomes a sport.",
       "results": [
-        "Correcteur automatique — zéro erreur manuelle",
+        "Correcteur automatique : zéro erreur manuelle",
         "Classements live + historique des tentatives",
         "Import/export de questions et cartes de révision",
         "Adoption massive par la communauté d'étudiants"
@@ -105,7 +105,7 @@
         "Realtime",
         "EdTech"
       ],
-      "titleEn": "TheSA Leagues — Quiz Competitions",
+      "titleEn": "TheSA Leagues · Quiz Competitions",
       "gallery": [
         {
           "image": "",
@@ -131,7 +131,7 @@
     },
     {
       "slug": "trading-journal-mt5",
-      "title": "TheSA Trading Journal — Analyse MT5",
+      "title": "TheSA Trading Journal · Analyse MT5",
       "category": "Fullstack Dev · Web App",
       "year": "2026",
       "thumbnail": "/assets/thumb-ChatGPT_Image_10_sept._2026__12_44_07.png",
@@ -139,8 +139,8 @@
       "heroColor": "#101010",
       "description": "Le copilote de chaque trader de TheSA : journal de trades connecté MT5, métriques de risque en temps réel et plan de trading personnel.",
       "descriptionEn": "The copilot of every TheSA trader: MT5-connected trade journal, real-time risk metrics and a personal trading plan.",
-      "challenge": "Un trader ouvre une position, ferme les yeux, espère. Sans journal, sans métriques, sans recul — il rejoue les mêmes erreurs chaque jour. La communauté TheSA comptait des dizaines de traders qui progressaient à l'aveugle, incapables de distinguer leur talent de leur chance.",
-      "challengeEn": "A trader opens a position, closes their eyes, hopes. Without a journal, without metrics, without hindsight — they repeat the same mistakes every day. TheSA's community had dozens of traders improving blindfolded, unable to tell their skill from their luck.",
+      "challenge": "Un trader ouvre une position, ferme les yeux, espère. Sans journal, sans métriques, sans recul, il rejoue les mêmes erreurs chaque jour. La communauté TheSA comptait des dizaines de traders qui progressaient à l'aveugle, incapables de distinguer leur talent de leur chance.",
+      "challengeEn": "A trader opens a position, closes their eyes, hopes. Without a journal, without metrics, without hindsight, they repeat the same mistakes every day. TheSA's community had dozens of traders improving blindfolded, unable to tell their skill from their luck.",
       "solution": "Un journal de trading intelligent : sélecteur de comptes MT5, opérations de balance, deals en attente, vue de performance globale, métriques de risque, distribution des profits, meilleures/pires trades et plan de trading éditable. Chaque trade devient une leçon.",
       "solutionEn": "A smart trading journal: MT5 account selector, balance operations, pending deals, overall performance view, risk metrics, profit distribution, best/worst trades and an editable trading plan. Every trade becomes a lesson.",
       "results": [
@@ -188,7 +188,7 @@
         "Risk",
         "Fintech"
       ],
-      "titleEn": "TheSA Trading Journal — MT5 Analytics",
+      "titleEn": "TheSA Trading Journal · MT5 Analytics",
       "gallery": [
         {
           "image": "",
@@ -214,7 +214,7 @@
     },
     {
       "slug": "annonces-publications",
-      "title": "TheSA Annonces — Publication de contenus",
+      "title": "TheSA Annonces · Publication de contenus",
       "category": "Fullstack Dev · Web App",
       "year": "2026",
       "thumbnail": "/assets/thumb-ChatGPT_Image_12_sept._2026__00_h_08_min_24_s.jpg",
@@ -222,12 +222,12 @@
       "heroColor": "#1a1a1a",
       "description": "Le canal officiel d'information de TheSA : un éditeur de contenus riches et modéré pour annoncer formations, maintenances et nouveautés à toute la communauté.",
       "descriptionEn": "TheSA's official information channel: a rich, moderated content editor to announce courses, maintenance and news to the whole community.",
-      "challenge": "Une formation est annoncée dans un groupe Telegram, un changement de schedule dans un email, une maintenance sur Discord. Les infos vitales se noient dans 15 canaux. Certains membres ratent des cours critiques — pas par manque d'intérêt, mais par manque de visibilité.",
-      "challengeEn": "A course announced in a Telegram group, a schedule change in an email, maintenance on Discord. Vital information drowns across 15 channels. Some members miss critical courses — not from lack of interest, but from lack of visibility.",
+      "challenge": "Une formation est annoncée dans un groupe Telegram, un changement de schedule dans un email, une maintenance sur Discord. Les infos vitales se noient dans 15 canaux. Certains membres ratent des cours critiques, pas par manque d'intérêt, mais par manque de visibilité.",
+      "challengeEn": "A course announced in a Telegram group, a schedule change in an email, maintenance on Discord. Vital information drowns across 15 channels. Some members miss critical courses, not from lack of interest, but from lack of visibility.",
       "solution": "Un système d'annonces professionnel : éditeur de blocs riches (paragraphes, titres, images, vidéos, listes, boutons d'action), workflow de publication avec statuts, visibilité contrôlée par l'admin et pages de lecture dédiées, optimisées sur mobile.",
       "solutionEn": "A professional announcement system: rich block editor (paragraphs, headings, images, videos, lists, action buttons), publishing workflow with statuses, admin-controlled visibility and dedicated reading pages, mobile-optimized.",
       "results": [
-        "Éditeur riche par blocs — 7 types de contenus",
+        "Éditeur riche par blocs : 7 types de contenus",
         "Publication/masquage contrôlé par l'admin",
         "Lecture fluide sur tous les appareils",
         "Communications claires, zéro ambiguïté"
@@ -271,7 +271,7 @@
         "Publishing",
         "Community"
       ],
-      "titleEn": "TheSA Announcements — Content Publishing",
+      "titleEn": "TheSA Announcements · Content Publishing",
       "gallery": [
         {
           "image": "",
@@ -305,8 +305,8 @@
       "heroColor": "#0f0f0f",
       "description": "Le moteur de croissance communautaire de TheSA : les membres parrainent, suivent leurs références et sont récompensés en temps réel.",
       "descriptionEn": "TheSA's community growth engine: members refer, track their referrals and get rewarded in real time.",
-      "challenge": "La meilleure publicité, c'est le bouche-à-oreille. Mais comment remercier ceux qui parrainent sans savoir combien ils ont apporté ? TheSA voyait ses membres recommander spontanément — sans aucun suivi, aucune reconnaissance, aucune raison de continuer.",
-      "challengeEn": "The best advertising is word of mouth. But how do you thank referrers when you can't even measure their impact? TheSA saw members recommending organically — with zero tracking, zero recognition, zero reason to keep going.",
+      "challenge": "La meilleure publicité, c'est le bouche-à-oreille. Mais comment remercier ceux qui parrainent sans savoir combien ils ont apporté ? TheSA voyait ses membres recommander spontanément, sans aucun suivi, aucune reconnaissance, aucune raison de continuer.",
+      "challengeEn": "The best advertising is word of mouth. But how do you thank referrers when you can't even measure their impact? TheSA saw members recommending organically, with zero tracking, zero recognition, zero reason to keep going.",
       "solution": "Une plateforme partenaire complète : dashboard temps réel avec statistiques, liste des références par utilisateur, activation du statut partenaire via vérification documentaire et suivi des paiements et commissions.",
       "solutionEn": "A complete partner platform: real-time dashboard with statistics, per-user referral list, partner status activation via document verification, and payments and commissions tracking.",
       "results": [
@@ -380,8 +380,8 @@
     },
     {
       "slug": "easycompta",
-      "title": "EasyCompta — Comptabilité OHADA",
-      "titleEn": "EasyCompta — OHADA Accounting Suite",
+      "title": "EasyCompta · Comptabilité OHADA",
+      "titleEn": "EasyCompta · OHADA Accounting Suite",
       "category": "Fullstack Dev · Desktop App",
       "year": "2026",
       "thumbnail": "",
@@ -421,8 +421,8 @@
         "captionEn": "Year-end close: the engine computes RAN and carried-forward balances automatically."
       },
       "architecture": {
-        "text": "Le principe tient en une phrase : la machine de l’entreprise garde ses chiffres en local et reste utilisable sans connexion, pendant que le cloud relie la machine du patron à celle du comptable pour qu’ils travaillent sur les mêmes données, en temps réel. Chaque montant est manipulé au centime, chaque écriture est numérotée et datée, et chaque action est tracée — on sait toujours qui a fait quoi.",
-        "textEn": "The principle fits in one sentence: the company’s machine keeps its figures locally and stays usable offline, while the cloud connects the owner’s machine to the accountant’s so both work on the same data, in real time. Every amount is handled to the cent, every entry is numbered and dated, and every action is traceable — you always know who did what.",
+        "text": "Le principe tient en une phrase : la machine de l’entreprise garde ses chiffres en local et reste utilisable sans connexion, pendant que le cloud relie la machine du patron à celle du comptable pour qu’ils travaillent sur les mêmes données, en temps réel. Chaque montant est manipulé au centime, chaque écriture est numérotée et datée, et chaque action est tracée, on sait toujours qui a fait quoi.",
+        "textEn": "The principle fits in one sentence: the company’s machine keeps its figures locally and stays usable offline, while the cloud connects the owner’s machine to the accountant’s so both work on the same data, in real time. Every amount is handled to the cent, every entry is numbered and dated, and every action is traceable, you always know who did what.",
         "stack": []
       },
       "flow": [
