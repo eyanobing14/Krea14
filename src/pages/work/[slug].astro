@@ -516,6 +516,13 @@ function loopRow<T>(row: T[]): T[] {
     border: 0;
     color: #fff;
   }
+  @media (max-width: 767px) {
+    .kg-marquee-stack .kg-caption {
+      padding: 0.85rem 0.7rem 0.6rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.04em;
+    }
+  }
   @keyframes kg-scroll-left {
     from {
       transform: translateX(0);
