@@ -653,6 +653,16 @@ function loopRow<T>(row: T[]): T[] {
     justify-content: center;
     min-width: 0;
   }
+  @media (max-width: 899px) {
+    .kg-modal {
+      padding: 0.75rem;
+    }
+    .kg-modal-image img {
+      width: 94vw !important;
+      max-width: 94vw !important;
+      max-height: 68vh !important;
+    }
+  }
   @media (min-width: 900px) {
     .kg-modal-figure {
       display: grid;
