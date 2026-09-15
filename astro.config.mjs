@@ -7,7 +7,12 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   server: {
     watch: {
-      ignored: ['**/public/data/portfolio.json']
+      ignored: [
+        '**/public/data/portfolio.json',
+        '**/public/assets/**',
+        '**/src/assets/portfolio/**',
+        '**/src/generated/imageMap.ts'
+      ]
     }
   },
   vite: {

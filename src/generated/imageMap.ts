@@ -2,23 +2,35 @@
 import img_profile_photo_jpeg from '../assets/portfolio/profile-photo.jpeg';
 import img_thumb_ChatGPT_Image_10_sept__2026__14_56_25_png from '../assets/portfolio/thumb-ChatGPT_Image_10_sept._2026__14_56_25.png';
 import img_hero_ChatGPT_Image_10_sept__2026__14_56_25_png from '../assets/portfolio/hero-ChatGPT_Image_10_sept._2026__14_56_25.png';
+import img_gallery_0_0_Capture_d__cran_15_9_2026_164317_www_thesa_pro_jpg from '../assets/portfolio/gallery-0-0-Capture_d__cran_15-9-2026_164317_www.thesa.pro.jpg';
+import img_gallery_0_1_Capture_d__cran_15_9_2026_165727_www_thesa_pro_jpg from '../assets/portfolio/gallery-0-1-Capture_d__cran_15-9-2026_165727_www.thesa.pro.jpg';
+import img_gallery_0_2_Capture_d__cran_15_9_2026_165411_www_thesa_pro_jpg from '../assets/portfolio/gallery-0-2-Capture_d__cran_15-9-2026_165411_www.thesa.pro.jpg';
+import img_gallery_0_3_Capture_d__cran_15_9_2026_165244_www_thesa_pro_jpg from '../assets/portfolio/gallery-0-3-Capture_d__cran_15-9-2026_165244_www.thesa.pro.jpg';
 import img_thumb_ChatGPT_Image_10_sept__2026__12_44_07_png from '../assets/portfolio/thumb-ChatGPT_Image_10_sept._2026__12_44_07.png';
 import img_hero_ChatGPT_Image_10_sept__2026__12_44_07_png from '../assets/portfolio/hero-ChatGPT_Image_10_sept._2026__12_44_07.png';
 import img_thumb_ChatGPT_Image_12_sept__2026__00_h_08_min_24_s_jpg from '../assets/portfolio/thumb-ChatGPT_Image_12_sept._2026__00_h_08_min_24_s.jpg';
 import img_hero_ChatGPT_Image_12_sept__2026__00_h_15_min_32_s_jpg from '../assets/portfolio/hero-ChatGPT_Image_12_sept._2026__00_h_15_min_32_s.jpg';
 import img_thumb_ChatGPT_Image_11_sept__2026__23_28_18_jpg from '../assets/portfolio/thumb-ChatGPT_Image_11_sept._2026__23_28_18.jpg';
 import img_hero_ChatGPT_Image_11_sept__2026__23_h_46_min_50_s_jpg from '../assets/portfolio/hero-ChatGPT_Image_11_sept._2026__23_h_46_min_50_s.jpg';
+import img_thumb_ChatGPT_Image_15_sept__2026__16_32_43_jpg from '../assets/portfolio/thumb-ChatGPT_Image_15_sept._2026__16_32_43.jpg';
+import img_hero_ChatGPT_Image_15_sept__2026__16_32_43_jpg from '../assets/portfolio/hero-ChatGPT_Image_15_sept._2026__16_32_43.jpg';
 
 const imageMap: Record<string, any> = {
   "/assets/profile-photo.jpeg": img_profile_photo_jpeg,
   "/assets/thumb-ChatGPT_Image_10_sept._2026__14_56_25.png": img_thumb_ChatGPT_Image_10_sept__2026__14_56_25_png,
   "/assets/hero-ChatGPT_Image_10_sept._2026__14_56_25.png": img_hero_ChatGPT_Image_10_sept__2026__14_56_25_png,
+  "/assets/gallery-0-0-Capture_d__cran_15-9-2026_164317_www.thesa.pro.jpg": img_gallery_0_0_Capture_d__cran_15_9_2026_164317_www_thesa_pro_jpg,
+  "/assets/gallery-0-1-Capture_d__cran_15-9-2026_165727_www.thesa.pro.jpg": img_gallery_0_1_Capture_d__cran_15_9_2026_165727_www_thesa_pro_jpg,
+  "/assets/gallery-0-2-Capture_d__cran_15-9-2026_165411_www.thesa.pro.jpg": img_gallery_0_2_Capture_d__cran_15_9_2026_165411_www_thesa_pro_jpg,
+  "/assets/gallery-0-3-Capture_d__cran_15-9-2026_165244_www.thesa.pro.jpg": img_gallery_0_3_Capture_d__cran_15_9_2026_165244_www_thesa_pro_jpg,
   "/assets/thumb-ChatGPT_Image_10_sept._2026__12_44_07.png": img_thumb_ChatGPT_Image_10_sept__2026__12_44_07_png,
   "/assets/hero-ChatGPT_Image_10_sept._2026__12_44_07.png": img_hero_ChatGPT_Image_10_sept__2026__12_44_07_png,
   "/assets/thumb-ChatGPT_Image_12_sept._2026__00_h_08_min_24_s.jpg": img_thumb_ChatGPT_Image_12_sept__2026__00_h_08_min_24_s_jpg,
   "/assets/hero-ChatGPT_Image_12_sept._2026__00_h_15_min_32_s.jpg": img_hero_ChatGPT_Image_12_sept__2026__00_h_15_min_32_s_jpg,
   "/assets/thumb-ChatGPT_Image_11_sept._2026__23_28_18.jpg": img_thumb_ChatGPT_Image_11_sept__2026__23_28_18_jpg,
-  "/assets/hero-ChatGPT_Image_11_sept._2026__23_h_46_min_50_s.jpg": img_hero_ChatGPT_Image_11_sept__2026__23_h_46_min_50_s_jpg
+  "/assets/hero-ChatGPT_Image_11_sept._2026__23_h_46_min_50_s.jpg": img_hero_ChatGPT_Image_11_sept__2026__23_h_46_min_50_s_jpg,
+  "/assets/thumb-ChatGPT_Image_15_sept._2026__16_32_43.jpg": img_thumb_ChatGPT_Image_15_sept__2026__16_32_43_jpg,
+  "/assets/hero-ChatGPT_Image_15_sept._2026__16_32_43.jpg": img_hero_ChatGPT_Image_15_sept__2026__16_32_43_jpg
 };
 
 export default imageMap;

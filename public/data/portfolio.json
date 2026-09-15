@@ -108,22 +108,22 @@
       "titleEn": "TheSA Leagues · Quiz Competitions",
       "gallery": [
         {
-          "image": "",
+          "image": "/assets/gallery-0-0-Capture_d__cran_15-9-2026_164317_www.thesa.pro.jpg",
           "caption": "Classement en temps réel",
           "captionEn": "Real-time leaderboard"
         },
         {
-          "image": "",
+          "image": "/assets/gallery-0-1-Capture_d__cran_15-9-2026_165727_www.thesa.pro.jpg",
           "caption": "Quiz chronométré",
           "captionEn": "Timed quiz"
         },
         {
-          "image": "",
+          "image": "/assets/gallery-0-2-Capture_d__cran_15-9-2026_165411_www.thesa.pro.jpg",
           "caption": "Cartes de révision",
           "captionEn": "Revision cards"
         },
         {
-          "image": "",
+          "image": "/assets/gallery-0-3-Capture_d__cran_15-9-2026_165244_www.thesa.pro.jpg",
           "caption": "Historique des tentatives",
           "captionEn": "Attempt history"
         }
@@ -384,8 +384,8 @@
       "titleEn": "EasyCompta · OHADA Accounting Suite",
       "category": "Fullstack Dev · Desktop App",
       "year": "2026",
-      "thumbnail": "",
-      "heroImage": "",
+      "thumbnail": "/assets/thumb-ChatGPT_Image_15_sept._2026__16_32_43.jpg",
+      "heroImage": "/assets/hero-ChatGPT_Image_15_sept._2026__16_32_43.jpg",
       "heroColor": "#101010",
       "description": "Une suite comptable professionnelle conforme OHADA, pensée pour les PME d’Afrique centrale : données locales toujours fiables, synchronisation cloud en temps réel et reporting conforme au plan SYSCOHADA.",
       "descriptionEn": "A professional OHADA-compliant accounting suite for Central African SMEs: always-reliable local data, real-time cloud sync and reporting fully compliant with the SYSCOHADA chart of accounts.",

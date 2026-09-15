@@ -10,8 +10,11 @@ const PORT = 4200;
 const ROOT = __dirname;
 const dataFile = path.join(ROOT, 'public', 'data', 'portfolio.json');
 const assetsDir = path.join(ROOT, 'src', 'assets', 'portfolio');
+const publicAssetsDir = path.join(ROOT, 'public', 'assets');
 const registryScript = path.join(ROOT, 'scripts', 'build-image-registry.mjs');
+const uploadOptimizationThreshold = 300 * 1024;
 if (!fs.existsSync(assetsDir)) fs.mkdirSync(assetsDir, { recursive: true });
+if (!fs.existsSync(publicAssetsDir)) fs.mkdirSync(publicAssetsDir, { recursive: true });
 
 function git(cmd) {
   try { return execSync(cmd, { cwd: ROOT, stdio: 'pipe' }).toString().trim(); }
@@ -49,6 +52,9 @@ function readBody(req) {
 }
 
 async function optimizeImage(inputPath, name) {
+  if (fs.statSync(inputPath).size <= uploadOptimizationThreshold) {
+    return { outputName: name, outputPath: inputPath };
+  }
   const sharp = (await import('sharp')).default;
   const ext = path.extname(name).toLowerCase();
   const isSvg = ext === '.svg';
@@ -58,8 +64,8 @@ async function optimizeImage(inputPath, name) {
   const outputPath = path.join(path.dirname(inputPath), outputName);
   if (!isSvg) {
     await sharp(inputPath)
-      .resize({ width: 1200, withoutEnlargement: true })
-      .jpeg({ quality: 85, mozjpeg: true })
+      .resize({ width: 2000, withoutEnlargement: true })
+      .jpeg({ quality: 95, mozjpeg: true })
       .toFile(outputPath);
     fs.unlinkSync(inputPath);
   }
@@ -118,6 +124,7 @@ const server = http.createServer(async (req, res) => {
     fs.writeFileSync(inputPath, Buffer.from(m[2], 'base64'));
     try {
       const { outputName } = await optimizeImage(inputPath, name);
+      fs.copyFileSync(path.join(assetsDir, outputName), path.join(publicAssetsDir, outputName));
       regenerateRegistry();
       return send(res, { ok: true, path: '/assets/' + outputName, filename: outputName });
     } catch (err) {
