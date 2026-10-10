@@ -81,23 +81,25 @@
    ============================================ */
 
 :root {
-  --bg: #000000;
-  --bg-raised: #0a0a0a;
-  --bg-overlay: #111111;
-  --bg-card: #0a0a0a;
-  --bg-code: #0d0d0d;
-  --bg-code-header: #080808;
-  --bg-code-gutter: #060606;
+  /* Noir adouci : le #000/#fff purs créent un halo autour du texte et fatiguent
+     les yeux sur les longues sessions (et écrasent les visuels du lightbox). */
+  --bg: #101010;
+  --bg-raised: #181818;
+  --bg-overlay: #1e1e1e;
+  --bg-card: #181818;
+  --bg-code: #151515;
+  --bg-code-header: #101010;
+  --bg-code-gutter: #0d0d0d;
 
-  --fg: #ffffff;
-  --fg-secondary: #b0b0b0;
-  --fg-tertiary: #888888;
-  --fg-muted: #666666;
+  --fg: #ececec;
+  --fg-secondary: #b6b6b6;
+  --fg-tertiary: #8e8e8e;
+  --fg-muted: #707070;
 
-  --border: #262626;
-  --border-subtle: #1e1e1e;
-  --border-strong: #3a3a3a;
-  --border-hover: #555555;
+  --border: #2b2b2b;
+  --border-subtle: #232323;
+  --border-strong: #3f3f3f;
+  --border-hover: #5c5c5c;
 
   /* Code syntax — refined grayscale, not pure black/white */
   --syn-keyword: #999999;
@@ -111,23 +113,23 @@
   --syn-param: #888888;
 
   /* Focus */
-  --focus-ring: #ffffff;
+  --focus-ring: #e8e8e8;
 
   /* Selection */
-  --selection-bg: #ffffff;
-  --selection-fg: #000000;
+  --selection-bg: #e6e6e6;
+  --selection-fg: #101010;
 
   /* Custom cursor — dark mode */
-  --cursor-fg: #ffffff;
+  --cursor-fg: #ededed;
   --cursor-hover-bg: rgba(255, 255, 255, 0.06);
-  --glow-inner: rgba(255, 255, 255, 0.15);
+  --glow-inner: rgba(255, 255, 255, 0.13);
   --glow-mid: rgba(255, 255, 255, 0.05);
 
   /* Logo invert — 1 = inverted (dark mode), 0 = normal (light mode) */
   --logo-invert: 1;
 
   /* Hero grid — subtle background lines */
-  --grid-color: rgba(255, 255, 255, 0.08);
+  --grid-color: rgba(255, 255, 255, 0.07);
 
   color-scheme: dark;
 }
@@ -137,23 +139,25 @@
    ============================================ */
 
 [data-theme="light"] {
-  --bg: #ffffff;
-  --bg-raised: #f5f5f5;
-  --bg-overlay: #f0f0f0;
-  --bg-card: #fafafa;
-  --bg-code: #f4f4f4;
-  --bg-code-header: #ececec;
-  --bg-code-gutter: #eaeaea;
+  /* Blanc adouci : un gris très clair au lieu du #ffffff pur, qui brûle les yeux
+     et fait paraître les images du lightbox ternes par comparaison. */
+  --bg: #f3f3f3;
+  --bg-raised: #eaeaea;
+  --bg-overlay: #e5e5e5;
+  --bg-card: #efefef;
+  --bg-code: #eaeaea;
+  --bg-code-header: #e3e3e3;
+  --bg-code-gutter: #e0e0e0;
 
-  --fg: #000000;
-  --fg-secondary: #555555;
-  --fg-tertiary: #777777;
-  --fg-muted: #aaaaaa;
+  --fg: #141414;
+  --fg-secondary: #505050;
+  --fg-tertiary: #717171;
+  --fg-muted: #a0a0a0;
 
-  --border: #e0e0e0;
-  --border-subtle: #eaeaea;
-  --border-strong: #cccccc;
-  --border-hover: #bbbbbb;
+  --border: #dadada;
+  --border-subtle: #e4e4e4;
+  --border-strong: #c6c6c6;
+  --border-hover: #b0b0b0;
 
   /* Code syntax — light mode grays */
   --syn-keyword: #666666;
@@ -166,12 +170,12 @@
   --syn-decorator: #888888;
   --syn-param: #777777;
 
-  --focus-ring: #000000;
-  --selection-bg: #000000;
-  --selection-fg: #ffffff;
+  --focus-ring: #141414;
+  --selection-bg: #141414;
+  --selection-fg: #f3f3f3;
 
   /* Custom cursor — light mode */
-  --cursor-fg: #000000;
+  --cursor-fg: #141414;
   --cursor-hover-bg: rgba(0, 0, 0, 0.06);
   --glow-inner: rgba(0, 0, 0, 0.12);
   --glow-mid: rgba(0, 0, 0, 0.04);
@@ -180,7 +184,7 @@
   --logo-invert: 0;
 
   /* Hero grid — subtle background lines */
-  --grid-color: rgba(0, 0, 0, 0.08);
+  --grid-color: rgba(0, 0, 0, 0.07);
 
   color-scheme: light;
 }

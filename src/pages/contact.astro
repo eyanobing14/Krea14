@@ -5,6 +5,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import ScrollReveal from "../components/ScrollReveal.astro";
 import Container from "../components/Container.astro";
+import TrustedBy from "../components/TrustedBy.astro";
 
 const profile = data.profile;
 const socials = (profile.socials || {}) as Record<string, string>;
@@ -27,7 +28,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
               <span style="color: var(--fg-tertiary);">projet.</span>
             </h1>
             <p class="mt-4 text-base sm:text-lg" style="color: var(--fg-secondary);">
-              <span data-fr="Disponible pour freelance. N'hésitez pas à nous contacter pour discuter de votre projet." data-en="Available for freelance. Don't hesitate to contact us to discuss your project.">Disponible pour freelance. N'hésitez pas à nous contacter pour discuter de votre projet.</span>
+              <span data-fr="Disponible pour du freelance. Remplissez ce que vous savez, nous compléterons le reste ensemble." data-en="Available for freelance work. Fill in what you know, we will work out the rest together.">Disponible pour du freelance. Remplissez ce que vous savez, nous compléterons le reste ensemble.</span>
             </p>
             <div class="mt-6 flex flex-col sm:flex-row gap-3">
               <a
@@ -40,7 +41,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
                 <span data-fr="Envoyer un message" data-en="Send a message">Envoyer un message</span>
               </a>
               <a
-                href={`https://wa.me/${profile.whatsapp || '25761729788'}`}
+                href={`https://wa.me/${String(profile.whatsapp || '243972140541').replace(/[^0-9]/g, '')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="px-6 py-3 text-sm no-underline transition-all text-center"
@@ -188,7 +189,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
                   <option value=""><span data-fr="Sélectionnez..." data-en="Select...">Sélectionnez...</span></option>
                   <option value="branding">Branding / Identité visuelle</option>
                   <option value="uiux">UI/UX Design</option>
-                  <option value="frontend">Développement Frontend</option>
+                  <option value="fullstack">Développement Fullstack</option>
                   <option value="logo">Logo Design</option>
                   <option value="other">Autre</option>
                 </select>
@@ -271,7 +272,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
                 <span data-fr="Message envoyé!" data-en="Message sent!">Message envoyé!</span>
               </p>
               <p class="mt-2 text-sm" style="color: var(--fg-secondary);">
-                <span data-fr="Nous vous répondrons dans les plus brefs délais." data-en="We'll get back to you as soon as possible.">Nous vous répondrons dans les plus brefs délais.</span>
+                <span data-fr="Merci, nous vous répondons sous 24 h ouvrées." data-en="Thanks, we reply within 24 business hours.">Merci, nous vous répondons sous 24 h ouvrées.</span>
               </p>
               <div class="mt-6 bounce-arrow">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--fg-muted)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -328,7 +329,17 @@ const socials = (profile.socials || {}) as Record<string, string>;
                               <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
                             </>
                           )}
-                          {name === "email" && (
+                        {name === "x" && (
+                          <>
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.451-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644Z" fill="var(--bg)" stroke="none" />
+                          </>
+                        )}
+                        {name === "whatsapp" && (
+                          <>
+                            <path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.5-.7-2.4-1.3-3.4-2.9-.2-.4.2-.4.7-1.3.1-.2 0-.4 0-.5 0-.2-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-1.1 1.2-1 2.8.2 4.7 1.2 1.9 2.6 3.1 4.9 4.1 2.3 1 2.9.8 3.7.7.8-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4ZM12 2.2a9.8 9.8 0 0 0-8.4 14.7L2.2 22l5.3-1.4A9.8 9.8 0 1 0 12 2.2Zm0 1.8a8 8 0 1 1-4.2 14.8l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 0 1 12 4Z" fill="var(--bg)" stroke="none" />
+                          </>
+                        )}
+                        {name === "email" && (
                             <>
                               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                               <polyline points="22,6 12,13 2,6" />
@@ -361,7 +372,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
                   class="text-xs leading-relaxed"
                   style="color: var(--fg-secondary);"
                 >
-                  <span data-fr="Réponse sous 24h ouvrées. Pour les projets urgents, mentionnez-le dans votre message." data-en="Response within 24 business hours. For urgent projects, mention it in your message.">Réponse sous 24h ouvrées. Pour les projets urgents, mentionnez-le dans votre message.</span>
+                  <span data-fr="Réponse sous 24 h ouvrées. Si c'est urgent, dites-le dans le message." data-en="Reply within 24 business hours. If it is urgent, say so in the message.">Réponse sous 24 h ouvrées. Si c'est urgent, dites-le dans le message.</span>
                 </p>
               </div>
             </div>
@@ -369,6 +380,10 @@ const socials = (profile.socials || {}) as Record<string, string>;
         </div>
       </Container>
     </section>
+
+    <!-- Ils nous ont fait confiance -->
+    <div class="section-divider" aria-hidden="true"></div>
+    <TrustedBy />
   </main>
   <Footer />
   <ScrollReveal />

@@ -176,13 +176,13 @@ const currentPath = Astro.url.pathname;
     transition: none;
   }
   .site-header.is-scrolled {
-    background: rgba(0, 0, 0, 0.6);
+    background: color-mix(in srgb, var(--bg) 62%, transparent);
     -webkit-backdrop-filter: blur(20px) saturate(1.6);
     backdrop-filter: blur(20px) saturate(1.6);
     border-bottom-color: rgba(255, 255, 255, 0.06);
   }
   [data-theme="light"] .site-header.is-scrolled {
-    background: #ffffff !important;
+    background: var(--bg) !important;
     border-bottom-color: rgba(0, 0, 0, 0.08) !important;
   }
 

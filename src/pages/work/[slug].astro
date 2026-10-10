@@ -8,6 +8,7 @@ import Container from "../../components/Container.astro";
 import PortfolioImage from "../../components/PortfolioImage.astro";
 import StepIcon from "../../components/StepIcon.astro";
 import BentoCard from "../../components/BentoCard.astro";
+import BackLink from "../../components/BackLink.astro";
 
 export function getStaticPaths() {
   return (data.caseStudies || []).map((study: any) => ({
@@ -39,6 +40,9 @@ const galleryRows: GalleryEntry[][] = [
   galleryEntries.filter((e) => e.index % 2 === 0),
   galleryEntries.filter((e) => e.index % 2 === 1),
 ].filter((row) => row.length > 0);
+// Slides du lightbox : les écrans qui ont une image, dans l'ordre de la galerie
+const gallerySlides: GalleryEntry[] = galleryEntries.filter((e) => e.item.image);
+
 // Repeat a row's items so one loop is wider than the viewport (seamless marquee)
 function loopRow<T>(row: T[]): T[] {
   const repeats = Math.max(1, Math.ceil(6 / row.length));
@@ -55,13 +59,7 @@ function loopRow<T>(row: T[]): T[] {
       <div class="absolute inset-0 opacity-[0.08] dark:opacity-[0.1]" aria-hidden="true" style="z-index: -1; background-image: linear-gradient(to right, var(--fg) 1px, transparent 1px), linear-gradient(to bottom, var(--fg) 1px, transparent 1px); background-size: 80px 80px;"></div>
       <Container>
         <div class="flex flex-wrap items-center gap-3 mb-8 relative z-10">
-          <a
-            href="/work"
-            class="text-xs no-underline transition-colors duration-200"
-            style="color: var(--fg-muted);"
-            onmouseover="this.style.color='var(--fg)'"
-            onmouseout="this.style.color='var(--fg-muted)'">← Retour</a
-          >
+          <BackLink href="/work" />
           <span class="text-xs" style="color: var(--fg-muted);">·</span>
           <span class="text-xs font-mono" style="color: var(--fg-muted);"
             >{study.year}</span
@@ -81,7 +79,7 @@ function loopRow<T>(row: T[]): T[] {
         <div class="mt-6 flex flex-wrap gap-2">                    {study.tags?.map((tag: string, i: number) => (
                       <span
                         class="px-3 py-1 text-xs font-mono uppercase tracking-wider"
-                        style="color: var(--fg-muted); border: 1px solid var(--border);"
+                        style="color: var(--fg-muted); border: 1px solid var(--border); background: var(--bg);"
                       ><span data-fr={tag} data-en={study.tagsEn?.[i] || tag}>{tag}</span>
                       </span>
                     ))}
@@ -137,22 +135,78 @@ function loopRow<T>(row: T[]): T[] {
         aria-label={study.title}
       >
         <div class="kg-modal-backdrop" data-kg-modal-close></div>
-        <figure class="kg-modal-figure">
-          <div data-kg-modal-image>
-            <PortfolioImage
-              src={heroGridImages[0]}
-              alt={study.title}
-              loading="lazy"
-              sizes="100vw"
-              style="max-width: 100%; max-height: 78vh; width: auto; height: auto; margin: 0 auto; border: 1px solid var(--border); background: var(--bg-raised);"
-            />
+        <figure class="kg-modal-figure" data-kg-mode="single">
+          <div class="kg-modal-media" data-kg-media>
+            <div class="kg-modal-frame" data-kg-frame>
+              <div class="kg-modal-image" data-kg-modal-image>
+                <PortfolioImage
+                  src={heroGridImages[0]}
+                  alt={study.title}
+                  loading="lazy"
+                  sizes="(min-width: 900px) 80vw, 100vw"
+                />
+              </div>
+            </div>
+            {gallerySlides.length > 1 && (
+              <div class="kg-modal-controls">
+                <button
+                  type="button"
+                  class="kg-nav-btn"
+                  data-kg-prev
+                  data-label-fr="Image précédente"
+                  data-label-en="Previous image"
+                  aria-label="Image précédente"
+                >
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"
+                    ><path
+                      d="M12.5 7H1.5M6 3.5 1.5 7 6 10.5"
+                      stroke="currentColor"
+                      stroke-width="1.4"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"></path></svg
+                  >
+                </button>
+                <div class="kg-dots" data-kg-dots aria-label="Écrans clés">
+                  {gallerySlides.map((entry, i) => (
+                    <button
+                      type="button"
+                      class="kg-dot"
+                      data-kg-dot={i}
+                      aria-label={`Écran ${i + 1}`}
+                      aria-current={i === 0 ? 'true' : 'false'}
+                    ></button>
+                  ))}
+                </div>
+                <button
+                  type="button"
+                  class="kg-nav-btn"
+                  data-kg-next
+                  data-label-fr="Image suivante"
+                  data-label-en="Next image"
+                  aria-label="Image suivante"
+                >
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"
+                    ><path
+                      d="M1.5 7h11M8 3.5 12.5 7 8 10.5"
+                      stroke="currentColor"
+                      stroke-width="1.4"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"></path></svg
+                  >
+                </button>
+              </div>
+            )}
           </div>
           <figcaption class="kg-modal-caption">
             <h3 class="text-lg sm:text-xl font-semibold leading-tight" style="color: var(--fg);">
               <span data-kg-modal-title data-fr={study.title} data-en={study.titleEn || study.title}>{study.title}</span>
             </h3>
             <p class="mt-2 text-sm leading-relaxed" style="color: var(--fg-secondary);">
-              <span data-fr={study.description} data-en={study.descriptionEn || study.description}>{study.description}</span>
+              <span
+                data-kg-modal-desc
+                data-fr={study.description}
+                data-en={study.descriptionEn || study.description}>{study.description}</span
+              >
             </p>
           </figcaption>
         </figure>
@@ -334,8 +388,11 @@ function loopRow<T>(row: T[]): T[] {
                       <figure
                         class="kg-item group"
                         data-kg-gallery-open={entry.item.image ? '' : undefined}
+                        data-kg-gallery-index={entry.item.image ? entry.index : undefined}
                         data-kg-caption={entry.item.caption || undefined}
                         data-kg-caption-en={entry.item.captionEn || entry.item.caption || undefined}
+                        data-kg-desc={entry.item.description || undefined}
+                        data-kg-desc-en={entry.item.descriptionEn || entry.item.description || undefined}
                         role={entry.item.image ? 'button' : undefined}
                         tabindex={entry.item.image && copy === 0 && i < row.length ? '0' : undefined}
                         aria-hidden={copy === 1 || i >= row.length ? 'true' : undefined}
@@ -620,7 +677,7 @@ function loopRow<T>(row: T[]): T[] {
     display: flex;
     flex-direction: column;
     gap: 0.9rem;
-    max-width: min(1100px, 100%);
+    max-width: min(1400px, 100%);
     max-height: 100%;
     margin: 0;
     overflow-y: auto;
@@ -653,23 +710,146 @@ function loopRow<T>(row: T[]): T[] {
     justify-content: center;
     min-width: 0;
   }
+
+  /* ── Lightbox : média, flèches, points ── */
+  .kg-modal-media {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    min-width: 0;
+  }
+  .kg-modal-frame {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    /* le swipe horizontal est capté ici, le scroll vertical reste au lightbox */
+    touch-action: pan-y;
+  }
+  .kg-modal-frame.is-dragging {
+    cursor: grabbing;
+  }
+  /* L'image occupe toute la largeur de sa colonne : hauteur fixe + object-fit
+     (une simple max-height réduirait la largeur pour garder le ratio). */
+  .kg-modal-image img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    /* hauteur fixe + contain : l'image remplit toute la largeur de sa colonne,
+       et la ligne de contrôles reste visible sans scroll */
+    height: 72vh;
+    max-height: 72vh;
+    object-fit: contain;
+    margin: 0 auto;
+    border: 1px solid var(--border);
+    background: var(--bg-raised);
+    transition:
+      transform 0.3s var(--ease-out-quart),
+      opacity 0.22s ease;
+    will-change: transform, opacity;
+  }
+  .kg-modal-frame.is-dragging .kg-modal-image img {
+    transition: none;
+  }
+
+  /* Flèches et points sur la même ligne, sous l'image */
+  .kg-modal-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .kg-nav-btn {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid var(--border-strong);
+    background: var(--bg);
+    color: var(--fg);
+    transition:
+      border-color 0.25s var(--ease-out-quart),
+      background 0.25s var(--ease-out-quart),
+      transform 0.25s var(--ease-out-quart);
+  }
+  .kg-nav-btn:hover {
+    border-color: var(--border-hover);
+    background: var(--bg-raised);
+  }
+  .kg-nav-btn:active {
+    transform: scale(0.94);
+  }
+
+  .kg-dots {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+  }
+  .kg-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.6rem;
+    height: 1.5rem;
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+  .kg-dot::after {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--fg);
+    opacity: 0.22;
+    transition:
+      opacity 0.25s var(--ease-out-quart),
+      transform 0.25s var(--ease-out-quart);
+  }
+  .kg-dot:hover::after {
+    opacity: 0.45;
+  }
+  .kg-dot[aria-current='true']::after {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+
+  /* Fondu de l'image qui part pendant le swipe */
+  .kg-modal-frame.is-switching .kg-modal-image img {
+    opacity: 0;
+    transition: opacity 0.12s linear;
+  }
+
+  /* Mode « single » (image du hero) : aucune navigation */
+  .kg-modal-figure[data-kg-mode='single'] .kg-modal-controls {
+    display: none;
+  }
   @media (max-width: 899px) {
     .kg-modal {
-      padding: 1.25rem;
+      padding: 0.75rem;
     }
     .kg-modal-image img {
-      width: 96vw !important;
-      max-width: 96vw !important;
-      max-height: 72vh !important;
+      width: 100%;
+      max-width: 100%;
+      height: 52vh;
+      max-height: 52vh;
     }
   }
   @media (min-width: 900px) {
     .kg-modal-figure {
       display: grid;
-      grid-template-columns: minmax(0, 1.7fr) minmax(240px, 0.7fr);
+      /* L'image prend l'essentiel de la largeur (≈ container de la page),
+         le texte garde une colonne étroite à droite. */
+      grid-template-columns: minmax(0, 2.4fr) minmax(230px, 0.6fr);
       align-items: center;
-      max-width: min(1200px, 100%);
-      gap: 2rem;
+      max-width: min(1440px, 100%);
+      gap: 2.25rem;
     }
     .kg-modal-caption {
       max-width: none;
@@ -774,22 +954,196 @@ function loopRow<T>(row: T[]): T[] {
     });
   }
 
-  // ── Hero image — lightbox with a blurred backdrop ──
+  // ── Lightbox — image agrandie, flèches, points et swipe ──
+  // Ouvert depuis l'image du hero : une seule image, pas de navigation.
+  // Ouvert depuis un écran clé : navigation complète (flèches, points, swipe, clavier).
   function initHeroLightbox() {
     const modal = document.getElementById('kg-hero-modal');
     if (!modal || modal.dataset.ready === '1') return;
     modal.dataset.ready = '1';
+
+    const figure = modal.querySelector<HTMLElement>('[data-kg-mode]');
+    const frame = modal.querySelector<HTMLElement>('[data-kg-frame]');
     const modalImage = modal.querySelector<HTMLImageElement>('[data-kg-modal-image] img');
     const modalTitle = modal.querySelector<HTMLElement>('[data-kg-modal-title]');
+    const modalDesc = modal.querySelector<HTMLElement>('[data-kg-modal-desc]');
+    const prevBtn = modal.querySelector<HTMLButtonElement>('[data-kg-prev]');
+    const nextBtn = modal.querySelector<HTMLButtonElement>('[data-kg-next]');
+    const dots = Array.from(modal.querySelectorAll<HTMLButtonElement>('[data-kg-dot]'));
+    if (!figure || !frame || !modalImage) return;
 
-    const setGalleryImage = (trigger: HTMLElement) => {
-      const source = trigger.querySelector<HTMLImageElement>('img');
-      if (!source || !modalImage) return;
-      modalImage.src = source.currentSrc || source.src;
-      modalImage.removeAttribute('srcset');
-      modalImage.alt = source.alt;
-      if (modalTitle) modalTitle.textContent = trigger.dataset.kgCaption || '';
+    // La langue est relue dans localStorage (le toggle recharge la page avec Header.astro)
+    const isEn = () => (localStorage.getItem('lang') || 'fr') === 'en';
+
+    // Écrans clés = entrées de galerie avec image, dans l'ordre de la galerie.
+    // Le DOM contient des copies (marquee) : on déduplique par index.
+    interface Slide {
+      index: number;
+      src: string;
+      srcset: string;
+      sizes: string;
+      caption: string;
+      captionEn: string;
+      description: string;
+      descriptionEn: string;
+    }
+    const slides: Slide[] = [];
+    document.querySelectorAll<HTMLElement>('[data-kg-gallery-index]').forEach((el) => {
+      const index = Number(el.dataset.kgGalleryIndex);
+      if (Number.isNaN(index) || slides.some((s) => s.index === index)) return;
+      const img = el.querySelector<HTMLImageElement>('img');
+      if (!img) return;
+      slides.push({
+        index,
+        src: img.getAttribute('src') || '',
+        srcset: img.getAttribute('srcset') || '',
+        sizes: img.getAttribute('sizes') || '',
+        caption: el.dataset.kgCaption || '',
+        captionEn: el.dataset.kgCaptionEn || el.dataset.kgCaption || '',
+        description: el.dataset.kgDesc || '',
+        descriptionEn: el.dataset.kgDescEn || el.dataset.kgDesc || '',
+      });
+    });
+    slides.sort((a, b) => a.index - b.index);
+
+    let current = -1; // -1 = image du hero (mode « single »)
+
+    // Texte de la fiche projet (data-fr/data-en du markup), affiché quand un écran
+    // n'a pas son propre texte
+    const baseText = (el: HTMLElement | null) =>
+      el ? el.getAttribute(isEn() ? 'data-en' : 'data-fr') || '' : '';
+
+    const setLabels = () => {
+      const en = isEn();
+      prevBtn?.setAttribute('aria-label', en ? 'Previous image' : 'Image précédente');
+      nextBtn?.setAttribute('aria-label', en ? 'Next image' : 'Image suivante');
+      dots.forEach((dot, i) =>
+        dot.setAttribute('aria-label', `${en ? 'Screen' : 'Écran'} ${i + 1}`)
+      );
     };
+
+    const paintDots = () => {
+      dots.forEach((dot, i) => {
+        const active = i === current;
+        dot.setAttribute('aria-current', active ? 'true' : 'false');
+        dot.classList.toggle('is-active', active);
+      });
+    };
+
+    const showSlide = (position: number) => {
+      const slide = slides[position];
+      if (!slide) return;
+      current = position;
+      modalImage.src = slide.src;
+      if (slide.srcset) modalImage.setAttribute('srcset', slide.srcset);
+      else modalImage.removeAttribute('srcset');
+      if (slide.sizes) modalImage.setAttribute('sizes', slide.sizes);
+      const caption = isEn() ? slide.captionEn : slide.caption;
+      // Chaque écran a son propre texte (repli : description du projet)
+      const description =
+        (isEn() ? slide.descriptionEn : slide.description) || baseText(modalDesc);
+      modalImage.alt = caption;
+      if (modalTitle) modalTitle.textContent = caption;
+      if (modalDesc) modalDesc.textContent = description;
+      paintDots();
+    };
+
+    const go = (delta: number) => {
+      if (current < 0 || slides.length < 2) return;
+      showSlide((current + delta + slides.length) % slides.length);
+    };
+
+    // ── Swipe / drag sur l'image ──
+    let dragging = false;
+    let moved = false;
+    let startX = 0;
+    let startY = 0;
+    let dx = 0;
+
+    const resetDrag = () => {
+      dragging = false;
+      moved = false;
+      dx = 0;
+      frame.classList.remove('is-dragging');
+      modalImage.style.transform = '';
+      modalImage.style.opacity = '';
+    };
+
+    frame.addEventListener('pointerdown', (event) => {
+      if (figure.dataset.kgMode !== 'gallery' || slides.length < 2) return;
+      if ((event.target as HTMLElement).closest('button')) return;
+      if (frame.classList.contains('is-switching')) return;
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      dragging = true;
+      moved = false;
+      dx = 0;
+      startX = event.clientX;
+      startY = event.clientY;
+      frame.classList.add('is-dragging');
+      try {
+        frame.setPointerCapture(event.pointerId);
+      } catch {
+        /* capture indisponible — le drag marche tant que le doigt reste sur l'image */
+      }
+      event.preventDefault();
+    });
+
+    frame.addEventListener(
+      'pointermove',
+      (event) => {
+        if (!dragging) return;
+        dx = event.clientX - startX;
+        const dy = event.clientY - startY;
+        if (!moved) {
+          if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+          if (Math.abs(dy) > Math.abs(dx)) {
+            // geste vertical : on rend la main au scroll du lightbox
+            resetDrag();
+            return;
+          }
+          moved = true;
+        }
+        const distance = Math.abs(dx);
+        modalImage.style.transform = `translate3d(${dx * 0.35}px, 0, 0)`;
+        // l'image qui part s'efface progressivement
+        modalImage.style.opacity = String(Math.max(0.15, 1 - distance / 340));
+        if (event.cancelable) event.preventDefault();
+      },
+      { passive: false }
+    );
+
+    const endDrag = (event: PointerEvent) => {
+      if (!dragging) return;
+      const threshold = Math.min(90, Math.max(40, frame.clientWidth * 0.12));
+      const navigate = moved && Math.abs(dx) > threshold;
+      const direction = dx < 0 ? 1 : -1;
+      try {
+        frame.releasePointerCapture(event.pointerId);
+      } catch {
+        /* déjà relâché */
+      }
+      resetDrag();
+      if (navigate) {
+        // fondu sortant court, puis échange d'image et fondu entrant
+        frame.classList.add('is-switching');
+        window.setTimeout(() => {
+          go(direction);
+          frame.classList.remove('is-switching');
+        }, 120);
+      }
+    };
+
+    frame.addEventListener('pointerup', endDrag);
+    frame.addEventListener('pointercancel', endDrag);
+
+    prevBtn?.addEventListener('click', () => go(-1));
+    nextBtn?.addEventListener('click', () => go(1));
+    dots.forEach((dot, i) =>
+      dot.addEventListener('click', () => {
+        if (figure.dataset.kgMode !== 'gallery') return;
+        showSlide(i);
+      })
+    );
 
     const setOpen = (open: boolean) => {
       modal.dataset.state = open ? 'open' : 'closed';
@@ -805,29 +1159,51 @@ function loopRow<T>(row: T[]): T[] {
     };
 
     document.querySelectorAll<HTMLElement>('[data-kg-modal-open]').forEach((el) => {
-      el.addEventListener('click', () => setOpen(true));
+      el.addEventListener('click', () => {
+        resetDrag();
+        figure.dataset.kgMode = 'single';
+        current = -1;
+        if (modalTitle) modalTitle.textContent = baseText(modalTitle);
+        if (modalDesc) modalDesc.textContent = baseText(modalDesc);
+        paintDots();
+        setOpen(true);
+      });
     });
-    document.querySelectorAll<HTMLElement>('[data-kg-gallery-open]').forEach((el) => {
-      const openGalleryImage = () => {
-        setGalleryImage(el);
+
+    // Écrans clés : on ouvre sur l'écran cliqué, avec toute la navigation
+    document.querySelectorAll<HTMLElement>('[data-kg-gallery-index]').forEach((el) => {
+      const index = Number(el.dataset.kgGalleryIndex);
+      const openAt = () => {
+        const position = slides.findIndex((slide) => slide.index === index);
+        if (position < 0) return;
+        resetDrag();
+        figure.dataset.kgMode = 'gallery';
+        showSlide(position);
         setOpen(true);
       };
-      el.addEventListener('click', openGalleryImage);
+      el.addEventListener('click', openAt);
       el.addEventListener('keydown', (event) => {
         if (event.key === 'Enter' || event.key === ' ') {
           event.preventDefault();
-          openGalleryImage();
+          openAt();
         }
       });
     });
+
     modal.querySelectorAll<HTMLElement>('[data-kg-modal-close]').forEach((el) => {
       el.addEventListener('click', () => setOpen(false));
     });
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && modal.dataset.state === 'open') setOpen(false);
-    });
-  }
 
+    document.addEventListener('keydown', (event) => {
+      if (modal.dataset.state !== 'open') return;
+      if (event.key === 'Escape') setOpen(false);
+      else if (event.key === 'ArrowLeft') go(-1);
+      else if (event.key === 'ArrowRight') go(1);
+    });
+
+    setLabels();
+    paintDots();
+  }
   function initKeyScreenPage() {
     initHeroLightbox();
   }

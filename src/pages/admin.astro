@@ -141,9 +141,9 @@ import Footer from '../components/Footer.astro';
                   <option value="+31" data-flag="🇳🇱">🇳🇱 +31 Pays-Bas</option>
                   <option value="+32" data-flag="🇧🇪">🇧🇪 +32 Belgique</option>
                   <option value="+41" data-flag="🇨🇭">🇨🇭 +41 Suisse</option>
-                  <option value="+213" data-flag="🇨🇦">🇨🇦 +1 Canada</option>
+                  <option value="+1" data-flag="🇨🇦">🇨🇦 +1 Canada</option>
                 </select>
-                <input id="p-whatsapp" type="tel" class="admin-input" placeholder="61729788" style="flex:1;" />
+                <input id="p-whatsapp" type="tel" class="admin-input" placeholder="972140541" style="flex:1;" />
               </div>
               <p class="mt-1 text-[10px]" style="color: var(--fg-muted);">Le lien WhatsApp sera : wa.me/[code]+[numéro]</p>
             </div>
@@ -246,7 +246,7 @@ import Footer from '../components/Footer.astro';
               </div>
             </div>
             <div>
-              <label class="admin-label">Frontend Development</label>
+              <label class="admin-label">Fullstack Development</label>
               <div class="flex gap-2 items-center">
                 <input id="l-price-frontend-min" type="number" class="admin-input" style="flex:1;" placeholder="Min" />
                 <span style="color:var(--fg-muted);">·</span>
@@ -871,6 +871,8 @@ import Footer from '../components/Footer.astro';
                 <div class="md:col-span-2">
                   <label class="admin-label">Galerie : captions (un par ligne)</label>
                   <textarea class="admin-input study-gallery" data-i="${i}" rows="3">${(study.gallery || []).map((g: any) => g.caption || '').join('\n')}</textarea>
+                  <label class="admin-label mt-3">Galerie : texte de chaque écran (un par ligne, optionnel)</label>
+                  <textarea class="admin-input study-gallery-desc" data-i="${i}" rows="3">${(study.gallery || []).map((g: any) => g.description || '').join('\n')}</textarea>
                   <div class="mt-3 space-y-2">
                     ${(study.gallery || []).map((g: any, gi: number) => `
                       <div class="flex items-center gap-3">
@@ -940,8 +942,10 @@ import Footer from '../components/Footer.astro';
           const arch = data.caseStudies[i].architecture || {};
           data.caseStudies[i].architecture = { text: archText, textEn: arch.textEn || '', stack: archStack.split(',').map((s: string) => s.trim()).filter(Boolean), stackEn: arch.stackEn || undefined };
           const galleryCaptions = (item.querySelector('.study-gallery') as HTMLTextAreaElement).value.split('\n').map((l: string) => l.trim()).filter(Boolean);
+          // on ne filtre pas les lignes vides : l'alignement avec les captions doit être conservé
+          const galleryDescs = (item.querySelector('.study-gallery-desc') as HTMLTextAreaElement).value.split('\n').map((l: string) => l.trim());
           const existingGallery = data.caseStudies[i].gallery || [];
-          data.caseStudies[i].gallery = galleryCaptions.map((caption: string, gi: number) => ({ image: existingGallery[gi]?.image || '', caption, captionEn: existingGallery[gi]?.captionEn || '' }));
+          data.caseStudies[i].gallery = galleryCaptions.map((caption: string, gi: number) => ({ image: existingGallery[gi]?.image || '', caption, captionEn: existingGallery[gi]?.captionEn || '', description: galleryDescs[gi] || '', descriptionEn: existingGallery[gi]?.descriptionEn || '' }));
           data.caseStudies[i].tags = (item.querySelector('.study-tags') as HTMLInputElement).value.split(',').map((t: string) => t.trim()).filter(Boolean);
           // Save flows (objects with text + image)
           const flowInputs = item.querySelectorAll('.study-flow-input') as NodeListOf<HTMLInputElement>;
@@ -1447,7 +1451,7 @@ import Footer from '../components/Footer.astro';
       const gp = (id: string) => parseInt((document.getElementById(id) as HTMLInputElement).value) || 0;
       data.legal.pricing.branding = { min: gp('l-price-branding-min'), max: gp('l-price-branding-max'), label: 'Branding / Visual Identity' };
       data.legal.pricing.uiux = { min: gp('l-price-uiux-min'), max: gp('l-price-uiux-max'), label: 'UI/UX Design' };
-      data.legal.pricing.frontend = { min: gp('l-price-frontend-min'), max: gp('l-price-frontend-max'), label: 'Frontend Development' };
+      data.legal.pricing.frontend = { min: gp('l-price-frontend-min'), max: gp('l-price-frontend-max'), label: 'Fullstack Development' };
       data.legal.pricing.logo = { min: gp('l-price-logo-min'), max: gp('l-price-logo-max'), label: 'Logo Design' };
       data.legal.pricing.other = { min: gp('l-price-other-min'), max: gp('l-price-other-max'), label: 'Other Projects' };
       data.legal.pricing.hourlyRate = gp('l-price-hourly');

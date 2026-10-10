@@ -143,7 +143,7 @@ Chaque étape contient :
 - Conditions de paiement, politique de remboursement
 
 #### Grille tarifaire
-Prix min/max par catégorie de service (Branding, UI/UX, Frontend, Logo, Autre, Taux horaire).
+Prix min/max par catégorie de service (Branding, UI/UX, Fullstack, Logo, Autre, Taux horaire).
 
 #### Contenu des pages légales
 - Politique de confidentialité

@@ -33,7 +33,7 @@
   <text x="120" y="350" class="subtitle" font-size="28" letter-spacing="3">GRAPHIC DESIGNER · UI/UX · FULLSTACK DEV</text>
 
   <!-- Tagline -->
-  <text x="120" y="420" class="subtitle" font-size="20" fill="rgba(255,255,255,0.35)">Nous créons des expériences numériques qui marquent.</text>
+  <text x="120" y="420" class="subtitle" font-size="20" fill="rgba(255,255,255,0.35)">Designer graphique, UI/UX et développeur fullstack.</text>
 
   <!-- URL -->
   <text x="120" y="560" class="url" font-size="18" letter-spacing="2">KREA14.VERCEL.APP</text>

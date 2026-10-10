@@ -11,8 +11,7 @@ export const T: Record<string, string> = {
   "Nous contacter": "Get in touch",
 
   // ── Hero accueil ──
-  "Nous concevons des expériences numériques qui marquent.": "We create digital experiences that leave a mark.",
-  "Nous transformons des idées en expériences numériques mémorables.": "We turn ideas into memorable digital experiences.",
+  "Designer graphique et développeur fullstack. Nous dessinons des identités, des interfaces et des applications web, du premier croquis à la mise en ligne.": "Graphic designer and fullstack developer. We design brands, interfaces and web apps, from the first sketch to launch.",
   "Voir mes projets": "View my projects",
   "En savoir plus": "Learn more",
   "Un projet en tête?": "Got a project in mind?",
@@ -29,26 +28,20 @@ export const T: Record<string, string> = {
 
   // ── Services ──
   "Ce que nous faisons.": "What we do.",
-  "Identité visuelle, branding, print design. Nous créons des systèmes visuels cohérents qui racontent votre histoire.":
-    "Visual identity, branding, print design. We create cohesive visual systems that tell your story.",
-  "Interfaces utilisateur intuitives, wireframing, prototypage. L'expérience utilisateur est au centre de chaque décision.":
-    "Intuitive user interfaces, wireframing, prototyping. User experience is at the center of every decision.",
-  "Sites web performants avec React, Astro, Tailwind. Du pixel-perfect au code propre.":
-    "High-performance websites with React, Astro, Tailwind. From pixel-perfect to clean code.",
-  "Logos mémorables et intemporels. Chaque logo raconte une histoire en un coup d'œil.":
-    "Memorable and timeless logos. Every logo tells a story at a glance.",
+  "Logos, identités visuelles et supports imprimés. Un système cohérent, avec des règles claires pour chaque format.": "Logos, visual identities and print material. One coherent system, with clear rules for every format.",
+  "Recherche, wireframes et prototypes testés avant la première ligne de code. Les décisions d'interface se prennent quand elles coûtent encore peu à changer.": "Research, wireframes and prototypes tested before the first line of code. Interface decisions get made while they are still cheap to change.",
+  "Applications web complètes : base de données, API, authentification, interface en Astro, React et Tailwind, déploiement. Le back et le front dans la même main.": "Full web applications: database, API, authentication, front end in Astro, React and Tailwind, deployment. Back end and front end in the same hands.",
+  "Un signe simple qui tient sur un favicon comme sur une enseigne. Livré avec ses variantes et ses règles d'usage.": "A simple mark that works on a favicon and on a shopfront sign. Delivered with its variants and usage rules.",
 
   // ── CTA ──
-  "Discutons de votre prochain projet. Nous sommes disponibles pour du freelance.":
-    "Let's discuss your next project. We're available for freelance work.",
+  "Parlez-nous du projet, même s'il n'est pas encore cadré. Nous vous dirons ce qui est réaliste, et par où commencer.": "Tell us about the project, even if it is not scoped yet. We will tell you what is realistic, and where to start.",
   "Voir le portfolio": "View portfolio",
   "WhatsApp": "WhatsApp",
 
   // ── Work page ──
   "Tous mes": "All my",
   "projets.": "projects.",
-  "Une sélection de projets en branding, UI/UX, développement frontend et logo design.":
-    "A selection of projects in branding, UI/UX, frontend development and logo design.",
+  "Des projets livrés en branding, UI/UX, développement fullstack et design de logo. Filtrez par type.": "Projects shipped in branding, UI/UX, fullstack development and logo design. Filter by type.",
   "Tous": "All",
   "Envie de collaborer?": "Want to collaborate?",
   "Chaque projet est une nouvelle aventure. Parlons du vôtre.":
@@ -58,36 +51,24 @@ export const T: Record<string, string> = {
   // ── About page ──
   "Qui sommes-nous?": "Who are we?",
   "L'impact que nous créons.": "The impact we create.",
-  "Les technologies changent selon les projets. Ce qui ne change pas, c'est la rigueur, la qualité et les résultats livrés.":
-    "Technologies change with projects. What doesn't change is the rigor, quality and delivered results.",
+  "Les outils changent d'un projet à l'autre. La méthode, elle, reste la même.": "The tools change from one project to the next. The method stays the same.",
   "Orientation résultats": "Results-oriented",
-  "Chaque projet commence par une écoute active. Nous comprenons votre marché, vos utilisateurs et vos contraintes avant de concevoir.":
-    "Every project starts with active listening. We understand your market, users and constraints before designing.",
+  "Nous commençons par comprendre votre marché, vos utilisateurs et vos contraintes, avant de dessiner quoi que ce soit.": "We start by understanding your market, your users and your constraints, before drawing anything.",
   "Qualité sans compromis": "Uncompromising quality",
-  "Code lisible, design pixel-perfect, performance optimale. Nous ne livrons jamais un travail que nous n'aurions pas fierté de montrer.":
-    "Readable code, pixel-perfect design, optimal performance. We never deliver work we wouldn't be proud to show.",
+  "Code lisible, maquettes respectées, temps de chargement mesurés. Rien ne part en production sans que nous ayons envie de le montrer.": "Readable code, mockups that match the build, measured load times. Nothing ships unless we are glad to show it.",
   "De A à Z": "From A to Z",
-  "Du premier croquis au déploiement en production. Une seule vision, un seul interlocuteur, une cohérence totale du début à la fin.":
-    "From first sketch to production deployment. One vision, one point of contact, total coherence from start to finish.",
+  "Du premier croquis à la mise en production. Un seul interlocuteur, et la même personne qui suit le projet jusqu'au bout.": "From the first sketch to production. One point of contact, and the same person following the project to the end.",
   "Intégration fluide": "Smooth integration",
-  "Nous nous adaptons à votre workflow. Git, sprints, revues de code : nous devenons un membre à part entière de votre équipe.":
-    "We adapt to your workflow. Git, sprints, code reviews : we become a full member of your team.",
+  "Vos outils, vos sprints, vos revues de code. Nous nous branchons sur votre façon de travailler plutôt que de vous imposer la nôtre.": "Your tools, your sprints, your code reviews. We plug into the way you already work instead of imposing ours.",
   "Plusieurs façons de penser.": "Multiple ways of thinking.",
-  "Nous ne sommes pas qu'un seul profil. Chaque projet mobilise différentes facettes de notre approche créative.":
-    "We're not just one profile. Every project mobilizes different facets of our creative approach.",
-  "Placer l'humain au centre. Observer, empathiser, prototyper rapidement. Valider avant de construire.":
-    "Put people at the center. Observe, empathize, prototype quickly. Validate before building.",
-  "Comprendre le marché, la concurrence, les objectifs business. Chaque choix visuel a un impact mesurable.":
-    "Understand the market, competition, business goals. Every visual choice has a measurable impact.",
-  "Explorer des directions inattendues. Typographie, couleur, composition : chaque pixel raconte une histoire.":
-    "Explore unexpected directions. Typography, color, composition : every pixel tells a story.",
-  "Code propre et performant. Accessibilité, responsive, optimisation : la beauté ne s'arrête pas au maquettage.":
-    "Clean and performant code. Accessibility, responsive, optimization : beauty doesn't stop at mockups.",
-  "Un projet réussi est un projet partagé. Communication transparente, retours itératifs, co-création avec l'équipe client.":
-    "A successful project is a shared project. Transparent communication, iterative feedback, co-creation with the client team.",
+  "Aucun projet ne ressemble au précédent, donc nous changeons de casquette en cours de route.": "No two projects look alike, so we switch hats along the way.",
+  "Observer avant de proposer. Prototyper vite, tester avec de vraies personnes, corriger avant de construire.": "Observe before proposing. Prototype fast, test with real people, fix it before building.",
+  "Comprendre le marché, la concurrence et ce que le projet doit rapporter. Les choix visuels servent ces objectifs, pas l'inverse.": "Understand the market, the competition and what the project needs to bring in. Visual choices serve those goals, not the other way round.",
+  "Chercher une direction qui ne ressemble pas à ce que fait tout le monde. Typographie, couleur, composition : rien n'est laissé au hasard.": "Find a direction that does not look like everyone else's. Type, colour, composition: nothing left to chance.",
+  "Un code qu'on relit sans grimacer. Accessibilité, responsive, poids des pages : la maquette n'est que la moitié du travail.": "Code we can reread without wincing. Accessibility, responsive behaviour, page weight: the mockup is only half the job.",
+  "Un projet réussi se construit à deux. Vous voyez l'avancement, vous commentez les maquettes, vous tranchez avec nous.": "A good project is built together. You see the progress, comment on the mockups, and decide with us.",
   "Expertise.": "Expertise.",
-  "Un écosystème de compétences combinées pour chaque projet.":
-    "An ecosystem of combined skills for every project.",
+  "Les outils et les disciplines que nous croisons au quotidien.": "The tools and disciplines we cross paths with every day.",
 
   // ── Thinking styles ──
   "Pensée Stratégique": "Strategic Thinking",
@@ -137,19 +118,16 @@ export const T: Record<string, string> = {
     "Describe your project, goals, timeline...",
   "Envoyer le message →": "Send message →",
   "Message envoyé!": "Message sent!",
-  "Nous vous répondrons dans les plus brefs délais.":
-    "We'll get back to you as soon as possible.",
+  "Merci, nous vous répondons sous 24 h ouvrées.": "Thanks, we reply within 24 business hours.",
   "Email direct": "Direct email",
   "Localisation": "Location",
   "Disponibilité": "Availability",
   "Réseaux": "Social networks",
-  "Réponse sous 24h ouvrées. Pour les projets urgents, mentionnez-le dans votre message.":
-    "Response within 24 business hours. For urgent projects, mention it in your message.",
+  "Réponse sous 24 h ouvrées. Si c'est urgent, dites-le dans le message.": "Reply within 24 business hours. If it is urgent, say so in the message.",
 
   // ── Contactons-nous ──
   "Contactons-nous.": "Let's get in touch.",
-  "N'hésitez pas à nous contacter pour discuter de votre projet.":
-    "Don't hesitate to contact us to discuss your project.",
+  "Dites-nous où vous en êtes, nous vous dirons ce qui est réaliste.": "Tell us where things stand, and we will tell you what is realistic.",
 
   // ── Marquee about ──
   "Brandings": "Brandings",
@@ -166,7 +144,7 @@ export const T: Record<string, string> = {
 
   // ── Footer services ──
   "Design Graphique": "Graphic Design",
-  "Frontend Dev": "Frontend Dev",
+  "Fullstack Dev": "Fullstack Dev",
   "Logo Design": "Logo Design",
 
   // ── Profile values ──
@@ -175,7 +153,7 @@ export const T: Record<string, string> = {
 
   // ── Contact form options ──
   "Branding / Identité visuelle": "Branding / Visual Identity",
-  "Développement Frontend": "Frontend Development",
+  "Développement Fullstack": "Fullstack Development",
   "Autre": "Other",
   "$1,000 +": "$1,000 +",
 
@@ -202,4 +180,5 @@ export const T: Record<string, string> = {
   "Confidentialité": "Privacy",
   "Conditions générales": "Terms",
   "Légal": "Legal",
+  "Ce que nous utilisons chaque jour, et ce qu'un projet nous oblige à apprendre.": "What we use every day, and what a project forces us to learn.",
 };

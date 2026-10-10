@@ -1,0 +1,80 @@
+---
+// BackLink — bouton retour encadré : flèche dans un carré + label mono.
+// Label FR/EN via data-fr/data-en (voir toggle de langue dans Header).
+interface Props {
+  href?: string;
+  fr?: string;
+  en?: string;
+}
+const { href = "/", fr = "Retour", en = "Back" } = Astro.props;
+---
+
+<a href={href} class="back-link">
+  <span class="back-link-icon" aria-hidden="true">
+    <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+      <path
+        d="M12.5 7H1.5M6 3.5 1.5 7 6 10.5"
+        stroke="currentColor"
+        stroke-width="1.4"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+    </svg>
+  </span>
+  <span class="back-link-label" data-fr={fr} data-en={en}>{fr}</span>
+</a>
+
+<style>
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.3rem 0.85rem 0.3rem 0.3rem;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--fg-muted);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition:
+      color 0.25s ease,
+      border-color 0.25s ease,
+      background 0.25s ease;
+  }
+  .back-link-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 1px solid var(--border-strong);
+    color: var(--fg-secondary);
+    transition:
+      transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      background 0.25s ease,
+      border-color 0.25s ease,
+      color 0.25s ease;
+  }
+  .back-link:hover {
+    color: var(--fg);
+    border-color: var(--border-hover);
+    background: var(--bg-raised);
+  }
+  .back-link:hover .back-link-icon {
+    background: var(--fg);
+    border-color: var(--fg);
+    color: var(--bg);
+    transform: translateX(-2px);
+  }
+  .back-link:focus-visible {
+    outline: 1px solid var(--fg);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .back-link,
+    .back-link-icon {
+      transition: none;
+    }
+  }
+</style>

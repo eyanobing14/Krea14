@@ -2,14 +2,16 @@
   "profile": {
     "name": "ExauEyano",
     "title": "Graphic Designer · UI/UX · Fullstack Dev",
-    "tagline": "Nous concevons des expériences numériques qui marquent.",
-    "taglineEn": "We create digital experiences that leave a mark.",
-    "bio": "Designer passionné avec 5+ ans d'expérience en design graphique, UI/UX et développement fullstack. Nous transformons des idées complexes en interfaces élégantes et intuitives.",
+    "tagline": "Designer graphique et développeur fullstack.",
+    "taglineEn": "Graphic designer and fullstack developer.",
+    "bio": "Designer graphique, UI/UX et développeur fullstack depuis cinq ans. Nous prenons les projets de la recherche utilisateur jusqu'à la mise en ligne, souvent pour des communautés et des petites équipes.",
     "email": "exaubing@gmail.com",
-    "location": "Burundi/Gitega",
+    "location": "Goma, Nord-Kivu",
     "availability": "Disponible pour freelance",
-    "whatsapp": "+25761729788",
+    "whatsapp": "+243972140541",
     "socials": {
+      "whatsapp": "https://wa.me/243972140541",
+      "x": "https://x.com/mr_krea14",
       "github": "https://github.com/eyanobing14",
       "instagram": "https://www.instagram.com/mr_krea_14"
     },
@@ -19,30 +21,30 @@
     {
       "id": "graphic-design",
       "title": "Design Graphique",
-      "description": "Identité visuelle, branding, print design. Nous créons des systèmes visuels cohérents qui racontent votre histoire.",
+      "description": "Logos, identités visuelles et supports imprimés. Un système cohérent, avec des règles claires pour chaque format.",
       "icon": "palette",
-      "descriptionEn": "Visual identity, branding, print design. We create cohesive visual systems that tell your story."
+      "descriptionEn": "Logos, visual identities and print material. One coherent system, with clear rules for every format."
     },
     {
       "id": "uiux",
       "title": "UI/UX Design",
-      "description": "Interfaces utilisateur intuitives, wireframing, prototypage. L'expérience utilisateur est au centre de chaque décision.",
+      "description": "Recherche, wireframes et prototypes testés avant la première ligne de code. Les décisions d'interface se prennent quand elles coûtent encore peu à changer.",
       "icon": "layout",
-      "descriptionEn": "Intuitive user interfaces, wireframing, prototyping. User experience is at the center of every decision."
+      "descriptionEn": "Research, wireframes and prototypes tested before the first line of code. Interface decisions get made while they are still cheap to change."
     },
     {
       "id": "frontend",
-      "title": "Développement Frontend",
-      "description": "Sites web performants avec React, Astro, Tailwind. Du pixel-perfect au code propre.",
+      "title": "Développement Fullstack",
+      "description": "Applications web complètes : base de données, API, authentification, interface en Astro, React et Tailwind, déploiement. Le back et le front dans la même main.",
       "icon": "code",
-      "descriptionEn": "High-performance websites with React, Astro, Tailwind. From pixel-perfect to clean code."
+      "descriptionEn": "Full web applications: database, API, authentication, front end in Astro, React and Tailwind, deployment. Back end and front end in the same hands."
     },
     {
       "id": "logo",
       "title": "Logo Design",
-      "description": "Logos mémorables et intemporels. Chaque logo raconte une histoire en un coup d'œil.",
+      "description": "Un signe simple qui tient sur un favicon comme sur une enseigne. Livré avec ses variantes et ses règles d'usage.",
       "icon": "star",
-      "descriptionEn": "Memorable and timeless logos. Every logo tells a story at a glance."
+      "descriptionEn": "A simple mark that works on a favicon and on a shopfront sign. Delivered with its variants and usage rules."
     }
   ],
   "caseStudies": [
@@ -110,22 +112,30 @@
         {
           "image": "/assets/gallery-0-0-Capture_d__cran_15-9-2026_164317_www.thesa.pro.jpg",
           "caption": "Classement en temps réel",
-          "captionEn": "Real-time leaderboard"
+          "captionEn": "Real-time leaderboard",
+          "description": "Classement live avec snapshots de ranking : on compare l'évolution des tentatives d'un quiz à l'autre.",
+          "descriptionEn": "Live leaderboard with ranking snapshots: attempt progress can be compared from one quiz to the next."
         },
         {
           "image": "/assets/gallery-0-1-Capture_d__cran_15-9-2026_165727_www.thesa.pro.jpg",
           "caption": "Quiz chronométré",
-          "captionEn": "Timed quiz"
+          "captionEn": "Timed quiz",
+          "description": "Chronomètre, progression et feedback instantané sur chaque question.",
+          "descriptionEn": "Timer, progress and instant feedback on every question."
         },
         {
           "image": "/assets/gallery-0-2-Capture_d__cran_15-9-2026_165411_www.thesa.pro.jpg",
           "caption": "Cartes de révision",
-          "captionEn": "Revision cards"
+          "captionEn": "Revision cards",
+          "description": "Cartes de révision navigables, importées et exportées avec les questions.",
+          "descriptionEn": "Browsable revision cards, imported and exported together with the questions."
         },
         {
           "image": "/assets/gallery-0-3-Capture_d__cran_15-9-2026_165244_www.thesa.pro.jpg",
           "caption": "Historique des tentatives",
-          "captionEn": "Attempt history"
+          "captionEn": "Attempt history",
+          "description": "Chaque tentative est conservée avec son score et son classement.",
+          "descriptionEn": "Every attempt is kept, with its score and its ranking."
         }
       ]
     },
@@ -504,6 +514,40 @@
       "images": []
     }
   ],
+  "trustedBy": [
+    {
+      "name": "Facebook",
+      "icon": "facebook"
+    },
+    {
+      "name": "YouTube",
+      "icon": "youtube"
+    },
+    {
+      "name": "Google",
+      "icon": "google"
+    },
+    {
+      "name": "WhatsApp",
+      "icon": "whatsapp"
+    },
+    {
+      "name": "Instagram",
+      "icon": "instagram"
+    },
+    {
+      "name": "GitHub",
+      "icon": "github"
+    },
+    {
+      "name": "LinkedIn",
+      "icon": "linkedin"
+    },
+    {
+      "name": "TikTok",
+      "icon": "tiktok"
+    }
+  ],
   "designSubcategories": [
     {
       "id": "flyer",
@@ -565,7 +609,7 @@
       "frontend": {
         "min": 2500,
         "max": 10000,
-        "label": "Frontend Development"
+        "label": "Fullstack Development"
       },
       "logo": {
         "min": 800,

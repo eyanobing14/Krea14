@@ -9,6 +9,7 @@ import PortfolioImage from "../components/PortfolioImage.astro";
 import ThinkingStyles from "../components/ThinkingStyles.astro";
 import ImpactSection from "../components/ImpactSection.astro";
 import OrbitalSkills from "../components/OrbitalSkills.astro";
+import TrustedBy from "../components/TrustedBy.astro";
 
 const profile = data.profile as typeof data.profile & { photo?: string };
 const socials = (profile.socials || {}) as Record<string, string>;
@@ -95,6 +96,16 @@ const socials = (profile.socials || {}) as Record<string, string>;
                             <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
                           </>
                         )}
+                        {name === "x" && (
+                          <>
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.451-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644Z" fill="var(--bg)" stroke="none" />
+                          </>
+                        )}
+                        {name === "whatsapp" && (
+                          <>
+                            <path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.5-.7-2.4-1.3-3.4-2.9-.2-.4.2-.4.7-1.3.1-.2 0-.4 0-.5 0-.2-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-1.1 1.2-1 2.8.2 4.7 1.2 1.9 2.6 3.1 4.9 4.1 2.3 1 2.9.8 3.7.7.8-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4ZM12 2.2a9.8 9.8 0 0 0-8.4 14.7L2.2 22l5.3-1.4A9.8 9.8 0 1 0 12 2.2Zm0 1.8a8 8 0 1 1-4.2 14.8l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 0 1 12 4Z" fill="var(--bg)" stroke="none" />
+                          </>
+                        )}
                         {name === "email" && (
                           <>
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
@@ -157,36 +168,21 @@ const socials = (profile.socials || {}) as Record<string, string>;
             >
               <span
                 data-fr={profile.bio}
-                data-en="Passionate designer with 5+ years of experience in graphic design, UI/UX and frontend development. We turn complex ideas into elegant and intuitive interfaces."
+                data-en="Graphic designer, UI/UX and fullstack developer for five years. We take projects from user research through to launch, often for communities and small teams."
                 >{profile.bio}</span
               >
             </p>
 
             <div
-              class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 animate-in"
+              class="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 animate-in lg:justify-start"
               style="--delay: 0.4s;"
             >
               <span
-                class="flex items-center gap-2 text-xs font-mono uppercase tracking-wider"
-                style="color: var(--fg-muted);"
+                class="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-mono uppercase tracking-wider leading-none"
+                style="color: var(--fg-muted); border: 1px solid var(--border); background: var(--bg);"
               >
                 <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  ><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"
-                  ></path><circle cx="12" cy="10" r="3"></circle></svg
-                >
-                {profile.location}
-              </span>
-              <span
-                class="flex items-center gap-2 text-xs font-mono uppercase tracking-wider"
-                style="color: var(--fg-muted);"
-              >
-                <svg
+                  class="shrink-0"
                   width="12"
                   height="12"
                   viewBox="0 0 24 24"
@@ -296,6 +292,11 @@ const socials = (profile.socials || {}) as Record<string, string>;
       </div>
     </div>
 
+    <!-- Ils nous ont fait confiance -->
+    <TrustedBy />
+
+    <div class="section-divider" aria-hidden="true"></div>
+
     <!-- L'impact que nous créons -->
     <ImpactSection />
 
@@ -326,9 +327,9 @@ const socials = (profile.socials || {}) as Record<string, string>;
         >
           {profile.availability}.
           <span
-            data-fr="N'hésitez pas à nous contacter pour discuter de votre projet."
-            data-en="Don't hesitate to reach out to discuss your project."
-            >N'hésitez pas à nous contacter pour discuter de votre projet.</span
+            data-fr="Dites-nous où vous en êtes, nous vous dirons ce qui est réaliste."
+            data-en="Tell us where things stand, and we will tell you what is realistic."
+            >Dites-nous où vous en êtes, nous vous dirons ce qui est réaliste.</span
           >
         </p>
         <div class="mt-8 flex flex-col items-center gap-3">
@@ -344,7 +345,7 @@ const socials = (profile.socials || {}) as Record<string, string>;
             >
           </a>
           <a
-            href={`https://wa.me/${profile.whatsapp || "25761729788"}`}
+            href={`https://wa.me/${String(profile.whatsapp || "243972140541").replace(/[^0-9]/g, "")}`}
             target="_blank"
             rel="noopener noreferrer"
             class="px-6 py-3 text-sm font-medium no-underline transition-all border w-full max-w-65 text-center"

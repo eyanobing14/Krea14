@@ -13,7 +13,7 @@ const canonicalURL = `${BASE_URL}${Astro.url.pathname}`.replace(/\?.$/, '');
 
 const {
   title = 'ExauEyano · Graphic Designer · UI/UX · Fullstack Dev',
-  description = 'Designer graphique, UI/UX et développeur fullstack basé au Burundi. Nous créons des expériences numériques qui marquent.'
+  description = 'Designer graphique, UI/UX et développeur fullstack. Identités visuelles, interfaces et applications web, du premier croquis à la mise en ligne.'
 } = Astro.props;
 ---
 
@@ -24,7 +24,7 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content={description} />
     <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#101010" />
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -66,12 +66,7 @@ const {
         'https://github.com/eyanobing14',
         'https://www.instagram.com/krea14/'
       ],
-      address: {
-        '@type': 'PostalAddress',
-        addressCountry: 'BI',
-        addressLocality: 'Gitega'
-      },
-      knowsAbout: ['UI/UX Design', 'Graphic Design', 'Web Development', 'Frontend Development']
+      knowsAbout: ['UI/UX Design', 'Graphic Design', 'Web Development', 'Fullstack Development']
     })} />
     <!-- Prevent FOUC: apply theme before paint -->
     <script is:inline>
@@ -79,11 +74,15 @@ const {
         var saved = localStorage.getItem('theme');
         var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         // Default to dark. Only switch to light if explicitly saved or prefers-light.
-        if (saved === 'light' || (!saved && !prefersDark)) {
+        var light = saved === 'light' || (!saved && !prefersDark);
+        if (light) {
           document.documentElement.setAttribute('data-theme', 'light');
         } else {
           document.documentElement.removeAttribute('data-theme');
         }
+        // Barre du navigateur mobile assortie au fond réel du thème
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', light ? '#f3f3f3' : '#101010');
       })();
     </script>
     <style>

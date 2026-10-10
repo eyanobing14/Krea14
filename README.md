@@ -1,6 +1,6 @@
 # Krea14 — Portfolio
 
-Site portfolio professionnel pour designer graphique, UI/UX, développement frontend et logo design.
+Site portfolio professionnel pour designer graphique, UI/UX, développement fullstack et logo design.
 
 ## Stack technique
 

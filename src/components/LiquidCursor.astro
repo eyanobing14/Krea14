@@ -1,6 +1,14 @@
 ---
 // Cursor — Awwwards-style: dot + ring + glow blob
 // Visible in both dark and light modes with proper illumination
+//
+// Deux règles à ne jamais casser :
+// 1. Layout.astro masque le curseur natif dès que `(pointer: fine)` est vrai. Ce composant
+//    doit donc tourner sur exactement la même condition (`fine`), sinon une machine se
+//    retrouve sans aucun pointeur. Le test est suivi en direct (voir `sync()`), pas figé au chargement.
+// 2. `prefers-reduced-motion: reduce` n'éteint plus le curseur : il passe en mode « static »,
+//    point + anneau collés au pointeur, sans inertie, sans glow et sans état de survol.
+//    L'identité visuelle reste, l'animation part.
 ---
 
 <div id="cursor-dot" class="cursor-dot" aria-hidden="true"></div>
@@ -16,8 +24,26 @@
     left: 0;
     pointer-events: none;
     z-index: 2147483647;
-    will-change: transform;
+    /* Position écrite dans `translate` (calculée par le compositeur), centrage et scale
+       restent dans `transform` : les deux propriétés se composent, dans cet ordre. */
+    will-change: translate, transform;
     transform: translate(-50%, -50%);
+  }
+
+  /* Révélés par le JS une fois positionnés : évite le flash en haut à gauche avant la 1re frame */
+  .cursor-dot,
+  .cursor-ring {
+    opacity: 0;
+  }
+  .cursor-dot.is-on,
+  .cursor-ring.is-on {
+    opacity: 1;
+  }
+
+  .cursor-dot.is-off,
+  .cursor-ring.is-off,
+  .cursor-glow.is-off {
+    display: none;
   }
 
   .cursor-dot {
@@ -76,7 +102,6 @@
       var(--glow-mid) 35%,
       transparent 70%
     );
-    filter: blur(1px);
   }
   .cursor-glow.is-active {
     opacity: 1;
@@ -86,13 +111,7 @@
     height: 420px;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .cursor-dot,
-    .cursor-ring,
-    .cursor-glow {
-      display: none;
-    }
-  }
+  /* Repli avant JS (et si le JS est bloqué) : pas de pointeur custom sans souris */
   @media (pointer: coarse) {
     .cursor-dot,
     .cursor-ring,
@@ -104,44 +123,74 @@
 
 <script>
   function initCursor() {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    if (window.matchMedia("(pointer: coarse)").matches) return;
+    const dot = document.getElementById("cursor-dot");
+    const ring = document.getElementById("cursor-ring");
+    const glow = document.getElementById("cursor-glow");
+    if (!dot || !ring || !glow) return;
 
-    const dot = document.getElementById("cursor-dot")!;
-    const ring = document.getElementById("cursor-ring")!;
-    const glow = document.getElementById("cursor-glow")!;
+    // Même condition que le CSS de Layout.astro qui masque le curseur natif.
+    const fine = window.matchMedia("(pointer: fine)");
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-    const cx = window.innerWidth / 2;
-    const cy = window.innerHeight / 2;
-    let mouseX = cx,
-      mouseY = cy;
-    let dotX = cx,
-      dotY = cy;
-    let ringX = cx,
-      ringY = cy;
-    let glowX = cx,
-      glowY = cy;
+    const startX = window.innerWidth / 2;
+    const startY = window.innerHeight / 2;
+    let mouseX = startX;
+    let mouseY = startY;
+    let dotX = startX;
+    let dotY = startY;
+    let ringX = startX;
+    let ringY = startY;
+    let glowX = startX;
+    let glowY = startY;
 
-    glow.classList.add("is-active");
+    let enabled = fine.matches; // souris disponible ?
+    let smooth = !reduce.matches; // animation autorisée ?
+    let firstFrame = false;
 
     const interactiveSelectors =
       'a, button, summary, [role="button"], input, textarea, select, label, [data-cursor-hover]';
-    const textSelectors =
-      "h1, h2, h3, h4, p, span, li, blockquote, .code-block";
+    const textSelectors = "h1, h2, h3, h4, p, span, li, blockquote, .code-block";
+
+    function onMediaChange(mq, handler) {
+      if (mq.addEventListener) mq.addEventListener("change", handler);
+      else mq.addListener(handler);
+    }
+
+    function syncVisibility() {
+      dot.classList.toggle("is-on", enabled);
+      ring.classList.toggle("is-on", enabled);
+      dot.classList.toggle("is-off", !enabled);
+      ring.classList.toggle("is-off", !enabled);
+      glow.classList.toggle("is-off", !enabled);
+      glow.classList.toggle("is-active", enabled && smooth);
+      if (!enabled || !smooth) {
+        dot.classList.remove("is-hovering", "is-text-hover");
+        ring.classList.remove("is-hovering", "is-text-hover", "is-clicking");
+      }
+    }
+
+    // Brancher/débrancher une souris ou changer la préférence d'animation ne doit pas
+    // demander un rechargement de page.
+    function sync() {
+      enabled = fine.matches;
+      smooth = !reduce.matches;
+      if (firstFrame) syncVisibility();
+    }
+    onMediaChange(fine, sync);
+    onMediaChange(reduce, sync);
 
     document.addEventListener("mousemove", (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
     });
 
-    document.addEventListener("mousedown", () =>
-      ring.classList.add("is-clicking"),
-    );
-    document.addEventListener("mouseup", () =>
-      ring.classList.remove("is-clicking"),
-    );
+    document.addEventListener("mousedown", () => {
+      if (enabled && smooth) ring.classList.add("is-clicking");
+    });
+    document.addEventListener("mouseup", () => ring.classList.remove("is-clicking"));
 
     document.addEventListener("mouseover", (e) => {
+      if (!enabled || !smooth) return;
       const target = (e.target as HTMLElement).closest(interactiveSelectors);
       if (target) {
         ring.classList.add("is-hovering");
@@ -162,6 +211,7 @@
     });
 
     document.addEventListener("mouseout", (e) => {
+      if (!enabled || !smooth) return;
       const target = e.target as HTMLElement;
       const relatedTarget = e.relatedTarget as Node | null;
       const currentInteractive = target.closest(interactiveSelectors);
@@ -176,32 +226,46 @@
       }
     });
 
-    document.addEventListener("mouseleave", () =>
-      glow.classList.remove("is-active"),
-    );
-    document.addEventListener("mouseenter", () =>
-      glow.classList.add("is-active"),
-    );
+    document.addEventListener("mouseleave", () => {
+      if (enabled && smooth) glow.classList.remove("is-active");
+    });
+    document.addEventListener("mouseenter", () => {
+      if (enabled && smooth) glow.classList.add("is-active");
+    });
 
-    function animate() {
-      dotX += (mouseX - dotX) * 0.35;
-      dotY += (mouseY - dotY) * 0.35;
-      dot.style.left = `${dotX}px`;
-      dot.style.top = `${dotY}px`;
+    let lastTime = 0;
 
-      ringX += (mouseX - ringX) * 0.12;
-      ringY += (mouseY - ringY) * 0.12;
-      ring.style.left = `${ringX}px`;
-      ring.style.top = `${ringY}px`;
+    function animate(now) {
+      const dt = lastTime ? Math.min((now - lastTime) / 1000, 0.1) : 1 / 60;
+      lastTime = now;
+      // Normalisation par le temps : même ressenti en 60, 120 ou 144 Hz.
+      // (à 60 Hz le facteur vaut 1, soit exactement le comportement d'origine)
+      const frames = dt * 60;
+      const ease = (base) => (smooth ? 1 - Math.pow(1 - base, frames) : 1);
 
-      glowX += (mouseX - glowX) * 0.06;
-      glowY += (mouseY - glowY) * 0.06;
-      glow.style.left = `${glowX}px`;
-      glow.style.top = `${glowY}px`;
+      dotX += (mouseX - dotX) * (smooth ? ease(0.35) : 1);
+      dotY += (mouseY - dotY) * (smooth ? ease(0.35) : 1);
+
+      ringX += (mouseX - ringX) * (smooth ? ease(0.12) : 1);
+      ringY += (mouseY - ringY) * (smooth ? ease(0.12) : 1);
+
+      if (smooth) {
+        glowX += (mouseX - glowX) * ease(0.06);
+        glowY += (mouseY - glowY) * ease(0.06);
+      }
+
+      dot.style.setProperty("translate", `${dotX}px ${dotY}px`);
+      ring.style.setProperty("translate", `${ringX}px ${ringY}px`);
+      if (smooth) glow.style.setProperty("translate", `${glowX}px ${glowY}px`);
+
+      if (!firstFrame) {
+        firstFrame = true;
+        syncVisibility();
+      }
 
       requestAnimationFrame(animate);
     }
-    animate();
+    requestAnimationFrame(animate);
   }
 
   if (document.readyState === "loading") {

@@ -1,0 +1,239 @@
+---
+// TrustedBy — « Ils nous ont fait confiance » : deux rangées de logos qui défilent
+// en sens opposés (gauche / droite). Les logos viennent de portfolio.json (trustedBy),
+// chaque rangée est dupliquée pour une boucle sans raccord.
+//
+// Les pictos sont définis une seule fois dans une feuille de sprites (<symbol>)
+// puis réutilisés par <use> : 36 logos × 2 groupes × 2 rangées coûtent ~14 Ko
+// au lieu de ~80 Ko avec un SVG inline par occurrence.
+import Container from "./Container.astro";
+import data from "../../public/data/portfolio.json";
+
+type TrustedItem = { name: string; icon?: string };
+
+const items = (((data as any).trustedBy || []) as TrustedItem[]).filter(
+  (item) => item && item.name && item.icon
+);
+
+// Rangée 1 = index pairs (sens gauche), rangée 2 = index impairs (sens droite)
+const rows = [
+  items.filter((_, i) => i % 2 === 0),
+  items.filter((_, i) => i % 2 === 1),
+].filter((row) => row.length > 0);
+
+// Assez de répétitions pour couvrir les très grands écrans sans trou :
+// ~36 logos par groupe (≈ 4300 px, donc au-delà d'un 4K pleine largeur).
+// La piste répète ce groupe deux fois : translateX(-50%) boucle sans raccord.
+const fill = (row: TrustedItem[]) =>
+  Array.from({ length: Math.max(4, Math.ceil(36 / row.length)) }, () => row).flat();
+
+// Pictos d'identité (contenu d'un <symbol viewBox="0 0 24 24">)
+const ICONS: Record<string, string> = {
+  facebook:
+    '<path d="M13.9 21.5v-7.9h2.6l.4-3h-3V8.7c0-.9.3-1.5 1.5-1.5h1.7V4.5c-.3 0-1.4-.1-2.6-.1-2.6 0-4.3 1.5-4.3 4.3v1.9H7.6v3h2.6v7.9h3.7Z" fill="currentColor"/>',
+  youtube:
+    '<path d="M21.6 7.2a2.6 2.6 0 0 0-1.8-1.8C18.1 5 12 5 12 5s-6.1 0-7.8.4a2.6 2.6 0 0 0-1.8 1.8C2 8.9 2 12 2 12s0 3.1.4 4.8a2.6 2.6 0 0 0 1.8 1.8C5.9 19 12 19 12 19s6.1 0 7.8-.4a2.6 2.6 0 0 0 1.8-1.8c.4-1.7.4-4.8.4-4.8s0-3.1-.4-4.8ZM10 15.5v-7l6 3.5-6 3.5Z" fill="currentColor"/>',
+  google:
+    '<path d="M12 11.2v2.9h4.6c-.2 1.2-1.4 3.5-4.6 3.5-2.8 0-5-2.3-5-5.1s2.2-5.1 5-5.1c1.6 0 2.6.7 3.2 1.2l2.2-2.1C16 5.1 14.2 4.2 12 4.2 7.7 4.2 4.2 7.7 4.2 12s3.5 7.8 7.8 7.8c4 0 6.6-2.8 6.6-6.7 0-.5-.1-.8-.1-1.1H12Z" fill="currentColor"/>',
+  whatsapp:
+    '<path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.5-.7-2.4-1.3-3.4-2.9-.2-.4.2-.4.7-1.3.1-.2 0-.4 0-.5 0-.2-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-1.1 1.2-1 2.8.2 4.7 1.2 1.9 2.6 3.1 4.9 4.1 2.3 1 2.9.8 3.7.7.8-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4ZM12 2.2a9.8 9.8 0 0 0-8.4 14.7L2.2 22l5.3-1.4A9.8 9.8 0 1 0 12 2.2Zm0 1.8a8 8 0 1 1-4.2 14.8l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 0 1 12 4Z" fill="currentColor"/>',
+  instagram:
+    '<rect x="3.3" y="3.3" width="17.4" height="17.4" rx="5" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"/>',
+  github:
+    '<path d="M12 2.2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.3-3.4-1.3-.4-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 4.9.4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2.2Z" fill="currentColor"/>',
+  linkedin:
+    '<path d="M6.9 8.8H4.2V20h2.7V8.8ZM5.5 7.4a1.6 1.6 0 1 0 0-3.2 1.6 1.6 0 0 0 0 3.2ZM20 13.9c0-3-1.6-4.4-3.7-4.4-1.7 0-2.5.9-2.9 1.6V8.8h-2.7V20h2.7v-6.2c0-1.4.6-2.2 1.8-2.2s1.7.8 1.7 2.2V20H20v-6.1Z" fill="currentColor"/>',
+  tiktok:
+    '<path d="M16.4 3h-2.7v11.4a2.4 2.4 0 1 1-2-2.4V9.3a5.1 5.1 0 1 0 4.7 5.1V9.1a5.6 5.6 0 0 0 3.3 1.1V7.5a3.3 3.3 0 0 1-3.3-3.3V3Z" fill="currentColor"/>',
+  x: '<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.451-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644Z" fill="currentColor"/>',
+};
+
+const usedIcons = Array.from(
+  new Set(items.map((item) => item.icon as string).filter((icon) => !!ICONS[icon]))
+);
+
+const duration = (rowIndex: number) => 95 + rowIndex * 15;
+---
+
+{
+  items.length > 1 && (
+    <section class="trusted-section">
+      <Container>
+        <h1 class="trusted-title">
+          <span data-fr="Ils nous ont fait confiance." data-en="They trusted us.">
+            Ils nous ont fait confiance.
+          </span>
+        </h1>
+      </Container>
+
+      {/* Feuille de sprites : un seul exemplaire de chaque picto dans le DOM */}
+      <svg class="trusted-sprite" aria-hidden="true" focusable="false">
+        {usedIcons.map((icon) => (
+          <symbol id={`trusted-${icon}`} viewBox="0 0 24 24" set:html={ICONS[icon]} />
+        ))}
+      </svg>
+
+      <div class="trusted-rows">
+        {rows.map((row, rowIndex) => {
+          const group = fill(row);
+          const lists = [0, 1];
+          return (
+            <div class:list={["trusted-row", rowIndex % 2 === 1 && "is-reverse"]}>
+              <div class="trusted-track" style={`--duration: ${duration(rowIndex)}s;`}>
+                {lists.map((copyIndex) => (
+                  <ul
+                    class="trusted-group"
+                    aria-hidden={copyIndex === 1 ? "true" : undefined}
+                  >
+                    {group.map((item) => (
+                      <li class="trusted-item">
+                        <svg class="trusted-mark" aria-hidden="true" focusable="false">
+                          <use href={`#trusted-${item.icon}`} />
+                        </svg>
+                      </li>
+                    ))}
+                  </ul>
+                ))}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .trusted-section {
+    padding: 4.5rem 0 4rem;
+  }
+
+  /* Le titre de section est le h1 de cette bande : la page garde son propre
+     h1 dans le hero, d'où une échelle sobre plutôt que celle d'un hero. */
+  .trusted-title {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+    margin-bottom: 2.5rem;
+  }
+  @media (min-width: 640px) {
+    .trusted-title {
+      font-size: 2.25rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .trusted-title {
+      font-size: 2.75rem;
+    }
+  }
+
+  .trusted-sprite {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
+
+  .trusted-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    /* les bords s'éteignent au lieu d'être coupés net */
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0,
+      #000 7%,
+      #000 93%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+  }
+
+  .trusted-row {
+    overflow: hidden;
+  }
+  .trusted-track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    animation: trusted-marquee var(--duration, 95s) linear infinite;
+  }
+  .trusted-row.is-reverse .trusted-track {
+    animation-direction: reverse;
+  }
+  .trusted-rows:hover .trusted-track {
+    animation-play-state: paused;
+  }
+
+  .trusted-group {
+    display: flex;
+    align-items: center;
+    flex: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .trusted-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    padding: 1rem 2.5rem;
+    border-right: 1px solid var(--border-subtle);
+    color: var(--fg-muted);
+    transition: color var(--duration-base) ease;
+  }
+  .trusted-item:hover {
+    color: var(--fg);
+  }
+  .trusted-mark {
+    width: 40px;
+    height: 40px;
+    flex: none;
+    display: block;
+  }
+
+  @keyframes trusted-marquee {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .trusted-section {
+      padding: 3rem 0 2.5rem;
+    }
+    .trusted-title {
+      margin-bottom: 1.75rem;
+    }
+    .trusted-item {
+      padding: 0.85rem 1.75rem;
+    }
+    .trusted-mark {
+      width: 34px;
+      height: 34px;
+    }
+  }
+
+  /* Mouvement réduit : plus de défilement auto, on peut faire défiler à la main.
+     Le groupe dupliqué (aria-hidden) est retiré, il ne servait qu'à la boucle. */
+  @media (prefers-reduced-motion: reduce) {
+    .trusted-row {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .trusted-track {
+      animation: none !important;
+    }
+    .trusted-group[aria-hidden='true'] {
+      display: none;
+    }
+  }
+</style>
