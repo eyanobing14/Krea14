@@ -62,14 +62,24 @@ const caseStudies = (data.caseStudies || []).slice(0, 3);
           class="flex flex-col md:flex-row md:items-end md:justify-between gap-8"
         >
           <div class="min-w-0 max-w-xl">
+            <h1
+              class="hero-desc text-base md:text-lg leading-relaxed animate-in"
+              style="color: var(--fg); font-weight: 600;"
+            >
+              <span
+                data-fr={profile.tagline}
+                data-en={profile.taglineEn || "Graphic designer and fullstack developer."}
+                >{profile.tagline}</span
+              >
+            </h1>
             <p
               class="hero-desc text-base md:text-lg leading-relaxed animate-in"
               style="color: var(--fg-secondary);"
             >
               <span
-                data-fr={`${profile.tagline} Nous dessinons des identités, des interfaces et des applications web, du premier croquis à la mise en ligne.`}
-                data-en={`${profile.taglineEn || "Graphic designer and fullstack developer."} We design brands, interfaces and web apps, from the first sketch to launch.`}
-                >{profile.tagline} Nous dessinons des identités, des interfaces et des applications web, du premier croquis à la mise en ligne.</span
+                data-fr="Nous dessinons des identités, des interfaces et des applications web, du premier croquis à la mise en ligne."
+                data-en="We design brands, interfaces and web apps, from the first sketch to launch."
+                >Nous dessinons des identités, des interfaces et des applications web, du premier croquis à la mise en ligne.</span
               >
             </p>
             <div

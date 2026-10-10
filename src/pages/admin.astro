@@ -152,6 +152,24 @@ import Footer from '../components/Footer.astro';
             <button id="btn-save-profile" class="admin-btn-primary">Sauvegarder le profil</button>
           </div>
         </div>
+
+        <div class="mt-10 admin-section-header">
+          <span class="admin-section-num">02</span>
+          <div>
+            <h2 class="text-sm font-semibold" style="color: var(--fg);">Logos de confiance</h2>
+            <p class="text-xs mt-1" style="color: var(--fg-muted);">Ceux qui nous ont fait confiance : affichés dans la bande de l'accueil, d'À propos et en bas de Contact.</p>
+          </div>
+        </div>
+        <div class="admin-section-body">
+          <p class="text-[11px] mb-4" style="color: var(--fg-muted);">
+            Deux logos minimum pour que la bande s'affiche. Icônes disponibles : facebook, youtube, google, whatsapp, instagram, github, linkedin, tiktok, x.
+            Pour une entreprise sans icône intégrée, colle l'URL de son logo (fond transparent conseillé).
+          </p>
+          <div id="trusted-list"></div>
+          <div class="mt-4 flex justify-center">
+            <button id="btn-add-trusted" class="admin-btn-outline">+ Ajouter un logo</button>
+          </div>
+        </div>
       </div>
 
       <!-- Case Studies Tab -->
@@ -1467,8 +1485,96 @@ import Footer from '../components/Footer.astro';
       showToast('Contenu légal sauvegardé!');
     });
 
+    // ── Logos de confiance ──
+    const TRUSTED_ICONS = ['facebook', 'youtube', 'google', 'whatsapp', 'instagram', 'github', 'linkedin', 'tiktok', 'x'];
+
+    function renderTrusted() {
+      const list = document.getElementById('trusted-list');
+      if (!list) return;
+      list.innerHTML = '';
+      if (!Array.isArray(data.trustedBy)) data.trustedBy = [];
+      data.trustedBy.forEach((item: any, i: number) => {
+        const el = document.createElement('div');
+        el.className = 'admin-item';
+        el.innerHTML = `
+          <div class="admin-item-header" data-action="toggle">
+            <div class="admin-item-left">
+              <span class="admin-item-num">${String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <div class="admin-item-title">${item.name || 'Sans nom'}</div>
+                <div class="admin-item-subtitle">${item.logo ? 'logo personnalisé' : (item.icon || '')}</div>
+              </div>
+            </div>
+            <div class="admin-item-actions">
+              <button class="admin-btn-sm tr-save" data-i="${i}" style="background:var(--fg); color:var(--bg);">Sauver</button>
+              <button class="admin-btn-ghost tr-delete" data-i="${i}">Supprimer</button>
+              <svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+          <div class="admin-item-body collapsed">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div><label class="admin-label">Entreprise</label><input class="admin-input tr-name" data-i="${i}" value="${(item.name || '').replace(/"/g, '&quot;')}" /></div>
+              <div>
+                <label class="admin-label">Icône</label>
+                <select class="admin-input tr-icon" data-i="${i}">
+                  ${TRUSTED_ICONS.map(k => `<option value="${k}" ${item.icon === k ? 'selected' : ''}>${k}</option>`).join('')}
+                </select>
+              </div>
+              <div class="md:col-span-2"><label class="admin-label">Logo personnalisé (URL, remplace l'icône)</label><input class="admin-input tr-logo" data-i="${i}" placeholder="https://…" value="${(item.logo || '').replace(/"/g, '&quot;')}" /></div>
+            </div>
+          </div>
+        `;
+        list.appendChild(el);
+      });
+
+      list.querySelectorAll('[data-action="toggle"]').forEach((header) => {
+        header.addEventListener('click', (e) => {
+          if ((e.target as HTMLElement).closest('.admin-btn-sm, .admin-btn-ghost')) return;
+          const body = header.nextElementSibling as HTMLElement;
+          const chevron = header.querySelector('.chevron') as HTMLElement;
+          body?.classList.toggle('collapsed');
+          chevron?.classList.toggle('is-open');
+        });
+      });
+
+      list.querySelectorAll('.tr-save').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const i = parseInt((btn as HTMLElement).dataset.i!);
+          const item = (btn as HTMLElement).closest('.admin-item')!;
+          data.trustedBy[i].name = (item.querySelector('.tr-name') as HTMLInputElement).value;
+          data.trustedBy[i].icon = (item.querySelector('.tr-icon') as HTMLSelectElement).value;
+          const logo = (item.querySelector('.tr-logo') as HTMLInputElement).value.trim();
+          if (logo) data.trustedBy[i].logo = logo; else delete data.trustedBy[i].logo;
+          if (!data.trustedBy[i].logo && !data.trustedBy[i].icon) data.trustedBy[i].icon = TRUSTED_ICONS[0];
+          save();
+          renderTrusted();
+          showToast('Logo sauvegardé!');
+        });
+      });
+
+      list.querySelectorAll('.tr-delete').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const i = parseInt((btn as HTMLElement).dataset.i!);
+          const name = data.trustedBy[i]?.name || 'ce logo';
+          showDeleteModal(`Supprimer "${name}" ? Cette action est irréversible.`, () => {
+            data.trustedBy.splice(i, 1);
+            save();
+            renderTrusted();
+            showToast('Logo supprimé.');
+          });
+        });
+      });
+    }
+
+    document.getElementById('btn-add-trusted')?.addEventListener('click', () => {
+      if (!Array.isArray(data.trustedBy)) data.trustedBy = [];
+      data.trustedBy.push({ name: 'Nouvelle entreprise', icon: TRUSTED_ICONS[data.trustedBy.length % TRUSTED_ICONS.length] });
+      save();
+      renderTrusted();
+    });
+
     refreshGitStatus();
-    loadData().then(() => { loadProfile(); renderStudies(); renderServices(); loadLegal(); });
+    loadData().then(() => { loadProfile(); renderStudies(); renderServices(); loadLegal(); renderTrusted(); });
   }
 
 
