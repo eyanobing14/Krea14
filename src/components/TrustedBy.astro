@@ -4,6 +4,8 @@
 // Titre = h2 : le h1 de la page reste celui du hero. Les libellés des logos ne
 // sont plus affichés mais restent lisible par un lecteur d'écran (aria-label).
 // Les logos viennent de portfolio.json (trustedBy).
+// Placement storytelling : la section ferme le récit de chaque page juste
+// avant l'appel à l'action (preuve sociale au moment de la décision).
 //
 // Les pictos sont définis une seule fois dans une feuille de sprites (<symbol>)
 // puis réutilisés par <use> : 36 logos × 2 groupes × 2 rangées coûtent ~14 Ko
@@ -61,13 +63,19 @@ const duration = (rowIndex: number) => 95 + rowIndex * 15;
   items.length > 1 && (
     <section class="trusted-section">
       <Container>
-        <h2 class="trusted-title" data-typewriter>
-          <span
-            data-typed-text
-            data-fr="Ils nous ont fait confiance."
-            data-en="They trusted us.">Ils nous ont fait confiance.</span
-          ><span class="trusted-caret" data-typed-caret aria-hidden="true"></span>
+        <h2 class="trusted-title">
+          <span data-fr="Ils nous ont fait confiance." data-en="They trusted us."
+            >Ils nous ont fait confiance.</span
+          >
         </h2>
+        <p
+          class="trusted-sub"
+          data-fr="Du premier croquis à la mise en ligne, des équipes de toute taille nous ont confié leurs projets."
+          data-en="From first sketch to launch, teams of all sizes have trusted us with their projects."
+        >
+          Du premier croquis à la mise en ligne, des équipes de toute taille nous
+          ont confié leurs projets.
+        </p>
       </Container>
 
       {/* Feuille de sprites : un seul exemplaire de chaque picto dans le DOM */}
@@ -122,61 +130,6 @@ const duration = (rowIndex: number) => 95 + rowIndex * 15;
   )
 }
 
-<script>
-  // Machine à écrire sur le titre : la frappe démarre quand la section entre
-  // dans le viewport. Le texte reste complet si le JS ne tourne pas, si le
-  // mouvement est réduit, ou si un autre script réécrit le contenu
-  // (changement de langue pendant la frappe : on rend la main).
-  const titles = document.querySelectorAll("[data-typewriter]");
-  if (titles.length) {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-    const typeTitle = (host: Element) => {
-      const text = host.querySelector("[data-typed-text]") as HTMLElement | null;
-      const caret = host.querySelector("[data-typed-caret]") as HTMLElement | null;
-      if (!text) return;
-      const full = (text.textContent || "").replace(/\s+/g, " ").trim();
-      if (!full) return;
-      if (reduce.matches) {
-        caret?.remove();
-        return;
-      }
-
-      let i = 0;
-      text.textContent = "";
-      caret?.classList.add("is-on");
-
-      const step = () => {
-        if (text.textContent !== full.slice(0, i)) {
-          caret?.remove();
-          return;
-        }
-        i += 1;
-        text.textContent = full.slice(0, i);
-        if (i < full.length) {
-          const ch = full[i - 1];
-          const delay = ch === "." ? 160 : ch === " " ? 60 : 40 + Math.random() * 55;
-          window.setTimeout(step, delay);
-        } else {
-          window.setTimeout(() => caret?.remove(), 1100);
-        }
-      };
-      window.setTimeout(step, 260);
-    };
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          observer.unobserve(entry.target);
-          typeTitle(entry.target);
-        });
-      },
-      { threshold: 0.5 }
-    );
-    titles.forEach((title) => observer.observe(title));
-  }
-</script>
 
 <style>
   .trusted-section {
@@ -195,32 +148,17 @@ const duration = (rowIndex: number) => 95 + rowIndex * 15;
     /* le titre reste discret : c'est une bande de logos, pas un hero.
        0.5 est le plancher AA pour un grand titre (3,4:1 en clair / 4,7:1 en sombre). */
     opacity: 0.5;
-    margin-bottom: 2.75rem;
+    margin-bottom: 0;
   }
 
-  /* Curseur de machine à écrire (affiché seulement pendant la frappe) */
-  .trusted-caret {
-    display: inline-block;
-    width: 0.5ch;
-    height: 0.82em;
-    margin-left: 0.12em;
-    vertical-align: -0.02em;
-    background: currentColor;
-    opacity: 0;
-  }
-  .trusted-caret.is-on {
-    opacity: 0.45;
-    animation: trusted-caret-blink 1s steps(1, end) infinite;
-  }
-  @keyframes trusted-caret-blink {
-    0%,
-    49% {
-      opacity: 0.45;
-    }
-    50%,
-    100% {
-      opacity: 0;
-    }
+  /* Accroche sous le titre : replace la section dans le récit
+     (promesse du hero → preuve sociale) juste avant l'appel à l'action. */
+  .trusted-sub {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--fg-secondary);
+    max-width: 42rem;
+    margin: 0.75rem 0 2.75rem;
   }
   @media (min-width: 640px) {
     .trusted-title {
@@ -337,7 +275,9 @@ const duration = (rowIndex: number) => 95 + rowIndex * 15;
     }
     .trusted-title {
       font-size: 1.75rem;
-      margin-bottom: 2rem;
+    }
+    .trusted-sub {
+      margin: 0.5rem 0 2rem;
     }
     .trusted-rows {
       gap: 1rem;

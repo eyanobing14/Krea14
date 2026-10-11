@@ -292,12 +292,6 @@ const socials = (profile.socials || {}) as Record<string, string>;
       </div>
     </div>
 
-    <!-- Ils nous ont fait confiance -->
-    <div class="section-divider" aria-hidden="true"></div>
-    <TrustedBy />
-
-    <div class="section-divider" aria-hidden="true"></div>
-
     <!-- L'impact que nous créons -->
     <ImpactSection />
 
@@ -310,6 +304,11 @@ const socials = (profile.socials || {}) as Record<string, string>;
 
     <!-- Expertise — Système orbital -->
     <OrbitalSkills />
+
+    <!-- Ils nous ont fait confiance — preuve sociale juste avant l'appel à l'action -->
+    <TrustedBy />
+
+    <div class="section-divider" aria-hidden="true"></div>
 
     <!-- CTA -->
     <section class="section">
